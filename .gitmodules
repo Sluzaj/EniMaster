@@ -1,3 +1,6 @@
 [submodule "EniPortogallo"]
 	path = EniPortogallo
 	url = https://github.com/Sluzaj/EniPortogallo.git
+[submodule "EniSpagna"]
+	path = EniSpagna
+	url = https://github.com/Sluzaj/EniSpagna.git
