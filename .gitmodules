@@ -1,0 +1,3 @@
+[submodule "EniPortogallo"]
+	path = EniPortogallo
+	url = https://github.com/Sluzaj/EniPortogallo.git
