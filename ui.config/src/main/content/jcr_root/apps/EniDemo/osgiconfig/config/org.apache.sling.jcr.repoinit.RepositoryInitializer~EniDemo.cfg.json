@@ -1,0 +1,7 @@
+{
+    "scripts": [
+        "create path (sling:OrderedFolder) /content/dam/EniDemo",
+        "create path (nt:unstructured) /content/dam/EniDemo/jcr:content",
+        "set properties on /content/dam/EniDemo/jcr:content\n  set cq:conf{String} to /conf/EniDemo\n  set jcr:title{String} to \"Eni Sites Demo\"\nend"
+    ]
+}

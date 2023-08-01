@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaceFilter version="1.0">
+    <filter root="/conf/EniDemo" mode="merge"/>
+    <filter root="/content/EniDemo" mode="merge"/>
+    <filter root="/content/dam/EniDemo" mode="merge">
+        <exclude pattern="/content/dam/EniDemo(/.*)?"/>
+        <include pattern="/content/dam/EniDemo/jcr:content(/.*)?"/>
+    </filter>
+    <filter root="/content/dam/EniDemo/asset.jpg" mode="merge"/>
+    <filter root="/content/experience-fragments/EniDemo" mode="merge"/>
+</workspaceFilter>
