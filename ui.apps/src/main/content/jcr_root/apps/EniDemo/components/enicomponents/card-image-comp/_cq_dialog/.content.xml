@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+	xmlns:cq="http://www.day.com/jcr/cq/1.0"
+	xmlns:jcr="http://www.jcp.org/jcr/1.0"
+	xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
+	xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+	jcr:primaryType="nt:unstructured" jcr:title="Card Image Properties"
+	sling:resourceType="cq/gui/components/authoring/dialog">
+	<content jcr:primaryType="nt:unstructured"
+		sling:resourceType="granite/ui/components/coral/foundation/container">
+		<items jcr:primaryType="nt:unstructured">
+			<tabs jcr:primaryType="nt:unstructured"
+				sling:resourceType="granite/ui/components/coral/foundation/tabs"
+				maximized="{Boolean}true">
+				<items jcr:primaryType="nt:unstructured">
+
+
+					<configItem jcr:primaryType="nt:unstructured"
+						jcr:title="Configurazione Item"
+						sling:resourceType="granite/ui/components/coral/foundation/container"
+						margin="{Boolean}true">
+						<items jcr:primaryType="nt:unstructured">
+							<columns jcr:primaryType="nt:unstructured"
+								sling:resourceType="granite/ui/components/coral/foundation/container"
+								margin="{Boolean}true">
+								<items jcr:primaryType="nt:unstructured">
+									<column jcr:primaryType="nt:unstructured"
+										sling:resourceType="granite/ui/components/coral/foundation/container">
+										<items jcr:primaryType="nt:unstructured">
+											<gestioneComponente
+												jcr:primaryType="nt:unstructured"
+												jcr:title="Gestione Componente"
+												sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">
+												<items jcr:primaryType="nt:unstructured">
+													<id jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+														fieldLabel="ID Componente" name="./id" />
+													<background jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/select"
+														fieldLabel="Background" name="./background">
+														<items jcr:primaryType="nt:unstructured">
+															<option1 jcr:primaryType="nt:unstructured" selected="true"
+																text="Bianco (#FFFFFF)" value="#ffffff" />
+															<option2 jcr:primaryType="nt:unstructured"
+																text="Grigio (#F4F4F4)" value="#f4f4f4" />
+														</items>
+													</background>
+													<titolo jcr:primaryType="nt:unstructured"
+														jcr:title="Titolo" fieldLabel="Titolo"
+														sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+														name="./titolo" />
+													<sottotitolo jcr:primaryType="nt:unstructured"
+														jcr:title="Sottotitolo" fieldLabel="Sottotitolo"
+														sling:resourceType="cq/gui/components/authoring/dialog/richtext"
+														name="./sottotitolo"
+														useFixedInlineToolbar="{Boolean}true"
+														removeSingleParagraphContainer="{Boolean}true">
+														<rtePlugins jcr:primaryType="nt:unstructured"
+															removeSingleParagraphContainer="true">
+															<format jcr:primaryType="nt:unstructured"
+																features="bold,italic" />
+															<justify jcr:primaryType="nt:unstructured"
+																features="*" />
+															<links jcr:primaryType="nt:unstructured"
+																features="modifylink,unlink" />
+															<lists jcr:primaryType="nt:unstructured"
+																features="*" />
+															<paraformat jcr:primaryType="nt:unstructured"
+																features="*">
+																<formats jcr:primaryType="nt:unstructured">
+																	<default_p jcr:primaryType="nt:unstructured"
+																		description="Paragraph" tag="p" />
+																	<default_h1
+																		jcr:primaryType="nt:unstructured"
+																		description="Heading 1" tag="h1" />
+																	<default_h2
+																		jcr:primaryType="nt:unstructured"
+																		description="Heading 2" tag="h2" />
+																	<default_h3
+																		jcr:primaryType="nt:unstructured"
+																		description="Heading 3" tag="h3" />
+																</formats>
+															</paraformat>
+															<tracklinks jcr:primaryType="nt:unstructured"
+																features="*" />
+															<table jcr:primaryType="nt:unstructured"
+																features="*" />
+															<subsuperscript
+																jcr:primaryType="nt:unstructured" features="*" />
+															<misctools jcr:primaryType="nt:unstructured"
+																features="*" />
+															<experience-aem
+																jcr:primaryType="nt:unstructured" features="*" />
+														</rtePlugins>
+														<uiSettings jcr:primaryType="nt:unstructured">
+															<cui jcr:primaryType="nt:unstructured">
+																<inline jcr:primaryType="nt:unstructured"
+																	toolbar="[format#bold,format#italic,format#underline,subsuperscript#subscript,subsuperscript#superscript,justify#justifyleft,justify#justifycenter,justify#justifyright,#lists,experience-aem#colorPicker,links#modifylink,links#unlink,#paraformat,table#createoredit,table#removetable,misctools#sourceedit]">
+																	<popovers jcr:primaryType="nt:unstructured">
+																		<justify jcr:primaryType="nt:unstructured"
+																			items="[justify#justifyleft,justify#justifycenter,justify#justifyright]"
+																			ref="justify" />
+																		<lists jcr:primaryType="nt:unstructured"
+																			items="[lists#unordered,lists#ordered,lists#outdent,lists#indent]"
+																			ref="lists" />
+																		<misctools jcr:primaryType="nt:unstructured"
+																			items="[misctools#specialchars]" ref="misctools" />
+																		<paraformat
+																			jcr:primaryType="nt:unstructured"
+																			items="paraformat:getFormats:paraformat-pulldown"
+																			ref="paraformat" />
+																	</popovers>
+																</inline>
+																<dialogFullScreen
+																	jcr:primaryType="nt:unstructured"
+																	toolbar="[format#bold,format#italic,format#underline,subsuperscript#subscript,subsuperscript#superscript,justify#justifyleft,justify#justifycenter,justify#justifyright,#lists,experience-aem#colorPicker,links#modifylink,links#unlink,#paraformat,table#createoredit,table#removetable,misctools#sourceedit]">
+																	<popovers jcr:primaryType="nt:unstructured">
+																		<justify jcr:primaryType="nt:unstructured"
+																			items="[justify#justifyleft,justify#justifycenter,justify#justifyright]"
+																			ref="justify" />
+																		<lists jcr:primaryType="nt:unstructured"
+																			items="[lists#unordered,lists#ordered,lists#outdent,lists#indent]"
+																			ref="lists" />
+																		<misctools jcr:primaryType="nt:unstructured"
+																			items="[misctools#specialchars]" ref="misctools" />
+																		<paraformat
+																			jcr:primaryType="nt:unstructured"
+																			items="paraformat:getFormats:paraformat-pulldown"
+																			ref="paraformat" />
+																	</popovers>
+																</dialogFullScreen>
+															</cui>
+														</uiSettings>
+													</sottotitolo>
+												</items>
+											</gestioneComponente>
+											
+											<primaCard jcr:primaryType="nt:unstructured"
+												jcr:title="Prima Card"
+												sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">
+												<items jcr:primaryType="nt:unstructured">
+													<immagine1
+														granite:class="cmp-image__editor-file-upload"
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="cq/gui/components/authoring/dialog/fileupload"
+														autoStart="{Boolean}false" class="cq-droptarget"
+														fileNameParameter="./immagine1Name"
+														fileReferenceParameter="./immagine1Reference"
+														mimeTypes="[image/gif,image/jpeg,image/png,image/tiff,image/svg+xml]"
+														multiple="{Boolean}false" name="./immagine1"
+														title="Immagine Card 1" fieldLabel="Immagine Card 1"
+														required="true"
+														uploadUrl="${suffix.path}" useHTML5="{Boolean}true" />
+													
+													<textCard1 jcr:primaryType="nt:unstructured"
+														jcr:title="Testo Card 1" fieldLabel="Testo Card 1"
+														sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+														name="./textCard1" maxlength="50" />
+												</items>
+											</primaCard>
+											
+											<secondaCard jcr:primaryType="nt:unstructured"
+												jcr:title="Seconda Card"
+												sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">
+												<items jcr:primaryType="nt:unstructured">
+													<immagine2
+														granite:class="cmp-image__editor-file-upload"
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="cq/gui/components/authoring/dialog/fileupload"
+														autoStart="{Boolean}false" class="cq-droptarget"
+														fileNameParameter="./immagine2Name"
+														fileReferenceParameter="./immagine2Reference"
+														mimeTypes="[image/gif,image/jpeg,image/png,image/tiff,image/svg+xml]"
+														multiple="{Boolean}false" name="./immagine2"
+														title="Immagine Card 2" fieldLabel="Immagine Card 2"
+														required="true"
+														uploadUrl="${suffix.path}" useHTML5="{Boolean}true" />
+													
+													<textCard2 jcr:primaryType="nt:unstructured"
+														jcr:title="Testo Card 2" fieldLabel="Testo Card 2"
+														sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+														name="./textCard2" maxlength="50" />
+												</items>
+											</secondaCard>
+
+											<terzaCard jcr:primaryType="nt:unstructured"
+												jcr:title="Terza Card"
+												sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">
+												<items jcr:primaryType="nt:unstructured">
+													<immagine3
+														granite:class="cmp-image__editor-file-upload"
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="cq/gui/components/authoring/dialog/fileupload"
+														autoStart="{Boolean}false" class="cq-droptarget"
+														fileNameParameter="./immagine3Name"
+														fileReferenceParameter="./immagine3Reference"
+														mimeTypes="[image/gif,image/jpeg,image/png,image/tiff,image/svg+xml]"
+														multiple="{Boolean}false" name="./immagine3"
+														title="Immagine Card 3" fieldLabel="Immagine Card 3"
+														required="true"
+														uploadUrl="${suffix.path}" useHTML5="{Boolean}true" />
+													
+													<textCard3 jcr:primaryType="nt:unstructured"
+														jcr:title="Testo Card 3" fieldLabel="Testo Card 3"
+														sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+														name="./textCard3" maxlength="50" />
+												</items>
+											</terzaCard>
+
+											<quartaCard jcr:primaryType="nt:unstructured"
+												jcr:title="Quarta Card"
+												sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">
+												<items jcr:primaryType="nt:unstructured">
+													<immagine4
+														granite:class="cmp-image__editor-file-upload"
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="cq/gui/components/authoring/dialog/fileupload"
+														autoStart="{Boolean}false" class="cq-droptarget"
+														fileNameParameter="./immagine4Name"
+														fileReferenceParameter="./immagine4Reference"
+														mimeTypes="[image/gif,image/jpeg,image/png,image/tiff,image/svg+xml]"
+														multiple="{Boolean}false" name="./immagine4"
+														title="Immagine Card 4" fieldLabel="Immagine Card 4"
+														required="true"
+														uploadUrl="${suffix.path}" useHTML5="{Boolean}true" />
+													
+													<textCard4 jcr:primaryType="nt:unstructured"
+														jcr:title="Testo Card 4" fieldLabel="Testo Card 4"
+														sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+														name="./textCard4" maxlength="50" />
+												</items>
+											</quartaCard>
+
+										</items>
+									</column>
+								</items>
+							</columns>
+						</items>
+					</configItem>
+
+				</items>
+			</tabs>
+		</items>
+	</content>
+</jcr:root>

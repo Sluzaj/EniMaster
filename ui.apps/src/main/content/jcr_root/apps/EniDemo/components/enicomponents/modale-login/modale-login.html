@@ -1,0 +1,78 @@
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+        data-sly-test.testing="${!properties.titolo}"> </sly>
+
+
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+
+<sly data-sly-use.eniEnvs="com.egl.core.models.utils.ENIEnvironmentConfig"></sly>
+
+
+<sly data-sly-test.id="${properties.id ? properties.id : 'ModaleLoginFast17'}"></sly>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+    	callSession();
+    });
+  
+</script>
+
+
+<script>
+window.ModaleLogin = { 
+		urlLogin: "${eniEnvs.serviceUrl @ context='uri'}/domm-ajaxredir/backend-controller-selfservices/convenzioniAgenzie/verificaAccessoAssistitoWeb",
+		urlSession: "${eniEnvs.serviceUrl @ context='uri'}/domm-ajaxredir/backend-controller-selfservices/convenzioniAgenzie/isLoggedInWeb"
+		
+	}
+
+</script>
+
+    <!-- Modale fast17 accedi -->
+     <div class="modal callmeback-2" id="ModaleLoginFast17" tabindex="-1" aria-labelledby="ModaleLoginFast17"
+        aria-hidden="true">
+        <div id="login" class="callmeback2-dialog">
+            <div class="callmeback2-modal">
+                <div class="callmeback2-header">
+                    <!-- Per la versione "Sessione Scaduta" cambia solo il testo -->
+                    <h2>Accedi</h2>
+                    <p class="p16-egl">Per visualizzare il contenuto della pagina devi effettuare l’accesso
+                        utilizzando username e password.</p>
+                </div>
+                <div class="callmeback2-body">
+                    <form class="needs-validation" novalidate>
+                        <div class="form-row">
+                            <div class="col-lg-6">
+                                <div class="label-box ">
+                                    <label for="exampleInputEmail1">Username</label>
+                                    <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                        required>
+                                    <div class="invalid-feedback">
+                                        Campo non compilato.
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="label-box">
+                                    <label for="validationCustom02">Password</label>
+                                    <input type="password" class="form-control" id="validationCustom02" required>
+                                    <div class="invalid-feedback">
+                                        Campo non compilato.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center messaggio-errore-fast">
+                            <p class="p20-egl"><!-- Errore --></p>
+                        </div>
+                        <div class="d-lg-flex justify-content-lg-center">
+                            <button class="btn btn-primary cta-primary" type="submit">Accedi</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

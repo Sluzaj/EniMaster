@@ -1,0 +1,45 @@
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	    data-sly-test.testing="${!properties.coloreBackground}"> </sly>
+
+<div class=" coverdinumeri-backgroudcolor" style="background-color:${properties.coloreBackground @context='styleToken'}">
+    <div class="container-lg px-lg-0 coverdinumeri-padding-container">
+        <div class="d-flex flex-column">
+            <div class="coverdititoli-title">
+                <div class="Nullam-quis-risus-eg">
+                    ${properties.titolo @context='html'}
+                </div>
+            </div>
+            <div class="coverdititoli-sezione">
+                <div class="Vivamus-sagittis-lac">
+                    ${properties.sottotitolo @context='html'}
+                </div>
+            </div>
+                            <!-- CARD -->
+            <div class="coverdititoli-text-align-cental d-flex flex-column flex-lg-row">
+                <div class="coverdinumeri-card-bg">
+                    <div class="coverdinumeri-card">
+                            <h3 class="text-title-card">${properties.titoloCard1}</h3>
+                            <h6 class="coverdinumeri-card-bodytext">${properties.sottotitoloCard1 @context='html'}</h6>
+                                <p class="text-paragaph-card" data-sly-test="${properties.notaCard1}">${properties.notaCard1}</p>
+                    </div>
+                </div>
+                <div class="coverdinumeri-spacing"></div>
+                <div class="coverdinumeri-card-bg">
+                    <div class="coverdinumeri-card">
+                            <h3 class="text-title-card">${properties.titoloCard2}</h3>
+                            <h6 class="coverdinumeri-card-bodytext">${properties.sottotitoloCard2 @context='html'}</h6>
+                            <p class="text-paragaph-card" data-sly-test="${properties.notaCard2}">${properties.notaCard2}</p>
+                    </div>
+                </div>
+                <div class="coverdinumeri-spacing"></div>
+                <div class="coverdinumeri-card-bg" data-sly-test="${properties.sceltaVariante == '3'}">
+                    <div class="coverdinumeri-card">
+                            <h3 class="text-title-card">${properties.titoloCard3}</h3>
+                            <h6 class="coverdinumeri-card-bodytext">${properties.sottotitoloCard3 @context='html'}</h6>
+                            <p class="text-paragaph-card" data-sly-test="${properties.notaCard3}">${properties.notaCard3}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

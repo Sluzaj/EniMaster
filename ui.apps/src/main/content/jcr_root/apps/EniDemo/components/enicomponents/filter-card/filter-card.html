@@ -1,0 +1,104 @@
+<sly
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.itemNumber}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+<sly data-sly-use.model="com.egl.core.models.filtercardgrid.FilterGridModel"></sly>
+
+  <div>
+  	<!-- MOBILE d-block d-lg-none -->
+    <div class="FilterCard-container-mobile d-block d-lg-none" style="background-color:${properties.bgColor @ context='styleString'};">
+      <div class="FilterCard-container-title-mobile container-lg">
+        <div class="FilterCard-content-title-mobile">
+          <h2 class="FilterCard-title-mobile">Scegli la tua polizza per
+            <div class="FilterCard-dropdown-mobile dropdown">
+              <button class="FilterCard-dropdown-content-mobile dropdown-toggle egl-dropdown" type="button"
+                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Tutti
+              </button>
+              <div class="FilterCard-dropdown-content-menu-mobile egl-dropdown-menu dropdown-menu"
+                aria-labelledby="dropdownMenuButton">
+                <!-- a class="dropdown-item" data-value="filter1" onclick="filterSelectionMobile('filter1')">Tutti</a-->
+                <sly data-sly-list.filter="${model.lista}">
+               	 <a class="dropdown-item" data-value="${filter.id @ context='scriptString'}"
+               	 	onclick="filterSelectionMobile('${filter.id @ context='scriptString'}')">${filter.nomeCategoria}</a>
+                </sly>
+              </div>
+            </div>
+          </h2>
+        </div>
+      </div>
+      <div class="FilterCard-container-main-mobile container-lg">
+        <div class="FilterCard-content-main-mobile">
+          <!-- MAIN ARTICLE MOBILE -->
+          <div class="FilterCard-container-article-main-mobile">
+            <div class="FilterCard-content-article-main-mobile">
+              <!-- TEXT -->
+              <div class="FilterCard-container-text-article-mobile">
+                <div class="FilterCard-content-text-article-mobile">
+                  <p>Ci sono <span class="FilterCard-articleNumber-mobile"></span> soluzioni per te:</p>
+                </div>
+              </div>
+            </div>
+            <!-- CARD ARTICLE -->
+            <div class="FilterCard-container-article-card-mobile">
+              <div class="FilterCard-content-article-card-mobile" data-sly-list="${model.items}">
+              	<div data-sly-unwrap="${wcmmode.disabled}">
+              		<sly data-sly-resource="${item @ resourceType='enigaseluce/components/filter-card/single-card', selectors='mobile'}"></sly>
+              	</div>
+               </div>
+             </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    <!-- DESKTOP d-none d-lg-block -->
+  
+    <div class="FilterCard-container d-none d-lg-block" style="background-color:${properties.bgColor @ context='styleString'};">
+      <div class="FilterCard-container-title container-lg">
+        <div class="FilterCard-content-title">
+          <h2 class="FilterCard-title">${properties.titolo @context='html'}</h2>
+        </div>
+      </div>
+      <div class="FilterCard-container-main container-lg">
+        <div class="FilterCard-content-main">
+          <!-- CARD CATEGORY -->
+          <div class="FilterCard-container-category-card">
+            <div id="categoryCardContent" class="FilterCard-content-category-card d-flex justify-content-between" 
+            	data-sly-list.filter="${model.lista}">
+              <!-- ELEMENT CARD CATEGORY -->
+              <div class="FilterCard-category-card"
+              		onclick="filterSelection('${filter.id @ context='scriptString'}')"
+              		data-sly-use.img="${'com.egl.core.models.utils.ImageModel' @ imagePath=filter.immagine}">
+                 	<img loading="lazy" class="FilterCard-category-card-img" src="${filter.immagine}" alt="${img.description}" />
+                    <p class="FilterCard-category-card-text">${filter.nomeCategoria}</p>
+              </div>
+            </div>
+          </div>
+          <!-- MAIN ARTICLE -->
+          <div class="FilterCard-container-article-main">
+            <div class="FilterCard-content-article-main">
+              <!-- TEXT -->
+              <div class="FilterCard-container-text-article">
+                <div class="FilterCard-content-text-article">
+                  <p>Ci sono <span class="FilterCard-articleNumber"></span> soluzioni per te:</p>
+                </div>
+              </div>
+              <!-- CARD ARTICLE -->
+              <div class="FilterCard-container-article-card">
+                <div class="FilterCard-content-article-card d-flex flex-wrap justify-content-between" 
+                	data-sly-list="${model.items}"> 
+	                <div data-sly-unwrap="${wcmmode.disabled}">
+	                	<sly data-sly-resource="${item @ resourceType='enigaseluce/components/filter-card/single-card', selectors='desktop'}"></sly>
+	                </div>		 	
+                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+   
+  

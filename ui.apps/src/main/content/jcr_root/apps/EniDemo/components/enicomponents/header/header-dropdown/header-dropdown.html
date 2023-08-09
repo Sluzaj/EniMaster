@@ -1,0 +1,82 @@
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.title}"> </sly>
+	
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<!-- desktopDropdown1 -->
+<div data-sly-use.dropdown="com.egl.core.models.DropdownModel"
+	data-sly-list.list="${dropdown.list}" data-sly-unwrap>
+	<div class="collapse" id="${list.dropdown}" tabindex="0">
+		<div class="container-lg">
+			<div class="row megaDropDownDesktop">
+				<div class="col d-flex flex-column">
+					<div tabindex="0" class="h3-egl boldText">${properties.titleSection}</div>
+					<div data-sly-list.elements="${list.dropdownElements}"
+						data-sly-unwrap>
+						<a class="p16-egl linkMD ${elements.newElement}" href="${elements.link}" target="${elements.target}" title="${elements.altText}">
+							${elements.text @ context='html'}
+						</a>
+					</div>
+				</div>
+				<div data-sly-list.subsection="${list.subsections}" data-sly-unwrap>
+					<div class="col d-flex flex-column">
+						<div tabindex="0" class="p16-egl boldText subcatTitle">${subsection.title}</div>
+						<div data-sly-list.submenu="${subsection.subsectionElements}"
+							data-sly-unwrap>
+							<a href="${submenu.link}" target="${submenu.target}" title="${submenu.altText}"
+								class="cap12-egl linkMD ${submenu.newElement}">${submenu.text}</a>
+						</div>
+						<div data-sly-test="${subsection.labelHub && subsection.linkHub}" data-sly-unwrap>
+							<a href="${subsection.linkHub}" class="cap12-egl linkMD linkHub"
+								target="${subsection.targetHub}" title="${submenu.altHub}"><b>${subsection.labelHub}</b><img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-right-solid.svg" class="header-comp-arrows-right"/></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid container-caroselloDropdownDesktop">
+			<div class="row megaDropDownDesktop row-caroselloDropdownDesktop">
+				<div class="col">
+					<div class="container">
+						<div class="row py-lg-3">
+							<div class="col-xl-3 col-lg-4">
+								<div tabindex="0" class="h4-egl boldText">${properties.titleCardContainer}</div>
+								<div tabindex="0" class="p16-egl">${properties.subTitleCardContainer}</div>
+							</div>
+							<div class="col-xl-9 col-lg-12">
+								<div class="row py-xl-0 py-lg-3">
+									<!-- Card Offerte per il DropDown -->
+									<div data-sly-list.card="${list.cards}" data-sly-unwrap>
+										<div class="egl-max-width-cards col-md-5 col-lg-4 col-10">
+											<div class="container-fluid cardOfferteMobile">
+												<div class="row">
+													<div class="col-8">
+														<div tabindex="0" class="p18-egl titoloCardOfferta">${card.title
+															@ context='html'}</div>
+														<div tabindex="0" class="pb-2 descCardOfferta">${card.subtitle}</div>
+														<a data-sly-test="${card.labelLink && card.urlLink}"
+															href="${card.urlLink}" target="${card.targetLink}"
+															title="${card.altLink}">
+															<button tabindex="0" class="btn btn-link cta-secondary">
+																${card.labelLink}
+															</button>
+														</a>
+													</div>
+													<div class="col-4 px-0 text-right">
+														<img loading="lazy" src="${card.image}" alt="${card.altImage}" />
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- Card Offerte per il DropDown fine-->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

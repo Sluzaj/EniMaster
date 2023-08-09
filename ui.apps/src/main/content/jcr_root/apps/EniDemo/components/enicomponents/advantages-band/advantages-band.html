@@ -1,0 +1,31 @@
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.title}"> </sly>
+	
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<sly data-sly-set.background="background-color: ${properties.background}"></sly>
+
+<div id="${properties.idRef}" class="container-fluid fascia-plain" style="${background @ context='styleString'}">
+    <div class="container-lg px-lg-0">
+        <div class="row row-fascia-plain mx-xs-0">
+            <div class="col-lg-4">
+                <h2 class="h2-egl">
+                    ${properties.title @ context='html'}
+                </h2>
+            </div>
+            <div class="col-lg-8">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <sly data-sly-resource="${'item1' @ resourceType='enigaseluce/components/advantages-band/advantages-item'}"></sly>
+                    </div>
+                    <div class="col-lg-4">
+                        <sly data-sly-resource="${'item2' @ resourceType='enigaseluce/components/advantages-band/advantages-item'}"></sly>
+                    </div>
+                    <div class="col-lg-4">
+                        <sly data-sly-resource="${'item3' @ resourceType='enigaseluce/components/advantages-band/advantages-item'}"></sly>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

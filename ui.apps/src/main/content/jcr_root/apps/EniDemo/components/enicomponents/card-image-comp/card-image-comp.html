@@ -1,0 +1,70 @@
+
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	    data-sly-test.testing="${!properties.immagine1Reference}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+  
+<div id="${properties.id}" class="card-image-bg" style="background-color:${properties.backgroundColore @ context='styleString'};">
+    <div class="card-image-container container-lg px-lg-0">
+        <div class="text-center">
+            <h2>${properties.titolo @ context='html'}</h2>
+        </div>
+        <div class="text-center">
+            <p class="p20-egl">${properties.sottotitolo @ context='html'}</p>
+        </div>
+        <div class="d-flex flex-wrap">
+            <div class="col-12 col-md-6 col-lg-3 px-0 position-relative card-image">
+                <picture data-sly-use.img1="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagine1Reference}" 
+                    data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=properties.immagine1Reference}" >
+                    <sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+                        <source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+                        <source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+                    </sly>
+                    <img loading="lazy"  src="${renditionsManager.renditions['1920px']}" alt="${img1.description}" />
+                </picture>
+                <div>
+                    ${properties.textCard1 @ context='html'}
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3 px-0 position-relative card-image">
+                <picture data-sly-use.img2="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagine2Reference}" 
+                    data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=properties.immagine2Reference}" >
+                    <sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+                        <source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+                        <source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+                    </sly>
+                    <img loading="lazy"  src="${renditionsManager.renditions['1920px']}" alt="${img2.description}" />
+                </picture>
+                <div>
+                    ${properties.textCard2 @ context='html'}
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3 px-0 position-relative card-image">
+                <picture data-sly-use.img3="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagine3Reference}" 
+                    data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=properties.immagine3Reference}" >
+                    <sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+                        <source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+                        <source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+                    </sly>
+                    <img loading="lazy"  src="${renditionsManager.renditions['1920px']}" alt="${img3.description}" />
+                </picture>
+                <div>
+                    ${properties.textCard3 @ context='html'}
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3 px-0 position-relative card-image">
+                <picture data-sly-use.img4="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagine4Reference}" 
+                    data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=properties.immagine4Reference}" >
+                    <sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+                        <source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+                        <source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+                    </sly>
+                    <img loading="lazy"  src="${renditionsManager.renditions['1920px']}" alt="${img4.description}" />
+                </picture>
+                <div>
+                    ${properties.textCard4 @ context='html'}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,355 @@
+<sly data-sly-use.modaleNAModel="${'com.egl.core.models.nuoveattivazioni.ModaleNAModel' @ forniture='luce'}"></sly>
+<sly data-sly-use.stepCartModel="${'com.egl.core.models.carrello.StepCartModel' @ cfPath=modaleNAModel.pathCF, promotion1Path='', promotion2Path=''}"></sly>
+<sly data-sly-set.texts="${stepCartModel.textValues}"></sly>
+<sly data-sly-set.businessCart="${modaleNAModel.businessCart}"></sly>
+<sly data-sly-set.residentialCart="${modaleNAModel.residentialCart}"></sly>
+<sly data-sly-set.cart="${businessCart || residentialCart}"></sly>
+<sly data-sly-set.isScontoDirect="${cart.scontoDirect}"></sly>
+<sly data-sly-set.isScontoDigitale="${cart.scontoDigitale}"></sly>
+<sly data-sly-set.isScontoConfPagamento="${cart.scontoConfigurazionePagamento}"></sly>
+<sly data-sly-set.isPerNoi="${'/pernoi' in currentPage.path}"></sly>
+<sly data-sly-set.isFastweb="${'fastweb' in currentPage.path}"></sly>
+
+<sly data-sly-set.isPrezziIndicizzati="${cart.attivazioneVariantePrezziIndicizzati}"></sly>
+
+
+<div class="flex-b-100 step-fascia-bioraria">
+    <!-- contenuto mobile e desktop -->
+    <div class="wrapper-contenuto-doppio d-flex flex-wrap">
+        <div class="flex-b-100">
+            <div class="egl-carrellostep-fascia-bi-titolo">
+                Prima di procedere seleziona la tariffa migliore per te
+            </div>
+        </div>
+        <div class="flex-b-100 position-relative">
+            <div class="
+          box-carrellostep-fascia-bi
+          position-relative
+          box-carrellostep-fascia-bi-mono box-carrellostep-selezionato
+        " onclick="selezionaBoxFornituraModale()">
+                <div class="position-absolute box-fascia-oraria-radio"></div>
+                <div class="d-flex align-items-center" style="margin-bottom: 14px">
+                    <img loading="lazy" class="box-fascia-bi-titolo-icon-doppia" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/bioraria-icon.svg"
+                        alt="icona-monoraria" />
+                    <div class="box-fascia-luce-titolo">${texts['monoraria'] @ context='html'}</div>
+                </div>
+ 				<div class="d-none justify-content-between d-lg-flex">
+                  <div>
+                    <div class="box-fascia-bold18" style="font-size: 16px">
+                      Luce <span class="box-fascia-cap14">24h</span>
+                    </div>
+                    <div class="box-fascia-cap14">${texts['24hDuration'] @ context='html'}</div>
+                  </div>
+                  <div></div>
+                </div>
+                <div class="d-flex justify-content-between d-lg-none">
+                  <div>
+                    <div class="box-fascia-bold18">Luce 24h</div>
+                    <div class="box-fascia-cap14" style="margin-top: 5px">
+                      ${texts['24hDuration'] @ context='html'}
+                    </div>
+                  </div>
+                  <div class="egl-carrellostep-corrispettivi-scelta-fascia-oraria">
+                    <div class="box-fascia-bold24">
+                      ${residentialCart.scontoDigitale ? residentialCart.digitalCorrispettivoLuce24 : residentialCart.corrispettivoLuce24}<span class="box-fascia-cap14" style="margin-left: 5px">€/kWh</span>
+                    </div>
+                    <div class="box-fascia-cap12" style="float: right">
+                      ${residentialCart.scontoDigitale ? residentialCart.digitalInfoSecondLuce24 : residentialCart.infoSecondLuce24 @ context='html'}
+                    </div>
+                  </div>
+                </div>
+				<div data-sly-test="${residentialCart.commercializzazioneLuceMese}" class="d-flex justify-content-between d-lg-none">
+                  <div>
+                    <div class="box-fascia-cap14" style="margin-top: 4px; width: 158px; height: 36px">
+                      Costi commercializzazione e vendita
+                    </div>
+                  </div>
+                  <div style="align-self: center">
+                    <div class="box-fascia-bold24">
+                      ${residentialCart.commercializzazioneLuceMese}<span class="box-fascia-cap14" style="margin-left: 5px">€/mese</span>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex-b-100 position-relative">
+          <div class="
+            box-carrellostep-fascia-bi
+            position-relative
+            box-carrellostep-fascia-bi-bioraria 
+          " onclick="selezionaBoxFornituraModale()">
+            <div class="position-absolute box-fascia-oraria-radio"></div>
+            <div class="d-flex align-items-center" style="margin-bottom: 14px">
+              <img loading="lazy" class="box-fascia-bi-titolo-icon-doppia" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/bioraria-icon.svg"
+                alt="icona-monoraria" />
+              <div class="box-fascia-luce-titolo">${texts['bioraria'] @ context='html'}</div>
+            </div>
+            <div class="d-none justify-content-between d-lg-flex">
+              <div>
+                <div class="box-fascia-f1">
+                  <div class="box-fascia-bold18" style="font-size: 16px">
+                    Luce <span class="box-fascia-cap14"><b>F1</b></span>
+                  </div>
+                  <div class="box-fascia-cap14">${texts['f1Duration'] @ context='html'}</div>
+                </div>
+              </div>
+              <div>
+                <div class="box-fascia-f2">
+                  <div class="box-fascia-bold18" style="font-size: 16px">
+                    Luce <span class="box-fascia-cap14"><b>F2-F3</b></span>
+                  </div>
+                  <div class="box-fascia-cap14">${texts['f23Duration'] @ context='html'}</div>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between d-lg-none">
+              <div class="box-fascia-f1">
+                <div class="box-fascia-bold18">Luce F1</div>
+                <div class="box-fascia-cap14">${texts['f1Duration'] @ context='html'}</div>
+              </div>
+              <div class="egl-carrellostep-corrispettivi-scelta-fascia-oraria">
+                <div class="box-fascia-bold24">
+                  ${residentialCart.scontoDigitale ? residentialCart.digitalCorrispettivoLuceF1 : residentialCart.corrispettivoLuceF1}<span class="box-fascia-cap14" style="margin-left: 5px">€/kWh</span>
+                </div>
+                <div class="box-fascia-cap12" style="float: right">
+                  ${residentialCart.scontoDigitale ? residentialCart.digitalInfoSecondLuceF1 : residentialCart.infoSecondLuceF1 @ context='html'}
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between d-lg-none">
+              <div class="box-fascia-f2">
+                <div class="box-fascia-bold18">Luce F2</div>
+                <div class="box-fascia-cap14">${texts['f23Duration'] @ context='html'}</div>
+              </div>
+              <div class="egl-carrellostep-corrispettivi-scelta-fascia-oraria">
+                <div class="box-fascia-bold24">
+                  ${residentialCart.scontoDigitale ? residentialCart.digitalCorrispettivoLuceF23 : residentialCart.corrispettivoLuceF23}<span class="box-fascia-cap14" style="margin-left: 5px">€/kWh</span>
+                </div>
+                <div class="box-fascia-cap12" style="float: right">
+                  ${residentialCart.scontoDigitale ? residentialCart.digitalInfoSecondLuceF23 : residentialCart.infoSecondLuceF23 @ context='html'}
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between d-lg-none">
+              <div>
+                <div class="box-fascia-cap14" style="margin-top: 4px; width: 158px; height: 36px">
+                  Costi commercializzazione e vendita
+                </div>
+              </div>
+              <div style="align-self: center">
+                <div class="box-fascia-bold24">
+                  ${residentialCart.commercializzazioneLuceMese}<span class="box-fascia-cap14" style="margin-left: 5px">€/mese</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex-b-100 d-lg-none">
+          <div class="egl-carrellostep-fascia-bi-subtext">
+            ${texts['rateStepDescriptionDirect'] @ context='html'}
+	          <br/>
+	          <br/>
+	          ${isScontoDigitale ? residentialCart.infoScontoDigitaleCarrelloAStep4 : '' @ context='html'}
+          </div>
+        </div>
+    </div>
+    <!-- contenuto desktop -->
+    <div style="height: fit-content" class="
+      wrapper-contenuto-doppio
+      d-none
+      flex-wrap
+      d-lg-flex
+      carrellostep-desktop-dettaglio
+    ">
+        <div class="flex-b-100" style="height: 38px">
+            <div class="egl-carrellostep-fascia-bi-titolo">
+                ${texts['rateStepSummary'] @ context='html'}${!isScontoDirect && isScontoDigitale ? '*' : ''}
+              </div>
+        </div>
+        <sly data-sly-test="${!isPrezziIndicizzati}">
+	        <div style="margin: auto auto" class="
+	        flex-b-100
+	        position-relative
+	        contenitore-carrellostep-fascia-bi-desktop-opt1 d-none
+	      ">
+	            <div class="box-carrellostep-fascia-bi position-relative non-selezionabile">
+	                <div class="justify-content-between d-lg-flex d-none" style="margin-top: 4px">
+	                    <div class="box-fascia-f1">
+	                        <div class="box-fascia-bold18">Luce F1</div>
+	                    </div>
+	                    <div class="egl-carrellostep-corrispettivi-scelta-fascia-oraria">
+	                    <div class="box-fascia-bold24">
+	                      ${residentialCart.scontoDigitale ? residentialCart.digitalCorrispettivoLuceF1 : residentialCart.corrispettivoLuceF1}<span class="box-fascia-cap14" style="margin-left: 5px">€/kWh</span>
+	                    </div>
+	                    <div class="box-fascia-cap12" style="float: right">
+	                      ${residentialCart.scontoDigitale ? residentialCart.digitalInfoSecondLuceF1 : residentialCart.infoSecondLuceF1 @ context='html'}
+	                    </div>
+	                  </div>
+	                </div>
+	                <div class="d-lg-flex d-none justify-content-between" style="margin-top: 5px">
+	                    <div class="box-fascia-f2">
+	                        <div class="box-fascia-bold18">Luce F2-F3</div>
+	                    </div>
+	                    <div class="egl-carrellostep-corrispettivi-scelta-fascia-oraria">
+		                    <div class="box-fascia-bold24">
+		                      ${residentialCart.scontoDigitale ? residentialCart.digitalCorrispettivoLuceF23 : residentialCart.corrispettivoLuceF23}<span class="box-fascia-cap14" style="margin-left: 5px">€/kWh</span>
+		                    </div>
+		                    <div class="box-fascia-cap12" style="float: right">
+		                      ${residentialCart.scontoDigitale ? residentialCart.digitalInfoSecondLuceF23 : residentialCart.infoSecondLuceF23 @ context='html'}
+		                    </div>
+	                  	</div>
+	                </div>
+	                <div data-sly-test="${residentialCart.commercializzazioneLuceMese}" 
+	                	class="justify-content-between d-lg-flex d-none" style="margin-top: 5px">
+	                    <div>
+	                        <div class="box-fascia-cap14" style="margin-top: 10px">
+	                            Costi commercializzazione e vendita
+	                        </div>
+	                    </div>
+	                    <div style="align-self: center">
+	                        <div class="box-fascia-bold24">
+		                      ${residentialCart.commercializzazioneLuceMese}<span class="box-fascia-cap14" style="margin-left: 5px">€/mese</span>
+		                    </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	        <div style="margin: auto auto" class="
+	        flex-b-100
+	        position-relative
+	        contenitore-carrellostep-fascia-bi-desktop-opt2
+	      ">
+	            <div class="box-carrellostep-fascia-bi position-relative non-selezionabile">
+	                <div class="justify-content-between d-lg-flex d-none" style="margin-top: 4px">
+	                    <div class="box-fascia-f1">
+	                        <div class="box-fascia-bold18">Luce 24h</div>
+	                    </div>
+	                    <div class="egl-carrellostep-corrispettivi-scelta-fascia-oraria">
+		                    <div class="box-fascia-bold24">
+		                      ${residentialCart.scontoDigitale ? residentialCart.digitalCorrispettivoLuce24 : residentialCart.corrispettivoLuce24}<span class="box-fascia-cap14" style="margin-left: 5px">€/kWh</span>
+		                    </div>
+		                    <div class="box-fascia-cap12" style="float: right">
+		                      ${residentialCart.scontoDigitale ? residentialCart.digitalInfoSecondLuce24 : residentialCart.infoSecondLuce24 @ context='html'}
+		                    </div>
+	                  </div>
+	                </div>
+	                <div class="justify-content-between d-lg-flex d-none" style="margin-top: 5px">
+	                    <div>
+	                        <div class="box-fascia-cap14" style="margin-top: 10px">
+	                            Costi commercializzazione e vendita
+	                        </div>
+	                    </div>
+	                    <div style="align-self: center">
+	                     <div class="box-fascia-bold24">
+	                       ${residentialCart.commercializzazioneLuceMese}<span class="box-fascia-cap14" style="margin-left: 5px">€/mese</span>
+	                     </div>
+	                  </div>
+	                </div>
+	            </div>
+	        </div>
+        </sly>
+        
+        <!-- PREZZI INDICIZZATI -->
+        <sly data-sly-test="${isPrezziIndicizzati}">
+        	    <div style="margin: auto auto" class="
+	        flex-b-100
+	        position-relative
+	        contenitore-carrellostep-fascia-bi-desktop-opt1
+	      ">
+	      <div class="box-carrellostep-fascia-bi position-relative non-selezionabile">
+	        <div class="justify-content-between d-lg-flex d-none flex-column" style="margin-top: 4px">
+	          <div class="cart-card-opt-titolo">
+	            <div class="p18-egl d-flex align-items-center">
+	              <b>LUCE MONORARIA</b>
+	              <i tabindex="-1" class="fas fa-exclamation no-content" data-trigger="focus" data-toggle="tooltip"
+	                data-placement="right" title="Tutti i giorni">
+	                <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/exclamation-solid.svg" class="listing-icon"/>
+	                </i>
+	            </div>
+	          </div>
+	          <!-- contenitore del dettaglio trend esploso da mettere come rimpiazzo all'altro -->
+	          <div class="dettaglio-trend-esploso">
+	            <div class="d-flex justify-content-between align-items-center">
+	              <p class="p18-egl ">Prezzo all'ingrosso
+	              </p>
+	              <p class="p18-egl mb-0 price-txt-bold">${residentialCart.scontoDigitale ? residentialCart.digitalPrezzoAllingrossoLuce : residentialCart.prezzoAllingrossoLuce}</p>
+	            </div>
+	            <div class="d-flex justify-content-between align-items-center">
+	              <p class="p18-egl">Contributo al consumo
+	              </p>
+	              <p class="p18-egl  mb-0 price-txt-bold">${residentialCart.scontoDigitale ? residentialCart.digitalPrezzoAlConsumoLuce : residentialCart.prezzoAlConsumoLuce} <small>€/kWh</small></p>
+	            </div>
+	            <div class="d-flex justify-content-between align-items-center">
+	              <p class="p18-egl"> Costi commercializzazione e vendita
+	              </p>
+	              <p class="p18-egl  mb-0 price-txt-bold">${residentialCart.commercializzazioneLuceMese} <small>€/mese</small></p>
+	            </div>
+	          </div>
+	        </div>
+	
+	      </div>
+	    </div>
+	    <div style=" margin: auto auto" class="
+	        flex-b-100
+	        position-relative
+	        contenitore-carrellostep-fascia-bi-desktop-opt2 pz-ind-opt
+	        d-none
+	      ">
+	      <div class="box-carrellostep-fascia-bi position-relative non-selezionabile">
+	        <div class="justify-content-between d-lg-flex d-none flex-column" style="margin-top: 4px">
+	          <div class="cart-card-opt-titolo">
+	            <div class="p18-egl d-flex align-items-center">
+	              <b>LUCE BIORARIA</b>
+	              <i tabindex="-1" class="fas fa-exclamation no-content" data-trigger="focus" data-toggle="tooltip"
+	                data-placement="right" title="Tutti i giorni">
+	                <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/exclamation-solid.svg" class="listing-icon"/>
+	                </i>
+	            </div>
+	          </div>
+	          <!-- contenitore del dettaglio trend esploso da mettere come rimpiazzo all'altro -->
+	          <div class="dettaglio-trend-esploso">
+	            <div class="d-flex justify-content-between align-items-center">
+	              <p class="p18-egl ">Prezzo all'ingrosso
+	              </p>
+	              <p class="p18-egl mb-0 price-txt-bold">${residentialCart.scontoDigitale ? residentialCart.digitalPrezzoAllingrossoLuce : residentialCart.prezzoAllingrossoLuce}</p>
+	            </div>
+	            <div class="d-flex justify-content-between align-items-center">
+	              <p class="p18-egl">Contributo al consumo
+	              </p>
+	              <p class="p18-egl  mb-0 price-txt-bold">${residentialCart.scontoDigitale ? residentialCart.digitalPrezzoAlConsumoLuce : residentialCart.prezzoAlConsumoLuce} <small>€/kWh</small></p>
+	            </div>
+	            <div class="d-flex justify-content-between align-items-center">
+	              <p class="p18-egl"> Costi commercializzazione e vendita
+	              </p>
+	              <p class="p18-egl  mb-0 price-txt-bold">${residentialCart.commercializzazioneLuceMese}<small>€/mese</small></p>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+        </sly>
+        
+        <div class="flex-b-100 d-lg-block d-none">
+          <div class="egl-carrellostep-fascia-bi-subtext">
+             ${texts['rateStepDescriptionDirect'] @ context='html'}
+	          <br/>
+	          <br/>
+	          ${isScontoDigitale ? residentialCart.infoScontoDigitaleCarrelloAStep4 : '' @ context='html'}
+          </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- bottoni -->
+<div class="
+    d-flex
+    flex-wrap
+    egl-modal-body-carrellostep-footer
+    indietro-e-continua
+    flex-b-100
+  ">
+    <button type="button" class="p20-egl egl-cart-cta-primary-yellow" onclick="caricaModaleNA('NA-modale-luce-step2');">
+        ${texts['continue'] @ context='html'}
+    </button>
+</div>

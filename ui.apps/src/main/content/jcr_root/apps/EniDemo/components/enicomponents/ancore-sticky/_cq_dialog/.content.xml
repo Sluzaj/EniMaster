@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+	xmlns:cq="http://www.day.com/jcr/cq/1.0"
+	xmlns:jcr="http://www.jcp.org/jcr/1.0"
+	xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
+	xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+	extraClientlibs="[cq.author.accordion]"
+	jcr:primaryType="nt:unstructured" jcr:title="Ancore Sticky Properties"
+	sling:resourceType="cq/gui/components/authoring/dialog">
+	<content jcr:primaryType="nt:unstructured"
+		sling:resourceType="granite/ui/components/coral/foundation/container">
+		<items jcr:primaryType="nt:unstructured">
+			<tabs jcr:primaryType="nt:unstructured"
+				sling:resourceType="granite/ui/components/coral/foundation/tabs"
+				maximized="{Boolean}true">
+				<items jcr:primaryType="nt:unstructured">
+
+
+					<configItem jcr:primaryType="nt:unstructured"
+						jcr:title="Configurazione Item"
+						sling:resourceType="granite/ui/components/coral/foundation/container"
+						margin="{Boolean}true">
+						<items jcr:primaryType="nt:unstructured">
+							<columns jcr:primaryType="nt:unstructured"
+								sling:resourceType="granite/ui/components/coral/foundation/container"
+								margin="{Boolean}true">
+								<items jcr:primaryType="nt:unstructured">
+									<column jcr:primaryType="nt:unstructured"
+										sling:resourceType="granite/ui/components/coral/foundation/container">
+										<items jcr:primaryType="nt:unstructured">
+											<gestioneComponente
+												jcr:primaryType="nt:unstructured"
+												jcr:title="Gestione Componente"
+												sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">
+												<items jcr:primaryType="nt:unstructured">
+													<background jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/select"
+														fieldLabel="Colore Ancore Sticky" name="./colore">
+														<items jcr:primaryType="nt:unstructured">
+															<option1 jcr:primaryType="nt:unstructured"
+																selected="true" text="Giallo" value="egl-anchor-bg-yellow" />
+															<option2 jcr:primaryType="nt:unstructured"
+																text="Grigio" value="egl-anchor-bg-light" />
+															<option3 jcr:primaryType="nt:unstructured"
+																text="Nero" value="egl-anchor-bg-dark"/>
+														</items>
+													</background>
+												</items>
+											</gestioneComponente>
+											
+											<campiAncore jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+												class="full-width" fieldLabel="Voci Ancore Sticky"
+												composite="{Boolean}true">
+												<granite:data jcr:primaryType="nt:unstructured"
+													min-item="3" max-item="6" />
+												<field jcr:primaryType="nt:unstructured"
+													sling:resourceType="granite/ui/components/foundation/form/fieldset"
+													jcr:title="Configurazione Voce" name="./ancoreSticky">
+													<layout jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/foundation/layouts/container"
+														method="absolute" />
+													<items jcr:primaryType="nt:unstructured">
+														<column jcr:primaryType="nt:unstructured"
+															sling:resourceType="granite/ui/components/foundation/container">
+															<items jcr:primaryType="nt:unstructured">
+																<label jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																	fieldLabel="Label" name="./label" 
+																	maxlength= "20"/>
+																<parametro jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																	fieldLabel="Parametro Ancora" name="./parametro" />
+																<altAncora jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																	fieldLabel="Alt Text Ancora" name="./altAncora" />
+															</items>
+														</column>
+													</items>
+												</field>
+											</campiAncore>
+																		
+										</items>
+									</column>
+								</items>
+							</columns>
+						</items>
+					</configItem>
+
+				</items>
+			</tabs>
+		</items>
+	</content>
+</jcr:root>
+

@@ -1,0 +1,77 @@
+<sly
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.title}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+<sly data-sly-test.isCentered="${properties.contentType == 'centered'}"></sly>
+<sly data-sly-test.titleType="${properties.titleType ? properties.titleType : 'up'}"></sly>
+<sly data-sly-test.mediaType="${properties.mediaType ? properties.mediaType : 'image'}"></sly>
+<sly data-sly-test.paddingTop30="${properties.removePadding == 'remove' ? '0px' : '30px'}"></sly>
+<sly data-sly-test.paddingTop60="${properties.removePadding  == 'remove' ? '0px' : '60px'}"></sly>
+
+<style>
+.image-${resource.name @ context='styleToken'}.zero-four-image-spacing-huge {
+    padding-top: ${paddingTop30 @ context='styleString'};
+}
+
+@media (min-width: 1024px){
+	.image-${resource.name @ context='styleToken'}.zero-four-image-spacing-huge {
+	    padding-top: ${paddingTop60 @ context='styleString'};
+	}
+}
+</style>
+
+<div id="${properties.idRef}" style="background-color: ${properties.bgColor@ context='styleString'}">
+	<div class="container-lg image-${resource.name} zero-four-image-spacing-huge px-lg-0 ${titleType == 'down' ? 'image-04-reverse' : ''}">
+		<div data-sly-test="${titleType == 'up'}"
+			class="d-flex ${isCentered ? 'justify-content-center' : 'left-alignment'}">
+			<div data-sly-test="${!isCentered}" class="zero-four-image-rectangle"></div>
+			<div class="d-flex flex-column">
+				<span
+					class="${isCentered ? 'zero-four-image-title-centered' : 'zero-four-image-title'}">${properties.title
+					@ context='html'}</span> <span
+					class="${isCentered ? 'zero-four-image-label-centered' : 'zero-four-image-label'}">${properties.subtitle
+					@ context='html'}</span>
+				<sly data-sly-test="${properties.modalCTA && isCentered}">
+					<button data-sly-test="${properties.linkCTA && properties.labelCTA}" class="buttonlink-pleni-cta image-button-04" type="button" data-toggle="modal" data-target="${'#' in properties.linkCTA ? '' : '#'}${properties.linkCTA}" title="${properties.altCTA}">${properties.labelCTA}</button>
+				</sly>
+				<sly data-sly-test="${!properties.modalCTA && isCentered}">
+					<a data-sly-test="${properties.linkCTA && properties.labelCTA}" href="${properties.linkCTA}" target="${properties.targetCTA}" class="buttonlink-pleni-cta image-button-04">${properties.labelCTA}</a>
+				</sly>
+			</div>
+		</div>
+		<div data-sly-test="${mediaType == 'image'}" class="zero-four-image-fixed-width-container"
+			data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.image}"
+			data-sly-use.imageMob="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.imageMob}">
+			<picture>
+				<source media="(min-width: 1024px)" srcset="${properties.image}" alt="${image.description}">
+                <img loading="lazy" class="zero-four-image-fixed-width-image" src="${properties.imageMob}" alt="${imageMob.description}">
+            </picture>
+		</div>
+		<div data-sly-test="${mediaType == 'video'}" class="zero-four-image-fixed-width-container ">
+            <iframe class="youtubeVideo image-04-youtube" 
+            	src="${properties.media}"
+				title="${properties.altMedia}" 
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+        </div>
+		<div data-sly-test="${titleType == 'down'}"
+			class="d-flex flex-column ${isCentered ? 'justify-content-center' : 'left-alignment'}">
+			<div data-sly-test="${!isCentered}" class="zero-four-image-rectangle"></div>
+			<div class="d-flex flex-column">
+				<span
+					class="${isCentered ? 'zero-four-image-title-centered' : 'zero-four-image-title'}">${properties.title
+					@ context='html'}</span> <span
+					class="${isCentered ? 'zero-four-image-label-centered' : 'zero-four-image-label'}">${properties.subtitle
+					@ context='html'}</span>
+				<sly data-sly-test="${properties.modalCTA && isCentered}">
+					<button data-sly-test="${properties.linkCTA && properties.labelCTA}" class="buttonlink-pleni-cta image-button-04" type="button" data-toggle="modal" data-target="${'#' in properties.linkCTA ? '' : '#'}${properties.linkCTA}" title="${properties.altCTA}">${properties.labelCTA}</button>
+				</sly>
+				<sly data-sly-test="${!properties.modalCTA && isCentered}">
+					<a data-sly-test="${properties.linkCTA && properties.labelCTA}" href="${properties.linkCTA}" target="${properties.targetCTA}" class="buttonlink-pleni-cta image-button-04">${properties.labelCTA}</a>
+				</sly>
+			</div>
+		</div>
+	</div>
+</div>

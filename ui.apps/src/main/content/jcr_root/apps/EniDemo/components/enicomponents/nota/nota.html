@@ -1,0 +1,60 @@
+<sly
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.contentSelect}"> </sly>
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<sly data-sly-test.isFrag="${properties.contentSelect == 'frag'}" />
+<sly data-sly-use.fragModel="com.egl.core.models.nota.FragmentNotaModel"></sly>
+
+<!--nota -->
+<div id="${properties.id}" class="container-fluid px-0 egl-nota-container nota-edit-${resource.name}" style="background-color:${properties.bgSelect @ context='styleString'};">
+	<div class="container-lg" style="background-color:${properties.bgSelect @ context='styleString'};">
+		<div class="row mx-xs-0">
+			<sly data-sly-test="${!properties.promoPosition || properties.promoPosition == 'before'}">
+				<div class="col-12 nota-promo1-${resource.name}" data-sly-test="${fragModel.notePromozione1}" data-sly-list="${fragModel.notePromozione1}" 
+					data-start-promo="${fragModel.startPromo1}" data-end-promo="${fragModel.endPromo1}">
+					<div class="cap12-egl" data-sly-use.procText="${'com.egl.core.models.utils.RTEPlaceholderHandler' @ text=item}">
+						${procText.processed @ context='unsafe'}
+					</div>
+				</div>
+				<div class="col-12 nota-promo2-${resource.name}" data-sly-test="${fragModel.notePromozione2}" data-sly-list="${fragModel.notePromozione2}"
+					data-start-promo="${fragModel.startPromo2}" data-end-promo="${fragModel.endPromo2}">
+					<div class="cap12-egl" data-sly-use.procText="${'com.egl.core.models.utils.RTEPlaceholderHandler' @ text=item}">
+						${procText.processed @ context='unsafe'}
+					</div>
+				</div>
+			</sly>
+			<div class="col-12" data-sly-test="${!isFrag}">
+				<div class="cap12-egl" data-sly-use.procText="${'com.egl.core.models.utils.RTEPlaceholderHandler' @ text=properties.text}">
+					${procText.processed @ context='unsafe'}
+				</div>
+			</div>
+			<div class="col-12" data-sly-test="${isFrag}" data-sly-list="${fragModel.note}">
+				<div class="cap12-egl" data-sly-use.procText="${'com.egl.core.models.utils.RTEPlaceholderHandler' @ text=item}">
+					${procText.processed @ context='unsafe'}
+				</div>
+			</div>
+			<sly data-sly-test="${properties.promoPosition == 'after'}">
+				<div class="col-12 nota-promo1-${resource.name}" data-sly-test="${fragModel.notePromozione1}" data-sly-list="${fragModel.notePromozione1}" 
+					data-start-promo="${fragModel.startPromo1}" data-end-promo="${fragModel.endPromo1}">
+					<div class="cap12-egl" data-sly-use.procText="${'com.egl.core.models.utils.RTEPlaceholderHandler' @ text=item}">
+						${procText.processed @ context='unsafe'}
+					</div>
+				</div>
+				<div class="col-12 nota-promo2-${resource.name}" data-sly-test="${fragModel.notePromozione2}" data-sly-list="${fragModel.notePromozione2}"
+					data-start-promo="${fragModel.startPromo2}" data-end-promo="${fragModel.endPromo2}">
+					<div class="cap12-egl" data-sly-use.procText="${'com.egl.core.models.utils.RTEPlaceholderHandler' @ text=item}">
+						${procText.processed @ context='unsafe'}
+					</div>
+				</div>
+			</sly>
+		</div>
+	</div>
+</div>
+<script data-sly-test="${wcmmode.disabled && (fragModel.notePromozione1 || fragModel.notePromozione2)}">
+	(function($) {
+		$(document).ready(
+			promotionHideShow(null,".nota-promo1-${resource.name @ context='scriptToken'}",".nota-promo2-${resource.name @ context='scriptToken'}")
+		);
+	})($);
+</script>

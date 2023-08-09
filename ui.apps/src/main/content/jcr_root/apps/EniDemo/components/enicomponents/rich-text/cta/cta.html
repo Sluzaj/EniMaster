@@ -1,0 +1,12 @@
+<sly
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.labelCTA}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+
+	<a href="${properties.urlCTA}" target="${properties.targetCTA}" 
+		title="${properties.altCTA}" class="${properties.ctaSelect}">
+		${properties.labelCTA}
+	</a>
+

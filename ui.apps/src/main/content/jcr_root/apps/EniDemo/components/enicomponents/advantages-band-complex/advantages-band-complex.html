@@ -1,0 +1,32 @@
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.title}"> </sly>
+	
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<sly data-sly-test.variante="${properties.sceltaVariante ? properties.sceltaVariante : 'paragrafoComplex'}"></sly>
+
+<sly data-sly-set.background="background-color: ${properties.background}"></sly>
+<sly data-sly-set.asset="background-image: url(${properties.assetReference}); background-repeat: no-repeat;"></sly>
+<sly data-sly-use.model="com.egl.core.models.advantagesband.AdvantagesBandComplexModel"></sly>
+
+<div id="${properties.idRef}" class="container-fluid fascia-complex " style="${background @ context='styleString'}">
+    <div class="container-lg box-asset" style="${asset @ context='styleString'}">
+        <div class="row row-fascia-complex">
+            <div class="col-lg-4">
+                <h2 class="h2-egl">${properties.title @ context='html'}</h2>
+            </div>
+            <div class="col-lg-8 px-lg-0 mx-auto">
+                <div class="row" data-sly-list="${model.items}">
+                	<div class="${properties.sceltaVariante} col-lg-5 col-12">
+                		<sly data-sly-test="${variante == 'paragrafoComplex'}">
+                    		<sly data-sly-resource="${item @ resourceType='enigaseluce/components/advantages-band-complex/advantages-item-complex'}"></sly>
+                    	</sly>
+                    	<sly data-sly-test="${variante == 'paragrafoComplex-bullet'}">
+                    		<sly data-sly-resource="${item @ resourceType='enigaseluce/components/advantages-band-complex/advantages-item-bullet-complex'}"></sly>
+                    	</sly>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

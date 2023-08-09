@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Breadcrumb"
+    sling:resourceType="cq/gui/components/authoring/dialog"
+    extraClientlibs="[cq.author.accordion]">
+    <content
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/container">
+        <items jcr:primaryType="nt:unstructured">
+       		<mostraComponente jcr:primaryType="nt:unstructured"
+				sling:resourceType="granite/ui/components/foundation/form/checkbox"
+				name="./showHide" text="Non mostrare il componente" value="true"/>
+            <background
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                fieldLabel="Background Color"
+                name="./background">
+                <items jcr:primaryType="nt:unstructured">
+                    <option1
+                        jcr:primaryType="nt:unstructured"
+                        selected="true"
+                        text="Light"
+                        value="light"/>
+                    <option2
+                        jcr:primaryType="nt:unstructured"
+                        text="Dark"
+                        value="dark"/>
+                </items>
+            </background>
+        </items>
+    </content>
+</jcr:root>

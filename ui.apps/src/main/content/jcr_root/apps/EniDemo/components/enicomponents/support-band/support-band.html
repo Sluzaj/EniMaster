@@ -1,0 +1,153 @@
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.titoloItem1}"> </sly>
+	
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<sly data-sly-set.isWhite="${properties.backgroundItem == 'dark-support-band-item-container'}"></sly>
+
+<sly data-sly-test.isURLItem1="${!properties.modalCTAitem1 || properties.tipologiaCTA1 == 'url1'}"></sly>
+<sly data-sly-test.urlCTAItem1="${properties.urlCTAitem1 ? properties.urlCTAitem1 : '#ti-chiamiamo-noi'}"></sly>
+<sly data-sly-test.oldModaleItem1="${properties.tipologiaCTA1 == 'modaleCommodity1' && urlCTAItem1 == '#ti-chiamiamo-noi'}"></sly>
+
+<sly data-sly-test.isURLItem2="${!properties.modalCTAitem2 || properties.tipologiaCTA2 == 'url2'}"></sly>
+<sly data-sly-test.urlCTAItem2="${properties.urlCTAitem2 ? properties.urlCTAitem2 : '#ti-chiamiamo-noi'}"></sly>
+<sly data-sly-test.oldModaleItem2="${properties.tipologiaCTA2 == 'modaleCommodity2' && urlCTAItem2 == '#ti-chiamiamo-noi'}"></sly>
+<sly data-sly-test.coloreSfondo="${properties.backgroundItem == 'esadec' ? properties.coloresfondo : properties.backgroundItem}"></sly>
+
+<!--Item Primario -->
+<div id="${properties.id}" class="container-fluid egl-support-band-container ${properties.backgroundColore}" data-sly-test="${!properties.titoloItem2}"> 	
+  <div class="row mx-0">
+    <div class="col-12">
+      <div class="container-lg egl-support-band-item-container ${coloreSfondo}" style="background-color:${coloreSfondo @context='styleToken'}">
+        <div class="row">
+          <div class="col-md-8">
+          	<div class="txt-wrapper">
+          		<sly data-sly-test="${properties.titoloItem1}">
+	            	<h4 class="h4-egl">${properties.titoloItem1 @context='html'}</h4>
+	            </sly>
+	            <sly data-sly-test="${properties.sottoTitoloItem1}">
+		            <p class="p18-egl">
+		              ${properties.sottoTitoloItem1 @context='html'}
+		            </p>
+		        </sly>
+           	</div>
+          </div>
+          <div class="col-md-4 centraContent" data-sly-test="${properties.labelCTAitem1}">             
+            <a data-sly-test="${isURLItem1 && properties.urlCTAitem1 && !properties.modalCTAitem1}" href="${properties.tipologiaCTA1 == 'javascript1'? properties.javascriptItem1 : properties.urlCTAitem1 @context='html'}" target="${properties.targetCTAitem1}" title="${properties.altCTAItem1}">
+              <button
+                type="button"
+                class="
+                btn btn-warning p20-egl
+                ${isWhite ? 'egl-btn-support-band-dark' : 'egl-btn-support-band'} "
+                style="background-color:${properties.coloresfondocta1 @context='styleToken'}!important">
+                ${properties.labelCTAitem1}
+              </button>
+            </a>
+            <button data-sly-test="${oldModaleItem1 || properties.modalCTAitem1}"
+              type="button"
+              class="
+              btn btn-warning p20-egl
+              ${isWhite ? 'egl-btn-support-band-dark' : 'egl-btn-support-band'} "
+              style="background-color:${properties.coloresfondocta1 @context='styleToken'} !important"
+              data-toggle="modal" data-target="${'#' in urlCTAItem1 ? '' : '#'}${urlCTAItem1}"
+					    onclick="sfCallMeBackDataLayer('1_i tuoi dati', null)">
+              ${properties.labelCTAitem1}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid egl-support-band-container ${properties.backgroundColore}" data-sly-test="${properties.titoloItem2}">
+  <div class="container-lg px-0">
+    <div class="row mx-0">
+      <div class="col-lg-6">
+        <div class="container-lg egl-support-band-item-container ${coloreSfondo}" style="background-color:${coloreSfondo @context='styleToken'}" data-sly-test="${properties.titoloItem2}">
+          <div class="row">
+            <div class="col-12">
+            <sly data-sly-test="${properties.titoloItem1}">
+              <h4 class="h4-egl">${properties.titoloItem1 @context='html'}</h4>
+            </sly>
+            </div>
+            <div class="col-12">
+            <sly data-sly-test="${properties.sottoTitoloItem1}">
+              <p class="p18-egl">
+                ${properties.sottoTitoloItem1 @context='html'}
+              </p>
+             </sly>
+            </div>
+            <div class="col-12 centraContent-sup-dual-btn" data-sly-test="${properties.labelCTAitem1}">
+              <a data-sly-test="${isURLItem1 && properties.urlCTAitem1 && !properties.modalCTAitem1}" href="${properties.tipologiaCTA1 == 'javascript1'? properties.javascriptItem1 : properties.urlCTAitem1 @context='html'}" target="${properties.targetCTAitem1}" title="${properties.altCTAItem1}">
+                <button
+                  type="button"
+                  class="btn btn-warning p20-egl 
+                  ${isWhite ? 'egl-btn-support-band-dark' : 'egl-btn-support-band'} "
+                  style="background-color:${properties.coloresfondocta1 @context='styleToken'}!important">
+                  ${properties.labelCTAitem1}
+                </button>
+              </a>
+              <button data-sly-test="${oldModaleItem1 || properties.modalCTAitem1}"
+                type="button"
+                class="
+                btn btn-warning p20-egl
+                ${isWhite ? 'egl-btn-support-band-dark' : 'egl-btn-support-band'} "
+                 style="background-color:${properties.coloresfondocta1 @context='styleToken'}!important"
+                data-toggle="modal" data-target="${'#' in urlCTAItem1 ? '' : '#'}${urlCTAItem1}"
+                onclick="sfCallMeBackDataLayer('1_i tuoi dati', null)">
+                ${properties.labelCTAitem1}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-6 pt-4 pt-lg-0">
+        <div class="container-fluid egl-support-band-item-container  ${coloreSfondo}" style="background-color:${coloreSfondo @context='styleToken'}">
+          <div class="row">
+            <div class="col-12">
+            <sly data-sly-test="${properties.titoloItem2}">
+              <h4 class="h4-egl">${properties.titoloItem2 @context='html'}</h4>
+            </sly>
+            </div>
+            <div class="col-12">
+           	 <sly data-sly-test="${properties.sottoTitoloItem2}">
+              <p class="p18-egl">
+                ${properties.sottoTitoloItem2 @context='html'}
+              </p>
+             </sly>
+            </div>
+            <div class="col-12 centraContent-sup-dual-btn" data-sly-test="${properties.labelCTAitem2}">
+              <a data-sly-test="${isURLItem2 && properties.urlCTAitem2 && !properties.modalCTAitem2}" href="${properties.tipologiaCTA2 == 'javascript2'? properties.javascriptItem2 : properties.urlCTAitem2 @context='html'}" target="${properties.targetCTAitem2}" title="${properties.altCTAItem2}">
+                <button
+                    type="button"
+                    class="btn btn-warning p20-egl 
+                    ${isWhite ? 'egl-btn-support-band-dark' : 'egl-btn-support-band'} "
+                     style="background-color:${properties.coloresfondocta2 @context='styleToken'}!important"
+                  >
+                  ${properties.labelCTAitem2}
+                </button>
+              </a>
+              <button data-sly-test="${oldModaleItem2 || properties.modalCTAitem2}"
+                type="button"
+                class="
+                btn btn-warning p20-egl
+                ${isWhite ? 'egl-btn-support-band-dark' : 'egl-btn-support-band'} "
+                style="background-color:${properties.coloresfondocta2 @context='styleToken'}!important"
+                data-toggle="modal" data-target="${'#' in urlCTAItem2 ? '' : '#'}${urlCTAItem2}"
+                onclick="sfCallMeBackDataLayer('1_i tuoi dati', null)">
+                ${properties.labelCTAitem2}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>    
+    </div>
+  </div>
+</div>
+
+    
+    
+
+

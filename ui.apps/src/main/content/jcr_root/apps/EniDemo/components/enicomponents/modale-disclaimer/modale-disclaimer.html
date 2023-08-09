@@ -1,0 +1,38 @@
+
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.test}"> </sly>
+	
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+	
+<div class="modal fade" id="modale-disclaimer" tabindex="-1" aria-labelledby="modale-disclaimer" aria-hidden="true">
+	<div class="modal-dialog egl-modale-disclaimer">
+		<div class="modal-content position-relative">
+			<span aria-hidden="true" class="position-absolute egl-mod-comm-closeIcon" style="z-index: 1">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<img loading="lazy" class="modale-close-disclaimer" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/7-icons-close-x.png" alt="chiudi-modale" />
+					</button>
+				</span>
+			<h2 class="modale-disclaimer-title">${properties.titolo @context='html'}</h2>
+			<p class="modale-disclaimer-testo">${properties.descrizione @context='html'}</p>
+			<div class="modale-disclaimer-bottom-buttons">
+				<button data-sly-test="${properties.labelCta2}" class="modale-disclaimer-button-left" 
+					data-toggle="modal" 
+					data-target="#modale-disclaimer">
+					${properties.labelCta2}
+				</button>
+				<button data-sly-test="${properties.labelCta1}" class="modale-disclaimer-button-right"
+					data-dismiss="modal"
+					data-toggle="modal" 
+					data-target="#Modale-Carrello-Step"
+					data-backdrop="static"
+        			data-keyboard="false"
+					onclick="openStartingStep()">
+					${properties.labelCta1}
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+

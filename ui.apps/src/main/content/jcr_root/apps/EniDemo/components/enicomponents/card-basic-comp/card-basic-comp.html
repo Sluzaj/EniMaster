@@ -1,0 +1,124 @@
+
+
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	    data-sly-test.testing="${!properties.paragrafoCard1}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+
+<div id="${properties.id}" class="card-basic-bg" style="background-color:${properties.backgroundColore @ context='styleString'};">
+    <div class="container-lg px-lg-0 card-basic-container ${properties.paragrafoCard3 ? '' : 'card-basic-2-cards'}">
+        <div class="d-flex card-basic-loghi ${properties.titleAlignment == 'center' ? 'justify-content-center align-items-center text-center' : ''}" data-sly-test="${properties.logo1Reference || properties.logo2Reference}">
+            <img loading="lazy" data-sly-test="${properties.logo1Reference}" 
+                data-sly-use.img1="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.logo1Reference}"
+                src="${properties.logo1Reference}" alt="${img1.description}">
+            <img loading="lazy" data-sly-test="${properties.logo2Reference}" 
+                data-sly-use.img2="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.logo2Reference}"
+                src="${properties.logo2Reference}" alt="${img2.description}">
+        </div>
+        <div class="d-flex card-basic-titolo ${properties.titleAlignment == 'center' ? 'justify-content-center align-items-center text-center' : ''}">
+            <div>
+                <h2>${properties.titolo @ context='html'}</h2>
+                <p class="p18-egl">${properties.sottotitolo @ context='html'}</p>
+            </div>
+        </div>
+        <div class="card-basic-rigaCarte d-none d-lg-flex">
+            <div class="card-basic-bg-carte ${properties.sfumatura == 'yellow' ? 'cb-bg-yellow' : ''}">
+                <div class="card-basic">
+                    <picture data-sly-use.img1="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagine1Reference}" 
+                        data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=properties.immagine1Reference}" >
+                        <sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+                            <source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+                            <source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+                        </sly>
+                        <img loading="lazy" src="${renditionsManager.renditions['1920px']}" alt="${img1.description}" />
+                    </picture>
+                    <h4 data-sly-test="${properties.titoloCard1}">${properties.titoloCard1 @context='html'}</h4>
+                    <p class="p16-egl">${properties.paragrafoCard1 @context='html'}</p>
+                </div>
+            </div>
+            <div class="card-basic-bg-carte">
+                <div class="card-basic">
+                    <picture data-sly-use.img2="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagine2Reference}" 
+                        data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=properties.immagine2Reference}" >
+                        <sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+                            <source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+                            <source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+                        </sly>
+                        <img loading="lazy" src="${renditionsManager.renditions['1920px']}" alt="${img2.description}" />
+                    </picture>
+                    <h4 data-sly-test="${properties.titoloCard2}">${properties.titoloCard2 @context='html'}</h4>
+                    <p class="p16-egl">${properties.paragrafoCard2 @context='html'}</p>
+                </div>
+            </div>
+            <div class="card-basic-bg-carte" data-sly-test="${properties.paragrafoCard3}">
+                <div class="card-basic">
+                    <picture data-sly-use.img3="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagine3Reference}" 
+                        data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=properties.immagine3Reference}" >
+                        <sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+                            <source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+                            <source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+                        </sly>
+                        <img loading="lazy" src="${renditionsManager.renditions['1920px']}" alt="${img3.description}" />
+                    </picture>
+                    <h4 data-sly-test="${properties.titoloCard3}">${properties.titoloCard3 @context='html'}</h4>
+                    <p class="p16-egl">${properties.paragrafoCard3 @context='html'}</p>
+                </div>
+            </div>
+        </div>
+        <div class="card-basic-rigaCarte card-basic-carosello d-flex d-lg-none">
+            <div class="card-basic-bg-carte ${properties.sfumatura == 'yellow' ? 'cb-bg-yellow' : ''}">
+                <div class="card-basic">
+                    <picture data-sly-use.img1="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagine1Reference}" 
+                        data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=properties.immagine1Reference}" >
+                        <sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+                            <source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+                            <source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+                        </sly>
+                        <img loading="lazy" src="${renditionsManager.renditions['1920px']}" alt="${img1.description}" />
+                    </picture>
+                    <h4 data-sly-test="${properties.titoloCard1}">${properties.titoloCard1 @context='html'}</h4>
+                    <p class="p16-egl">${properties.paragrafoCard1 @context='html'}</p>
+                </div>
+            </div>
+            <div class="card-basic-bg-carte">
+                <div class="card-basic">
+                    <picture data-sly-use.img2="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagine2Reference}" 
+                        data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=properties.immagine2Reference}" >
+                        <sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+                            <source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+                            <source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+                        </sly>
+                        <img loading="lazy" src="${renditionsManager.renditions['1920px']}" alt="${img2.description}" />
+                    </picture>
+                    <h4 data-sly-test="${properties.titoloCard2}">${properties.titoloCard2 @context='html'}</h4>
+                    <p class="p16-egl">${properties.paragrafoCard2 @context='html'}</p>
+                </div>
+            </div>
+            <div class="card-basic-bg-carte" data-sly-test="${properties.paragrafoCard3}">
+                <div class="card-basic">
+                    <picture data-sly-use.img3="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagine3Reference}" 
+                        data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=properties.immagine3Reference}" >
+                        <sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+                            <source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+                            <source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+                        </sly>
+                        <img loading="lazy" src="${renditionsManager.renditions['1920px']}" alt="${img3.description}" />
+                    </picture>
+                    <h4 data-sly-test="${properties.titoloCard3}">${properties.titoloCard3 @context='html'}</h4>
+                    <p class="p16-egl">${properties.paragrafoCard3 @context='html'}</p>
+                </div>
+            </div>
+        </div>
+        <div class="cards-basic-impaginazione d-lg-none">
+            <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-left-solid.svg"
+                    class="cards-basic-previous-arrow cards-basic-arrows" 
+                onclick="slideCardsbasic('-', event)"/>
+            <p class="cards-basic-status-text" style="margin-bottom: 0px;">
+            </p>
+            <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-right-solid.svg"
+                    class="cards-basic-next-arrow cards-basic-arrows"
+                onclick="slideCardsbasic('+', event)"/>
+        </div>
+    </div>
+</div>

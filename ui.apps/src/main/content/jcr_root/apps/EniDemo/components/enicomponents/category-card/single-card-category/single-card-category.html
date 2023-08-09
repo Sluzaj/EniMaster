@@ -1,0 +1,25 @@
+<sly
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.titoloCard}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<sly data-sly-test.modal="${request.requestPathInfo.selectors}"/>
+
+<div class="card-category-bg position-relative filtro-${properties.listaFiltri}" data-filtro="${properties.listaFiltri}">
+    <div class="card-category position-relative" data-sly-use.imagecard="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.imgRef}">
+        <img loading="lazy" src="${properties.imgRef}" alt="${imagecard.description}" style="width: 100%;">
+        <div data-sly-test="${properties.iconaRef && properties.label}" class="position-absolute card-category-pill d-flex" 
+        	data-sly-use.icona="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.iconaRef}">
+            <img loading="lazy" src="${properties.iconaRef}" alt="${icona.description}">
+            <p class="p18-egl">${properties.label}</p>
+        </div>
+        <div class="position-absolute card-category-text">
+            <h4 class="h4-egl">${properties.titoloCard}</h4>
+            <sly data-sly-test="${properties.labelCta}">
+                <a data-sly-test="${properties.variante == 'url'}" href="${properties.urlCTA}" target="${properties.targetCTA}" title="${properties.altCta}" class="cta-secondary">${properties.labelCta}</a>
+                <a data-sly-test="${properties.variante == 'modale'}" href="#" class="cta-secondary" data-toggle="modal" data-target="${modal}">${properties.labelCta}</a>
+        	</sly>
+        </div>
+    </div>
+</div>

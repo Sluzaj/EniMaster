@@ -1,0 +1,90 @@
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	    data-sly-test.testing="${!properties.titolo}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<sly data-sly-use.model="com.egl.core.models.fascialink.FasciaLinkModel"></sly>
+
+	<div id="${properties.id}"  style="background-color:${properties.backgroundColore @context='styleToken'}">
+	    <!-- DESKTOP -->
+	    <div id="${properties.id}" class="FasciaLink-container d-none d-lg-block container-lg" >
+	      <!-- Fascia Link in griglia - 4 link -->
+	      <section class="FasciaLink-4-link-griglia-container">
+	        <div class="FasciaLink-4-link-griglia-content">
+	         <!-- Titolo Centrato -->
+	         <sly data-sly-test="${properties.posizioneTitolo == 'centro'}">
+		          <div class="FasciaLink-4-link-griglia-title">
+		            <h2>${properties.titolo @context='html'}</h2>
+		            <p class="p18-egl">${properties.sottotitolo @context='html'}</p>
+		          </div>
+	         </sly>
+	         <!-- Titolo Sinistra -->
+	          <sly data-sly-test="${properties.posizioneTitolo == 'sinistra'}">
+		           <div data-sly-test="${properties.titolo}" class="FasciaLink-1-link-griglia-title-left">
+		            <div class="FasciaLink-1-link-griglia-content-title-left">
+		              <h2>${properties.titolo @context='html'}</h2>
+		              <p>${properties.sottotitolo @context='html'}</p>
+		            </div>
+		          </div>
+	         </sly>
+	           <!-- Griglia -->     
+	          <div data-sly-test="${properties.sceltaVariante == 'griglia'}"  data-sly-list.listGriglia="${model.listaGriglia}" class="FasciaLink-4-link-griglia-link d-flex flex-wrap">
+	            <div class="FasciaLink-4-link-griglia-text">
+	              <a href="${listGriglia.urlCta}" target="${listGriglia.targetCta}" title="${listGriglia.altCta}">${listGriglia.labelCta}</a>
+	            </div>
+	          </div>
+	           <!-- Centrato -->
+	          <div data-sly-test="${properties.sceltaVariante == 'centrato'}" data-sly-list.listCentro="${model.listaCentrata}" class="FasciaLink-5-link-centrato-link d-flex justify-content-center">
+	            <div class="FasciaLink-5-link-centrato-text">
+	              <a href="${listCentro.urlCta}" target="${listCentro.targetCta}" title="${listCentro.altCta}">${listCentro.labelCta}</a>
+	            </div>
+	          </div>
+	        </div>
+	        <div data-sly-test="${properties.note}" class="notes ${properties.posizioneNote}">
+          		<p>${properties.note @context='html'}</p>
+        	</div>
+	      </section>	      
+	    </div>
+    
+	    <!-- MOBILE -->
+	    <div class="FasciaLink-container-mobile d-block d-lg-none container-lg">
+	      <!-- Fascia Link centrato in griglia mobile - 4 link -->
+	      <section class="FasciaLink-4-link-griglia-centrato-mobile-container">
+	        <div class="FasciaLink-4-link-griglia-centrato-mobile-content">
+	        <!-- Titolo Centrato -->
+	        <sly data-sly-test="${properties.posizioneTitolo == 'centro'}">
+	          <div class="FasciaLink-4-link-griglia-centrato-mobile-title">
+	            <h2>${properties.titolo @context='html'}</h2>
+	            <p class="p18-egl">${properties.sottotitolo @context='html'}</p>
+	          </div>
+	         </sly>
+	           <!-- Titolo Sinistra -->
+	        	<sly data-sly-test="${properties.posizioneTitolo == 'sinistra'}">
+		          <div data-sly-test="${properties.titolo}" class="FasciaLink-4-link-griglia-left-mobile-title d-flex">
+		            <div class="FasciaLink-4-link-griglia-left-mobile-title-content">
+		              <h2>${properties.titolo @context='html'}</h2>
+		              <p>${properties.sottotitolo @context='html'}</p>
+		            </div>
+		          </div>
+	           </sly>
+	           <!-- Centrato -->
+	          <div data-sly-test="${properties.sceltaVariante == 'centrato'}" data-sly-list.listCentro="${model.listaCentrata}" class="FasciaLink-4-link-griglia-centrato-mobile-link">
+	            <div class="FasciaLink-4-link-griglia-centrato-mobile-text">
+	             	<a href="${listCentro.urlCta}" target="${listCentro.targetCta}" title="${listCentro.altCta}">${listCentro.labelCta}</a>
+	            </div>
+	          </div>
+	          <!-- Griglia -->
+	          <div data-sly-test="${properties.sceltaVariante == 'griglia'}" data-sly-list.listGriglia="${model.listaGriglia}" class="FasciaLink-4-link-griglia-left-mobile-link">
+	            <div class="FasciaLink-4-link-griglia-left-mobile-text">
+	             	<a href="${listGriglia.urlCta}" target="${listGriglia.targetCta}" title="${listGriglia.altCta}">${listGriglia.labelCta}</a>
+	            </div>
+	          </div>
+	        </div>
+	        <div data-sly-test="${properties.note}" class="notes ${properties.posizioneNote}">
+          		<p>${properties.note @context='html'}</p>
+        	</div>
+	      </section>
+	    </div>
+	    
+	    
+    </div>

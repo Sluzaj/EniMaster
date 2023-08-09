@@ -1,0 +1,33 @@
+<sly
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.itemNumber}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<sly data-sly-use.model="com.egl.core.models.cardcheckbox.CardCheckboxModel"></sly>
+	
+
+ <div class="container-lg checkbox-card-container px-lg-0"> 
+     <div class="d-flex flex-column align-items-center justify-content-center text-center">
+         <h2 class="checkbox-container-title">
+             ${properties.title @context='html'}
+         </h2>
+         <p class="p20-egl">${properties.subtitle @ context='html'}</p>
+     </div>
+     <div class="checkbox-cards-row d-flex flex-column flex-md-row justify-content-md-center flex-wrap justify-content-lg-between"
+     	data-sly-list="${model.items}">
+     	<div data-sly-unwrap="${wcmmode.disabled}">
+			<sly data-sly-resource="${item @ resourceType='enigaseluce/components/card-checkbox/single-card-checkbox'}"></sly>
+		</div>
+     </div>
+     <div class="category-footer d-flex">
+         <button data-toggle="modal" data-target="#typ-modale" class="buttonlink-pleni-cta mx-auto mt-4">${properties.ctaPrimaria}</button>
+     </div>
+     <div data-sly-unwrap="${wcmmode.disabled}">
+		<sly data-sly-resource="${'modale-typ' @ resourceType='enigaseluce/components/card-checkbox/modale-overlay'}"></sly>
+	</div>
+ </div>
+ 
+
+
+

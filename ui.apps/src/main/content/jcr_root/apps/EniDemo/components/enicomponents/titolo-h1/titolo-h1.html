@@ -1,0 +1,21 @@
+<sly
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.title}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+<sly data-sly-use.model="com.egl.core.models.BreadcrumbFinder"></sly>
+<sly data-sly-test.hasBreadcrumb="${model.breadcrumbPresent}"></sly>
+
+<div id="${properties.idRef}" class="container-lg titolo-h1-container ${hasBreadcrumb ? 'titolo-h1-breadcrumb' : ''}">
+	<div class="d-flex">
+		<div class="title-h1-label-rectangle"></div>
+		<div data-sly-test="${properties.label}" class="d-flex flex-column">
+			<p class="title-h1-label-label">${properties.label @
+				context='html'}</p>
+			<h1 class="title-h1-label-text">${properties.title @
+				context='html'}</h1>
+		</div>
+		<h1 data-sly-test="${!properties.label}" class="title-h1-label-text">${properties.title
+			@ context='html'}</h1>
+	</div>
+</div>

@@ -1,0 +1,186 @@
+
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	    data-sly-test.testing="${!properties.titolo}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+
+    <!-- senza fascia cta -->
+    <div id="${properties.id}" class="py-5">
+        <div class="container-lg">
+            <div class="d-flex ${properties.posizioneTitolo}">
+                <div class="rettangolo-titolo-highlight"></div>
+                <h2>${properties.titolo}</h2>
+            </div>
+        </div>
+        <div class="container-lg highlight-comp-container">
+        	<div class="${properties.fasciaCta ? 'highlight-wrapper-cta' : ''}" style="background-color:${properties.fasciaCta ? properties.coloreBackgroundFascia : '' @ context='styleString'};">
+            <div class="d-flex highlight-card-body flex-column flex-lg-row" data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagineReference}">
+               <picture data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=properties.immagineReference}" >
+                            <sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+                                <source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+                                <source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+                            </sly>
+                            <img loading="lazy"  src="${renditionsManager.renditions['1920px']}" alt="${image.description}">
+               </picture>
+                <div>
+                    <!-- mob/desk -->
+                    <div class="highlight-desc-outer d-md-none d-lg-block">
+                        <img loading="lazy"  src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-tooltip-yellow.svg"
+                            class="highlight-prodotto-tooltip d-block d-md-none d-lg-block" data-toggle="tooltip"
+                            data-placement="left" title="${properties.tooltip}">
+                        <div class="highlight-card-desc" data-sly-use.logo1="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.logoReference}">
+                            <div class="p18-egl" style="margin-bottom: 15px;">
+                                <b>${properties.nomeProdotto}</b>
+                            </div>
+                            <div class="p18-egl">
+                                ${properties.sottotitolo}
+                            </div>
+                             ${properties.paragrafo @context='html'}
+                            <div class="highlight-separatore">
+                                <span></span>
+                                <div class="cap12-egl">${properties.labelSeparatore}</div>
+                                <span></span>
+                            </div>
+                            <div class="text-center cap12-egl">
+                                <p class="highlight-titolo-rosso"><b>${properties.labelRossa}</b></p>
+                            </div>
+                            <img loading="lazy"  src="${properties.logoReference}" class="highlight-desc-img" alt="${logo1.description}">
+                            <div>
+                                <p class="cap12-egl m-0">${properties.nota1 @context='html'}</p>
+                            </div>
+                        </div>
+                        <!-- fASCIA PREZZO SINGOLA -->
+                        <sly data-sly-test="${properties.tipoFasciaPrezzo == 'singola'}">
+	                        <div class="d-flex highlight-desc-outer-prezzi">
+	                            <div class="cap12-egl">
+	                                <p class="outer-desc-prezzi-p">${properties.label}</p>
+	                            </div>
+	                            <div class="highlight-prezzo-grande">${properties.prezzo}
+	                            </div>
+	                            <div>
+	                                <div class="highlight-prezzo-scontato">${properties.prezzoOld}
+	                                </div>
+	                                <div class="cap12-egl"><b>${properties.descrizionePrezzo}</b></div>
+	                            </div>
+	                        </div>
+	                        <div class="text-center cap12-egl">${properties.nota}</div>
+                        </sly>
+                        <!-- fASCIA PREZZO DOPPIA -->
+                        <sly data-sly-test="${properties.tipoFasciaPrezzo == 'doppia'}">
+                           <div class="d-flex highlight-desc-outer-prezzi outer-prezzi-doppi">
+                                <div class="outer-doppio-prezzo-rate">
+                                    <div class="p16-eg">
+                                        <p>${properties.label1 @context='html'}</p>
+                                        <p class="outer-doppio-prezzo-caption">${properties.notaLabel1}</p>
+                                    </div>
+                                </div>
+                                <div class="outer-doppio-prezzo-taeg">
+                                    <div class="p16-eg">
+                                        <p>${properties.label2 @context='html'}</p>
+                                        <p class="outer-doppio-prezzo-caption">${properties.notaLabel2}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </sly>
+                    </div>
+                    <div class="cap14-egl highlight-bottom-caption d-lg-block d-none">
+                    	${properties.nota2 @context='html'}
+                    </div>
+                </div>
+                
+                
+                
+                <!-- TABLET-->
+                <div class="highlight-desc-outer d-none d-md-block d-lg-none">
+                    <div class="highlight-card-desc">
+                        <div class="p18-egl" style="margin-bottom: 15px;">
+                            <b>${properties.nomeProdotto}</b>
+                        </div>
+                        <div class="d-flex flex-wrap">
+                            <div class="highlight-desc-tablet">
+                                <div class="p18-egl">
+                                     ${properties.sottotitolo}
+                                </div>
+                                ${properties.paragrafo @context='html'}
+                            </div>
+                            <div class="highlight-desc-tablet" data-sly-use.logo1="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.logoReference}">
+                                <div class="highlight-separatore">
+                                    <span></span>
+                                    <div class="cap12-egl">${properties.labelSeparatore}</div>
+                                    <span></span>
+                                </div>
+                                <div class="text-center cap12-egl">
+                                    <p class="highlight-titolo-rosso"><b>${properties.labelRossa}</b></p>
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <img loading="lazy"  src="${properties.logoReference}" class="highlight-desc-img" alt="${logo1.description}">
+                                </div>
+                                <div >
+                                    <p class="cap12-egl m-0">${properties.nota1 @context='html'}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- fASCIA PREZZO SINGOLA TABLET -->
+                    <sly data-sly-test="${properties.tipoFasciaPrezzo == 'singola'}">
+	                    <div class="d-flex highlight-desc-outer-prezzi">
+	                        <div class="cap12-egl">
+	                            <p class="outer-desc-prezzi-p">${properties.label}</p>
+	                        </div>
+	                        <div class="highlight-prezzo-grande">${properties.prezzo}
+	                        </div>
+	                        <div class="position-relative outer-mono-prezzo-caption">
+	                            <img loading="lazy"  src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-tooltip-yellow.svg" 
+	                            	class="highlight-prodotto-tooltip d-none d-md-block d-lg-none" 
+	                            		data-toggle="tooltip" data-placement="left" title="${properties.tooltip}">
+	                            <div class="highlight-prezzo-scontato">${properties.prezzoOld}
+	                            </div>
+	                            <div class="cap12-egl"><b>${properties.descrizionePrezzo}</b></div>
+	                        </div>
+	                    </div>
+	                    <div class="text-center cap12-egl">${properties.nota}</div>
+                    </sly>
+                    
+                     <!-- fASCIA PREZZO DOPPIA TABLET -->
+                    <sly data-sly-test="${properties.tipoFasciaPrezzo == 'doppia'}">
+                       <div class="d-flex highlight-desc-outer-prezzi outer-prezzi-doppi">
+                            <div class="outer-doppio-prezzo-rate">
+                                <div class="p16-eg">
+                                    <p>${properties.label1 @context='html'}</p>
+                                    <p class="outer-doppio-prezzo-caption">${properties.notaLabel1}</p>
+                                </div>
+                            </div>
+                            <div class="outer-doppio-prezzo-taeg">
+                                <div class="p16-eg">
+                                    <p>${properties.label2 @context='html'}</p>
+                                    <p class="outer-doppio-prezzo-caption">${properties.notaLabel2}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </sly>
+                </div>
+                <div class="cap14-egl highlight-bottom-caption d-lg-none">
+                	${properties.nota2 @context='html'}
+                </div>
+            </div>
+            <div data-sly-test="${properties.fasciaCta}" class="d-lg-flex justify-content-between highlight-fascia-cta" style="background-color:${properties.coloreBackgroundFascia @ context='styleString'};">
+                    <div>
+                        <p class="h4-egl"><b>${properties.titoloFascia @context='html'}</b></p>
+                        <p class="p18-egl">${properties.sottotitoloFascia @context='html'}</p>
+                    </div>
+                    <sly data-sly-test="${!properties.modalCTA}">
+	                    <a data-sly-test="${properties.labelCta && properties.urlCta}" href="${properties.urlCta}" 
+		                    target="${properties.targetCta}" title=${properties.altCta} class="${properties.sceltaCta}">
+		                    ${properties.labelCta} 
+	                    </a>
+                    </sly>
+                   	<sly data-sly-test="${properties.modalCTA}">
+						<button type="button" data-toggle="modal" class="${properties.sceltaCta}"
+							data-target="${'#' in properties.urlCta ? '' : '#'}${properties.urlCta}">${properties.labelCta}
+						</button>
+				</sly>
+                </div>
+           </div>
+        </div>
+    </div>

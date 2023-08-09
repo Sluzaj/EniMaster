@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+	xmlns:cq="http://www.day.com/jcr/cq/1.0"
+	xmlns:jcr="http://www.jcp.org/jcr/1.0"
+	xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
+	xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+	jcr:primaryType="nt:unstructured"
+	jcr:title="Modale With Form Properties"
+	sling:resourceType="cq/gui/components/authoring/dialog">
+	<content jcr:primaryType="nt:unstructured"
+		sling:resourceType="granite/ui/components/coral/foundation/container">
+		<items jcr:primaryType="nt:unstructured">
+			<tabs jcr:primaryType="nt:unstructured"
+				sling:resourceType="granite/ui/components/coral/foundation/tabs"
+				maximized="{Boolean}true">
+				<items jcr:primaryType="nt:unstructured">
+
+					<gestioneComponente
+						jcr:primaryType="nt:unstructured" jcr:title="Gestione Componente"
+						sling:resourceType="granite/ui/components/coral/foundation/container"
+						margin="{Boolean}true">
+						<items jcr:primaryType="nt:unstructured">
+							<columns jcr:primaryType="nt:unstructured"
+								sling:resourceType="granite/ui/components/coral/foundation/container"
+								margin="{Boolean}true">
+								<items jcr:primaryType="nt:unstructured">
+									<column jcr:primaryType="nt:unstructured"
+										sling:resourceType="granite/ui/components/coral/foundation/container">
+										<items jcr:primaryType="nt:unstructured">
+											<id jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+												fieldLabel="ID Componente" name="./id" />
+											<pathCF jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+												fieldLabel="Path Content Fragment Form" name="./pathCF" required="true"
+												rootPath="/content/dam/enigaseluce" />
+											
+										</items>
+									</column>
+								</items>
+							</columns>
+						</items>
+					</gestioneComponente>
+				</items>
+			</tabs>
+		</items>
+	</content>
+</jcr:root>

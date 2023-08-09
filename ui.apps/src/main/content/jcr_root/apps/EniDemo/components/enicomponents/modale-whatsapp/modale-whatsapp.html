@@ -1,0 +1,34 @@
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.test}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+  <!-- modale wa -->
+  <div pln-component="modale-whatsapp" pln-version="1.0" pln-template="" id="ModaleWA-component" class="">
+	  <div class="modal callmeback-2" id="ModaleWA" tabindex="-1" aria-labelledby="ModaleWA" aria-hidden="true">
+	    <div class="callmeback2-dialog">
+	      <div class="callmeback2-modal modale-wa">
+	        <span aria-hidden="true" class="position-absolute egl-mod-comm-closeIcon">
+	          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	            <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-close-bold.svg" alt="chiudi-modale" />
+	          </button>
+	        </span>
+	        <img loading="lazy" class="whatsappIcon" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-whatsapp-color.svg" alt="icona whatsapp">
+	        <div class="modaleWA-body">
+	          <div>
+	            <h2 class="mb-0">Contattaci con WhatsApp</h2>
+	            <p class="p16-egl">Attiva una conversazione WhatsApp con i nostri operatori e richiedi
+	              informazioni sui
+	              prodotti.</p>
+	            <p class="p14-egl">Cliccando su "Apri WhatsApp" dichiaro di aver preso visione dell'<a
+	                href="https://eniplenitude.com/info/privacy-policy">informativa</a>
+	              sul
+	              trattamento dei dati personali per richiesta di ricontatto.</p>
+	          </div>
+	          <a  data-testoWa="${properties.testoWhatsapp}" data-numberwa="${properties.numeroWhatsapp}" data-offertaName="${properties.nomeofferta}" href="#"
+	            class="buttonlink-pleni-cta whatsappNew" >Apri WhatsApp</a>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+  </div>

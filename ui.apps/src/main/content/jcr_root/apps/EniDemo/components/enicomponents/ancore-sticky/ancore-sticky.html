@@ -1,0 +1,20 @@
+
+<sly data-sly-use.model="com.egl.core.models.ancoresticky.AncoreStickyModel"></sly>
+
+<div id="heroSticky"></div>
+
+  <div class=" h-100 w-100">  
+
+    <!-- ID UNIVOCO NECESSARIO PER LA FUNZIONE STICKY -->
+	    <div class="container-fluid ancore-sticky-container ${properties.colore}" id="Sticky-Banner">
+	      <div class="container-lg px-0">
+	        <div class="anchor-container justify-content-between">
+		        <sly data-sly-list.asLista="${model.lista}">
+		          <a class="egl-anchor-link" href="#${asLista.parametro}" title="${asLista.altAncora}">${asLista.label}</a>
+		        </sly>
+	        </div>
+	      </div>
+	    </div>
+
+  </div>
+

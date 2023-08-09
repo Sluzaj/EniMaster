@@ -1,0 +1,35 @@
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	    data-sly-test.testing="${!properties.titolo}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+
+    <div id="${properties.id}" class="container-lg numbers-container">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex flex-column justify-content-center align-items-center text-center"
+                	data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.logoReference}">
+                    <h2>${properties.titolo}</h2>
+                    <h4>${properties.sottotitolo}</h4>
+                    <img loading="lazy" src="${properties.logoReference}" alt="${image2.description}">
+                </div>
+                <div class="d-flex flex-wrap">
+                    <div class="bubbles-container">
+                        <div class="bubble-numbers">
+                            <p class="bubble-yellow">${properties.numeroSx}</p>
+                            <p class="bubble-title">${properties.titoloItemSx}</p>
+                            <p class="p18-egl">${properties.sottoTitoloSx}</p>
+                        </div>
+                    </div>
+                    <div class="bubbles-container">
+                        <div class="bubble-numbers">
+                            <p class="bubble-yellow">${properties.numeroDx}</p>
+                            <p class="bubble-title">${properties.titoloItemDx}</p>
+                            <p class="p18-egl">${properties.sottoTitoloDx}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    

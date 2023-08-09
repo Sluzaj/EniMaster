@@ -1,0 +1,23 @@
+<sly data-sly-use.model="${'com.egl.core.models.nuoveattivazioni.GasNATextsModel' @ stepName='gasSteps', pathJson=properties.pathJson}" />
+<sly data-sly-test.text="${model.gasSteps}"/>
+
+<div class="container-lg px-lg-0">
+    <div class="row">
+        <div class="col-lg-4 na-titolo">
+            <h2>${properties.title}</h2>
+            <div class="na-rettangolo"></div>
+            ${properties.description @ context='html'}
+        </div>
+        <div class="col-lg-8 na-spazio-card na-step0">
+            <div class="na-card">
+                <div class="na-card-content">
+                    <div class="w-100">
+                        <p>${text.gasTitle}</p>
+                        <h3>${text.step0Description}</h3>
+                        <button type="button" onclick="caricaStepNuovaAttivazione('gas_step1')">${text.step0Button}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

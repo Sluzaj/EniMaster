@@ -1,0 +1,249 @@
+<template data-sly-template.switchInPromo="${@ cartModel, 
+  stepCartModel, furnitureName, 
+  isCambioLuce, isCambioGas, isSwitchInLuce, 
+  isSwitchInGas, isVoltureLuce, isVoltureGas, 
+  isNewActivationLuce, isNewActivationGas, isDirectDebit, voltureInactive}">
+  <sly data-sly-set.texts="${stepCartModel.textValues}"></sly>
+  <sly data-sly-set.promo1="${stepCartModel.promo1}"></sly>
+  <sly data-sly-set.promo2="${stepCartModel.promo2}"></sly>
+  <sly data-sly-set.promo1Type="${promo1.tipologiaPromozione}"></sly>
+  <!-- sly data-sly-set.promo1Type="${promo1 && !promo1type && ('luce' in promo1.tipologiaPromozione) ? 'luce' : promo1Type}"></sly>
+  <sly data-sly-set.promo1Type="${promo1 && !promo1Type && ('gas' in promo1.tipologiaPromozione) ? 'gas' : promo1Type}"></sly -->
+  <sly data-sly-set.promo2Type="${promo2.tipologiaPromozione}"></sly>
+  <!-- sly data-sly-set.promo2Type="${promo2 && !promo2Type && ('luce' in promo2.tipologiaPromozione) ? 'luce' : promo2Type}"></sly>
+  <sly data-sly-set.promo2Type="${promo2 && !promo2Type && ('gas' in promo2.tipologiaPromozione) ? 'gas' : promo2Type}"></sly -->
+  <sly data-sly-set.isDual="${furnitureName == 'DUAL'}"></sly>
+  <sly data-sly-set.isMonoLuce="${furnitureName == 'LUCE'}"></sly>
+  <sly data-sly-set.isMonoGas="${furnitureName == 'GAS'}"></sly>
+  <sly data-sly-set.isPromo1Active="${(('dual' in promo1Type && isDual) || ('luce' in promo1Type && isMonoLuce) || ('gas' in promo1Type && isMonoGas))}"></sly>
+  <sly data-sly-set.isPromo2Active="${(('dual' in promo2Type && isDual) || ('luce' in promo2Type && isMonoLuce) || ('gas' in promo2Type && isMonoGas))}"></sly>
+
+  <sly data-sly-test="${isDual}">
+    <sly data-sly-set.titleLabel="${isCambioLuce && isCambioGas ? 'furnitureChangeTitleLG' : (isVoltureLuce && isVoltureGas ? 'exitTransferLightGas' : 'exitSwitchInTitle')}"></sly>
+    <sly data-sly-set.subtitleLabel="${isVoltureLuce && isVoltureGas ? 'exitTransferOwner' : ''}"></sly>
+    <sly data-sly-set.boxTitleLabel="${isCambioLuce && isCambioGas ? 'exitSwitchInBoxTitle' : 'exitSwitchInBoxTitleAlternative'}"></sly>
+    <sly data-sly-set.ctaLabel="${isCambioLuce && isCambioGas ? 'myEni' : (isVoltureLuce && isVoltureGas ? 'exitTransferButton' : 'continue')}"></sly>
+  </sly>
+
+  <sly data-sly-test="${isMonoLuce}">
+    <sly data-sly-set.titleLabel="${isCambioLuce ? 'furnitureChangeTitleLuce' : (isSwitchInLuce && isVoltureLuce ? 'exitTitleTransferSingleContract' : (isVoltureLuce ? 'exitTransferLight' : (isNewActivationLuce ? 'exitTitleLightNewActivation' : 'exitSwitchInTitle')))}"></sly>
+    <sly data-sly-set.subtitleLabel="${isSwitchInLuce && isVoltureLuce ? (voltureInactive ? 'exitWarningTransferKO' : '') : ''}"></sly>
+    <sly data-sly-set.boxTitleLabel="${isCambioLuce ? 'exitSwitchInBoxTitle' : (isSwitchInLuce && isVoltureLuce && voltureInactive ? 'exitSwitchInBoxTitleVoltureInactive' : 'exitSwitchInBoxTitleAlternative')}"></sly>
+    <sly data-sly-set.ctaLabel="${isCambioLuce ? 'myEni' : (isSwitchInLuce && isVoltureLuce ? 'exitSwitchInTransferButton' : (isVoltureLuce ? 'exitTransferButton' : (isNewActivationLuce ? 'exitButtonSaleLight' : 'continue')))}"></sly>
+  </sly>
+
+  <sly data-sly-test="${isMonoGas}">
+    <sly data-sly-set.titleLabel="${isCambioGas ? 'furnitureChangeTitleGas' : (isVoltureGas ? 'exitTransferGas' : (isNewActivationGas ? 'exitTitleGasNewActivation' : 'exitSwitchInTitle'))}"></sly>
+    <sly data-sly-set.subtitleLabel=""></sly>
+    <sly data-sly-set.boxTitleLabel="${isCambioGas ? 'exitSwitchInBoxTitle' : 'exitSwitchInBoxTitleAlternative'}"></sly>
+    <sly data-sly-set.ctaLabel="${isCambioGas ? 'myEni' : (isVoltureGas ? 'exitTransferButton' : (isNewActivationGas ? 'exitButtonSaleGas' : 'continue'))}"></sly>
+  </sly>
+
+  <style>
+    .end-promo1-title-${resource.name @ context='styleString'}:before {
+      background-color: ${promo1.coloreBackgroundFasciaPromozionale @ context='styleString'};
+    }
+    .end-promo2-title-${resource.name @ context='styleString'}:before {
+      background-color: ${promo2.coloreBackgroundFasciaPromozionale @ context='styleString'};
+    }
+  </style>
+
+  <span
+    aria-hidden="true"
+    class="position-absolute egl-mod-comm-prevIcon d-lg-none"
+  >
+    <button
+      type="button"
+      class="freccia-torna-indietro"
+      onclick="goToStep('restart')"
+      aria-label="indietro"
+    >
+      <i class="fas fa-chevron-left"></i>
+    </button>
+  </span>
+  <span
+    aria-hidden="true"
+    class="position-absolute egl-mod-comm-prevCta d-lg-block d-none"
+  >
+    <button
+      type="button"
+      class="btn btn-link cta-secondary cta-carrellostep-uscita"
+      onclick="goToStep('restart')"
+    >
+      ${texts['restart'] @ context='html'}
+    </button>
+  </span>
+  <div class="progress w-100 position-absolute">
+    <div
+    style="width: 100%;"
+    class="progress-bar"
+    role="progressbar"
+    aria-valuenow="100%"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    ></div>
+  </div>
+  <div class="wrapper-selezione-fornitura">
+    <div
+      class="d-flex flex-wrap egl-modal-body-carrellostep-contenuto carrellostep-uscita-switch-in"
+    >
+    <div data-sly-test="${promo1 && (isSwitchInGas || isSwitchInLuce) && isPromo1Active}" class="egl-modale-step-promo-banner position-absolute d-none d-lg-flex end-promo1-title-${resource.name}"
+      data-start-promo="${promo1.dataInizioPromozione}" data-end-promo="${promo1.dataFinePromozione}"
+      style="background-color: ${promo1.coloreBackgroundFasciaPromozionale @ context='styleString'};">
+      <div class="egl-modale-step-promo-banner-testo">
+        ${promo1.copyPromozione @ context='html'}
+      </div>
+      <img loading="lazy" data-sly-use.image1="${'com.egl.core.models.utils.ImageModel' @ imagePath=promo1.immagineFasciaPromo}" 
+        src="${promo1.immagineFasciaPromo}" alt="${image1.description}"/>
+    </div>
+    <div data-sly-test="${promo2 && (isSwitchInGas || isSwitchInLuce) && isPromo2Active}" class="egl-modale-step-promo-banner position-absolute d-none d-lg-flex end-promo2-title-${resource.name}"
+      data-start-promo="${promo2.dataInizioPromozione}" data-end-promo="${promo2.dataFinePromozione}"
+      style="background-color: ${promo2.coloreBackgroundFasciaPromozionale @ context='styleString'};">
+      <div class="egl-modale-step-promo-banner-testo">
+        ${promo2.copyPromozione @ context='html'}
+      </div>
+      <img loading="lazy" data-sly-use.image1="${'com.egl.core.models.utils.ImageModel' @ imagePath=promo2.immagineFasciaPromo}" 
+        src="${promo2.immagineFasciaPromo}" alt="${image1.description}"/>
+    </div>
+      <div class="carrellostep-uscita-switch-in-titolo">
+        <div class="egl-carrellostep-uscita-title-action position-relative">
+          <div class="p20-egl">${texts[titleLabel] @ context='html'}</div>
+          <div class="egl-carrellostep-uscita-pericolo" data-sly-test="${texts[subtitleLabel]}">
+            <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/combined-shape-pericolo.svg" alt="Attenzione" />
+            <div class="egl-carrellostep-pericolo-testo">
+              ${texts[subtitleLabel] @ context='html'}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="box-uscita-carrellostep" 
+        style="background-color: ${promo1 && isPromo1Active ? promo1.coloreBackgroundFasciaPromozionale : (promo2 && isPromo2Active ? promo2.coloreBackgroundFasciaPromozionale : '#ffffff') @ context='styleString'};">
+        <div class="box-uscita-carrellostep-titolo" style="background-color: ${cartModel.offerColor @ context='styleString'};">
+          <div class="h2-egl">${(isNewActivationGas || isNewActivationLuce) ? texts['exitBoxNewActivation'] : stepCartModel.offerName @ context='html'}</div>
+          <div class="p20-egl">${isDual ? 'LUCE E GAS' : furnitureName}</div>
+        </div>
+        <div class="box-uscita-carrellostep-contenuto">
+          <div class="box-uscita-carrellostep-contenuto-paragrafo-titolo" data-sly-test="${!isNewActivationGas && !isNewActivationLuce}">
+            ${texts[boxTitleLabel] @ context='html'}
+          </div>
+          <div class="box-uscita-carrellostep-contenuto-paragrafo-titolo" data-sly-test="${isNewActivationGas || isNewActivationLuce}">
+            <sly data-sly-set.newActivationLuce="${texts['exitBoxNewActivationTitleLight'] @ format=[stepCartModel.offerName]}"</sly>
+            <sly data-sly-set.newActivationGas="${texts['exitBoxNewActivationTitleGas'] @ format=[stepCartModel.offerName]}"</sly>
+            ${isNewActivationLuce ? newActivationLuce : newActivationGas @ context='html'}
+          </div>
+          <sly data-sly-test="${(isSwitchInLuce && !isVoltureLuce) || isSwitchInGas}">
+            <div class="box-uscita-carrellostep-contenuto-paragrafo">
+              <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/7-icons-check.svg" alt="icona check" />
+              ${texts['exitSwitchInUltimaBolletta'] @ context='html'}
+            </div>
+            <div data-sly-test="${isDirectDebit}" class="box-uscita-carrellostep-contenuto-paragrafo">
+              <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/7-icons-check.svg" alt="icona check" />
+              ${texts['exitSwitchInIban'] @ context='html'}
+            </div>
+          </sly>
+          <sly data-sly-test="${(isVoltureLuce && !isSwitchInLuce) || isVoltureGas}">
+            <div data-sly-test="${isVoltureLuce}" class="box-uscita-carrellostep-contenuto-paragrafo">
+              <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/7-icons-check.svg" alt="icona check" />
+              ${texts['exitSwitchInPODLight'] @ context='html'}
+            </div>
+            <div data-sly-test="${isVoltureGas}" class="box-uscita-carrellostep-contenuto-paragrafo">
+              <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/7-icons-check.svg" alt="icona check" />
+              ${texts['exitSwitchInPDRGas'] @ context='html'}
+            </div>
+            <div class="box-uscita-carrellostep-contenuto-paragrafo">
+              <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/7-icons-check.svg" alt="icona check" />
+              ${texts['exitSwitchInDocument'] @ context='html'}
+            </div>
+          </sly>
+          <sly data-sly-test="${isVoltureLuce && isSwitchInLuce}">
+            <div class="box-uscita-carrellostep-contenuto-paragrafo">
+              <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/7-icons-check.svg" alt="icona check" />
+              ${texts['exitSwitchInPODLight'] @ context='html'}
+            </div>
+            <div class="box-uscita-carrellostep-contenuto-paragrafo">
+              <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/7-icons-check.svg" alt="icona check" />
+              ${texts['exitSwitchInDocument'] @ context='html'}
+            </div>
+            <div data-sly-test="${isDirectDebit}" class="box-uscita-carrellostep-contenuto-paragrafo">
+              <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/7-icons-check.svg" alt="icona check" />
+              ${texts['exitSwitchInIban'] @ context='html'}
+            </div>
+          </sly>
+          <button data-sly-test="${!(isSwitchInLuce && isVoltureLuce && voltureInactive)}"
+            type="button"
+            class="p20-egl egl-cart-cta-primary-yellow"
+            onclick="exitFlux('${furnitureName @ context='scriptString'}')"
+          >
+            ${texts[ctaLabel] @ context='html'}
+          </button>
+        </div>
+        <div data-sly-test="${promo1 && (isSwitchInGas || isSwitchInLuce) && isPromo1Active}" class="d-flex box-uscita-carrellostep-promo d-lg-none end-promo1-mobile-title-${resource.name}"
+          data-start-promo="${promo1.dataInizioPromozione}" data-end-promo="${promo1.dataFinePromozione}">
+          <div class="egl-modale-step-promo-banner-testo">
+            ${promo1.copyPromozione @ context='html'}
+          </div>
+          <img loading="lazy" data-sly-use.image1="${'com.egl.core.models.utils.ImageModel' @ imagePath=promo1.immagineFasciaPromo}" 
+            src="${promo1.immagineFasciaPromo}" alt="${image1.description}"/>
+        </div>
+        <div data-sly-test="${promo2 && (isSwitchInGas || isSwitchInLuce) && isPromo2Active}" class="d-flex box-uscita-carrellostep-promo d-lg-none end-promo2-mobile-title-${resource.name}"
+          data-start-promo="${promo2.dataInizioPromozione}" data-end-promo="${promo2.dataFinePromozione}">
+          <div class="egl-modale-step-promo-banner-testo">
+            ${promo2.copyPromozione @ context='html'}
+          </div>
+          <img loading="lazy" data-sly-use.image1="${'com.egl.core.models.utils.ImageModel' @ imagePath=promo2.immagineFasciaPromo}" 
+            src="${promo2.immagineFasciaPromo}" alt="${image1.description}"/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <sly data-sly-test="${stepCartModel.offerImage}" 
+    data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=stepCartModel.offerImage}"
+    data-sly-use.imageAlt="${'com.egl.core.models.utils.ImageModel' @ imagePath=stepCartModel.offerImage}">
+    <div class="egl-carrellostep-promo d-lg-block d-none end-img-banner-${resource.name}">
+      <picture>
+        <sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+          <source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+					<source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+        </sly>
+        <img loading="lazy" src="${renditionsManager.renditions['1920px']}" alt="${imageAlt.description}">
+      </picture>
+    </div>
+  </sly>
+  <sly data-sly-test="${promo1 && (isSwitchInGas || isSwitchInLuce) && isPromo1Active}" 
+    data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=promo1.immagineHeroBanner}"
+    data-sly-use.imageAlt="${'com.egl.core.models.utils.ImageModel' @ imagePath=promo1.immagineHeroBanner}">
+    <div class="egl-carrellostep-promo d-lg-block d-none end-img-banner-promo1-${resource.name}"
+      data-start-promo="${promo1.dataInizioPromozione}" data-end-promo="${promo1.dataFinePromozione}">
+      <picture>
+        <sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+          <source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+					<source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+        </sly>
+        <img loading="lazy" src="${renditionsManager.renditions['1920px']}" alt="${imageAlt.description}">
+      </picture>
+    </div>
+  </sly>
+  <sly data-sly-test="${promo2 && (isSwitchInGas || isSwitchInLuce) && isPromo2Active}" 
+    data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=promo2.immagineHeroBanner}"
+    data-sly-use.imageAlt="${'com.egl.core.models.utils.ImageModel' @ imagePath=promo2.immagineHeroBanner}">
+    <div class="egl-carrellostep-promo d-lg-block d-none end-img-banner-promo2-${resource.name}"
+      data-start-promo="${promo2.dataInizioPromozione}" data-end-promo="${promo2.dataFinePromozione}">
+      <picture>
+        <sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+          <source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+					<source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+        </sly>
+        <img loading="lazy" src="${renditionsManager.renditions['1920px']}" alt="${imageAlt.description}">
+      </picture>
+    </div>
+  </sly>
+
+  <script data-sly-test="${promo1 || promo2}" id="promo-script">
+    (function($) {
+      promotionHideShow(null,".end-promo1-title-${resource.name @ context='scriptToken'}",".end-promo2-title-${resource.name @ context='scriptToken'}", null);
+      promotionHideShow(null,".end-promo1-mobile-title-${resource.name @ context='scriptToken'}",".end-promo2-mobile-title-${resource.name @ context='scriptToken'}", null);
+      promotionHideShow(".end-img-banner-${resource.name @ context='scriptToken'}",".end-img-banner-promo1-${resource.name @ context='scriptToken'}",".end-img-banner-promo2-${resource.name @ context='scriptToken'}", null);
+      handlePromoBackgroundColor(".box-uscita-carrellostep", ".end-promo1-title-${resource.name @ context='scriptToken'}",".end-promo2-title-${resource.name @ context='scriptToken'}");
+    })($);
+  </script>
+</template>

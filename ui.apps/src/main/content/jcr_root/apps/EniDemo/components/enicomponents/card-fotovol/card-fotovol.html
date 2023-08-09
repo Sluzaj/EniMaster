@@ -1,0 +1,69 @@
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	    data-sly-test.testing="${!properties.title}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<div id="${properties.idRef}" class="card-fotovoltaico-bg">
+	<div class="container-lg px-lg-0">
+		<div class="text-center">
+			<h2>${properties.title}</h2>
+			<h4>${properties.subtitle @ context='html'}</h4>
+		</div>
+		<div class="d-flex flex-column flex-lg-row justify-content-center">
+			<div class="card-fotovoltaico-wrapper card-superbonus">
+				<div data-sly-test="${properties.discountCard1}" class="position-absolute pecetta-fotovol">${properties.discountCard1 @ context='html'}</div>
+				<div class="card-fotovoltaico">
+					<div data-sly-use.imageCard1="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.iconCard1}">
+						<img loading="lazy"  src="${properties.iconCard1}" alt="${imageCard1.description}">
+					<h4>${properties.titleCard1}</h4>
+					<p class="cap16-egl">${properties.textCard1 @ context='html'}</p>
+					</div>
+					<sly data-sly-test="${!properties.modalCTACard1}">
+					<a data-sly-test="${properties.labelCTACard1 && properties.linkCTACard1}" href="${properties.linkCTACard1}" 
+						title="${properties.altCTACard1}" target="${properties.targetCTACard1}">${properties.labelCTACard1}</a>
+					</sly>
+					<sly data-sly-test="${properties.modalCTACard1}">
+						<button type="button" data-toggle="modal" 
+							data-target="${'#' in properties.linkCTACard1 ? '' : '#'}${properties.linkCTACard1}">${properties.labelCTACard1}</button>
+					</sly>
+				</div>
+			</div>
+			<div class="card-fotovoltaico-wrapper">
+				<div data-sly-test="${properties.discountCard2}" class="position-absolute pecetta-fotovol">${properties.discountCard2 @ context='html'}</div>
+				<div class="card-fotovoltaico">
+					<div data-sly-use.imageCard2="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.iconCard2}">
+						<img loading="lazy"  src="${properties.iconCard2}" alt="${imageCard2.description}">
+					<h4>${properties.titleCard2}</h4>
+					<p class="cap16-egl">${properties.textCard2 @ context='html'}</p>
+					</div>
+					<sly data-sly-test="${!properties.modalCTACard2}">
+					<a data-sly-test="${properties.labelCTACard2 && properties.linkCTACard2}" href="${properties.linkCTACard2}" 
+						title="${properties.altCTACard2}" target="${properties.targetCTACard2}">${properties.labelCTACard2}</a>
+					</sly>
+					<sly data-sly-test="${properties.modalCTACard2}">
+						<button type="button" data-toggle="modal"
+							data-target="${'#' in properties.linkCTACard2 ? '' : '#'}${properties.linkCTACard2}">${properties.labelCTACard2}</button>
+					</sly>
+				</div>
+			</div>
+			<div data-sly-test="${properties.titleCard3}" class="card-fotovoltaico-wrapper">
+				<div data-sly-test="${properties.discountCard3}" class="position-absolute pecetta-fotovol">${properties.discountCard3 @ context='html'}</div>
+				<div class="card-fotovoltaico">
+					<div data-sly-use.imageCard1="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.iconCard3}">
+						<img loading="lazy"  src="${properties.iconCard3}" alt="${imageCard3.description}">
+					<h4>${properties.titleCard3}</h4>
+					<p class="cap16-egl">${properties.textCard3 @ context='html'}</p>
+					</div>
+					<sly data-sly-test="${!properties.modalCTACard3}">
+					<a data-sly-test="${properties.labelCTACard3 && properties.linkCTACard3}" href="${properties.linkCTACard3}" 
+						title="${properties.altCTACard3}" target="${properties.targetCTACard3}">${properties.labelCTACard3}</a>
+					</sly>
+					<sly data-sly-test="${properties.modalCTACard3}">
+						<button type="button" data-toggle="modal"
+							data-target="${'#' in properties.linkCTACard3 ? '' : '#'}${properties.linkCTACard3}">${properties.labelCTACard3}</button>
+					</sly>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

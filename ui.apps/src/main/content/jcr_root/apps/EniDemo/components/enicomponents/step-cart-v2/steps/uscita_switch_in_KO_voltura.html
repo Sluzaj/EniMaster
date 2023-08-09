@@ -1,0 +1,63 @@
+<template data-sly-template.switchInKO="${@ cartModel, stepCartModel}">
+  <sly data-sly-set.texts="${stepCartModel.textValues}"></sly>
+  <span
+    aria-hidden="true"
+    class="position-absolute egl-mod-comm-prevIcon d-lg-none"
+  >
+    <button
+      type="button"
+      class="freccia-torna-indietro"
+      onclick="goToStep('restart')"
+      aria-label="indietro"
+    >
+      <i class="fas fa-chevron-left"></i>
+    </button>
+  </span>
+  <span
+    aria-hidden="true"
+    class="position-absolute egl-mod-comm-prevCta d-lg-block d-none"
+  >
+    <button
+      type="button"
+      class="btn btn-link cta-secondary cta-carrellostep-uscita"
+      onclick="goToStep('restart')"
+    >
+      ${texts['restart'] @ context='html'}
+    </button>
+  </span>
+  <div class="progress w-100 position-absolute">
+    <div
+    style="width: 100%;"
+    class="progress-bar"
+    role="progressbar"
+    aria-valuenow="100%"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    ></div>
+  </div>
+  <div class="wrapper-selezione-fornitura carrellostep-uscita-box-doppio">
+    <div
+      class="d-flex flex-wrap egl-modal-body-carrellostep-contenuto carrellostep-uscita-switch-in"
+    >
+      <div class="carrellostep-uscita-switch-in-titolo">
+        <div class="egl-carrellostep-uscita-title-action position-relative">
+          <div class="p20-egl">${texts['exitKOTitle'] @ context='html'}</div>
+        </div>
+      </div>
+      <div
+        class="box-uscita-carrellostep box-uscita-carrellostep-bianco box-uscita-carrellostep-ko-voltura"
+      >
+        <img loading="lazy"
+          src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/7-icons-thankyoupage-failed.svg"
+          alt="operazione fallita"
+        />
+        <div class="box-uscita-carrellostep-bianco-paragrafo">
+          ${texts['exitKOTBoxTitle'] @ context='html'}
+        </div>
+        <div class="box-uscita-carrellostep-bianco-subParagrafo">
+          ${texts['exitKOTBoxSubtitle'] @ context='html'}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

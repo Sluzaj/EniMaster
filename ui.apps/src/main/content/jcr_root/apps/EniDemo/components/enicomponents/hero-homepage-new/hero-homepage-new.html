@@ -1,0 +1,106 @@
+<sly
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.sceltaBackground}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<style>
+
+.sc-new-heroHome-overlay {
+	content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+    left: 0;
+    background:linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 44%, rgba(0, 0, 0, 0.71) 100%);
+
+}
+.sc-new-heroHome-bg-color-container {
+  background-color: ${properties.colore @ context='styleToken'};
+
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .sc-new-heroHome-overlay {
+ 	content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+    left: 0;
+   background: linear-gradient(to left, rgba(0, 0, 0, 0.13) 0%, rgba(0, 0, 0, 0.6) 67%, rgba(0, 0, 0, 0.7) 100%);
+  }
+}
+
+@media screen and (min-width: 1024px){
+  .sc-new-heroHome-overlay {
+  	content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+    left: 0;
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.13) 0%, rgba(0, 0, 0, 0.6) 67%, rgba(0, 0, 0, 0.7) 100%);
+  }
+}
+</style>
+
+<!-- HeroHome + img + color + overlay-->
+<sly data-sly-test="${properties.sceltaBackground != 'immagine'}">
+<div class="sc-new-heroHome-bg-color-container">
+	<div class="sc-new-heroHome-wrapper">
+		<div class="sc-new-heroHome-content">
+		   <div class="container-lg">
+				${properties.titolo @context='html'}
+			</div>
+			<div class="${properties.tipoVelina}"></div>
+		</div>
+	</div>
+</div>
+</sly>
+<sly data-sly-test="${properties.sceltaBackground == 'immagine'}">
+
+<div class="sc-new-heroHome-bg-container">
+    <div class="sc-new-heroHome-wrapper">
+      <div class="sc-new-heroHome-content">
+      		<div class="container-lg">
+       			${properties.titolo @context='html'}
+           </div> 
+        <div class="${properties.tipoVelina}"></div>
+         
+         <picture data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=properties.immagineReference}" 
+			data-sly-use.imgMobile="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagineReference}">
+          <source media="(min-width: 1441px) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions['1440px'] @ context='uri'}">
+          <source media="(min-width: 1441px)" srcset="${renditionsManager.renditions['1440px'] @ context='uri'}">
+          
+          <source media="(min-width: 1025px) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions['1024px'] @ context='uri'}">
+          <source media="(min-width: 1025px)" srcset="${renditionsManager.renditions['1024px'] @ context='uri'}">
+
+          <source media="(min-width: 769px) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions['768px'] @ context='uri'}">
+          <source media="(min-width: 769px)" srcset="${renditionsManager.renditions['768px'] @ context='uri'}">
+
+          <source media="(min-width: 320px) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions['360px'] @ context='uri'}">
+          <source media="(min-width: 320px)" srcset="${renditionsManager.renditions['360px'] @ context='uri'}">
+          <img src="${renditionsManager.doubledRenditions['1920px'] @ context='uri'}"
+			alt="${imgMobile.description}">
+        </picture>
+      </div>
+    </div>
+  </div>
+
+
+</sly>
+<!-- div
+	class="${properties.sceltaBackground == 'immagine' ? 'sc-new-heroHome-bg-container' : 'sc-new-heroHome-bg-color-container'}">
+	<div class="sc-new-heroHome-content">
+		${properties.titolo @context='html'}
+		<div class="${properties.tipoVelina}"></div>
+	</div>
+</div-->
+
+
+

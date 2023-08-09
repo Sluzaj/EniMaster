@@ -1,0 +1,50 @@
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.title}"> </sly>
+	
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<sly data-sly-use.model="com.egl.core.models.photostory.PhotostoryModel"></sly>
+
+<sly data-sly-list.lista="${model.photoList}">
+	<div id="${photo.divId}">
+		<div data-sly-test="${!lista.varianteText || lista.varianteText == 'right'}" data-sly-unwrap>
+			 <!--right -->
+			<div class="container-lg photostory-img-right-corp">
+				<div class="row justify-content-between mx-xs-0">
+					<div class="col-lg-6 photostory-titolo-img-corp">
+						<span class="contatore">
+							 ${lista.photoIndex }/${model.photoList.size}
+						</span>
+						<p class="p18-egl">${lista.text @ context='html'}  </p>
+					</div>
+						<div class="col-lg-6 photostory-img-corp ${lista.varianteImg == 'verticale' ? 'photostory-img-right-corp-verticale' : ''}">
+							<picture data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=lista.asset}"
+								data-sly-use.rend="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=lista.asset}">
+								<source media="(min-resolution: 150dpi)" srcset="${rend.doubledRenditions['1920px'] @ context='uri'}">
+									<img loading="lazy" src="${rend.renditions['1920px']}" alt="${image.description}"/>
+							  </picture>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		<div data-sly-test="${!lista.varianteText || lista.varianteText == 'left'}" data-sly-unwrap>
+			<!-- left -->
+				<div class="container-lg photostory-img-left-corp">
+					<div class="row justify-content-between mx-xs-0">
+						<div class="col-lg-6 photostory-img-corp ${lista.varianteImg == 'verticale' ? 'photostory-img-left-corp-verticale' : ''}">
+								<picture data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=lista.asset}"
+									data-sly-use.rend="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=lista.asset}">
+									<source media="(min-resolution: 150dpi)" srcset="${rend.doubledRenditions['1920px'] @ context='uri'}">
+										<img loading="lazy" src="${rend.renditions['1920px']}" alt="${image.description}"/>
+								</picture>
+							</div>	
+					<div class="col-lg-6 photostory-titolo-img-corp">
+						<span class="contatore">${lista.photoIndex }/${model.photoList.size}</span>
+							<p class="p18-egl">${lista.text @ context='html'}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</sly>

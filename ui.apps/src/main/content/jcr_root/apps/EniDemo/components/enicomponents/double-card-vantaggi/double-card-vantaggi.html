@@ -1,0 +1,69 @@
+
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	    data-sly-test.testing="${!properties.titolo}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<sly data-sly-use.model="com.egl.core.models.doublecardvantaggi.DoubleCardVantaggiModel"></sly>
+
+    <div id="${properties.id}" class="container-lg double-card-vantaggi-spacing-huge ${properties.colorType}">
+        <div class="d-flex">
+            <div class="d-flex flex-column">
+                <span class="double-card-vantaggi-title">${properties.titolo @context='html'}</span>
+            </div>
+        </div>
+
+
+        <div class="w-100 d-flex cards-container">
+            <!-- LEFT CARD -->
+            <div class="double-card-vantaggi-container col-lg-6 col-12 px-0 px-0 pr-lg-3">
+                <div class="double-card-vantaggi-card d-flex flex-column left-card">
+                    <div class="double-card-vantaggi-card-body d-flex flex-column">
+                        <div class="double-card-vantaggi-card-body-title">
+                            ${properties.titoloSinistra @context='html'}
+                        </div>
+                        <sly data-sly-list.cardsx="${model.listaSx}">
+	                        <div class="double-card-vantaggi-card-row-container">
+	                            <div class="double-card-vantaggi-card-body-icon-container" data-sly-test=${cardsx.testoSinistra}>
+	                                <span class="double-card-vantaggi-card-body-icon"> </span>
+	                            </div>
+	                            <div class="double-card-vantaggi-card-body-text">
+	                               	${cardsx.testoSinistra @ context='html'}
+	                            </div>
+	                        </div>
+	                    </sly>
+                    </div>
+                    <div class="mask"></div>
+                </div>
+            </div>
+            <!-- RIGHT CARD -->
+            <div class="double-card-vantaggi-container col-lg-6 col-12 px-0 px-0 pl-lg-3">
+                <div class="double-card-vantaggi-card d-flex flex-column right-card">
+                    <div class="double-card-vantaggi-card-body d-flex flex-column">
+                        <div class="double-card-vantaggi-card-body-title">
+                            ${properties.titoloDestra @context='html'}
+                        </div>
+                        <sly data-sly-list.carddx="${model.listaDx}">
+	                        <div class="double-card-vantaggi-card-row-container">
+	                            <div class="double-card-vantaggi-card-body-icon-container" data-sly-test=${carddx.testoDestra}>
+	                                <span class="double-card-vantaggi-card-body-icon"> </span>
+	                            </div>
+	                            <div class="double-card-vantaggi-card-body-text">
+	                                ${carddx.testoDestra @ context='html'}
+	                            </div>
+	                        </div>
+                        </sly>
+                    </div>
+                    <div class="mask"></div>
+                </div>
+            </div>
+        </div>
+        <div class="double-card-vantaggi-bottom-text">
+            <span>
+                ${properties.note @context='html'}
+            </span>
+        </div>
+    </div>
+
+
+

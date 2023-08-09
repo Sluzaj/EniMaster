@@ -1,0 +1,254 @@
+<sly
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.title}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing, emptyTextAppend=request.requestPathInfo.selectors[1]}"></sly>
+<sly data-sly-test.isTab1="${request.requestPathInfo.selectors[1] == 'Tab 1'}"></sly>
+
+<sly
+	data-sly-test.isPromo="${properties.promo1 || properties.promo2}"></sly>
+
+<sly
+	data-sly-use.fragModel="com.egl.core.models.herohomepage.PromoHPModel"></sly>
+
+<div
+	class="${request.requestPathInfo.selectors[0]} ${isPromo ? 'HP-slide-promo' : ''} ${wcmmode.edit ? '' : 'HP-carosello-behaviour'}">
+	<div class="HP-background-div-color"
+		style="--HP-bg-color-1: ${properties.bgColor @ context='styleToken'}; --HP-bg-color-2: ${properties.bgColor @ context='styleToken'}; --HP-bg-color-3: ${properties.bgColor @ context='styleToken'}">
+		<div class="container-lg egl-herohomepage-basic heroHP-edit-${resource.name}">
+			<div class="HP-navigatore-carosello"
+				aria-describedby="Hero Homepage">
+				<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-left-solid-white.svg" class="HP-previous-arrow"/>
+				<p style="margin-bottom: 0px;">
+					<span class="HP-navigatore-current-slide">1</span> <span
+						class="HP-navigatore-total-slide">/2</span>
+				</p>
+				<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-right-solid-white.svg" class="HP-next-arrow"/>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="HP-contenitore-asset">
+						<div class="HP-contenitore-asset-per-promo"
+							data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.asset}">
+							<picture data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=properties.asset}" >
+	                            <sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+	                                <source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+	                                <source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+	                            </sly>
+								<img fetchpriority="${isTab1 ? 'high' : ''}" src="${renditionsManager.renditions['1920px']}" alt="${image.description}" />
+							</picture>
+						</div>
+					</div>
+					<div
+						class="d-flex flex-column HP-contenitore-contenuto justify-content-between">
+						<div>
+							<h2 class="h2-egl" aria-describedby="Hero Homepage">${properties.title
+								@ context='html'}</h2>
+							<h4 class="h4-egl" aria-describedby="Hero Homepage">${properties.subtitle
+								@ context='html'}</h4>
+							<a data-sly-test="${properties.linkCTA && properties.labelCTA}" href="${properties.linkCTA}" target="${properties.targetCTA}" title="${properties.altCTA}"
+								class="HP-cta-primary" aria-describedby="Hero Homepage">${properties.labelCTA}</a>
+							<div class="p16-egl" aria-describedby="Hero Homepage">${properties.note
+								@ context='html'}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div data-sly-test="${isPromo}" data-sly-unwrap>
+		<!-- HERO HP PROMO 1 -->
+			<div data-sly-test.promozione="${fragModel.hp1}"
+				class="container-lg egl-herohomepage-basic heroHP-promo1-${resource.name}"
+				data-start-promo="${promozione.dataInizioPromozione}"
+				data-end-promo="${promozione.dataFinePromozione}">
+				<div class="HP-navigatore-carosello"
+					aria-describedby="Hero Homepage">
+					<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-left-solid-white.svg" class="HP-previous-arrow"/>
+					<p style="margin-bottom: 0px;">
+						<span class="HP-navigatore-current-slide">1</span> <span
+							class="HP-navigatore-total-slide">/2</span>
+					</p>
+					<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-right-solid-white.svg" class="HP-next-arrow"/>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<div class="HP-contenitore-asset">
+							<div class="HP-contenitore-asset-per-promo"
+								data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=promozione.immagineHeroBanner}"
+								data-sly-use.imageFascia="${'com.egl.core.models.utils.ImageModel' @ imagePath=promozione.immagineFasciaPromo}">
+								<picture data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=promozione.immagineHeroBanner}" >
+		                            <sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+		                                <source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+		                                <source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+		                            </sly>
+									<img fetchpriority="${isTab1 ? 'high' : ''}" src="${renditionsManager.renditions['1920px']}"
+										alt="${image.description}" />
+								</picture>
+								<div
+									class="HP-promo-fascia HP-promo-fascia-desktop d-lg-flex d-none"
+									style="background-color: ${promozione.coloreBackgroundFasciaPromozionale@ context='styleToken'}">
+									<div class="p16-egl">${promozione.copyPromozione @
+										context='html'}</div>
+									<img class="HP-promo-fascia-asset"
+										src="${promozione.immagineFasciaPromo}"
+										alt="${imageFascia.description}" />
+								</div>
+							</div>
+						</div>
+						<div class="HP-promo-fascia d-lg-none"
+							style="background-color: ${promozione.coloreBackgroundFasciaPromozionale@ context='styleToken'}">
+							<div class="p16-egl">${promozione.copyPromozione @
+								context='html'}</div>
+							<img class="HP-promo-fascia-asset"
+								src="${promozione.immagineFasciaPromo}"
+								alt="${imageFascia.description}" />
+						</div>
+						<div
+							class="d-flex flex-column HP-contenitore-contenuto justify-content-between">
+							<div>
+								<h2 class="h2-egl" aria-describedby="Hero Homepage">${promozione.titoloComponenteHeroBannerHomepage
+									@ context='html'}</h2>
+								<h4 class="h4-egl" aria-describedby="Hero Homepage">${promozione.sottotitoloComponenteHeroBannerHomepage
+									@ context='html'}</h4>
+								<a data-sly-test="${properties.linkCTA && properties.labelCTA}" href="${properties.linkCTA}" title="${properties.altCTA}"
+									class="HP-cta-primary" aria-describedby="Hero Homepage">${properties.labelCTA}</a>
+								<div data-sly-test="${isPromo}" class="HP-promo-countdown-div">
+									<div class="HP-promo-countdown-content d-flex flex-column">
+										<div class="cap12-egl">PROMO ATTIVA! Scade tra:</div>
+										<div class="d-flex HP-promo-countdown-tempo">
+											<div class="egl-promo-cd-giorno">
+												<div>01</div>
+											</div>
+											<div>:</div>
+											<div class="egl-promo-cd-ore">
+												<div>12</div>
+											</div>
+											<div>:</div>
+											<div class="egl-promo-cd-minuti">
+												<div>12</div>
+											</div>
+										</div>
+										<div class="d-flex HP-promo-countdown-data">
+											<div>GIORNO</div>
+											<div>ORE</div>
+											<div>MINUTI</div>
+										</div>
+									</div>
+									<img
+										data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=promozione.immaginePerBandSticky}"
+										class="HP-promo-countdown-asset"
+										src="${promozione.immaginePerBandSticky}"
+										alt="${image.description}" />
+								</div>
+								<div class="p16-egl" aria-describedby="Hero Homepage">${promozione.notaComponenteHeroBannerHomepage
+									@ context='html'}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- HERO HP PROMO 2 -->
+			<div data-sly-test.promozione2="${fragModel.hp2}"
+				class="container-lg egl-herohomepage-basic heroHP-promo2-${resource.name}"
+				data-start-promo="${promozione2.dataInizioPromozione}"
+				data-end-promo="${promozione2.dataFinePromozione}">
+				<div class="HP-navigatore-carosello"
+					aria-describedby="Hero Homepage">
+					<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-left-solid-white.svg" class="HP-previous-arrow"/>
+					<p style="margin-bottom: 0px;">
+						<span class="HP-navigatore-current-slide">1</span> <span
+							class="HP-navigatore-total-slide">/2</span>
+					</p>
+					 <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-right-solid-white.svg" class="HP-next-arrow"/>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<div class="HP-contenitore-asset">
+							<div class="HP-contenitore-asset-per-promo"
+								data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=promozione2.immagineHeroBanner}"
+								data-sly-use.imageFascia="${'com.egl.core.models.utils.ImageModel' @ imagePath=promozione2.immagineFasciaPromo}">
+								<picture data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=promozione2.immagineHeroBanner}" >
+		                            <sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+		                                <source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+		                                <source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+		                            </sly>
+									<img fetchpriority="${isTab1 ? 'high' : ''}" src="${renditionsManager.renditions['1920px']}"
+										alt="${image.description}" />
+								</picture>
+								<div
+									class="HP-promo-fascia HP-promo-fascia-desktop d-lg-flex d-none"
+									style="background-color: ${promozione2.coloreBackgroundFasciaPromozionale@ context='styleToken'}">
+									<div class="p16-egl">${promozione2.copyPromozione @
+										context='html'}</div>
+									<img class="HP-promo-fascia-asset"
+										src="${promozione2.immagineFasciaPromo}"
+										alt="${imageFascia.description}" />
+								</div>
+							</div>
+						</div>
+						<div class="HP-promo-fascia d-lg-none"
+							style="background-color: ${promozione2.coloreBackgroundFasciaPromozionale@ context='styleToken'}">
+							<div class="p16-egl">${promozione2.copyPromozione @
+								context='html'}</div>
+							<img class="HP-promo-fascia-asset"
+								src="${promozione2.immagineFasciaPromo}"
+								alt="${imageFascia.description}" />
+						</div>
+						<div
+							class="d-flex flex-column HP-contenitore-contenuto justify-content-between">
+							<div>
+								<h2 class="h2-egl" aria-describedby="Hero Homepage">${promozione2.titoloComponenteHeroBannerHomepage
+									@ context='html'}</h2>
+								<h4 class="h4-egl" aria-describedby="Hero Homepage">${promozione2.sottotitoloComponenteHeroBannerHomepage
+									@ context='html'}</h4>
+								<a data-sly-test="${properties.linkCTA && properties.labelCTA}" href="${properties.linkCTA}" title="${properties.altCTA}"
+									class="HP-cta-primary" aria-describedby="Hero Homepage">${properties.labelCTA}</a>
+								<div data-sly-test="${isPromo}" class="HP-promo-countdown-div">
+									<div class="HP-promo-countdown-content d-flex flex-column">
+										<div class="cap12-egl">PROMO ATTIVA! Scade tra:</div>
+										<div class="d-flex HP-promo-countdown-tempo">
+											<div class="egl-promo-cd-giorno">
+												<div>01</div>
+											</div>
+											<div>:</div>
+											<div class="egl-promo-cd-ore">
+												<div>12</div>
+											</div>
+											<div>:</div>
+											<div class="egl-promo-cd-minuti">
+												<div>12</div>
+											</div>
+										</div>
+										<div class="d-flex HP-promo-countdown-data">
+											<div>GIORNO</div>
+											<div>ORE</div>
+											<div>MINUTI</div>
+										</div>
+									</div>
+									<img
+										data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=promozione2.immaginePerBandSticky}"
+										class="HP-promo-countdown-asset"
+										src="${promozione2.immaginePerBandSticky}"
+										alt="${image.description}" />
+								</div>
+								<div class="p16-egl" aria-describedby="Hero Homepage">${promozione2.notaComponenteHeroBannerHomepage
+									@ context='html'}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script data-sly-test="${wcmmode.disabled && (fragModel.hp1 || fragModel.hp2)}">
+	(function($) {
+		$(document).ready( function() {
+			promotionHideShow(".heroHP-edit-${resource.name @ context='scriptToken'}",".heroHP-promo1-${resource.name @ context='scriptToken'}",".heroHP-promo2-${resource.name @ context='scriptToken'}");
+      countdownElements(".heroHP-promo1-${resource.name @ context='scriptToken'}", ".egl-promo-cd-giorno", ".egl-promo-cd-ore", ".egl-promo-cd-minuti");
+      countdownElements(".heroHP-promo2-${resource.name @ context='scriptToken'}", ".egl-promo-cd-giorno", ".egl-promo-cd-ore", ".egl-promo-cd-minuti");
+    });
+	})($);
+</script>

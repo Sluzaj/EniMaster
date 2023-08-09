@@ -1,0 +1,80 @@
+
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	    data-sly-test.testing="${!properties.labelCta1}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+
+    <div id="${properties.id}" class="link-utili-bg" style="background-color:${properties.coloreBackground @ context='styleString'};">
+        <div class="container-lg link-utili-container">
+        
+       	<!-- CTA 1 -->
+       	<sly data-sly-test="${properties.tipologiaCTA1 == 'tipoA'}">
+            <a data-sly-test="${properties.labelCta1 && properties.urlCta1}"
+               href="${properties.urlCta1}" target="${properties.targetCta1}" title="${properties.altCta1}" 
+               class="link-utili-item link-utili-white" x-cq-linkchecker="valid">
+                <span>${properties.labelCta1 @context='html'} </span>
+                <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/link-utili-yellow.svg" alt="arrow yellow" srcset="">
+            </a>
+        </sly> 
+        
+        <sly data-sly-test="${properties.tipologiaCTA1 == 'tipoB'}">
+        	<a data-sly-test="${properties.labelCta1 && properties.urlCta1}"
+        		href="${properties.urlCta1}" target="${properties.targetCta1}" title="${properties.altCta1}" 
+        	    class="link-utili-item link-utili-img" style="background-color:${properties.coloreCtaB1 @ context='styleString'};" x-cq-linkchecker="valid">
+                <img loading="lazy" data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagineB1Reference}" 
+                	src="${properties.immagineB1Reference}" alt="${image.description}" class="link-utili-rectangle" />
+                <span class="position-relative"><u>${properties.labelCta1 @context='html'}</u><img loading="lazy" class="link-utili-chevron"
+                        src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/chevron-white-right.svg" alt="arrow white" srcset=""></span>
+            </a>
+        </sly>
+        
+        
+        <!-- CTA 2 -->
+        <sly data-sly-test="${properties.tipologiaCTA2 == 'tipoA'}">
+        	 <a data-sly-test="${properties.labelCta2 && properties.urlCta2}"
+        	 	href="${properties.urlCta2}" target="${properties.targetCta2}" title="${properties.altCta2}"
+        	    class="link-utili-item link-utili-white" x-cq-linkchecker="valid">
+                <span>${properties.labelCta2 @context='html'} </span>
+                <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/link-utili-yellow.svg" alt="arrow yellow" srcset="">
+            </a>
+        </sly>
+        
+        <sly data-sly-test="${properties.tipologiaCTA2 == 'tipoB'}">
+        	<a data-sly-test="${properties.labelCta2 && properties.urlCta2}"
+        		href="${properties.urlCta2}" target="${properties.targetCta2}" title="${properties.altCta2}" 
+        	    class="link-utili-item link-utili-img" style="background-color:${properties.coloreCtaB2 @ context='styleString'};" x-cq-linkchecker="valid">
+                <img loading="lazy" data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagineB2Reference}" 
+                src="${properties.immagineB2Reference}" alt="${image.description}" class="link-utili-rectangle" />
+                <span class="position-relative"><u>${properties.labelCta2 @context='html'}</u><img loading="lazy" class="link-utili-chevron"
+                        src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/chevron-white-right.svg" alt="arrow white" srcset=""></span>
+            </a>
+        </sly>
+        
+        <!-- CTA 3 -->
+        <sly data-sly-test="${properties.tipologiaCTA3 == 'tipoA'}">
+            <a data-sly-test="${properties.labelCta3 && properties.urlCta3}"
+            	href="${properties.urlCta3}" target="${properties.targetCta3}" title="${properties.altCta3}" 
+                class="link-utili-item link-utili-white" x-cq-linkchecker="valid">
+                <span>${properties.labelCta3 @context='html'} </span>
+                <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/link-utili-yellow.svg" alt="arrow yellow" srcset="">
+            </a>
+        </sly>
+        
+        <sly data-sly-test="${properties.tipologiaCTA3 == 'tipoB'}">
+            <a data-sly-test="${properties.labelCta3 && properties.urlCta3}"
+            	href="${properties.urlCta3}" target="${properties.targetCta3}" title="${properties.altCta3}" 
+                class="link-utili-item link-utili-img" style="background-color:${properties.coloreCtaB3 @ context='styleString'};" x-cq-linkchecker="valid">
+                <img loading="lazy" data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagineB3Reference}"
+                src="${properties.immagineB3Reference}" alt="${image.description}" class="link-utili-rectangle" />
+                <span class="position-relative"><u>${properties.labelCta3 @context='html'}</u><img loading="lazy" class="link-utili-chevron"
+                        src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/chevron-white-right.svg" alt="arrow white" srcset=""></span>
+            </a>
+        </sly>
+        
+        </div>
+    </div>
+
+
+
+

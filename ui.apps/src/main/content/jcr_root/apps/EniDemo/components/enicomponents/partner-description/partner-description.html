@@ -1,0 +1,203 @@
+<sly
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.title}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<sly data-sly-test.isColor="${properties.bgSelect == 'color'}"></sly>
+<sly data-sly-test.isMonoLogo="${properties.logoType == 'monoLogo'}"></sly>
+<sly data-sly-test.isMonoPar="${properties.contentType == 'monoPar'}"></sly>
+
+<sly data-sly-use.logo1="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.logo1}"></sly>
+<sly data-sly-use.logo2="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.logo2}"></sly>
+
+<sly data-sly-test="${!isColor}">
+	<sly data-sly-use.rendMan="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=properties.pathBG}"></sly>
+	<sly data-sly-set.rendDesk="${rendMan.renditions}"></sly>
+	<sly data-sly-set.doubleRendDesk="${rendMan.doubledRenditions}"></sly>
+	
+	<style>
+	  .partner-description-bg-container {
+	    background: url(${rendDesk['360px'] @ context='uri'}) no-repeat center center ;
+	    -webkit-background-size: cover;
+	    -moz-background-size: cover;
+	    -o-background-size: cover;
+	    background-size: cover;
+	  }
+	  @media (min-resolution: 150dpi) {
+	    .partner-description-bg-container {
+	      background: url(${doubleRendDesk['360px'] @ context='uri'}) no-repeat center center ;
+	      -webkit-background-size: cover;
+	      -moz-background-size: cover;
+	      -o-background-size: cover;
+	      background-size: cover;
+	    }
+	  }
+	  @media (min-width: 768px) {
+	    .partner-description-bg-container {
+	      background: url(${rendDesk['768px'] @ context='uri'}) no-repeat center center ;
+	      -webkit-background-size: cover;
+	      -moz-background-size: cover;
+	      -o-background-size: cover;
+	      background-size: cover;
+	    }
+	  }
+	  @media (min-width: 768px) and (min-resolution: 150dpi) {
+	    .partner-description-bg-container {
+	      background: url(${doubleRendDesk['768px'] @ context='uri'}) no-repeat center center ;
+	      -webkit-background-size: cover;
+	      -moz-background-size: cover;
+	      -o-background-size: cover;
+	      background-size: cover;
+	    }
+	  }
+	  @media (min-width: 1024px) {
+	    .partner-description-bg-container {
+	      background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+	      -webkit-background-size: cover;
+	      -moz-background-size: cover;
+	      -o-background-size: cover;
+	      background-size: cover;
+	    }
+	  }
+	  @media (min-width: 1024px) and (min-resolution: 150dpi) {
+	    .partner-description-bg-container {
+	      background: url(${doubleRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+	      -webkit-background-size: cover;
+	      -moz-background-size: cover;
+	      -o-background-size: cover;
+	      background-size: cover;
+	    }
+	  }
+	  @media (min-width: 1440px) {
+	    .partner-description-bg-container {
+	      background: url(${rendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+	      -webkit-background-size: cover;
+	      -moz-background-size: cover;
+	      -o-background-size: cover;
+	      background-size: cover;
+	    }
+	  }
+	  @media (min-width: 1440px) and (min-resolution: 150dpi) {
+	    .partner-description-bg-container {
+	      background: url(${doubleRendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+	      -webkit-background-size: cover;
+	      -moz-background-size: cover;
+	      -o-background-size: cover;
+	      background-size: cover;
+	    }
+	  }
+	  @media (min-width: 1920px) {
+	    .partner-description-bg-container {
+	      background: url(${rendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+	      -webkit-background-size: cover;
+	      -moz-background-size: cover;
+	      -o-background-size: cover;
+	      background-size: cover;
+	    }
+	  }
+	  @media (min-width: 1920px) and (min-resolution: 150dpi) {
+	    .partner-description-bg-container {
+	      background: url(${doubleRendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+	      -webkit-background-size: cover;
+	      -moz-background-size: cover;
+	      -o-background-size: cover;
+	      background-size: cover;
+	    }
+	  }
+	</style>
+</sly>
+
+<div id="${properties.idRef}" class="${isColor ? 'partner-description-bg-container-no-img' : 'partner-description-bg-container'} container-lg" 
+	style="background-color:${properties.bgColor @ context='styleString'};">
+    <div class="partner-description-content-container">
+        <div class="partner-description-main-title-container px-md-0">
+            <span class="partner-description-main-title">${properties.title @ context='html'}</span>
+        </div>
+        
+      	<div data-sly-test="${!isMonoPar}" data-sly-unwrap>
+	        <div class="partner-description-content-mono d-none d-lg-flex">
+	            <!-- left content -->
+	            <div class="partner-description-left-content-container-mono px-md-0">
+	                <div class="partner-description-pre-title-container left">
+	                    <span class="partner-description-pre-title"> ${properties.labelItem1} </span>
+	                </div>
+	                <div class="partner-description-logo-button-container">
+	                    <img loading="lazy" class="partner-description-logo-button-img" src="${properties.logo1}" alt="${logo1.description}">
+	                </div>
+	            </div>
+	            <!-- right content -->
+	            <div data-sly-test="${!isMonoLogo}" class="partner-description-right-content-container-mono px-md-0">
+	                <div class="partner-description-pre-title-container">
+	                    <span class="partner-description-pre-title">${properties.labelItem2}</span>
+	                </div>
+	                <div class="partner-description-logo-button-container">
+	                    <img loading="lazy" class="partner-description-logo-button-img" src="${properties.logo2}" alt="${logo2.description}">
+	                </div>
+	            </div>
+	        </div>
+	        <div class="partner-description-content">
+	            <!-- left content -->
+	            <div class="partner-description-left-content-container container-lg px-md-0">
+	                <div class="partner-description-pre-title-container d-lg-none left">
+	                    <span class="partner-description-pre-title">${properties.labelItem1}</span>
+	                </div>
+	                <div class="partner-description-logo-button-container d-lg-none">
+	                    <img loading="lazy" class="partner-description-logo-button-img" src="${properties.logo1}" alt="${logo1.description}">
+	                </div>
+	                <div class="partner-description-content-title-container">
+	                    <span class="partner-description-content-title">${properties.titleItem1 @ context='html'}</span>
+	                </div>
+	                <div class="partner-description-content-description-container left">
+	                    <span class="partner-description-content-description">${properties.descrItem1 @ context='html'}</span>
+	                </div>
+	            </div>
+	            <!-- right content -->
+	            <div class="partner-description-right-content-container container-lg px-md-0">
+	                <div data-sly-test="${!isMonoLogo}" class="partner-description-pre-title-container d-lg-none">
+	                    <span class="partner-description-pre-title">${properties.labelItem2}</span>
+	                </div>
+	                <div data-sly-test="${!isMonoLogo}" class="partner-description-logo-button-container d-lg-none">
+	                    <img loading="lazy" class="partner-description-logo-button-img" src="${properties.logo2}" alt="${logo2.description}">
+	                </div>
+	                <div class="partner-description-content-title-container">
+	                    <span class="partner-description-content-title">${properties.titleItem2 @ context='html'}</span>
+	
+	                </div>
+	                <div class="partner-description-content-description-container">
+	                    <span class="partner-description-content-description">${properties.descrItem2 @ context='html'}</span>
+	                </div>
+	            </div>
+	        </div>
+        </div>
+        
+        <div data-sly-test="${isMonoPar}" class="partner-description-maxi-content-container container-lg px-md-0">
+            <div class="partner-description-content-mono">
+                <!-- left content -->
+                <div class="partner-description-left-content-container-mono px-md-0">
+                    <div class="partner-description-pre-title-container left">
+                        <span class="partner-description-pre-title">${properties.labelItem1}</span>
+                    </div>
+                    <div class="partner-description-logo-button-container">
+                        <img loading="lazy" class="partner-description-logo-button-img" src="${properties.logo1}" alt="${logo1.description}">
+                    </div>
+                </div>
+                <!-- right content -->
+                <div data-sly-test="${!isMonoLogo}" class="partner-description-right-content-container-mono px-md-0">
+                    <div class="partner-description-pre-title-container">
+                        <span class="partner-description-pre-title">${properties.labelItem2}</span>
+                    </div>
+                    <div class="partner-description-logo-button-container">
+                        <img loading="lazy" class="partner-description-logo-button-img" src="${properties.logo2}" alt="${logo2.description}">
+                    </div>
+                </div>
+            </div>
+            <div class="partner-description-content-title-container-mono">
+                <span class="partner-description-content-title-mono">${properties.titleItem1 @ context='html'}</span>
+            </div>
+            <div class="partner-description-content-description-container-mono">
+                <span class="partner-description-content-description-mono">${properties.descrItem1 @ context='html'}</span>
+            </div>
+        </div>
+    </div>
+</div>

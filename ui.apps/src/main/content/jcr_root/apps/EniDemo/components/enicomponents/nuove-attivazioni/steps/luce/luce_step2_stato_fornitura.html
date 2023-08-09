@@ -1,0 +1,39 @@
+<sly data-sly-use.model="${'com.egl.core.models.nuoveattivazioni.LuceNATextsModel' @ stepName='luceSteps', pathJson=properties.pathJson}" />
+<sly data-sly-test.text="${model.luceSteps}"/>
+
+<div class="container-lg px-lg-0">
+    <div class="row">
+        <div class="col-lg-4 na-titolo">
+            <h2>${properties.title}</h2>
+            <div class="na-rettangolo"></div>
+            ${properties.description @ context='html'}
+        </div>
+        <div class="col-lg-8 na-spazio-card na-step0 na-stato-fornitura">
+            <div class="na-card">
+                <div class="na-card-content na-stato-fornitura-luce">
+                    <div class="w-100">
+                        <p>${text.lightTitle}</p>
+                        <h3>${text.activeForniture}</h3>
+                        <div class="d-flex na-contenitore-bottoni">
+                         <div class="item">
+                            <button type="button" class="na-white-button"
+                                onclick="caricaStepNuovaAttivazione('luce_cliente')">${text.activeFornitureR1}</button>
+                            <div class="d-lg-none na-sottotiolo-button">${text.activeFornitureDescrR1 @ context='html'}</div>
+                          </div>
+                          <div class="item">
+                            <button type="button" class="na-white-button"
+                                onclick="caricaStepNuovaAttivazione('luce_primaAttivazione')">${text.activeFornitureR2}</button>
+                                <div class="d-lg-none na-sottotiolo-button">${text.activeFornitureDescrR2 @ context='html'}</div>
+                          </div>
+                          <div class="item">
+                                <button type="button" class="na-white-button"
+                                onclick="caricaStepNuovaAttivazione('luce_subentro')">${text.activeFornitureR3}</button>
+                                <div class="d-lg-none na-sottotiolo-button">${text.activeFornitureDescrR3 @ context='html'}</div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

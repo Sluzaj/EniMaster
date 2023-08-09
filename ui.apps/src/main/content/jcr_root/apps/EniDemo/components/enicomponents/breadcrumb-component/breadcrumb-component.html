@@ -1,0 +1,30 @@
+<sly data-sly-use.model="com.egl.core.models.breadcrumb.BreadcrumbModel"></sly>
+<sly data-sly-set.background="${properties.background || 'light'}"></sly> 
+<sly data-sly-test.showHide="${properties.showHide ? properties.showHide : 'false'}"></sly>
+
+<div data-sly-test="${!showHide}" class="container-fluid egl-breadcrumb-container ${background == 'light' ? 'egl-breadcrumb-velina-nera' : 'egl-breadcrumb-velina-bianca'}" 
+	style="${wcmmode.edit ? 'position: relative; background-color: lightgrey;' : '' @ context='styleString'}">
+    <nav aria-label="breadcrumb">
+        <ol class="container-lg ${background == 'light' ? 'egl-breadcrumb-light' : 'egl-breadcrumb-dark'} breadcrumb inside-scroll"
+            itemscope itemtype="http://schema.org/BreadcrumbList">
+            <sly data-sly-list="${model.pages}">
+	            <li class="breadcrumb-item egl-breadcrumb-item"
+                    itemscope itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+                    <sly data-sly-set.vanityUrl="/${item.vanityUrl ? item.vanityUrl : ''}"></sly>
+                    
+		                <a role="link" aria-label="${item.pageTitle || item.title || item.name}" itemprop="item" href="${item.path == '/content/enigaseluce/it/it/casa' ? '/content/enigaseluce/it/it' : (vanityUrl != '/' ? vanityUrl : item.path)}" title="${item.pageTitle || item.title || item.name}">
+	                        <span itemprop="name">${item.pageTitle || item.title || item.name}</span>
+	                    </a>
+	                    <meta content="${itemList.count}" itemprop="position"></meta>
+                    
+	            </li>
+            </sly>
+            <li class="breadcrumb-item egl-breadcrumb-item active"
+                aria-current="page"
+                itemscope itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+                <span itemprop="name">${currentPage.pageTitle || currentPage.title || currentPage.name}</span>
+                <meta content="${model.lastIndex}" itemprop="position"></meta>
+            </li>
+        </ol>
+    </nav>
+</div>

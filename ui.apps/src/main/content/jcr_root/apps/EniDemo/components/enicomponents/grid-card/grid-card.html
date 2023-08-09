@@ -1,0 +1,170 @@
+<sly
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.title}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+<sly data-sly-test.isCentered="${properties.contentType == 'centered'}"></sly>
+<sly data-sly-test.isLeftCTA="${properties.contentType == 'leftCTA'}"></sly>
+
+<sly data-sly-test.hasTwoCard="${properties.itemNumber == '2'}"></sly>
+<sly data-sly-test.hasThreeCard="${properties.itemNumber == '3'}"></sly>
+<sly data-sly-test.hasFourCard="${properties.itemNumber == '4'}"></sly>
+
+<sly data-sly-test.twoCardClass="${hasTwoCard ? 'col-6' : ''}"></sly>
+<sly data-sly-test.threeCardClass="${hasThreeCard ? 'col-4' : ''}"></sly>
+<sly data-sly-test.fourCardClass="${hasFourCard ? 'col-3' : ''}"></sly>
+
+<sly data-sly-test.titleType="${properties.titleType ? properties.titleType : 'leftTitle'}"></sly>
+<sly data-sly-test.isCenteredTitle="${titleType == 'centeredTitle'}"></sly>
+<sly data-sly-test.isCTA3="${properties.labelCTACard3v4 || properties.labelCTACard3}"></sly>
+
+<style data-sly-test="${properties.colorType == 'color'}">
+.grid-card-bg-card-body.grid-card-1 {
+	background-color: ${properties.colorCard1 @ context='styleToken'};
+}
+
+.grid-card-bg-card-body.grid-card-2 {
+	background-color: ${properties.colorCard2 @ context='styleToken'};
+}
+
+.grid-card-bg-card-body.grid-card-3 {
+	background-color: ${properties.colorCard3 @ context='styleToken'};
+}
+
+.grid-card-bg-card-body.grid-card-3v4 {
+	background-color: ${properties.colorCard3v4 @ context='styleToken'};
+}
+
+.grid-card-bg-card-body.grid-card-4 {
+	background-color: ${properties.colorCard4 @ context='styleToken'};
+}
+</style>
+<div style="background-color:${properties.bgColor @ context='styleString'};">
+	<div id="${properties.idRef}" class="container-lg grid-card-container ${isCenteredTitle ? 'grid-card-title-logo' : ''} ${properties.colorType == 'gradient' ? 'grid-card-gradient-bg' : ''}">
+		<div class="d-flex ${isCenteredTitle ? 'justify-content-center text-center' : ''}">
+			<div class="grid-card-rectangle"></div>
+			<div data-sly-test="${!isCenteredTitle}" class="d-flex flex-column">
+				<span class="grid-card-text">${properties.title @
+					context='html'}</span> <span class="grid-card-label">
+					${properties.subtitle @ context='html'} </span>
+			</div>
+			<div data-sly-test="${isCenteredTitle}" class="d-flex flex-column justify-content-center text-center">
+                <span class="grid-card-text">${properties.title @
+					context='html'}</span>
+                <div class="d-flex flex-md-row flex-column" data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.imgTitleReference}">
+                    <span class="grid-card-label">
+                        ${properties.subtitle @ context='html'}
+                    </span>
+                    <img loading="lazy" data-sly-test="${properties.imgTitleReference}" src="${properties.imgTitleReference}" alt="${image.description}">
+                </div>
+            </div>
+		</div>
+		<div class="d-flex container-fluid px-0 gridCardCarousel row">
+			<div
+				class="grid-card-container-card ${hasTwoCard ? 'col-6' : ''} ${hasThreeCard ? 'col-4' : ''} ${hasFourCard ? 'col-3' : ''} ${!properties.labelCTACard1 ? 'grid-cards-nolink' : ''} ${isCentered ? 'grid-cards-center-text' : ''}">
+				<div class="grid-card-card">
+					<div class="grid-card-bg-card-body grid-card-1">
+						<div class="grid-card-card-body d-flex flex-column">
+							<div class="grid-card-card-body-title">
+								${properties.titleCard1 @ context='html'}</div>
+							<div class="grid-card-card-body-text">
+								${properties.textCard1 @ context='html'}</div>
+							<div data-sly-test="${isLeftCTA && properties.labelCTACard1}" class="bg-link">
+								<a href="${properties.itemsjs1 ? properties.itemsjs1 : properties.linkCTACard1 @context='html'}"
+									title="${properties.altCTACard1}"
+									target="${properties.targetCTACard1}"><button type="button"
+										class="btn btn-link card-da-2-cta-secondary pl-0">
+										${properties.labelCTACard1}</button></a>
+							</div>
+						</div>
+						<div class="mask"></div>
+					</div>
+				</div>
+			</div>
+	
+			<div
+				class="grid-card-container-card ${hasTwoCard ? 'col-6' : ''} ${hasThreeCard ? 'col-4' : ''} ${hasFourCard ? 'col-3' : ''} ${!properties.labelCTACard2 ? 'grid-cards-nolink' : ''} ${isCentered ? 'grid-cards-center-text' : ''}">
+				<div class="grid-card-card">
+					<div class="grid-card-bg-card-body grid-card-2">
+						<div class="grid-card-card-body d-flex flex-column">
+							<div class="grid-card-card-body-title">
+								${properties.titleCard2 @ context='html'}</div>
+							<div class="grid-card-card-body-text">
+								${properties.textCard2 @ context='html'}</div>
+							<div data-sly-test="${isLeftCTA && properties.labelCTACard2}" class="bg-link">
+								<a href="${properties.itemsjs2 ? properties.itemsjs2 : properties.linkCTACard2 @context='html'}"
+									title="${properties.altCTACard2}"
+									target="${properties.targetCTACard2}"><button type="button"
+										class="btn btn-link card-da-2-cta-secondary pl-0">
+										${properties.labelCTACard2}</button></a>
+							</div>
+						</div>
+						<div class="mask"></div>
+					</div>
+				</div>
+			</div>
+	
+			<div data-sly-test="${hasThreeCard || hasFourCard}"
+				class="grid-card-container-card ${hasThreeCard ? 'col-4' : ''} ${hasFourCard ? 'col-3' : ''} ${!isCTA3 ? 'grid-cards-nolink' : ''} ${isCentered ? 'grid-cards-center-text' : ''}">
+				<div class="grid-card-card">
+					<div class="grid-card-bg-card-body grid-card-3v4">
+						<div class="grid-card-card-body d-flex flex-column">
+							<div class="grid-card-card-body-title">
+								${hasFourCard ? properties.titleCard3v4 : properties.titleCard3 @ context='html'}</div>
+							<div class="grid-card-card-body-text">
+								${hasFourCard ? properties.textCard3v4 : properties.textCard3 @ context='html'}</div>
+							<div data-sly-test="${isLeftCTA && isCTA3}" class="bg-link">
+								<!-- a href="${hasFourCard ? properties.linkCTACard3v4 : properties.linkCTACard3}"-->
+								<a href="${(hasFourCard) ? (properties.itemsjs34 ? properties.itemsjs34 : properties.linkCTACard3v4) : (properties.itemsjs3 ? properties.itemsjs3 : properties.linkCTACard3) @context='html'}"
+									title="${hasFourCard ? properties.altCTACard3v4 : properties.altCTACard3}"
+									target="${hasFourCard ? properties.targetCTACard3v4 : properties.targetCTACard3}"><button type="button"
+										class="btn btn-link card-da-2-cta-secondary pl-0">
+										${hasFourCard ? properties.labelCTACard3v4 : properties.labelCTACard3}</button></a>
+							</div>
+						</div>
+						<div class="mask"></div>
+					</div>
+				</div>
+			</div>
+	
+			<div data-sly-test="${hasFourCard}"
+				class="grid-card-container-card col-3 ${isCentered ? 'grid-cards-center-text' : ''} ${!properties.labelCTACard4 ? 'grid-cards-nolink' : ''}">
+				<div class="grid-card-card">
+					<div class="grid-card-bg-card-body grid-card-4">
+						<div class="grid-card-card-body d-flex flex-column">
+							<div class="grid-card-card-body-title">
+								${properties.titleCard4 @ context='html'}</div>
+							<div class="grid-card-card-body-text">
+								${properties.textCard4 @ context='html'}</div>
+							<div data-sly-test="${isLeftCTA && properties.labelCTACard4}" class="bg-link">
+								<a href="${properties.itemsjs4 ? properties.itemsjs4 : properties.linkCTACard4 @context='html'}"
+									title="${properties.altCTACard4}"
+									target="${properties.targetCTACard4}"><button type="button"
+										class="btn btn-link card-da-2-cta-secondary pl-0">
+										${properties.labelCTACard4}</button></a>
+							</div>
+						</div>
+						<div class="mask"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		<div class="row justify-content-center riga-frecce gridCardFrecce">
+			<div class="col-6">
+				<div class="impaginazione flex-direction-row justify-content-center">
+					<div class="news__arrow news__arrow_dir_left"
+						onclick="slideGridCard('-', event)">
+						<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-left-solid.svg" class="news__arrow"/>
+					</div>
+	
+					<p class="pagingGridCard-cards p18-egl"></p>
+					<div class="news__arrow news__arrow_dir_right"
+						onclick="slideGridCard('+', event)">
+						<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-right-solid.svg" class="news__arrow"/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

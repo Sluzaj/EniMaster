@@ -1,0 +1,87 @@
+<sly
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.title}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<sly data-sly-test.isLeft="${properties.contentType == 'left'}"></sly>
+<sly data-sly-test.isNonMediaContentEmpty="${!properties.title && !properties.subtitle && !properties.labelCTA}"></sly>
+<sly data-sly-test.titleType="${properties.titleType ? properties.titleType : 'up'}"></sly>
+<sly data-sly-test.mediaType="${properties.mediaType ? properties.mediaType : 'image'}"></sly>
+<sly data-sly-test.backgroundColor="${properties.bgColor == 'custom' ? properties.bgColorCustom : properties.bgColor}"></sly>
+<sly data-sly-test.isRadius="${properties.radius}"></sly>
+<sly data-sly-test.isCover="${properties.cover}"></sly>
+
+<sly data-sly-test.velinaClass="${properties.velina == 'grey' ? 'velina velina-grey': ''}"></sly>
+<sly data-sly-test.velinaClass="${properties.velina == 'white' ? 'velina velina-white': velinaClass}"></sly>
+<sly data-sly-test.isVelinaCustom="${properties.velina == 'custom'}"></sly>
+<sly data-sly-test.velinaClass="${isVelinaCustom ? 'velina velina-custom': velinaClass}"></sly>
+
+
+<style data-sly-test="${isVelinaCustom}">
+[data-pln-component=basic-image][pln-version='2.0'].image-box article .content-image.cover button .velina.velina-custom::before {
+   background-color: ${properties.velinaCustom @ context='styleString'};
+}
+</style>
+<div style="background-color: ${backgroundColor@ context='styleString'}">
+    <div id="${properties.idRef}" data-pln-component="basic-image" pln-version="2.0" class="container-lg image-box ${properties.removePadding == 'remove' ? '' : 'spacing'}">
+        <article class="${titleType == 'down' ? 'reverse' : ''}">
+            <div class="${isLeft ? 'title-stroke' : ''} ${isLeft && isNonMediaContentEmpty ? 'no-margin' : ''}" aria-hidden="${isLeft ? 'true' : ''}">
+                <section class="content ${isLeft ? 'left' : ''} ${!isLeft && isNonMediaContentEmpty ? 'no-margin' : ''}">
+                    ${properties.title @ context='html'}
+                    ${properties.subtitle @ context='html'}
+                <sly data-sly-test="${properties.modalCTA && !isLeft}">
+					<button data-sly-test="${properties.linkCTA && properties.labelCTA}" class="pln-btn-primary" type="button" data-toggle="modal" data-target="${'#' in properties.linkCTA ? '' : '#'}${properties.linkCTA}" title="${properties.altCTA}">${properties.labelCTA}</button>
+				</sly>
+				<sly data-sly-test="${!properties.modalCTA && !isLeft}">
+					<a role="button" data-sly-test="${properties.linkCTA && properties.labelCTA}" href="${properties.linkCTA}" target="${properties.targetCTA}" class="pln-btn-primary">${properties.labelCTA}</a>
+				</sly>
+                </section>
+            </div>
+            <section data-sly-test="${mediaType == 'image'}" class="content-image ${isRadius ? 'getRadius' : ''}"
+            data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.image}"
+			data-sly-use.imageMob="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.imageMob}">
+                <picture>
+                    <source media="(min-width: 1024px)" srcset="${properties.image}" alt="${image.description}">
+                    <img loading="lazy" alt="${imageMob.description}" src="${properties.imageMob}" aria-hidden="${properties.ariaHiddenImage}" 
+                    aria-describedby="img1">
+                    <span class="sr-only" id="img1">
+                        ${properties.ariaImageDescription}
+                    </span>
+                </picture>
+            </section>
+            <section data-sly-test="${mediaType == 'video'}" 
+            class="content-image ${isRadius ? 'getRadius' : ''} ${isCover ? 'cover' : ''}">
+            	<button data-sly-test="${isCover}" aria-label="clicca per riprodurre il video">
+                    <div class="${velinaClass} ${isRadius ? 'getRadius' : ''}">
+                        <picture>
+                            <source media="(min-width: 1024px)" data-sly-use.coverImage="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.coverImage}"
+                                srcset="${properties.coverImage}" alt="${coverImage.description}">
+                            <img loading="lazy" data-sly-use.coverImageMob="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.coverImageMob}" 
+                            alt="${coverImageMob.description}" src="${properties.coverImageMob}" aria-hidden="${properties.ariaHiddenCoverImage}"
+                            aria-describedby="img2">
+                            <span class="sr-only" id="img2">
+                        		${properties.ariaCoverImageDescription}
+                    		</span>
+                        </picture>
+                        <div class="play white">
+                            <picture data-sly-use.btnPlayImage="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.btnPlayImage}">
+                                <source srcset="${properties.btnPlayImage}" alt="${btnPlayImage.description}">
+                                <img loading="lazy" src="${properties.btnPlayImage}" aria-hidden="${properties.ariaHiddenBtnPlayImage}" alt="${btnPlayImage.description}"
+                                aria-describedby="img3">
+                            <span class="sr-only" id="img3">
+                        		${properties.ariaBtnPlayImageDescription}
+                    		</span>
+                            </picture>
+                            <p> ${properties.labelBtnPlay} </p>
+                        </div>
+                    </div>
+                </button>
+                <iframe
+                    src="${properties.media}" title="${properties.altMedia}" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </section>
+        </article>
+    </div>
+</div>

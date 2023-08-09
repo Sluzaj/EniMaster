@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+	xmlns:cq="http://www.day.com/jcr/cq/1.0"
+	xmlns:jcr="http://www.jcp.org/jcr/1.0"
+	xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
+	xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+	extraClientlibs="[cq.author.accordion]"
+	jcr:primaryType="nt:unstructured" jcr:title="Rich Text Properties"
+	sling:resourceType="cq/gui/components/authoring/dialog">
+	<content jcr:primaryType="nt:unstructured"
+		sling:resourceType="granite/ui/components/coral/foundation/container">
+		<items jcr:primaryType="nt:unstructured">
+			<tabs jcr:primaryType="nt:unstructured"
+				sling:resourceType="granite/ui/components/coral/foundation/tabs"
+				maximized="{Boolean}true">
+				<items jcr:primaryType="nt:unstructured">
+
+
+					<configItem jcr:primaryType="nt:unstructured"
+						jcr:title="Configurazione Item"
+						sling:resourceType="granite/ui/components/coral/foundation/container"
+						margin="{Boolean}true">
+						<items jcr:primaryType="nt:unstructured">
+							<columns jcr:primaryType="nt:unstructured"
+								sling:resourceType="granite/ui/components/coral/foundation/container"
+								margin="{Boolean}true">
+								<items jcr:primaryType="nt:unstructured">
+									<column jcr:primaryType="nt:unstructured"
+										sling:resourceType="granite/ui/components/coral/foundation/container">
+										<items jcr:primaryType="nt:unstructured">
+											<gestioneComponente
+												jcr:primaryType="nt:unstructured"
+												jcr:title="Gestione Componente"
+												sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">
+												<items jcr:primaryType="nt:unstructured">
+													<idRef jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+														fieldLabel="ID Per Ancore" name="./idRef" />
+													<bgSelect jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/select"
+														fieldLabel="Colore Sfondo" name="./bgSelect">
+														<items jcr:primaryType="nt:unstructured">
+															<option1 jcr:primaryType="nt:unstructured"
+																text="Bianco" value="#ffffff" />
+															<option2 jcr:primaryType="nt:unstructured"
+																text="Grigio" value="#f4f4f4" selected="true" />
+														</items>
+													</bgSelect>
+													<margini jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/select"
+														fieldLabel="Margini Componente" name="./margini">
+														<items jcr:primaryType="nt:unstructured">
+															<option1 jcr:primaryType="nt:unstructured"
+																text="Attivati" value="" selected="true" />
+															<option2 jcr:primaryType="nt:unstructured"
+																text="Disattivati" value="disattivato" />
+														</items>
+													</margini>
+												</items>
+											</gestioneComponente>
+
+											<!-- Multifield di Select -->
+											<gestioneItem jcr:primaryType="nt:unstructured"
+												jcr:title="Gestione Item"
+												sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">
+												<items jcr:primaryType="nt:unstructured">
+
+													<itemRichText
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">
+														<items jcr:primaryType="nt:unstructured">
+															<tabs jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+																class="full-width" fieldLabel="Item Rich Text"
+																composite="{Boolean}true">
+																<granite:data
+																	jcr:primaryType="nt:unstructured" min-item="1" />
+																<field jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/foundation/form/fieldset"
+																	name="./itemRichText">
+																	<layout jcr:primaryType="nt:unstructured"
+																		sling:resourceType="granite/ui/components/foundation/layouts/container"
+																		method="absolute" />
+																	<items jcr:primaryType="nt:unstructured">
+																		<column jcr:primaryType="nt:unstructured"
+																			sling:resourceType="granite/ui/components/foundation/container">
+																			<items jcr:primaryType="nt:unstructured">
+																				<elementoTestuale
+																					jcr:primaryType="nt:unstructured"
+																					sling:resourceType="granite/ui/components/coral/foundation/form/select"
+																					fieldLabel="Elemento Testuale"
+																					name="./elementoTestuale">
+																					<items jcr:primaryType="nt:unstructured">
+																						<option1 jcr:primaryType="nt:unstructured"
+																							text="Titolo" value="enigaseluce/components/rich-text/titolo" selected="true" />
+																						<option2 jcr:primaryType="nt:unstructured"
+																							text="Paragrafo" value="enigaseluce/components/rich-text/paragrafo" />
+																						<option3 jcr:primaryType="nt:unstructured"
+																							text="Paragrafo Numerato"
+																							value="enigaseluce/components/rich-text/paragrafo-numerato" />
+																						<option4 jcr:primaryType="nt:unstructured"
+																							text="CTA" value="enigaseluce/components/rich-text/cta" />
+																						<option5 jcr:primaryType="nt:unstructured"
+																							text="Nota" value="enigaseluce/components/rich-text/nota" />
+																						<option6 jcr:primaryType="nt:unstructured"
+																							text="Rich Image" value="enigaseluce/components/rich-text/rich-image" />
+																					</items>
+																				</elementoTestuale>
+
+
+																			</items>
+																		</column>
+																	</items>
+																</field>
+															</tabs>
+														</items>
+													</itemRichText>
+												</items>
+											</gestioneItem>
+
+										</items>
+									</column>
+								</items>
+							</columns>
+						</items>
+					</configItem>
+
+				</items>
+			</tabs>
+		</items>
+	</content>
+</jcr:root>

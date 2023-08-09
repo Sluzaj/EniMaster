@@ -1,0 +1,283 @@
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"></sly> 
+<sly data-sly-use.model="com.egl.core.models.tabverticalecorp.TabVerticaleCorpModel"></sly>
+
+<!--Titotlo-->
+<div id="${properties.idRef}" class="tab-vertical-wrapper" data-sf-component="tab-verticale-corporate" sf-template="corporate">
+    <div class="d-flex egl-tab-vertical-title container-lg">
+        <sly data-sly-test="${properties.title}">
+            <div class="d-flex flex-column">
+                <div class="card-offerte-title">
+                  ${properties.title @ context='html'}
+                </div>
+            </div>
+        </sly>
+    </div>
+    <div class="tab-verticale-background-div-color d-none d-lg-block">
+        <div class="container-lg egl-herohomepage-basic egl-tab-vertical-container">
+            <div class="tab-verticale-contenitore-asset">
+                <div class="tab-verticale-contenitore-asset-per-promo velina-tab-vertical">
+                    <sly data-sly-list.el="${model.list}">
+                        <div id="${el.divId}" class="tabcontent ${elList.first ? 'd-block' : 'd-none'}" style="display:${wcmmode.edit && !elList.first ? 'none' : '' @ context='styleToken'}">
+                            <div class="tabcontent-contenuto-testuale">
+
+                                <!--Titolo paragrafo tab-->
+                                <div class="content-area">
+                                    <div class="d-flex tabcontent-contenuto-titolo">
+                                        <p>${el.titleTab @ context='html'}</p>
+                                    </div>
+                                    <p class="tabcontent-contenuto-paragrafo">
+                                        ${el.paragraphTab @ context='html'} </p>
+
+                                    <!--Gestione Link-->
+                                    <div class="links-container">
+                                        <div class="container-button-and-line">
+                                            <sly data-sly-test="${el.linkCTA}">
+                                                <sly data-sly-test="${el.targetCTA == 'modale'}">
+                                                    <a data-toggle="modal" href="#${el.linkCTA}" target="${el.targetCTA}" title="${el.altCTA}">
+                                                        <button type="button" class="btn btn-link card-offerte-right-cta-secondary pl-0">
+                                                          <span>${el.labelCTA}</span>
+                                                        </button>
+                                                        <span class="button-text-decoration"></span>
+                                                    </a>
+                                                </sly>
+
+                                                <sly data-sly-test="${el.targetCTA != 'modale'}">
+                                                    <a href="${el.linkCTA}" target="${el.targetCTA}" title="${el.altCTA}">
+                                                        <button type="button"
+                                                            class="btn btn-link card-offerte-right-cta-secondary pl-0">
+                                                            <span>${el.labelCTA}</span>
+                                                        </button>
+                                                        <span class="button-text-decoration"></span>
+                                                    </a>
+                                                </sly>
+                                            </sly>
+                                        </div>
+                                        <!--Gestione Link2-->
+                                        <div class="container-button-and-line">
+                                            <sly data-sly-test="${el.linkCTA2}">
+                                                <sly data-sly-test="${el.targetCTA2 == 'modale'}">
+                                                    <a data-toggle="modal" href="#${el.linkCTA2}" target="${el.targetCTA2}" title="${el.altCTA2}">
+                                                        <button type="button" class="btn btn-link card-offerte-right-cta-secondary pl-0">
+                                                          <span>${el.labelCTA2}</span>
+                                                        </button>
+                                                        <span class="button-text-decoration"></span>
+                                                    </a>
+                                                </sly>
+
+                                                <sly data-sly-test="${el.targetCTA2 != 'modale'}">
+                                                    <a href="${el.linkCTA2}" target="${el.targetCTA2}" title="${el.altCTA2}">
+                                                        <button type="button"
+                                                            class="btn btn-link card-offerte-right-cta-secondary pl-0">
+                                                            <span>${el.labelCTA2}</span>
+                                                        </button>
+                                                        <span class="button-text-decoration"></span>
+                                                    </a>
+                                                </sly>
+                                            </sly>
+                                        </div>
+                                        <!--Gestione Link3-->
+                                        <div class="container-button-and-line">
+                                            <sly data-sly-test="${el.linkCTA3}">
+                                                <sly data-sly-test="${el.targetCTA3 == 'modale'}">
+                                                    <a data-toggle="modal" href="#${el.linkCTA3}" target="${el.targetCTA3}" title="${el.altCTA3}">
+                                                        <button type="button" class="btn btn-link card-offerte-right-cta-secondary pl-0">
+                                                          <span>${el.labelCTA3}</span>
+                                                        </button>
+                                                        <span class="button-text-decoration"></span>
+                                                    </a>
+                                                </sly>
+
+                                                <sly data-sly-test="${el.targetCTA3 != 'modale'}">
+                                                    <a href="${el.linkCTA3}" target="${el.targetCTA3}" title="${el.altCTA3}">
+                                                        <button type="button"
+                                                            class="btn btn-link card-offerte-right-cta-secondary pl-0">
+                                                            <span>${el.labelCTA3}</span>
+                                                        </button>
+                                                        <span class="button-text-decoration"></span>
+                                                    </a>
+                                                </sly>
+                                            </sly>
+                                        </div>
+                                        <!--Gestione Link4-->
+                                        <div class="container-button-and-line">
+                                            <sly data-sly-test="${el.linkCTA4}">
+                                                <sly data-sly-test="${el.targetCTA4 == 'modale'}">
+                                                    <a data-toggle="modal" href="#${el.linkCTA4}" target="${el.targetCTA4}" title="${el.altCTA4}">
+                                                        <button type="button" class="btn btn-link card-offerte-right-cta-secondary pl-0">
+                                                          <span>${el.labelCTA4}</span>
+                                                        </button>
+                                                        <span class="button-text-decoration"></span>
+                                                    </a>
+                                                </sly>
+
+                                                <sly data-sly-test="${el.targetCTA4 != 'modale'}">
+                                                    <a href="${el.linkCTA4}" target="${el.targetCTA4}" title="${el.altCTA4}">
+                                                        <button type="button"
+                                                            class="btn btn-link card-offerte-right-cta-secondary pl-0">
+                                                            <span>${el.labelCTA4}</span>
+                                                        </button>
+                                                        <span class="button-text-decoration"></span>
+                                                    </a>
+                                                </sly>
+                                            </sly>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            
+                                <!--Immagine-->
+                                <div class="image-area">
+                                    <img loading="lazy" class="tab-verticale-right-img" src="${el.asset @ context='uri'}" alt="" />
+                                   
+                                </div>
+                            </div>
+                            <img class="tab-verticale-right-img" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/velina.svg" alt="" />
+                        </div>
+                    </sly> 
+                </div>
+            </div>
+            <!--Tab-->
+            <div class="row tab-verticale-main-row">
+                <div class="col-3 tab-verticale-main-col">
+                    <div class="d-flex flex-column tab-verticale-contenitore-contenuto">
+                        <sly data-sly-list.tab="${model.list}">
+                            <div class="tablinks" data-sly-set.func="changeTab(event, '${tab.divId}')" onclick="${func @ context='attribute'}" 
+                                    id="${tabList.first ? 'defaultOpen' : ''}">
+                                <span class="tab-verticale-tab-style">
+                                    <p>${tab.tabLabel}</p>
+                                </span>
+                            </div>
+                        </sly>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile-->
+    <div class="tab-verticale-mobile-wrapper d-lg-none">
+        <div class="tab-verticale-mobile-tabs-container">
+            <!-- Mobile Tab -->
+            <sly data-sly-list.tabMobile="${model.list}">
+                <span class="tab-verticale-mobile-tabs">${tabMobile.tabLabel}</span>
+            </sly>
+        </div>
+        <div class="tab-verticale-mobile-content-container">
+            <sly data-sly-list.elMobile="${model.list}">
+                <span class="pointer"></span>
+                    <div class="tab-verticale-mobile-content">
+                    <div class="tab-verticale-mobile-testo">
+                        <!-- Mobile Immagine -->
+                       <img loading="lazy" src="${elMobile.assetMobile @ context='uri'}" alt="">
+
+                            <!-- Mobile Titolo e Paragrafo -->
+                        <div class="content-area">
+                            <div class="d-flex tabcontent-contenuto-titolo">
+                                <p>${elMobile.titleTab @ context='html'}</p>
+                            </div>
+                            <p class="tabcontent-contenuto-paragrafo">
+                                ${elMobile.paragraphTab @ context='html'}</p>
+                                <!-- Mobile Gestione Link -->
+                            <div class="links-container">
+                                <div class="container-button-and-line">
+                                    <sly data-sly-test="${elMobile.linkCTA}">
+                                        <sly data-sly-test="${elMobile.targetCTA == 'modale'}">
+                                            <a data-toggle="modal" href="#${elMobile.linkCTA}" target="${elMobile.targetCTA}" title="${elMobile.altCTA}">
+                                                <button type="button"
+                                                        class="btn btn-link card-offerte-right-cta-secondary pl-0">
+                                                        <span>${elMobile.labelCTA}</span>
+                                                    </button>
+                                                    <span class="button-text-decoration"></span>
+                                                </a>
+                                              </sly> 
+
+                                            <sly data-sly-test="${elMobile.targetCTA != 'modale'}">
+                                                <a href="${elMobile.linkCTA}" target="${elMobile.targetCTA}" title="${elMobile.altCTA}">
+                                                <button type="button"
+                                                        class="btn btn-link card-offerte-right-cta-secondary pl-0">
+                                                        <span>${elMobile.labelCTA}</span>
+                                                    </button>
+                                                    <span class="button-text-decoration"></span>
+                                                </a>
+                                            </sly> 
+                                        </sly>  
+                                </div>
+                                    <!-- Mobile Gestione Link 2-->
+                                <div class="container-button-and-line">
+                                    <sly data-sly-test="${elMobile.linkCTA2}">
+                                        <sly data-sly-test="${elMobile.targetCTA2 == 'modale'}">
+                                            <a data-toggle="modal" href="#${elMobile.linkCTA2}" target="${elMobile.targetCTA2}" title="${elMobile.altCTA2}">
+                                                <button type="button"
+                                                        class="btn btn-link card-offerte-right-cta-secondary pl-0">
+                                                        <span>${elMobile.labelCTA2}</span>
+                                                    </button>
+                                                    <span class="button-text-decoration"></span>
+                                                </a>
+                                              </sly> 
+
+                                            <sly data-sly-test="${elMobile.targetCTA2 != 'modale'}">
+                                                <a href="${elMobile.linkCTA2}" target="${elMobile.targetCTA2}" title="${elMobile.altCTA2}">
+                                                <button type="button"
+                                                        class="btn btn-link card-offerte-right-cta-secondary pl-0">
+                                                        <span>${elMobile.labelCTA2}</span>
+                                                    </button>
+                                                    <span class="button-text-decoration"></span>
+                                                </a>
+                                            </sly> 
+                                        </sly>  
+                                </div>
+                                    <!-- Mobile Gestione Link 3-->
+                                <div class="container-button-and-line">
+                                    <sly data-sly-test="${elMobile.linkCTA3}">
+                                        <sly data-sly-test="${elMobile.targetCTA3 == 'modale'}">
+                                            <a data-toggle="modal" href="#${elMobile.linkCTA3}" target="${elMobile.targetCTA3}" title="${elMobile.altCTA3}">
+                                                <button type="button"
+                                                        class="btn btn-link card-offerte-right-cta-secondary pl-0">
+                                                        <span>${elMobile.labelCTA3}</span>
+                                                    </button>
+                                                    <span class="button-text-decoration"></span>
+                                                </a>
+                                              </sly> 
+
+                                            <sly data-sly-test="${elMobile.targetCTA3 != 'modale'}">
+                                                <a href="${elMobile.linkCTA3}" target="${elMobile.targetCTA3}" title="${elMobile.altCTA3}">
+                                                <button type="button"
+                                                        class="btn btn-link card-offerte-right-cta-secondary pl-0">
+                                                        <span>${elMobile.labelCTA3}</span>
+                                                    </button>
+                                                    <span class="button-text-decoration"></span>
+                                                </a>
+                                            </sly> 
+                                        </sly>  
+                                </div>
+                                    <!-- Mobile Gestione Link 4-->
+                                <div class="container-button-and-line">
+                                    <sly data-sly-test="${elMobile.linkCTA4}">
+                                        <sly data-sly-test="${elMobile.targetCTA4 == 'modale'}">
+                                            <a data-toggle="modal" href="#${elMobile.linkCTA4}" target="${elMobile.targetCTA4}" title="${elMobile.altCTA4}">
+                                                <button type="button"
+                                                        class="btn btn-link card-offerte-right-cta-secondary pl-0">
+                                                        <span>${elMobile.labelCTA4}</span>
+                                                    </button>
+                                                    <span class="button-text-decoration"></span>
+                                                </a>
+                                              </sly> 
+
+                                            <sly data-sly-test="${elMobile.targetCTA4 != 'modale'}">
+                                                <a href="${elMobile.linkCTA4}" target="${elMobile.targetCTA4}" title="${elMobile.altCTA4}">
+                                                <button type="button"
+                                                        class="btn btn-link card-offerte-right-cta-secondary pl-0">
+                                                        <span>${elMobile.labelCTA4}</span>
+                                                    </button>
+                                                    <span class="button-text-decoration"></span>
+                                                </a>
+                                            </sly> 
+                                        </sly>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </sly>               
+        </div>
+    </div>
+</div>

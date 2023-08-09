@@ -1,0 +1,119 @@
+<template data-sly-template.furnitureState="${@ cartModel, stepCartModel, isLight, isMono}">
+  <sly data-sly-set.texts="${stepCartModel.textValues}"></sly>
+  
+  <style data-sly-test="${stepCartModel.isBusiness}">
+    @media (min-width: 1024px) {
+      .egl-box-fornitura-carrellostep.stato_fornitura.passo-a-egl .egl-box-fornitura-carrellostep-nome:after {
+        content: "voglio passare a Plenitude";
+        bottom: -40px;
+        left: 65px;
+        width: 206px;
+        height: 20px;
+        font-size: 14px;
+        font-weight: 400;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: center;
+      }
+    }
+  </style>
+  <span
+    aria-hidden="true"
+    class="position-absolute egl-mod-comm-prevIcon d-lg-none"
+  >
+    <button
+      type="button"
+      class="freccia-torna-indietro"
+      onclick="goToStep('back')"
+      aria-label="indietro"
+    >
+      <i class="fas fa-chevron-left"></i>
+    </button>
+  </span>
+  <div class="progress w-100 position-absolute">
+    <sly data-sly-set.bar="${isLight ? '14%' : '42%'}"></sly>
+    <div
+      style="width: ${bar @ context='styleToken'}"
+      class="progress-bar"
+      role="progressbar"
+      aria-valuenow="${bar}"
+      aria-valuemin="0"
+      aria-valuemax="100"
+    ></div>
+  </div>
+  <div class="egl-stato-fornitura-dettaglio">
+    <div class="egl-stato-fornitura-dettaglio-testo">
+      ${isMono? texts['start'] : (isLight ? texts['furnitureStateTitleLight'] : texts['furnitureStateTitleGas']) @ context='html'}
+    </div>
+  </div>
+  <div style="flex-basis: 100%">
+    <div
+      class="
+        d-flex
+        flex-wrap
+        egl-modal-body-carrellostep-contenuto
+        step-stato-fornitura
+        ${stepCartModel.isBusiness ? 'step-interstatario-contratto' : ''}
+      "
+    >
+      <div class="flex-b-100 d-flex justify-content-center">
+        <div class="text-left egl-modal-carrellostep-titolo">
+          <b>${isLight ? texts['furnitureStateSubTitleLight'] : texts['furnitureStateSubTitleGas'] @ context='html'}</b>
+        </div>
+      </div>
+      <div
+        class="egl-box-fornitura-carrellostep stato_fornitura ${stepCartModel.isBusiness ? 'interstatario_contratto' : ''}"
+        onclick="selezionaOpzioneCarrelloStep()"
+      >
+        <div
+          class="egl-box-fornitura-carrellostep-nome"
+        >
+          <b>${texts['furnitureAlreadyActive'] @ context='html'}</b>
+        </div>
+      </div>
+      <div
+        onclick="selezionaOpzioneCarrelloStep()"
+        class="egl-box-fornitura-carrellostep stato_fornitura ${stepCartModel.isBusiness ? 'interstatario_contratto' : ''} passo-a-egl"
+      >
+        <div class="egl-box-fornitura-carrellostep-nome">
+          <b>${texts['furnitureOther'] @ context='html'}</b>
+        </div>
+      </div>
+      <div data-sly-test="${!stepCartModel.isBusiness}"
+        class="egl-box-fornitura-carrellostep stato_fornitura"
+        onclick="selezionaOpzioneCarrelloStep()"
+      >
+        <div
+          class="egl-box-fornitura-carrellostep-nome"
+        >
+          <b>${isLight ? texts['furnitureNotActiveLight'] : texts['furnitureNotActiveGas'] @ context='html'}</b>
+        </div>
+      </div>
+    </div>
+    <div
+      class="
+        d-flex
+        flex-wrap
+        egl-modal-body-carrellostep-footer
+        indietro-e-continua
+      "
+    >
+      <button
+        type="button"
+        class="p20-egl egl-cart-cta-primary-white d-none d-lg-block"
+        onclick="goToStep('back')"
+      >
+        ${texts['back'] @ context='html'}
+      </button>
+      <button
+        type="button"
+        class="p20-egl egl-cart-cta-primary-yellow"
+        onclick="goToStep('next')"
+      >
+        ${texts['continue'] @ context='html'}
+      </button>
+    </div>
+  </div>
+</template>

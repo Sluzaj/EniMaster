@@ -1,0 +1,246 @@
+<sly
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.title}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+<sly data-sly-test.isColor="${properties.coloreVelina == 'color'}"></sly>
+<sly data-sly-test.isLanding="${properties.invertMobile}"></sly>
+<sly data-sly-test.coloreVelina="${isColor ? properties.esaVelinaColor : properties.coloreVelina}"></sly>
+<sly data-sly-use.model="com.egl.core.models.BreadcrumbFinder"></sly>
+<sly data-sly-test.hasBreadcrumb="${model.breadcrumbPresent}"></sly>
+<sly data-sly-test.isBgColor="${properties.bgType == 'coloreBack'}"></sly>
+<sly data-sly-test.isBasic="${properties.contentType == 'basic'}"></sly>
+<sly data-sly-test.landBread="${hasBreadcrumb && isLanding}"></sly>
+
+<sly data-sly-use.rendMan="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=properties.immagineBackReference}"></sly>
+<sly data-sly-set.rendDesk="${rendMan.renditions}"></sly>
+<sly data-sly-set.doubleRendDesk="${rendMan.doubledRenditions}"></sly>
+
+<style>
+.exComm-bg-color-container {
+	background:${properties.coloreBackground @ context='styleString'};
+}
+.exComm-bg-color-container::before {
+	background: linear-gradient(90deg, ${coloreVelina @ context='styleToken'} 34%, rgb(255 255 255/ 0%) 66%);
+}
+.separatore-immagini-exComm::before {
+	background: ${properties.coloreSeparatore @ context='styleToken'};
+}
+.exComm-pecetta div::before {
+  	background-color:${properties.bgColorLabel @ context='html'};
+}
+
+@media (min-width: 1024px) {
+  .exComm-bg-container{
+  	color: ${properties.coloreDesktop @ context='styleToken'};
+    background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+  .exComm-bg-container::before {
+		background: linear-gradient(90deg, ${coloreVelina @ context='styleToken'} 34%, rgb(255 255 255/ 0%) 66%);
+	}
+	.exComm-bg-color-container {
+		background:${properties.coloreBackground @ context='styleString'};
+	}
+	.exComm-bg-color-container::before {
+		background: linear-gradient(90deg, ${coloreVelina @ context='styleToken'} 34%, rgb(255 255 255/ 0%) 66%);
+	}
+	.separatore-immagini-exComm::before {
+		background: ${properties.coloreSeparatore @ context='styleToken'};
+	}
+	.exComm-pecetta div::before {
+  		background-color:${properties.bgColorLabel @ context='html'};
+	}
+	.cap12-egl.notaMobile{
+		display:none;
+	}
+}
+@media (min-width: 1024px) and (min-resolution: 150dpi) {
+  .exComm-bg-container{
+    background: url(${doubleRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+}
+@media (min-width: 1440px) {
+  .exComm-bg-container{
+    background: url(${rendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+}
+@media (min-width: 1440px) and (min-resolution: 150dpi) {
+  .exComm-bg-container{
+    background: url(${doubleRendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+}
+@media (min-width: 1920px) {
+  .exComm-bg-container{
+    background: url(${rendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+}
+@media (min-width: 1920px) and (min-resolution: 150dpi) {
+  .exComm-bg-container{
+    background: url(${doubleRendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+}
+
+@media (max-width: 1023px){
+	.exComm-bg-container{
+		color: ${properties.coloreMobile @ context='styleToken'};
+	}
+	.cap12-egl.notaDesktop{
+		display:none;
+	}
+}
+</style>
+
+
+<div class="${isBgColor ? 'exComm-bg-color-container' : 'exComm-bg-container'} ${isLanding ? 'exComm-landingPage' : ''} ${landBread ? 'landing-breadcrumb' : ''}">
+	<div class="container-lg position-relative exComm-container ${hasBreadcrumb ? '' : 'exComm-no-bcrumb'} ${properties.classBox}">
+		<div data-sly-test="${isBasic}" class="row exComm-riga-loghi-top">
+			<!-- LOGHI V.BASIC -->
+			<div class="col-lg-6">
+				<div class="d-flex">
+					<div data-sly-use.logo1="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.logo1Reference}">
+						<a href="${properties.urlLogo1}"><img data-sly-test="${properties.logo1Reference}" class="exComm-logo-height"
+							src="${properties.logo1Reference}"
+							alt="${logo1.description}"></a>
+					</div>
+					<div data-sly-test="${properties.logo2Reference}" class="separatore-immagini-exComm d-flex" data-sly-use.logo2="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.logo2Reference}">
+						<a href="${properties.urlLogo2}"><img data-sly-test="${properties.logo2Reference}" class="exComm-logo-height"
+							src="${properties.logo2Reference}"
+							alt="${logo2.description}"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-6">
+				<div>
+					<h1>${properties.extracommodityName @ context='html'}</h1>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-6">
+				<div>
+					<h2>${properties.title @ context='html'}</h2>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-6">
+				<div>
+					<h3>${properties.subtitle @ context='html'}</h3>
+				</div>
+			</div>
+		</div>
+		<div data-sly-test="${isBasic}" class="row">
+			<!-- CTA V.BASIC -->
+			<div class="col-lg-6">
+				<div class="d-flex">
+					<sly data-sly-test="${properties.linkCTA && properties.labelCTA}">
+					<a data-sly-test="${!properties.modalCTA}" href="${properties.linkCTA}" target="${properties.targetCTA}"
+						title="${properties.altCTA}" class="cta-exComm">${properties.labelCTA}</a>
+					<sly data-sly-test="${properties.modalCTA}">
+					<button type="button" data-toggle="modal" class="cta-exComm"
+						data-target="${'#' in properties.linkCTA ? '' : '#'}${properties.linkCTA}"
+						title="${properties.altCTA}">${properties.labelCTA}</button>
+					</sly>
+					</sly>
+				</div>
+			</div>
+		</div>
+		<div data-sly-test="${!isBasic}" class="row">
+			<!-- LOGHI V.APP -->
+			<div class="col-lg-6">
+				<div class="d-flex exComm-flex-Apps"
+					data-sly-use.logo1App="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.logoApp1Reference}"
+					data-sly-use.logo2App="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.logoApp2Reference}">
+					<a class="cta-exComm ${properties.hideLogo1 ? 'd-none d-lg-block' : ''}" href="${properties.urlLogoApp1}"
+						target="${properties.targetLogoApp1}"> <img id="exComm-Apple"
+						src="${properties.logoApp1Reference}"
+						alt="${logo1App.description}">
+					</a> <a class="cta-exComm ${properties.hideLogo2 ? 'd-none d-lg-block' : ''}" href="${properties.urlLogoApp2}"
+						target="${properties.targetLogoApp2}"> <img id="exComm-Google"
+						src="${properties.logoApp2Reference}"
+						alt="${logo2App.description}">
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-6">
+				<div>
+					<div class="cap12-egl notaDesktop">${properties.notaCaption @ context='html'}</div>
+					<div class="cap12-egl notaMobile">${properties.notaMobile @ context='html'}</div>
+				</div>
+			</div>
+		</div>
+		<div data-sly-test="${properties.textLabel}" class="position-absolute exComm-pecetta" style="background-color:${properties.bgColorLabel @ context='html'}">
+			<div>${properties.textLabel @ context='html'}</div>
+		</div>
+	</div>
+	<div class="exComm-mobileImage adj d-block d-lg-none position-relative">
+		<sly data-sly-test="${!isBgColor}">
+		<picture data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=properties.immagineBackReference}" 
+			data-sly-use.imgMobile="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagineBackReference}">
+		<source media="(min-width: 768px) and (min-resolution: 150dpi)"
+			srcset="${renditionsManager.doubledRenditions['768px'] @ context='uri'}">
+		<source media="(min-width: 768px)"
+			srcset="${renditionsManager.renditions['768px'] @ context='uri'}">
+		<source media="(min-width: 320px) and (min-resolution: 150dpi)"
+			srcset="${renditionsManager.doubledRenditions['320px'] @ context='uri'}">
+		<source media="(min-width: 320px)"
+			srcset="${renditionsManager.doubledRenditions['320px'] @ context='uri'}">
+		<img class="exComm-mobileImageBackground"
+			src="${renditionsManager.doubledRenditions['1920px'] @ context='uri'}"
+			alt="${imgMobile.description}"></picture>
+		<div data-sly-test="${isBasic}"
+			class="exComm-mobileImage-logos d-flex position-absolute">
+			<!-- LOGHI MOBILE V.BASIC -->
+			<div 
+				data-sly-use.logo1="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.logo1Reference}">
+				<a href="${properties.urlLogo1}"><img data-sly-test="${properties.logo1Reference}" src="${properties.logo1Reference}" alt="${logo1.description}"></a>
+			</div>
+			<div data-sly-test="${properties.logo2Reference}" class="separatore-immagini-exComm d-flex"
+				data-sly-use.logo2="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.logo2Reference}">
+				<a href="${properties.urlLogo2}"><img data-sly-test="${properties.logo2Reference}" src="${properties.logo2Reference}" alt="${logo2.description}"></a>
+			</div>
+		</div>
+		</sly>
+		<div data-sly-test="${properties.textLabel}" class="position-absolute exComm-pecetta" style="background-color:${properties.bgColorLabel @ context='html'}">
+			<div>${properties.textLabel @ context='html'}</div>
+		</div>
+	</div>
+	<div data-sly-test="${!isBasic}" class="exComm-mobileImage-App container-lg d-flex d-lg-none"
+		data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.imgReference}">
+		<!-- ASSET V.APPS -->
+		<img src="${properties.imgReference}" alt="${image.description}">
+	</div>
+</div>
+<div data-sly-test="${!isBasic}" class="exComm-mobileImage-App container-lg px-lg-0 justify-content-end d-none d-lg-flex"
+	data-sly-use.imageMob="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.imgReference}">
+	<!-- ASSET MOBILE V.APPS -->
+	<img src="${properties.imgReference}" alt="${imageMob.description}">
+</div>

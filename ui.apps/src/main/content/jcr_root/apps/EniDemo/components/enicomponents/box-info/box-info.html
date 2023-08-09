@@ -1,0 +1,55 @@
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	    data-sly-test.testing="${!properties.titoloBox}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+<sly data-sly-test.oneItem="${properties.numeroItem == 'uno'}"></sly>
+<sly data-sly-test.oneItemImg="${properties.checkImg && oneItem}"></sly>
+<sly data-sly-test.twoItem="${properties.numeroItem == 'due'}"></sly>
+<sly data-sly-test.threeItem="${properties.numeroItem == 'tre'}"></sly>
+
+    <!-- box info 3 item variant -->
+    <div class="position-relative wrapper-BI ${properties.colorType ? 'gradient-BI' : ''}">
+	    <div id="${properties.id}" class="container-lg egl-box-info-container position-relative ${oneItem ? 'mono-box-info' : ''} ${properties.colorType}" style="background-color:${properties.bgColor @ context='styleString'};">
+	        <div class="row">
+	            <div class="col-lg-3 col-12">
+	                <div class="box-info-titolo">
+	                    <h2 class="h2-egl">${properties.titoloBox @context='html'}</h2>
+	                </div>
+	            </div>
+	            <div class="col-lg-9 col-12">
+	                <div class="row box-info-carousel">
+	                    <div data-sly-test="${oneItem || oneItemImg || twoItem || threeItem}" class="${oneItem ? 'col-lg-9' : ''} ${twoItem ? 'col-md-6' : ''} ${threeItem ? 'col-md-4' : ''} col-12">
+	                        <ul data-sly-test="${twoItem || threeItem}">
+	                            <li>${properties.titoloInfo1 @context='html'}</li>
+	                        </ul>
+	                        <p class="p16-egl">${properties.testoInfo1 @context='html'}</p>
+	                        <img loading="lazy" data-sly-test="${oneItemImg}" data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.image}" 
+	                        	src="${properties.image}" alt="${image.description}">
+	                    </div>
+	                    <div data-sly-test="${twoItem || threeItem}" class="${twoItem ? 'col-md-6' : ''} ${threeItem ? 'col-md-4' : ''} col-12">
+	                        <ul>
+	                            <li>${properties.titoloInfo2 @context='html'}</li>
+	                        </ul>
+	                        <p class="p16-egl">${properties.testoInfo2 @context='html'}</p>
+	                    </div>
+	                    <div data-sly-test="${threeItem}" class="col-md-4 col-12">
+	                        <ul>
+	                            <li>${properties.titoloInfo3 @context='html'}</li>
+	                        </ul>
+	                        <p class="p16-egl">${properties.testoInfo3 @context='html'}</p>
+	                    </div>
+	                </div>
+	            </div>
+	            <div data-sly-test="${!oneItem}" class="box-info-navigatore-carosello d-md-none">
+	                <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-left-solid.svg"
+                        class="box-info-previous-arrow box-info-arrows" onclick="slideBoxInfoCard('-')"/>
+	                <p class="box-info-status-text" style="margin-bottom: 0px;">
+	                </p>
+	                 <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-right-solid.svg"
+                        class="box-info-next-arrow box-info-arrows" onclick="slideBoxInfoCard('+')"/>
+	            </div>
+	        </div>
+	    </div>
+	</div>    
+
+

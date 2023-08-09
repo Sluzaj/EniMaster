@@ -1,0 +1,33 @@
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.test}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<sly data-sly-test.id="${properties.id ? properties.id : 'modale-assistenza'}"></sly>
+
+  <div aem-component="info-service" aem-version="1.0" >
+    <!-- modale disclaimer -->   
+    <div class="modal fade modale-assistenza" id="${id}" tabindex="-1" aria-labelledby="${id}" aria-hidden="true">
+        <div class="modal-dialog egl-modale-disclaimer">
+            <div class="modal-content position-relative">
+                <span aria-hidden="true" class="position-absolute egl-mod-comm-closeIcon" style="z-index: 1">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <img loading="lazy" class="modale-close-disclaimer" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/7-icons-close-x.png" alt="chiudi-modale" />
+                        </button>
+                    </span>
+                <h2 class="modale-disclaimer-title text-center justify-content-center">${properties.titolo}</h2>
+                <p class="modale-disclaimer-testo text-center">${properties.paragrafo @context='html'}</p>
+                <div class="modale-disclaimer-bottom-buttons">
+                	<a href="${properties.linkPrimaCta}" class="modale-disclaimer-button-left" target="${properties.targetPrimaCta}" title="${properties.altPrimaCta}">${properties.labelPrimaCta}
+	                    
+                    </a>
+                    <a href="${properties.linkSecondaCta}" 
+                    	data-urlretail="${properties.linkSecondaCtaRetail}" data-urlpmi="${properties.linkSecondaCtaPMI}"
+                    	 class="modale-disclaimer-button-right linkForUserType"    target="${properties.targetSecondaCta}"  title="${properties.altSecondaCta}" >${properties.labelSecondaCta}
+                    
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+	</div>

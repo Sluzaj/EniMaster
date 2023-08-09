@@ -1,0 +1,42 @@
+
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.test}"> </sly>
+	
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+	
+<script>
+$(window).ready(function () {
+	  if (document.documentMode != undefined) {
+	    $(".ModaleExplorer-container").removeClass("d-none");
+	  }
+
+	  $(".ModaleExplorer-button-banner-info").click(function () {
+	    $(".ModaleExplorer-container").addClass("d-none");
+	  });
+});
+</script>	
+	
+	
+<div class="ModaleExplorer-container d-none">
+      <div class="ModaleExplorer-content">
+        <!-- BANNER POP UP INFO -->
+        <div class="ModaleExplorer-banner-info-container">
+          <div class="ModaleExplorer-banner-info-content">
+            <div class="ModaleExplorer-banner-info-title d-flex align-items-center justify-content-center">
+              <p>Gentile utente,</p>
+            </div>
+            <div class="ModaleExplorer-banner-info-text">
+              <p>
+                sembra che tu stia navigando il nostro sito da Internet
+                Explorer. Il portale Plenitude non è per&ograve; ottimizzato per questo
+                browser, che è stato recentemente dismesso. Per un'esperienza di
+                navigazione migliore puoi provare a utilizzare un altro browser,
+                ad esempio Google Chrome, Edge, Safari o Mozilla.
+              </p>
+              <button class="ModaleExplorer-button-banner-info">Ho capito
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

@@ -1,0 +1,201 @@
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html" data-sly-test.testing="${!properties.test}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+
+<sly data-sly-use.eniEnvs="com.egl.core.models.utils.ENIEnvironmentConfig"></sly>
+
+<sly data-sly-use.modelForm="${'com.egl.core.models.modalwithform.ModalWithForm'}"></sly>
+<sly data-sly-test.formattribute="${modelForm.form}"></sly>
+<sly data-sly-test.righeForm="${modelForm.righe}"></sly>
+<sly data-sly-test.consensiradio="${modelForm.consensiradio}"></sly>
+<sly data-sly-test.id="${properties.id ? properties.id : ''}"></sly>
+
+
+
+
+<div pln-component="callmeback" pln-version="1.0" pln-template="" id="${id}-component">
+	<div class="modal" aria-label="${formattribute.titolo}" id="${id}">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                        <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-colored-telefono.svg" class="icon" alt=""/>
+                        
+                        <h2>${formattribute.titolo}</h2>
+                        <p>${formattribute.sottotitolo}</p>
+                        <div class="fieldRequired">${formattribute.testointroduttivo}</div>
+                    
+
+                    <!--Body modale-->
+                    <div class="modal-body">
+                        <form needs-validation="true">
+                        	<legend class="sr-only">Form ${formattribute.titolo}</legend>
+                        	<input type="hidden" name="nomeTracciamenti" value="${formattribute.nameformtracciamenti}"/>
+                        	<input type="hidden" name="nomeForm" id="nomeForm" value="${formattribute.nameform}"/>
+                			<input type="hidden" name="url_chiamante" id="pagina" />
+                			<input type="hidden" name="invio_mail" id="invio_mail" value="${formattribute.tipomail =='NO' ? 'N' : 'Y' }"/>
+                			<!-- input type="hidden" name="numCampi" value="${formattribute.numCampi}"/>
+							<input type="hidden" name="nomeCampi" id="nomeCampi" value="${formattribute.nomeCampi}"/-->
+			            	 <sly data-sly-list.riga0="${righeForm}">
+			             		<sly data-sly-list.campo0="${riga0.campi}">
+			             				<sly data-sly-test="${campo0.tipocampo == 'hidden'}">
+					             				<input type="hidden" name="${campo0.namecampohtml}" id="${campo0.campoidhtml}" value="${campo0.placeholdercampo}"/>
+					             		</sly>
+			             		</sly>
+			             	</sly>
+                           
+                                <div class="row"><!-- contenitore righe -->
+	                                <sly data-sly-list.riga="${righeForm}">
+	                                <sly data-sly-list.campo="${riga.campi}">
+			                        <sly data-sly-test="${campo.tipocampo != 'hidden' && campo.tipocampo != 'radiobutton'  && campo.tipocampo != 'select' && campo.tipocampo != 'checkbox'}">
+				                        <div class="col-lg-${riga.larghezzacampo} form-field">
+				                        	
+					                        	 <sly data-sly-test="${campo.tipocampo == 'inputtext'}"><!-- campo inputtext -->
+							                        	<label for="${campo.campoidhtml}">${campo.labelcampo}<sly data-sly-test="${campo.obbligatorio}">*</sly></label>				                                     
+				                                           <input data-sly-test="${campo.obbligatorio}" type="text" value=""  id="${campo.campoidhtml}" name="${campo.namecampohtml}"  data-sly-attribute="${campo.egonattribute}" aria-label="${campo.labelcampo}" required />
+				                                           <input data-sly-test="${!campo.obbligatorio}" type="text" value="" id="${campo.campoidhtml}" name="${campo.namecampohtml}" data-sly-attribute="${campo.egonattribute}"  aria-label="${campo.labelcampo}" />
+				                                            <output data-sly-test="${campo.errorevalidazione}" role="alert" class="blank">${campo.errorevalidazione}</output>
+				                                       
+		                                        </sly>
+	                                        
+	                                        <sly data-sly-test="${campo.tipocampo == 'telefono'}"><!-- campo telefono -->
+	                                        	<label for="${campo.campoidhtml}">${campo.labelcampo}<sly data-sly-test="${campo.obbligatorio}">*</sly></label>
+		                                        
+		                                            <input data-sly-test="${campo.obbligatorio}" type="number" maxlength="16" pattern="[0-9]*"   name="${campo.namecampohtml}"   id="${campo.campoidhtml}" data-sly-attribute="${campo.egonattribute}" aria-label="${campo.labelcampo}" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required>
+		                                             <input data-sly-test="${!campo.obbligatorio}" type="number" maxlength="16" pattern="[0-9]*" name="${campo.namecampohtml}" id="${campo.campoidhtml}"	data-sly-attribute="${campo.egonattribute}"  aria-label="${campo.labelcampo}" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" >
+		                                            <output data-sly-test="${campo.errorevalidazione}" role="alert" class="blank">${campo.errorevalidazione}</output>
+		                                        
+	                                        </sly>
+	                                        <sly data-sly-test="${campo.tipocampo == 'email'}"><!-- campo email -->
+	                                        	 <label for="${campo.campoidhtml}">${campo.labelcampo}<sly data-sly-test="${campo.obbligatorio}">*</sly></label>
+		                                         <input data-sly-test="${campo.obbligatorio}" type="email" id="${campo.campoidhtml}" name="${campo.namecampohtml}"  data-sly-attribute="${campo.egonattribute}" aria-label="${campo.labelcampo}" required/>
+		                                         <input data-sly-test="${!campo.obbligatorio}" type="email" id="${campo.campoidhtml}" name="${campo.namecampohtml}"  data-sly-attribute="${campo.egonattribute}" aria-label="${campo.labelcampo}"/>
+		                                         <output data-sly-test="${campo.errorevalidazione}" role="alert" class="blank">${campo.errorevalidazione}</output>
+		                                        
+	                                        </sly>
+				                             <sly data-sly-test="${campo.tipocampo == 'cap'}"><!-- campo cap -->
+			                                        <label for="${campo.campoidhtml}">${campo.labelcampo}<sly data-sly-test="${campo.obbligatorio}">*</sly></label>
+			                                        <input data-sly-test="${!campo.obbligatorio}" type="text" id="${campo.campoidhtml}" name="${campo.namecampohtml}" data-sly-attribute="${campo.egonattribute}" aria-label="${campo.labelcampo}" />
+			                                        <input data-sly-test="${campo.obbligatorio}" type="text"  id="${campo.campoidhtml}" name="${campo.namecampohtml}" data-sly-attribute="${campo.egonattribute}"  aria-label="${campo.labelcampo}" required/>
+			                                        <output data-sly-test="${campo.errorevalidazione}" role="alert" class="blank">${campo.errorevalidazione}</output>
+			                                        
+	                                    	</sly>
+	                                    	 <sly data-sly-test="${campo.tipocampo == 'textbox'}"><!--es.note -->
+												 <div class="textareaSmart" data-sly-attribute="${campo.egonattribute}">
+	                                        		<label  for="${campo.campoidhtml}">${campo.labelcampo}<sly data-sly-test="${campo.obbligatorio}">*</sly></label>
+	                                        
+	                                        		<textarea id="${campo.campoidhtml}" name="${campo.namecampohtml}" class="textarea" maxlength="500" autofocus aria-label="${campo.labelcampo}"></textarea>
+	
+	                                        		<div class="the-count">
+	                                            		<span id="current">0</span>
+	                                            		<span id="maximum">/ 500</span>
+	                                        		</div>
+	                                        	</div>
+	                                  		  </sly>
+											
+				                           </div>
+			                        </sly>
+			                       <sly data-sly-test="${campo.tipocampo != 'hidden' && (campo.tipocampo == 'radiobutton'  || campo.tipocampo == 'select' || campo.tipocampo == 'checkbox')}">
+			                        <div class="col-lg-${riga.larghezzacampo} form-field">
+			                        	
+					                         <sly data-sly-test="${campo.tipocampo == 'select'}">
+					                        	<label for="${campo.campoidhtml}">${campo.introduzionecampo}<sly data-sly-test="${campo.obbligatorio}">*</sly></label>
+					                        		
+					                        			<sly data-sly-test="${campo.obbligatorio}">
+			                                                <select id="${campo.campoidhtml}"  name="${campo.namecampohtml}" aria-haspopup="true" required>
+																	<sly data-sly-test.stringalabels="${campo.labelcampo}"/>
+				                                        			<sly data-sly-test.stringavalues="${campo.placeholdercampo}"/>
+				                                        
+							                           			 	<sly data-sly-use.listalabel="${'modalejssplitstringa.js' @ testo=stringalabels}"/>
+							                           				<sly data-sly-use.listavalue="${'modalejssplitstringa.js' @ testo=stringavalues}"/>
+			                                                    <option selected>${campo.opzionedefault}</option>
+			                                                    		<sly data-sly-list.label="${listalabel}">
+									                                		 <sly data-sly-list.value="${listavalue}">
+						                                                 		 <sly data-sly-test="${labelList.index == valueList.index}">
+						                                                 		 	<option value="${value}" id="${value}">${label}</option>
+						                                                  		</sly>
+						
+									                                		</sly>
+									                               		 </sly>                                                   
+			                                                </select>
+		                                                </sly>
+		                                                <sly data-sly-test="${!campo.obbligatorio}">
+			                                                <select id="${campo.campoidhtml}"  name="${campo.namecampohtml}" aria-haspopup="true">
+																	<sly data-sly-test.stringalabels="${campo.labelcampo}"/>
+				                                        			<sly data-sly-test.stringavalues="${campo.placeholdercampo}"/>
+				                                        
+							                           			 	<sly data-sly-use.listalabel="${'modalejssplitstringa.js' @ testo=stringalabels}"/>
+							                           				<sly data-sly-use.listavalue="${'modalejssplitstringa.js' @ testo=stringavalues}"/>
+			                                                    <option selected>${campo.opzionedefault}</option>
+			                                                    		<sly data-sly-list.label="${listalabel}">
+									                                		 <sly data-sly-list.value="${listavalue}">
+						                                                 		 <sly data-sly-test="${labelList.index == valueList.index}">
+						                                                 		 	<option value="${value}" id="${value}">${label}</option>
+						                                                  		</sly>
+						
+									                                		</sly>
+									                               		 </sly>                                                   
+			                                                </select>
+		                                                </sly>
+		                                               <output data-sly-test="${campo.errorevalidazione}">${campo.errorevalidazione}</output>
+		                                           		                        	
+			                                    </sly>
+	                                   	
+			                        </div>
+			                       </sly>
+			                       
+			                 </sly>
+			                 		</sly>
+   					 			
+
+                               
+
+                                <div class="col-lg-12 privacy-disclaimer">${formattribute.disclaimerform @context='html'}</div>
+
+                                <div class="col-lg-12 submit-box">
+                                    <div>
+	                                    <sly data-sly-test="${consensiradio}">
+	                                    		<sly data-sly-list.campoconsensi="${consensiradio}">
+		                                				<sly data-sly-test="${!campoconsensi.nascosto}">
+			                                				<div class="form-checkbox">
+			                                					<div>
+			                                					     <input data-sly-test="${campoconsensi.campoobbligatorio=='n'}" type="checkbox" value="${campoconsensi.valorecampoconsensi}" name="${campoconsensi.namecampoconsensi}" id="${campoconsensi.idcampoconsensi}">
+			                                					     <input data-sly-test="${campoconsensi.campoobbligatorio=='s'}" type="checkbox" value="${campoconsensi.valorecampoconsensi}" name="${campoconsensi.namecampoconsensi}" id="${campoconsensi.idcampoconsensi}" required>
+			                                    					 <label  for="${campoconsensi.idcampoconsensi}">${campoconsensi.labelcampoconsensi}</label>			                                    				                               				
+			                                    				</div>
+			                                    				<output>${campoconsensi.validazionecampo}</output>
+			                                    			</div>	
+		                                    			</sly>
+		                                    			<sly data-sly-test="${campoconsensi.nascosto}">
+			                                    			<input data-sly-test="${campoconsensi.campoobbligatorio=='n'}" type="hidden" value="${campoconsensi.valorecampoconsensi}" name="${campoconsensi.namecampoconsensi}" id="${campoconsensi.idcampoconsensi}">
+			                                    			<input data-sly-test="${campoconsensi.campoobbligatorio=='s'}" type="hidden" value="${campoconsensi.valorecampoconsensi}" name="${campoconsensi.namecampoconsensi}" id="${campoconsensi.idcampoconsensi}" required>
+			                                    		</sly>	
+		                                    	</sly>
+		                                </sly>   
+                                    </div>
+                                    <button class="btn btn-primary cta-primary" type="submit">${formattribute.labelcta}</button>
+                                </div>
+                            </div>
+                        </form>
+
+                       
+                    </div>
+
+                    <!---Pulsanet per chiudere-->
+                        
+                    <button class="close" alt="Chiudi Modale">
+                        <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-close-bold.svg" aria-hidden="true" />
+                   </button>
+                </div>
+            
+            	
+                        
+            </div>
+
+            <button class="close" data-dismiss="modal" title="Chiudi">
+                <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-close-bold.svg" alt="Chiudi modale" aria-hidden="true" />
+            </button>
+
+        </div>
+</div>
+

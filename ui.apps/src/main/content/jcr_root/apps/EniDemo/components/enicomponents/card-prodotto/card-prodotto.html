@@ -1,0 +1,1034 @@
+
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	    data-sly-test.testing="${!properties.titolo}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<sly data-sly-use.model="com.egl.core.models.cardprodotto.CardProdottoModel"></sly>
+
+    <!-- variante 4 cards -->
+ <sly data-sly-test="${properties.numeroCard == 'quattro'}">
+    <div id="${properties.id}" class="container-lg px-lg-0 container-card-prodotto variante-4cards ${properties.checkCtaPrezzi ? 'variante-prod-prezzi' : ''}">
+        <div class="row">
+            <div class="col-12 text-center card-prodotto-titolo">
+                <h2>${properties.titolo @context='html'}</h2>
+            </div>
+        </div>
+        <div class="row card-prodotto-cards d-none d-lg-flex">
+            <div class="col-3">
+                <div class="card-prodotto-bg">
+                    <div class="card-prodotto-body">
+                        <img loading="lazy"  src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-tooltip-yellow.svg" class="cards-prodotto-tooltip" data-toggle="tooltip" data-placement="left" title="${properties.tooltipCard1}">
+                        <div>                        
+	                        <div class="d-flex card-prodotto-header" data-sly-use.image1="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagineCard1Reference}">
+	                            <img loading="lazy"  src="${properties.immagineCard1Reference}" alt="${image1.description}">
+	                            <div class="d-flex flex-column">
+	                                <div>${properties.prezzoCard1}</div>
+	                                <div class="cap12-egl">${properties.prezzoOldCard1}</div>
+	                                <div class="cap12-egl">${properties.infoPrezzoCard1}</div>
+	                                <div class="cap12-egl">${properties.notaCard1 @context='html'}</div>
+	                            </div>
+	                        </div>
+	                        <div class="p20-egl">${properties.titoloProdottoCard1 @context='html'}</div>
+		                        <ul data-sly-list.cardUno="${model.listaUno}">
+		                            <li>${cardUno.testoUno @ context='html'}</li>
+		                        </ul>
+                    	</div>
+                   		<!-- VARIANTE PREZZI -->
+	                    <div data-sly-test="${properties.checkCtaPrezzi}" class="card-prodotto-prezzi">
+	                       <div class="d-flex justify-content-center align-items-center">
+	                           <div>
+	                               <p class="card-prodotto-prezzi-valori">${properties.text1Card1 @context='html'}</p>
+	                               <p class="cap12-egl">${properties.text2Card1 @context='html'}</p>
+	                           </div>
+	                           <div class="separatore-cards-prodotto-prezzi"></div>
+	                           <div>
+	                               <p class="card-prodotto-prezzi-valori">${properties.text3Card1 @context='html'}</p>
+	                               <p class="cap12-egl">${properties.text4Card1 @context='html'}</p>
+	                           </div>
+	                       </div>
+	                       <!-- scelta bottone o link -->
+	                       <sly data-sly-test="${!properties.modalCTACard1}">
+	                       		<a href="${properties.urlCtaCard1}" title="${properties.altCta1}" target="${properties.targetCtaCard1}" 
+	                       			class="buttonlink-pleni-cta">${properties.labelCtaCard1}</a>
+	                       </sly>
+	                       <sly data-sly-test="${properties.modalCTACard1}">
+								<button type="button" data-toggle="modal" 
+								data-target="${'#' in properties.urlCtaCard1 ? '' : '#'}${properties.urlCtaCard1}" 
+								title="${properties.altCta1}" class="buttonlink-pleni-cta">${properties.labelCtaCard1}
+								</button>
+							</sly>
+	                       
+	                   </div>
+	                   
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card-prodotto-bg">
+                    <div class="card-prodotto-body">
+                        <img loading="lazy"  src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-tooltip-yellow.svg" class="cards-prodotto-tooltip" data-toggle="tooltip" data-placement="left" title="${properties.tooltipCard2}">
+                        <div>
+	                        <div class="d-flex card-prodotto-header" data-sly-use.image2="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagineCard2Reference}">
+	                            <img loading="lazy"  src="${properties.immagineCard2Reference}" alt="${image2.description}">
+	                            <div class="d-flex flex-column">
+	                                <div>${properties.prezzoCard2}</div>
+	                                <div class="cap12-egl">${properties.prezzoOldCard2}</div>
+	                                <div class="cap12-egl">${properties.infoPrezzoCard2}</div>
+	                                <div class="cap12-egl">${properties.notaCard2 @context='html'}</div>
+	                            </div>
+	                        </div>
+	                        <div class="p20-egl">${properties.titoloProdottoCard2 @context='html'}</div>
+			                        <ul data-sly-list.cardDue="${model.listaDue}">
+			                            <li>${cardDue.testoDue @ context='html'}</li>
+			                        </ul>
+                    	</div>
+                        <!-- VARIANTE PREZZI -->
+	                    <div data-sly-test="${properties.checkCtaPrezzi}" class="card-prodotto-prezzi">
+	                       <div class="d-flex justify-content-center align-items-center">
+	                           <div>
+	                               <p class="card-prodotto-prezzi-valori">${properties.text1Card2 @context='html'}</p>
+	                               <p class="cap12-egl">${properties.text2Card2 @context='html'}</p>
+	                           </div>
+	                           <div class="separatore-cards-prodotto-prezzi"></div>
+	                           <div>
+	                               <p class="card-prodotto-prezzi-valori">${properties.text3Card2 @context='html'}</p>
+	                               <p class="cap12-egl">${properties.text4Card2 @context='html'}</p>
+	                           </div>
+	                       </div>
+	                       <!-- scelta bottone o link Card 2-->
+	                       <sly data-sly-test="${!properties.modalCTACard2}">
+	                       		<a href="${properties.urlCtaCard2}" title="${properties.altCta2}" target="${properties.targetCtaCard2}" 
+	                       			class="buttonlink-pleni-cta">${properties.labelCtaCard2}</a>
+	                       </sly>
+	                       <sly data-sly-test="${properties.modalCTACard2}">
+								<button type="button" data-toggle="modal" 
+								data-target="${'#' in properties.urlCtaCard2 ? '' : '#'}${properties.urlCtaCard2}" 
+								title="${properties.altCta2}" class="buttonlink-pleni-cta">${properties.labelCtaCard2}
+								</button>
+							</sly>
+	                   </div>
+	                </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card-prodotto-bg">
+                    <div class="card-prodotto-body">
+                        <img loading="lazy"  src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-tooltip-yellow.svg" class="cards-prodotto-tooltip" data-toggle="tooltip" data-placement="left" title="${properties.tooltipCard3v4}">
+                        <div>
+	                        <div class="d-flex card-prodotto-header" data-sly-use.image3="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagineCard3v4Reference}">
+	                            <img loading="lazy"  src="${properties.immagineCard3v4Reference}" alt="${image3.description}">
+	                            <div class="d-flex flex-column">
+	                                <div>${properties.prezzoCard3v4}</div>
+	                                <div class="cap12-egl">${properties.prezzoOldCard3v4}</div>
+	                                <div class="cap12-egl">${properties.infoPrezzoCard3v4}</div>
+	                                <div class="cap12-egl">${properties.notaCard3v4 @context='html'}</div>
+	                            </div>
+	                        </div>
+	                        <div class="p20-egl">${properties.titoloProdottoCard3v4 @context='html'}</div>
+		                        <ul data-sly-list.cardTreQuattro="${model.listaTreQuattro}">
+		                            <li>${cardTreQuattro.testoTreQuattro @ context='html'}</li>
+		                        </ul>
+                    	</div>
+                    	<!-- VARIANTE PREZZI -->
+	                    <div data-sly-test="${properties.checkCtaPrezzi}" class="card-prodotto-prezzi">
+	                       <div class="d-flex justify-content-center align-items-center">
+	                           <div>
+	                               <p class="card-prodotto-prezzi-valori">${properties.text1Card3v4 @context='html'}</p>
+	                               <p class="cap12-egl">${properties.text2Card3v4 @context='html'}</p>
+	                           </div>
+	                           <div class="separatore-cards-prodotto-prezzi"></div>
+	                           <div>
+	                               <p class="card-prodotto-prezzi-valori">${properties.text3Card3v4 @context='html'}</p>
+	                               <p class="cap12-egl">${properties.text4Card3v4 @context='html'}</p>
+	                           </div>
+	                       </div>
+	                        <!-- scelta bottone o link Card 3v4-->
+	                       <sly data-sly-test="${!properties.modalCTACard3v4}">
+	                       		<a href="${properties.urlCtaCard3v4}" title="${properties.altCta3v4}" target="${properties.targetCtaCard3v4}" 
+	                       			class="buttonlink-pleni-cta">${properties.labelCtaCard3v4}</a>
+	                       </sly>
+	                       <sly data-sly-test="${properties.modalCTACard3v4}">
+								<button type="button" data-toggle="modal" 
+								data-target="${'#' in properties.urlCtaCard3v4 ? '' : '#'}${properties.urlCtaCard3v4}" 
+								title="${properties.altCta3v4}" class="buttonlink-pleni-cta">${properties.labelCtaCard3v4}
+								</button>
+							</sly>
+	                   </div>
+	                 </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card-prodotto-bg">
+                    <div class="card-prodotto-body">
+                        <img loading="lazy"  src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-tooltip-yellow.svg" class="cards-prodotto-tooltip" data-toggle="tooltip" data-placement="left" title="${properties.tooltipCard4}">
+                        <div>
+	                        <div class="d-flex card-prodotto-header" data-sly-use.image4="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagineCard4Reference}">
+	                            <img loading="lazy"  src="${properties.immagineCard4Reference}" alt="${image4.description}">
+	                            <div class="d-flex flex-column">
+	                                <div>${properties.prezzoCard4}</div>
+	                                <div class="cap12-egl">${properties.prezzoOldCard4}</div>
+	                                <div class="cap12-egl">${properties.infoPrezzoCard4}</div>
+	                                <div class="cap12-egl">${properties.notaCard4 @context='html'}</div>
+	                            </div>
+	                        </div>
+	                        <div class="p20-egl">${properties.titoloProdottoCard4 @context='html'}</div>
+			                        <ul data-sly-list.cardQuattro="${model.listaQuattro}">
+			                            <li>${cardQuattro.testoQuattro @ context='html'}</li>
+			                        </ul>
+                    	</div>
+                    	 <!-- VARIANTE PREZZI -->
+	                    <div data-sly-test="${properties.checkCtaPrezzi}" class="card-prodotto-prezzi">
+	                       <div class="d-flex justify-content-center align-items-center">
+	                           <div>
+	                               <p class="card-prodotto-prezzi-valori">${properties.text1Card4 @context='html'}</p>
+	                               <p class="cap12-egl">${properties.text2Card4 @context='html'}</p>
+	                           </div>
+	                           <div class="separatore-cards-prodotto-prezzi"></div>
+	                           <div>
+	                               <p class="card-prodotto-prezzi-valori">${properties.text3Card4 @context='html'}</p>
+	                               <p class="cap12-egl">${properties.text4Card4 @context='html'}</p>
+	                           </div>
+	                       </div>
+	                       <!-- scelta bottone o link Card 4-->
+	                       <sly data-sly-test="${!properties.modalCTACard4}">
+	                       		<a href="${properties.urlCtaCard4}" title="${properties.altCta4}" target="${properties.targetCtaCard4}" 
+	                       			class="buttonlink-pleni-cta">${properties.labelCtaCard4}</a>
+	                       </sly>
+	                       <sly data-sly-test="${properties.modalCTACard4}">
+								<button type="button" data-toggle="modal" 
+								data-target="${'#' in properties.urlCtaCard4 ? '' : '#'}${properties.urlCtaCard4}" 
+								title="${properties.altCta4}" class="buttonlink-pleni-cta">${properties.labelCtaCard4}
+								</button>
+							</sly>
+	                   </div>
+	                 </div>
+                </div>
+            </div>
+        </div>
+       <!-- CARD DA 4 MOBILE --> 
+        <div class="row card-prodotto-cards card-prodotto-carosello d-lg-none">
+            <div class="col-3">
+                <div class="card-prodotto-bg">
+                    <div class="card-prodotto-body variante-cards-prodotto">
+                        <img loading="lazy"  src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-tooltip-yellow.svg" class="cards-prodotto-tooltip" data-toggle="tooltip" data-placement="left" title="${properties.tooltipCard1}">
+                        <div>
+	                        <div class="d-flex card-prodotto-header" data-sly-use.image1="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagineCard1Reference}">
+	                            <img loading="lazy"  src="${properties.immagineCard1Reference}" alt="${image1.description}">
+	                            <div>
+	                                <div class="d-flex">
+	                                    <div class="variante-cards-prodotto-prezzo">${properties.prezzoCard1}</div>
+	                                    <div class="d-flex flex-column">
+	                                        <div class="cap12-egl">${properties.prezzoOldCard1}</div>
+	                                        <div class="cap12-egl">${properties.infoPrezzoCard1}</div>
+	                                    </div>
+	                                </div>
+	                                <div class="cap12-egl">${properties.notaCard1 @context='html'}</div>
+	                            </div>
+	                        </div>
+	                        <div class="p20-egl">${properties.titoloProdottoCard1 @context='html'}</div>
+		                        <ul data-sly-list.cardUno="${model.listaUno}">
+		                            <li>${cardUno.testoUno @ context='html'}</li>
+		                        </ul>
+                    	</div>
+                    	<!-- VARIANTE PREZZI -->
+	                    <div data-sly-test="${properties.checkCtaPrezzi}" class="card-prodotto-prezzi">
+	                       <div class="d-flex justify-content-center align-items-center">
+	                           <div>
+	                               <p class="card-prodotto-prezzi-valori">${properties.text1Card1 @context='html'}</p>
+	                               <p class="cap12-egl">${properties.text2Card1 @context='html'}</p>
+	                           </div>
+	                           <div class="separatore-cards-prodotto-prezzi"></div>
+	                           <div>
+	                               <p class="card-prodotto-prezzi-valori">${properties.text3Card1 @context='html'}</p>
+	                               <p class="cap12-egl">${properties.text4Card1 @context='html'}</p>
+	                           </div>
+	                       </div>
+	                       <!-- scelta bottone o link -->
+	                       <sly data-sly-test="${!properties.modalCTACard1}">
+	                       		<a href="${properties.urlCtaCard1}" title="${properties.altCta1}" target="${properties.targetCtaCard1}" 
+	                       			class="buttonlink-pleni-cta">${properties.labelCtaCard1}</a>
+	                       </sly>
+	                       <sly data-sly-test="${properties.modalCTACard1}">
+								<button type="button" data-toggle="modal" 
+								data-target="${'#' in properties.urlCtaCard1 ? '' : '#'}${properties.urlCtaCard1}" 
+								title="${properties.altCta1}" class="buttonlink-pleni-cta">${properties.labelCtaCard1}
+								</button>
+							</sly>
+	                   </div>
+	                </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card-prodotto-bg">
+                    <div class="card-prodotto-body variante-cards-prodotto">
+                        <img loading="lazy"  src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-tooltip-yellow.svg" class="cards-prodotto-tooltip" data-toggle="tooltip" data-placement="left" title="${properties.tooltipCard2}">
+                        <div>
+	                        <div class="d-flex card-prodotto-header" data-sly-use.image2="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagineCard2Reference}">
+	                            <img loading="lazy"  src="${properties.immagineCard2Reference}" alt="${image2.description}">
+	                            <div>
+	                                <div class="d-flex">
+	                                    <div class="variante-cards-prodotto-prezzo">${properties.prezzoCard2}</div>
+	                                    <div class="d-flex flex-column">
+	                                        <div class="cap12-egl">${properties.prezzoOldCard2}</div>
+	                                        <div class="cap12-egl">${properties.infoPrezzoCard2}</div>
+	                                    </div>
+	                                </div>
+	                                <div class="cap12-egl">${properties.notaCard2 @context='html'}</div>
+	                            </div>
+	                        </div>
+	                        <div class="p20-egl">${properties.titoloProdottoCard2 @context='html'}</div>
+		                        <ul data-sly-list.cardDue="${model.listaDue}">
+		                            <li>${cardDue.testoDue @ context='html'}</li>
+		                        </ul>
+                    	</div>
+                    	<!-- VARIANTE PREZZI -->
+	                    <div data-sly-test="${properties.checkCtaPrezzi}" class="card-prodotto-prezzi">
+	                       <div class="d-flex justify-content-center align-items-center">
+	                          <div>
+	                               <p class="card-prodotto-prezzi-valori">${properties.text1Card2 @context='html'}</p>
+	                               <p class="cap12-egl">${properties.text2Card2 @context='html'}</p>
+	                           </div>
+	                           <div class="separatore-cards-prodotto-prezzi"></div>
+	                           <div>
+	                               <p class="card-prodotto-prezzi-valori">${properties.text3Card2 @context='html'}</p>
+	                               <p class="cap12-egl">${properties.text4Card2 @context='html'}</p>
+	                           </div>
+	                       </div>
+	                       <!-- scelta bottone o link Card 2-->
+	                       <sly data-sly-test="${!properties.modalCTACard2}">
+	                       		<a href="${properties.urlCtaCard2}" title="${properties.altCta2}" target="${properties.targetCtaCard2}" 
+	                       			class="buttonlink-pleni-cta">${properties.labelCtaCard2}</a>
+	                       </sly>
+	                       <sly data-sly-test="${properties.modalCTACard2}">
+								<button type="button" data-toggle="modal" 
+								data-target="${'#' in properties.urlCtaCard2 ? '' : '#'}${properties.urlCtaCard2}" 
+								title="${properties.altCta2}" class="buttonlink-pleni-cta">${properties.labelCtaCard2}
+								</button>
+							</sly>
+	                   </div>
+	                 </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card-prodotto-bg">
+                    <div class="card-prodotto-body variante-cards-prodotto">
+                        <img loading="lazy"  src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-tooltip-yellow.svg" class="cards-prodotto-tooltip" data-toggle="tooltip" data-placement="left" title="${properties.tooltipCard3v4}">
+                        <div>
+	                        <div class="d-flex card-prodotto-header" data-sly-use.image3="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagineCard3v4Reference}">
+	                            <img loading="lazy"  src="${properties.immagineCard3v4Reference}" alt="${image3.description}">
+	                            <div>
+	                                <div class="d-flex">
+	                                    <div class="variante-cards-prodotto-prezzo">${properties.prezzoCard3v4}</div>
+	                                    <div class="d-flex flex-column">
+	                                        <div class="cap12-egl">${properties.prezzoOldCard3v4}</div>
+	                                        <div class="cap12-egl">${properties.infoPrezzoCard3v4}</div>
+	                                    </div>
+	                                </div>
+	                                <div class="cap12-egl">${properties.notaCard3v4 @context='html'}</div>
+	                            </div>
+	                        </div>
+	                        <div class="p20-egl">${properties.titoloProdottoCard3v4 @context='html'}</div>
+			                        <ul data-sly-list.cardTreQuattro="${model.listaTreQuattro}">
+			                            <li>${cardTreQuattro.testoTreQuattro @ context='html'}</li>
+			                        </ul>
+                    	</div>
+                    	<!-- VARIANTE PREZZI -->
+	                    <div data-sly-test="${properties.checkCtaPrezzi}" class="card-prodotto-prezzi">
+	                       <div class="d-flex justify-content-center align-items-center">
+	                           <div>
+	                               <p class="card-prodotto-prezzi-valori">${properties.text1Card3v4 @context='html'}</p>
+	                               <p class="cap12-egl">${properties.text2Card3v4 @context='html'}</p>
+	                           </div>
+	                           <div class="separatore-cards-prodotto-prezzi"></div>
+	                           <div>
+	                               <p class="card-prodotto-prezzi-valori">${properties.text3Card3v4 @context='html'}</p>
+	                               <p class="cap12-egl">${properties.text4Card3v4 @context='html'}</p>
+	                           </div>
+	                       </div>
+	                        <!-- scelta bottone o link Card 3v4-->
+	                       <sly data-sly-test="${!properties.modalCTACard3v4}">
+	                       		<a href="${properties.urlCtaCard3v4}" title="${properties.altCta3v4}" target="${properties.targetCtaCard3v4}" 
+	                       			class="buttonlink-pleni-cta">${properties.labelCtaCard3v4}</a>
+	                       </sly>
+	                       <sly data-sly-test="${properties.modalCTACard3v4}">
+								<button type="button" data-toggle="modal" 
+								data-target="${'#' in properties.urlCtaCard3v4 ? '' : '#'}${properties.urlCtaCard3v4}" 
+								title="${properties.altCta3v4}" class="buttonlink-pleni-cta">${properties.labelCtaCard3v4}
+								</button>
+							</sly>
+	                   </div>
+	                 </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card-prodotto-bg">
+                    <div class="card-prodotto-body variante-cards-prodotto">
+                        <img loading="lazy"  src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-tooltip-yellow.svg" class="cards-prodotto-tooltip" data-toggle="tooltip" data-placement="left" title="${properties.tooltipCard4}">
+                        <div>
+	                        <div class="d-flex card-prodotto-header" data-sly-use.image4="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagineCard4Reference}">
+	                            <img loading="lazy"  src="${properties.immagineCard4Reference}" alt="${image4.description}">
+	                            <div>
+	                                <div class="d-flex">
+	                                    <div class="variante-cards-prodotto-prezzo">${properties.prezzoCard4}</div>
+	                                    <div class="d-flex flex-column">
+	                                        <div class="cap12-egl">${properties.prezzoOldCard4}</div>
+	                                        <div class="cap12-egl">${properties.infoPrezzoCard4}</div>
+	                                    </div>
+	                                </div>
+	                                <div class="cap12-egl">${properties.notaCard4 @context='html'}</div>
+	                            </div>
+	                        </div>
+	                        <div class="p20-egl">${properties.titoloProdottoCard4 @context='html'}</div>
+			                        <ul data-sly-list.cardQuattro="${model.listaQuattro}">
+			                            <li>${cardQuattro.testoQuattro @ context='html'}</li>
+			                        </ul>
+                    	</div>
+                    	<!-- VARIANTE PREZZI -->
+	                    <div data-sly-test="${properties.checkCtaPrezzi}" class="card-prodotto-prezzi">
+	                       <div class="d-flex justify-content-center align-items-center">
+	                           <div>
+	                               <p class="card-prodotto-prezzi-valori">${properties.text1Card4 @context='html'}</p>
+	                               <p class="cap12-egl">${properties.text2Card4 @context='html'}</p>
+	                           </div>
+	                           <div class="separatore-cards-prodotto-prezzi"></div>
+	                           <div>
+	                               <p class="card-prodotto-prezzi-valori">${properties.text3Card4 @context='html'}</p>
+	                               <p class="cap12-egl">${properties.text4Card4 @context='html'}</p>
+	                           </div>
+	                       </div>
+	                        <!-- scelta bottone o link Card 4-->
+	                       <sly data-sly-test="${!properties.modalCTACard4}">
+	                       		<a href="${properties.urlCtaCard4}" title="${properties.altCta4}" target="${properties.targetCtaCard4}" 
+	                       			class="buttonlink-pleni-cta">${properties.labelCtaCard4}</a>
+	                       </sly>
+	                       <sly data-sly-test="${properties.modalCTACard4}">
+								<button type="button" data-toggle="modal" 
+								data-target="${'#' in properties.urlCtaCard4 ? '' : '#'}${properties.urlCtaCard4}" 
+								title="${properties.altCta4}" class="buttonlink-pleni-cta">${properties.labelCtaCard4}
+								</button>
+							</sly>
+	                   </div>
+	                 </div>
+                </div>
+            </div>
+        </div>
+        <div class="cards-prodotto-impaginazione d-lg-none">
+            <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-left-solid.svg"
+                class="cards-prodotto-previous-arrow cards-prodotto-arrows"
+                onclick="slideCardsProdotto('-', event)"/>
+            <p class="cards-prodotto-status-text" style="margin-bottom: 0px;">
+            </p>
+            <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-right-solid.svg"
+                class="cards-prodotto-next-arrow cards-prodotto-arrows"
+                onclick="slideCardsProdotto('+', event)"/>
+        </div>
+		<div class="col-12 d-flex justify-content-center">
+			<sly data-sly-test="${!properties.modalCTA}">
+			<a data-sly-test="${properties.urlCta && properties.labelCta}"
+				href="${properties.urlCta}" target="${properties.targetCta}"
+				title="${properties.altCta}" class="cta-primary-card">${properties.labelCta}</a>
+			</sly>
+			<sly data-sly-test="${properties.modalCTA}">
+			<button type="button" data-toggle="modal" class="cta-primary-card"
+				data-target="${'#' in properties.urlCta ? '' : '#'}${properties.urlCta}"
+				title="${properties.altCta}">${properties.labelCta}</button>
+			</sly>
+		</div>
+</div>
+</sly>
+
+    <!-- variante 3 cards -->
+<sly data-sly-test="${properties.numeroCard == 'tre'}">
+    <div id="${properties.id}" class="container-lg px-lg-0 container-card-prodotto ${properties.checkCtaPrezzi ? 'variante-prod-prezzi' : ''}">
+        <div class="row">
+            <div class="col-12 text-center card-prodotto-titolo">
+                <h2>${properties.titolo @context='html'}</h2>
+            </div>
+        </div>
+        <div class="row card-prodotto-cards d-none d-lg-flex">
+            <div class="col-4">
+                <div class="card-prodotto-bg">
+                    <div class="card-prodotto-body variante-cards-prodotto">
+                    	<div>
+	                        <img loading="lazy"  src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-tooltip-yellow.svg" class="cards-prodotto-tooltip" data-toggle="tooltip" data-placement="left" title="${properties.tooltipCard1}">                       
+	                        <div class="d-flex card-prodotto-header" data-sly-use.image1="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagineCard1Reference}">
+	                            <img loading="lazy"  src="${properties.immagineCard1Reference}" alt="${image1.description}">
+	                            <div>
+	                                <div class="d-flex">
+	                                    <div class="variante-cards-prodotto-prezzo">${properties.prezzoCard1}</div>
+	                                    <div class="d-flex flex-column">
+	                                        <div class="cap12-egl">${properties.prezzoOldCard1}</div>
+	                                        <div class="cap12-egl">${properties.infoPrezzoCard1}</div>
+	                                    </div>
+	                                </div>
+	                                <div class="cap12-egl">${properties.notaCard1 @context='html'}</div>
+	                            </div>
+	                        </div>
+	                        <div class="p20-egl">${properties.titoloProdottoCard1 @context='html'}</div>
+		                        <ul data-sly-list.cardUno="${model.listaUno}">
+		                            <li>${cardUno.testoUno @ context='html'}</li>
+		                        </ul>
+	                    	</div>
+	                   	<!-- VARIANTE PREZZI -->
+		                    <div data-sly-test="${properties.checkCtaPrezzi}" class="card-prodotto-prezzi">
+		                       <div class="d-flex justify-content-center align-items-center">
+		                           <div>
+		                               <p class="card-prodotto-prezzi-valori">${properties.text1Card1 @context='html'}</p>
+		                               <p class="cap12-egl">${properties.text2Card1 @context='html'}</p>
+		                           </div>
+		                           <div class="separatore-cards-prodotto-prezzi"></div>
+		                           <div>
+		                               <p class="card-prodotto-prezzi-valori">${properties.text3Card1 @context='html'}</p>
+		                               <p class="cap12-egl">${properties.text4Card1 @context='html'}</p>
+		                           </div>
+		                       </div>
+		                       <!-- scelta bottone o link -->
+		                       <sly data-sly-test="${!properties.modalCTACard1}">
+		                       		<a href="${properties.urlCtaCard1}" title="${properties.altCta1}" target="${properties.targetCtaCard1}" 
+		                       			class="buttonlink-pleni-cta">${properties.labelCtaCard1}</a>
+		                       </sly>
+		                       <sly data-sly-test="${properties.modalCTACard1}">
+									<button type="button" data-toggle="modal" 
+									data-target="${'#' in properties.urlCtaCard1 ? '' : '#'}${properties.urlCtaCard1}" 
+									title="${properties.altCta1}" class="buttonlink-pleni-cta">${properties.labelCtaCard1}
+									</button>
+								</sly>
+		                   </div>
+	                  </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card-prodotto-bg">
+                    <div class="card-prodotto-body variante-cards-prodotto">
+                    	<div>
+	                        <img loading="lazy"  src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-tooltip-yellow.svg" class="cards-prodotto-tooltip" data-toggle="tooltip" data-placement="left" title="${properties.tooltipCard2}">                       
+	                        <div class="d-flex card-prodotto-header" data-sly-use.image2="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagineCard2Reference}">
+	                            <img loading="lazy"  src="${properties.immagineCard2Reference}" alt="${image2.description}">
+	                            <div>
+	                                <div class="d-flex">
+	                                    <div class="variante-cards-prodotto-prezzo">${properties.prezzoCard2}</div>
+	                                    <div class="d-flex flex-column">
+	                                        <div class="cap12-egl">${properties.prezzoOldCard2}</div>
+	                                        <div class="cap12-egl">${properties.infoPrezzoCard2}</div>
+	                                    </div>
+	                                </div>
+	                                <div class="cap12-egl">${properties.notaCard2 @context='html'}</div>
+	                            </div>
+	                        </div>
+	                        <div class="p20-egl">${properties.titoloProdottoCard2 @context='html'}</div>
+		                        <ul data-sly-list.cardDue="${model.listaDue}">
+		                            <li>${cardDue.testoDue @ context='html'}</li>
+		                        </ul>
+                    	</div>
+                    	 <!-- VARIANTE PREZZI -->
+	                    <div data-sly-test="${properties.checkCtaPrezzi}" class="card-prodotto-prezzi">
+	                       <div class="d-flex justify-content-center align-items-center">
+	                           <div>
+	                               <p class="card-prodotto-prezzi-valori">${properties.text1Card2 @context='html'}</p>
+	                               <p class="cap12-egl">${properties.text2Card2 @context='html'}</p>
+	                           </div>
+	                           <div class="separatore-cards-prodotto-prezzi"></div>
+	                           <div>
+	                               <p class="card-prodotto-prezzi-valori">${properties.text3Card2 @context='html'}</p>
+	                               <p class="cap12-egl">${properties.text4Card2 @context='html'}</p>
+	                           </div>
+	                       </div>
+	                       <!-- scelta bottone o link Card 2-->
+	                       <sly data-sly-test="${!properties.modalCTACard2}">
+	                       		<a href="${properties.urlCtaCard2}" title="${properties.altCta2}" target="${properties.targetCtaCard2}" 
+	                       			class="buttonlink-pleni-cta">${properties.labelCtaCard2}</a>
+	                       </sly>
+	                       <sly data-sly-test="${properties.modalCTACard2}">
+								<button type="button" data-toggle="modal" 
+								data-target="${'#' in properties.urlCtaCard2 ? '' : '#'}${properties.urlCtaCard2}" 
+								title="${properties.altCta2}" class="buttonlink-pleni-cta">${properties.labelCtaCard2}
+								</button>
+							</sly>
+	                   </div>
+	                 </div>
+	                 
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card-prodotto-bg">
+                    <div class="card-prodotto-body variante-cards-prodotto">
+                    	<div>
+	                        <img loading="lazy"  src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-tooltip-yellow.svg" class="cards-prodotto-tooltip" data-toggle="tooltip" data-placement="left" title="${properties.tooltipCard3}">                       
+	                        <div class="d-flex card-prodotto-header" data-sly-use.image3="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagineCard3Reference}">
+	                            <img loading="lazy"  src="${properties.immagineCard3Reference}" alt="${image3.description}">
+	                            <div>
+	                                <div class="d-flex">
+	                                    <div class="variante-cards-prodotto-prezzo">${properties.prezzoCard3}</div>
+	                                    <div class="d-flex flex-column">
+	                                        <div class="cap12-egl">${properties.prezzoOldCard3}</div>
+	                                        <div class="cap12-egl">${properties.infoPrezzoCard3}</div>
+	                                    </div>
+	                                </div>
+	                                <div class="cap12-egl">${properties.notaCard3 @context='html'}</div>
+	                            </div>
+	                        </div>
+	                        <div class="p20-egl">${properties.titoloProdottoCard3 @context='html'}</div>
+		                        <ul data-sly-list.cardTre="${model.listaTre}">
+		                            <li>${cardTre.testoTre @ context='html'}</li>
+		                        </ul>
+                    	</div>
+     					<!-- VARIANTE PREZZI -->
+	                    <div data-sly-test="${properties.checkCtaPrezzi}" class="card-prodotto-prezzi">
+	                       <div class="d-flex justify-content-center align-items-center">
+	                           <div>
+	                               <p class="card-prodotto-prezzi-valori">${properties.text1Card3 @context='html'}</p>
+	                               <p class="cap12-egl">${properties.text2Card3 @context='html'}</p>
+	                           </div>
+	                           <div class="separatore-cards-prodotto-prezzi"></div>
+	                           <div>
+	                               <p class="card-prodotto-prezzi-valori">${properties.text3Card3 @context='html'}</p>
+	                               <p class="cap12-egl">${properties.text4Card3 @context='html'}</p>
+	                           </div>
+	                       </div>
+	                       <!-- scelta bottone o link Card 3-->
+	                       <sly data-sly-test="${!properties.modalCTACard3}">
+	                       		<a href="${properties.urlCtaCard3}" title="${properties.altCta3}" target="${properties.targetCtaCard3}" 
+	                       			class="buttonlink-pleni-cta">${properties.labelCtaCard3}</a>
+	                       </sly>
+	                       <sly data-sly-test="${properties.modalCTACard3}">
+								<button type="button" data-toggle="modal" 
+								data-target="${'#' in properties.urlCtaCard3 ? '' : '#'}${properties.urlCtaCard3}" 
+								title="${properties.altCta3}" class="buttonlink-pleni-cta">${properties.labelCtaCard3}
+								</button>
+							</sly>
+	                   </div>
+	               </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CARD 3 MOBILE -->
+        <div class="row card-prodotto-cards card-prodotto-carosello d-lg-none">
+            <div class="col-3">
+                <div class="card-prodotto-bg">
+                    <div class="card-prodotto-body variante-cards-prodotto">
+                    	<div>
+	                        <img loading="lazy"  src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-tooltip-yellow.svg" class="cards-prodotto-tooltip" data-toggle="tooltip" data-placement="left" title="${properties.tooltipCard1}">                      
+	                        <div class="d-flex card-prodotto-header" data-sly-use.image1="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagineCard1Reference}">
+	                            <img loading="lazy"  src="${properties.immagineCard1Reference}" alt="${image1.description}">
+	                            <div>
+	                                <div class="d-flex">
+	                                    <div class="variante-cards-prodotto-prezzo">${properties.prezzoCard1}</div>
+	                                    <div class="d-flex flex-column">
+	                                        <div class="cap12-egl">${properties.prezzoOldCard1}</div>
+	                                        <div class="cap12-egl">${properties.infoPrezzoCard1}</div>
+	                                    </div>
+	                                </div>
+	                                <div class="cap12-egl">${properties.notaCard1 @context='html'}</div>
+	                            </div>
+	                        </div>
+	                        <div class="p20-egl">${properties.titoloProdottoCard1 @context='html'}</div>
+		                        <ul data-sly-list.cardUno="${model.listaUno}">
+		                            <li>${cardUno.testoUno @ context='html'}</li>
+		                        </ul>
+                   		 </div>
+                       	<!-- VARIANTE PREZZI -->
+	                    <div data-sly-test="${properties.checkCtaPrezzi}" class="card-prodotto-prezzi">
+	                       <div class="d-flex justify-content-center align-items-center">
+	                           <div>
+	                               <p class="card-prodotto-prezzi-valori">${properties.text1Card1 @context='html'}</p>
+	                               <p class="cap12-egl">${properties.text2Card1 @context='html'}</p>
+	                           </div>
+	                           <div class="separatore-cards-prodotto-prezzi"></div>
+	                           <div>
+	                               <p class="card-prodotto-prezzi-valori">${properties.text3Card1 @context='html'}</p>
+	                               <p class="cap12-egl">${properties.text4Card1 @context='html'}</p>
+	                           </div>
+	                       </div>
+	                       <!-- scelta bottone o link -->
+	                       <sly data-sly-test="${!properties.modalCTACard1}">
+	                       		<a href="${properties.urlCtaCard1}" title="${properties.altCta1}" target="${properties.targetCtaCard1}" 
+	                       			class="buttonlink-pleni-cta">${properties.labelCtaCard1}</a>
+	                       </sly>
+	                       <sly data-sly-test="${properties.modalCTACard1}">
+								<button type="button" data-toggle="modal" 
+								data-target="${'#' in properties.urlCtaCard1 ? '' : '#'}${properties.urlCtaCard1}" 
+								title="${properties.altCta1}" class="buttonlink-pleni-cta">${properties.labelCtaCard1}
+								</button>
+							</sly>
+	                   </div>
+		             </div>
+		             
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card-prodotto-bg">
+                    <div class="card-prodotto-body variante-cards-prodotto">
+                    	<div>
+	                        <img loading="lazy"  src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-tooltip-yellow.svg" class="cards-prodotto-tooltip" data-toggle="tooltip" data-placement="left" title="${properties.tooltipCard2}">
+	                        <div class="d-flex card-prodotto-header" data-sly-use.image2="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagineCard2Reference}">
+	                            <img loading="lazy"  src="${properties.immagineCard2Reference}" alt="${image2.description}">
+	                            <div>
+	                                <div class="d-flex">
+	                                    <div class="variante-cards-prodotto-prezzo">${properties.prezzoCard2}</div>
+	                                    <div class="d-flex flex-column">
+	                                        <div class="cap12-egl">${properties.prezzoOldCard2}</div>
+	                                        <div class="cap12-egl">${properties.infoPrezzoCard2}</div>
+	                                    </div>
+	                                </div>
+	                                <div class="cap12-egl">${properties.notaCard2 @context='html'}</div>
+	                            </div>
+	                        </div>
+	                        <div class="p20-egl">${properties.titoloProdottoCard2 @context='html'}</div>
+		                        <ul data-sly-list.cardDue="${model.listaDue}">
+		                            <li>${cardDue.testoDue @ context='html'}</li>
+		                        </ul>
+                   	 	</div>
+          			 <!-- VARIANTE PREZZI -->
+		                    <div data-sly-test="${properties.checkCtaPrezzi}" class="card-prodotto-prezzi">
+		                       <div class="d-flex justify-content-center align-items-center">
+		                           <div>
+		                               <p class="card-prodotto-prezzi-valori">${properties.text1Card2 @context='html'}</p>
+		                               <p class="cap12-egl">${properties.text2Card2 @context='html'}</p>
+		                           </div>
+		                           <div class="separatore-cards-prodotto-prezzi"></div>
+		                           <div>
+		                               <p class="card-prodotto-prezzi-valori">${properties.text3Card2 @context='html'}</p>
+		                               <p class="cap12-egl">${properties.text4Card2 @context='html'}</p>
+		                           </div>
+		                       </div>
+		                       <!-- scelta bottone o link Card 2-->
+		                       <sly data-sly-test="${!properties.modalCTACard2}">
+		                       		<a href="${properties.urlCtaCard2}" title="${properties.altCta2}" target="${properties.targetCtaCard2}" 
+		                       			class="buttonlink-pleni-cta">${properties.labelCtaCard2}</a>
+		                       </sly>
+		                       <sly data-sly-test="${properties.modalCTACard2}">
+									<button type="button" data-toggle="modal" 
+									data-target="${'#' in properties.urlCtaCard2 ? '' : '#'}${properties.urlCtaCard2}" 
+									title="${properties.altCta2}" class="buttonlink-pleni-cta">${properties.labelCtaCard2}
+									</button>
+								</sly>
+		                   </div>
+	                   </div>
+	                                    
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card-prodotto-bg">
+                    <div class="card-prodotto-body variante-cards-prodotto">
+                    	<div>
+	                        <img loading="lazy"  src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-tooltip-yellow.svg" class="cards-prodotto-tooltip" data-toggle="tooltip" data-placement="left" title="${properties.tooltipCard3}">                       
+	                        <div class="d-flex card-prodotto-header" data-sly-use.image3="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagineCard3Reference}">
+	                            <img loading="lazy"  src="${properties.immagineCard3Reference}" alt="${image3.description}">
+	                            <div>
+	                                <div class="d-flex">
+	                                    <div class="variante-cards-prodotto-prezzo">${properties.prezzoCard3}</div>
+	                                    <div class="d-flex flex-column">
+	                                        <div class="cap12-egl">${properties.prezzoOldCard3}</div>
+	                                        <div class="cap12-egl">${properties.infoPrezzoCard3}</div>
+	                                    </div>
+	                                </div>
+	                                <div class="cap12-egl">${properties.notaCard3 @context='html'}</div>
+	                            </div>
+	                        </div>
+	                        <div class="p20-egl">${properties.titoloProdottoCard3 @context='html'}</div>         	
+		                        <ul data-sly-list.cardTre="${model.listaTre}">
+		                            <li>${cardTre.testoTre @ context='html'}</li>
+		                        </ul>
+		                  </div>
+		                <!-- VARIANTE PREZZI -->
+	                    <div data-sly-test="${properties.checkCtaPrezzi}" class="card-prodotto-prezzi">
+	                       <div class="d-flex justify-content-center align-items-center">
+	                           <div>
+	                               <p class="card-prodotto-prezzi-valori">${properties.text1Card3 @context='html'}</p>
+	                               <p class="cap12-egl">${properties.text2Card3 @context='html'}</p>
+	                           </div>
+	                           <div class="separatore-cards-prodotto-prezzi"></div>
+	                           <div>
+	                               <p class="card-prodotto-prezzi-valori">${properties.text3Card3 @context='html'}</p>
+	                               <p class="cap12-egl">${properties.text4Card3 @context='html'}</p>
+	                           </div>
+	                       </div>
+	                       <!-- scelta bottone o link Card 3-->
+	                       <sly data-sly-test="${!properties.modalCTACard3}">
+	                       		<a href="${properties.urlCtaCard3}" title="${properties.altCta3}" target="${properties.targetCtaCard3}" 
+	                       			class="buttonlink-pleni-cta">${properties.labelCtaCard3}</a>
+	                       </sly>
+	                       <sly data-sly-test="${properties.modalCTACard3}">
+								<button type="button" data-toggle="modal" 
+								data-target="${'#' in properties.urlCtaCard3 ? '' : '#'}${properties.urlCtaCard3}" 
+								title="${properties.altCta3}" class="buttonlink-pleni-cta">${properties.labelCtaCard3}
+								</button>
+							</sly>
+	                   </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="cards-prodotto-impaginazione d-lg-none">
+           <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-left-solid.svg"
+                class="cards-prodotto-previous-arrow cards-prodotto-arrows"
+                onclick="slideCardsProdotto('-', event)"/>
+            <p class="cards-prodotto-status-text" style="margin-bottom: 0px;">
+            </p>
+            <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-right-solid.svg"
+                class="cards-prodotto-next-arrow cards-prodotto-arrows"
+                onclick="slideCardsProdotto('+', event)"/>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+	        <sly data-sly-test="${!properties.modalCTA}">
+			<a data-sly-test="${properties.urlCta && properties.labelCta}"
+				href="${properties.urlCta}" target="${properties.targetCta}"
+				title="${properties.altCta}" class="cta-primary-card">${properties.labelCta}</a>
+			</sly>
+			<sly data-sly-test="${properties.modalCTA}">
+			<button type="button" data-toggle="modal" class="cta-primary-card"
+				data-target="${'#' in properties.urlCta ? '' : '#'}${properties.urlCta}"
+				title="${properties.altCta}">${properties.labelCta}</button>
+			</sly>
+        </div>
+    </div>
+    </sly>
+
+
+
+    <!-- variante 2 cards -->
+<sly data-sly-test="${properties.numeroCard == 'due'}">
+    <div id="${properties.id}" class="container-lg px-lg-0 container-card-prodotto ${properties.checkCtaPrezzi ? 'variante-prod-prezzi' : ''}">
+        <div class="row">
+            <div class="col-12 text-center card-prodotto-titolo">
+                <h2>${properties.titolo @context='html'}</h2>
+            </div>
+        </div>
+        <div class="row card-prodotto-cards d-none d-lg-flex justify-content-center">
+            <div class="col-5">
+                <div class="card-prodotto-bg">
+                    <div class="card-prodotto-body variante-cards-prodotto">
+                    	<div> 
+	                        <img loading="lazy"  src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-tooltip-yellow.svg" class="cards-prodotto-tooltip" data-toggle="tooltip" data-placement="left" title="${properties.tooltipCard1}">
+	                        <div class="d-flex card-prodotto-header" data-sly-use.image1="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagineCard1Reference}">
+	                            <img loading="lazy"  src="${properties.immagineCard1Reference}" alt="${image1.description}">
+	                            <div>
+	                                <div class="d-flex">
+	                                    <div class="variante-cards-prodotto-prezzo">${properties.prezzoCard1}</div>
+	                                    <div class="d-flex flex-column">
+	                                        <div class="cap12-egl">${properties.prezzoOldCard1}</div>
+	                                        <div class="cap12-egl">${properties.infoPrezzoCard1}</div>
+	                                    </div>
+	                                </div>
+	                                <div class="cap12-egl">${properties.notaCard1 @context='html'}</div>
+	                            </div>
+	                        </div>
+	                        <div class="p20-egl">${properties.titoloProdottoCard1 @context='html'}</div>
+		                        <ul data-sly-list.cardUno="${model.listaUno}">
+		                            <li>${cardUno.testoUno @ context='html'}</li>
+		                        </ul>
+                    	</div>
+                    <!-- VARIANTE PREZZI -->
+	                    <div data-sly-test="${properties.checkCtaPrezzi}" class="card-prodotto-prezzi">
+	                       <div class="d-flex justify-content-center align-items-center">
+	                           <div>
+	                               <p class="card-prodotto-prezzi-valori">${properties.text1Card1 @context='html'}</p>
+	                               <p class="cap12-egl">${properties.text2Card1 @context='html'}</p>
+	                           </div>
+	                           <div class="separatore-cards-prodotto-prezzi"></div>
+	                           <div>
+	                               <p class="card-prodotto-prezzi-valori">${properties.text3Card1 @context='html'}</p>
+	                               <p class="cap12-egl">${properties.text4Card1 @context='html'}</p>
+	                           </div>
+	                       </div>
+	                       <!-- scelta bottone o link -->
+	                       <sly data-sly-test="${!properties.modalCTACard1}">
+	                       		<a href="${properties.urlCtaCard1}" title="${properties.altCta1}" target="${properties.targetCtaCard1}" 
+	                       			class="buttonlink-pleni-cta">${properties.labelCtaCard1}</a>
+	                       </sly>
+	                       <sly data-sly-test="${properties.modalCTACard1}">
+								<button type="button" data-toggle="modal" 
+								data-target="${'#' in properties.urlCtaCard1 ? '' : '#'}${properties.urlCtaCard1}" 
+								title="${properties.altCta1}" class="buttonlink-pleni-cta">${properties.labelCtaCard1}
+								</button>
+							</sly>
+	                   </div>
+                   </div>
+                    
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="card-prodotto-bg">
+                    <div class="card-prodotto-body variante-cards-prodotto">
+                    	<div>
+                        <img loading="lazy"  src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-tooltip-yellow.svg" class="cards-prodotto-tooltip" data-toggle="tooltip" data-placement="left" title="${properties.tooltipCard2}">                      
+                        <div class="d-flex card-prodotto-header" data-sly-use.image2="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagineCard2Reference}">
+                            <img loading="lazy"  src="${properties.immagineCard2Reference}" alt="${image2.description}">
+                            <div>
+                                <div class="d-flex">
+                                    <div class="variante-cards-prodotto-prezzo">${properties.prezzoCard2}</div>
+                                    <div class="d-flex flex-column">
+                                        <div class="cap12-egl">${properties.prezzoOldCard2}</div>
+                                        <div class="cap12-egl">${properties.infoPrezzoCard2}</div>
+                                    </div>
+                                </div>
+                                <div class="cap12-egl">${properties.notaCard2 @context='html'}</div>
+                            </div>
+                        </div>
+                        <div class="p20-egl">${properties.titoloProdottoCard2 @context='html'}</div>
+	                        <ul data-sly-list.cardDue="${model.listaDue}">
+	                            <li>${cardDue.testoDue @ context='html'}</li>
+	                        </ul>
+		                </div>                 
+                   	<!-- VARIANTE PREZZI -->
+	                    <div data-sly-test="${properties.checkCtaPrezzi}" class="card-prodotto-prezzi">
+	                       <div class="d-flex justify-content-center align-items-center">
+								<div>
+	                               <p class="card-prodotto-prezzi-valori">${properties.text1Card2 @context='html'}</p>
+	                               <p class="cap12-egl">${properties.text2Card2 @context='html'}</p>
+	                           </div>
+	                           <div class="separatore-cards-prodotto-prezzi"></div>
+	                           <div>
+	                               <p class="card-prodotto-prezzi-valori">${properties.text3Card2 @context='html'}</p>
+	                               <p class="cap12-egl">${properties.text4Card2 @context='html'}</p>
+	                           </div>
+	                       </div>
+	                       <!-- scelta bottone o link Card 2-->
+	                       <sly data-sly-test="${!properties.modalCTACard2}">
+	                       		<a href="${properties.urlCtaCard2}" title="${properties.altCta2}" target="${properties.targetCtaCard2}" 
+	                       			class="buttonlink-pleni-cta">${properties.labelCtaCard2}</a>
+	                       </sly>
+	                       <sly data-sly-test="${properties.modalCTACard2}">
+								<button type="button" data-toggle="modal" 
+								data-target="${'#' in properties.urlCtaCard2 ? '' : '#'}${properties.urlCtaCard2}" 
+								title="${properties.altCta2}" class="buttonlink-pleni-cta">${properties.labelCtaCard2}
+								</button>
+							</sly>
+	                   </div>
+                   </div>
+                   
+                </div>
+            </div>
+        </div>
+        <div class="row card-prodotto-cards card-prodotto-carosello d-lg-none">
+            <div class="col-3">
+                <div class="card-prodotto-bg">
+                    <div class="card-prodotto-body variante-cards-prodotto">
+                    	<div>
+	                        <img loading="lazy"  src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-tooltip-yellow.svg" class="cards-prodotto-tooltip" data-toggle="tooltip" data-placement="left" title="${properties.tooltipCard1}">
+	                        <div class="d-flex card-prodotto-header" data-sly-use.image1="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagineCard1Reference}">
+	                            <img loading="lazy"  src="${properties.immagineCard1Reference}" alt="${image1.description}">
+	                            <div>
+	                                <div class="d-flex">
+	                                    <div class="variante-cards-prodotto-prezzo">${properties.prezzoCard1}</div>
+	                                    <div class="d-flex flex-column">
+	                                        <div class="cap12-egl">${properties.prezzoOldCard1}</div>
+	                                        <div class="cap12-egl">${properties.infoPrezzoCard1}</div>
+	                                    </div>
+	                                </div>
+	                                <div class="cap12-egl">${properties.notaCard1 @context='html'}</div>
+	                            </div>
+	                        </div>
+	                        <div class="p20-egl">${properties.titoloProdottoCard1 @context='html'}</div>
+		                        <ul data-sly-list.cardUno="${model.listaUno}">
+		                            <li>${cardUno.testoUno @ context='html'}</li>
+		                        </ul>
+		                 </div>
+                    <!-- VARIANTE PREZZI -->
+	                    <div data-sly-test="${properties.checkCtaPrezzi}" class="card-prodotto-prezzi">
+	                       <div class="d-flex justify-content-center align-items-center">
+	                           <div>
+	                               <p class="card-prodotto-prezzi-valori">${properties.text1Card1 @context='html'}</p>
+	                               <p class="cap12-egl">${properties.text2Card1 @context='html'}</p>
+	                           </div>
+	                           <div class="separatore-cards-prodotto-prezzi"></div>
+	                           <div>
+	                               <p class="card-prodotto-prezzi-valori">${properties.text3Card1 @context='html'}</p>
+	                               <p class="cap12-egl">${properties.text4Card1 @context='html'}</p>
+	                           </div>
+	                       </div>
+	                        <!-- scelta bottone o link -->
+	                       <sly data-sly-test="${!properties.modalCTACard1}">
+	                       		<a href="${properties.urlCtaCard1}" title="${properties.altCta1}" target="${properties.targetCtaCard1}" 
+	                       			class="buttonlink-pleni-cta">${properties.labelCtaCard1}</a>
+	                       </sly>
+	                       <sly data-sly-test="${properties.modalCTACard1}">
+								<button type="button" data-toggle="modal" 
+								data-target="${'#' in properties.urlCtaCard1 ? '' : '#'}${properties.urlCtaCard1}" 
+								title="${properties.altCta1}" class="buttonlink-pleni-cta">${properties.labelCtaCard1}
+								</button>
+							</sly>
+	                   </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card-prodotto-bg">
+                    <div class="card-prodotto-body variante-cards-prodotto">
+                    	<div>
+	                        <img loading="lazy"  src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-tooltip-yellow.svg" class="cards-prodotto-tooltip" data-toggle="tooltip" data-placement="left" title="${properties.tooltipCard2}">	                        
+	                        <div class="d-flex card-prodotto-header" data-sly-use.image2="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagineCard2Reference}">
+	                            <img loading="lazy"  src="${properties.immagineCard2Reference}" alt="${image2.description}">
+	                            <div>
+	                                <div class="d-flex">
+	                                    <div class="variante-cards-prodotto-prezzo">${properties.prezzoCard2}</div>
+	                                    <div class="d-flex flex-column">
+	                                        <div class="cap12-egl">${properties.prezzoOldCard2}</div>
+	                                        <div class="cap12-egl">${properties.infoPrezzoCard2}</div>
+	                                    </div>
+	                                </div>
+	                                <div class="cap12-egl">${properties.notaCard2 @context='html'}</div>
+	                            </div>
+	                        </div>
+	                        <div class="p20-egl">${properties.titoloProdottoCard2 @context='html'}</div>
+		                        <ul data-sly-list.cardDue="${model.listaDue}">
+		                            <li>${cardDue.testoDue @ context='html'}</li>
+		                        </ul>
+			             </div>
+	                     <!-- VARIANTE PREZZI -->
+	                    <div data-sly-test="${properties.checkCtaPrezzi}" class="card-prodotto-prezzi">
+	                       <div class="d-flex justify-content-center align-items-center">
+	                           <div>
+	                               <p class="card-prodotto-prezzi-valori">${properties.text1Card2 @context='html'}</p>
+	                               <p class="cap12-egl">${properties.text2Card2 @context='html'}</p>
+	                           </div>
+	                           <div class="separatore-cards-prodotto-prezzi"></div>
+	                           <div>
+	                               <p class="card-prodotto-prezzi-valori">${properties.text3Card2 @context='html'}</p>
+	                               <p class="cap12-egl">${properties.text4Card2 @context='html'}</p>
+	                           </div>
+	                       </div>
+	                       <!-- scelta bottone o link Card 2-->
+	                       <sly data-sly-test="${!properties.modalCTACard2}">
+	                       		<a href="${properties.urlCtaCard2}" title="${properties.altCta2}" target="${properties.targetCtaCard2}" 
+	                       			class="buttonlink-pleni-cta">${properties.labelCtaCard2}</a>
+	                       </sly>
+	                       <sly data-sly-test="${properties.modalCTACard2}">
+								<button type="button" data-toggle="modal" 
+								data-target="${'#' in properties.urlCtaCard2 ? '' : '#'}${properties.urlCtaCard2}" 
+								title="${properties.altCta2}" class="buttonlink-pleni-cta">${properties.labelCtaCard2}
+								</button>
+							</sly>
+	                   </div>                
+                  </div>
+                  
+                </div>
+            </div>
+        </div>
+        <div class="cards-prodotto-impaginazione d-lg-none">
+             <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-left-solid.svg"
+                class="cards-prodotto-previous-arrow cards-prodotto-arrows"
+                onclick="slideCardsProdotto('-', event)"/>
+            <p class="cards-prodotto-status-text" style="margin-bottom: 0px;">
+            </p>
+            <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-right-solid.svg"
+                class="cards-prodotto-next-arrow cards-prodotto-arrows"
+                onclick="slideCardsProdotto('+', event)"/>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+            <sly data-sly-test="${!properties.modalCTA}">
+			<a data-sly-test="${properties.urlCta && properties.labelCta}"
+				href="${properties.urlCta}" target="${properties.targetCta}"
+				title="${properties.altCta}" class="cta-primary-card">${properties.labelCta}</a>
+			</sly>
+			<sly data-sly-test="${properties.modalCTA}">
+			<button type="button" data-toggle="modal" class="cta-primary-card"
+				data-target="${'#' in properties.urlCta ? '' : '#'}${properties.urlCta}"
+				title="${properties.altCta}">${properties.labelCta}</button>
+			</sly>
+        </div>
+    </div>
+</sly>

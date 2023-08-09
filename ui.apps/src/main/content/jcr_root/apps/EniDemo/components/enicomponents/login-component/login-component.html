@@ -1,0 +1,54 @@
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${wcmmode.edit}"> </sly>
+	
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<sly data-sly-set.bgColor="background-color:${properties.coloreBackground};"></sly>
+
+<div class="d-flex flex-column flex-lg-row">
+	<div class="position-relative login-truffe-container" style="${properties.tipoBackground == 'coloreBack' ? bgColor : '' @ context='styleString'}">
+		<picture data-sly-test="${properties.tipoBackground == 'immagineBack'}"
+			data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=properties.immagineBackReference}" 
+			data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagineBackReference}">
+			<sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+				<source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+				<source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+			</sly>
+			<img loading="lazy" class="login-truffe-img" src="${renditionsManager.renditions['1920px']}" alt="${image.description}">
+		</picture>
+		<div class="login-truffe-testo">
+			<h3 class="h3-egl">${properties.titolo @context='html'}</h3>
+			<p class="p20-egl">
+				${properties.paragrafo @context='html'}
+			</p>
+			<div data-sly-test="${properties.labelCta && properties.urlCta}" class="cta-secondary">
+				<a href="${properties.urlCta}" target="${properties.targetCta}" title="${properties.titleTextCta}"
+					style="color: #212529;">
+					${properties.labelCta} 
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="login-form-container">
+		<div class="login-form-accedi-custom d-flex justify-content-between">
+			<div class="login-form-titolo">Accedi</div>
+			<div class="login-form-registrati d-flex flex-column">
+				<div class="cap12-egl">Sei un nuovo cliente?</div>
+				<div data-sly-test="${properties.urlRegCta}" class="cta-secondary">
+					<a href="${properties.urlRegCta}" target="${properties.targetRegCta}" title="${properties.titleTextRegCta}" x-cq-linkchecker="valid"
+						style="color: #212529;">
+						Registrati 
+					</a>
+				</div>
+			</div>
+		</div>
+		<div id="form-login-gigya"></div>
+		<div class="${wcmmode.edit ? '' : 'd-none'} login-failed">
+        	<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/thank-you-page-failed.svg" alt="">
+        	${properties.maintenanceMessage @ context='html'}
+        	<a data-sly-test="${properties.labelBackCta && properties.urlBackCta}" href="${properties.urlBackCta}" target="${properties.targetBackCta}" title="${properties.titleTextBackCta}">
+				${properties.labelBackCta}
+			</a>
+      	</div>
+	</div>
+</div>

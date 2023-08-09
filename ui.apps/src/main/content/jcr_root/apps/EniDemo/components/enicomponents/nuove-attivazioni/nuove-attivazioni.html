@@ -1,0 +1,74 @@
+<sly data-sly-use.check="com.egl.core.models.nuoveattivazioni.CheckNAFromCart" />
+<sly data-sly-use.modaleNAModel="${'com.egl.core.models.nuoveattivazioni.ModaleNAModel' @ queryStringOfferta=check.queryStringOfferta, queryStringConvenzione=check.queryStringConvenzione, forniture=properties.furnitureType}"/>
+<sly data-sly-use.activationModel="com.egl.core.models.nuoveattivazioni.NewActivationModel" /> 
+<sly data-sly-set.cart="${modaleNAModel.residentialCart}"></sly>
+
+
+<sly data-sly-test="${!activationModel.selectors || activationModel.selectors.length == 0}">
+  <sly
+	  data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	  data-sly-test.testing="${!properties.title}"> </sly>
+  <sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+  <div id="NA_container" data-component-path="${activationModel.componentPath}" 
+  	data-codice-offerta="${check.queryStringOfferta}" data-codice-convenzione="${check.queryStringConvenzione}" data-codice-canale="${cart.codiceCanale}"
+        data-codice-tp-canale="${cart.codiceTpCanale}" data-callme="${properties.callme}"></div>
+  <script data-sly-test="${!properties.furnitureType || properties.furnitureType == 'luce'}">
+    $(function() {
+      caricaStepNuovaAttivazione('luce_step0');
+    });
+  </script>
+  <script data-sly-test="${properties.furnitureType == 'gas'}">
+    $(function() {
+      caricaStepNuovaAttivazione('gas_step0');
+    });
+  </script>
+  
+  <!-- Nuovo Step 4 e 5. Qua cambia il contenuto-->
+     
+   <div class="modal fade" id="modale-NA" tabindex="-1" aria-labelledby="modale-NA" aria-hidden="true">
+    <div class="modal-dialog egl-modale-commodity egl-modale-carrello-step egl-selezione-fornitura">
+      <div class="modal-content position-relative">
+        <span aria-hidden="true" class="position-absolute egl-mod-comm-closeIcon">
+          <button data-sly-test="${!properties.furnitureType || properties.furnitureType == 'luce'}" type="button" 
+          	class="close" data-dismiss="modal" aria-label="Close" onclick="caricaModaleNA('NA-modale-luce-step1');">
+            <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/7-icons-close-x.png" alt="chiudi-modale" />
+          </button>
+          <button  data-sly-test="${properties.furnitureType == 'gas'}" type="button" 
+          	class="close" data-dismiss="modal" aria-label="Close" onclick="caricaModaleNA('NA-modale-gas-step2');">
+            <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/7-icons-close-x.png" alt="chiudi-modale" />
+          </button>
+        </span>
+        <div class="modal-header flex-wrap position-relative justify-content-center justify-content-lg-start">
+          <div class="modal-title p20-egl flex-lg-row">
+            <p class="modal-title-forniture">
+             Stai attivando l'offerta ${modaleNAModel.offerName} ${properties.furnitureType}
+            </p>
+          </div>
+        </div>
+        <!-- body modale carrello step -->
+        <div class="modal-body egl-modal-body-carrellostep" id="modale-NA-body">
+			<script data-sly-test="${!properties.furnitureType || properties.furnitureType == 'luce'}">
+	      		 $(function() {
+	      			caricaModaleNA('NA-modale-luce-step1');
+	      		 });
+      		</script>
+      		<script data-sly-test="${properties.furnitureType == 'gas'}">
+	      		 $(function() {
+	      			caricaModaleNA('NA-modale-gas-step2');
+	      		 });
+      		</script>
+
+        </div>
+      </div>
+    </div>
+  </div>
+     
+  
+  
+</sly>
+
+<sly data-sly-test="${activationModel.selectors && activationModel.selectors.length > 0}"
+  data-sly-include="${activationModel.nextStep}"></sly>
+  
+  

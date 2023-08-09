@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+	xmlns:cq="http://www.day.com/jcr/cq/1.0"
+	xmlns:jcr="http://www.jcp.org/jcr/1.0"
+	xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
+	xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+	jcr:primaryType="nt:unstructured" jcr:title="Support Band Properties"
+	sling:resourceType="cq/gui/components/authoring/dialog">
+	<content jcr:primaryType="nt:unstructured"
+		sling:resourceType="granite/ui/components/coral/foundation/container">
+		<items jcr:primaryType="nt:unstructured">
+			<tabs jcr:primaryType="nt:unstructured"
+				sling:resourceType="granite/ui/components/coral/foundation/tabs"
+				maximized="{Boolean}true">
+				<items jcr:primaryType="nt:unstructured">
+
+					<gestioneComponente
+						jcr:primaryType="nt:unstructured" jcr:title="Gestione Componente"
+						sling:resourceType="granite/ui/components/coral/foundation/container"
+						margin="{Boolean}true">
+						<items jcr:primaryType="nt:unstructured">
+							<columns jcr:primaryType="nt:unstructured"
+								sling:resourceType="granite/ui/components/coral/foundation/container"
+								margin="{Boolean}true">
+								<items jcr:primaryType="nt:unstructured">
+									<column jcr:primaryType="nt:unstructured"
+										sling:resourceType="granite/ui/components/coral/foundation/container">
+										<items jcr:primaryType="nt:unstructured">
+											<id jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+												fieldLabel="ID Componente" name="./id" />
+											<background jcr:primaryType="nt:unstructured"
+												
+												sling:resourceType="granite/ui/components/coral/foundation/form/select"
+												fieldLabel="Background Color" name="./backgroundColore">
+												<items jcr:primaryType="nt:unstructured">
+													<option1 jcr:primaryType="nt:unstructured"
+														selected="true" text="White (#FFFFFF)" value="" />
+													<option2 jcr:primaryType="nt:unstructured"
+														text="Gray (#F4F4F4)" value="dark-support-band" />
+													
+												</items>
+												
+											</background>
+											
+										</items>
+									</column>
+								</items>
+							</columns>
+						</items>
+					</gestioneComponente>
+
+
+					<configItem jcr:primaryType="nt:unstructured"
+						jcr:title="Configurazione Item"
+						sling:resourceType="granite/ui/components/coral/foundation/container"
+						margin="{Boolean}true">
+						<items jcr:primaryType="nt:unstructured">
+							<columns jcr:primaryType="nt:unstructured"
+								sling:resourceType="granite/ui/components/coral/foundation/container"
+								margin="{Boolean}true">
+								<items jcr:primaryType="nt:unstructured">
+									<column jcr:primaryType="nt:unstructured"
+										sling:resourceType="granite/ui/components/coral/foundation/container">
+										<items jcr:primaryType="nt:unstructured">
+											<backgroundItem1
+											 granite:class="cq-dialog-dropdown-showhide"
+												jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/select"
+												fieldLabel="Background Color Item" name="./backgroundItem">
+												<items jcr:primaryType="nt:unstructured">
+													<option1 jcr:primaryType="nt:unstructured"
+														selected="true" text="Giallo Eni (#FFD300)" value="" />
+													<option2 jcr:primaryType="nt:unstructured"
+														text="White (#FFFFFF)"
+														value="dark-support-band-item-container" />
+													<option3 jcr:primaryType="nt:unstructured"
+														text="Esadecimale" value="esadec" />
+												</items>
+												<granite:data
+                                                    jcr:primaryType="nt:unstructured"
+                                                    cq-dialog-dropdown-showhide-target=".coloreSfondo-showhide-target"/>
+											</backgroundItem1>
+											<coloreEsadecimale
+                                                granite:class="coloreSfondo-showhide-target"
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/container">
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <coloresfondo
+                                                        jcr:primaryType="nt:unstructured"
+                                                        sling:resourceType="granite/ui/components/coral/foundation/form/colorfield"
+                                                        fieldLabel="Colore sfondo"
+                                                        name="./coloresfondo"/>
+                                                </items>
+                                                <granite:data
+                                                    jcr:primaryType="nt:unstructured"
+                                                    showhidetargetvalue="esadec"/>
+                                            </coloreEsadecimale>
+											<firstItem jcr:primaryType="nt:unstructured"
+												jcr:title="Primo Item"
+												sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">
+												<items jcr:primaryType="nt:unstructured">
+													<titoloItem1 jcr:primaryType="nt:unstructured"
+														jcr:title="Titolo Item 1" fieldLabel="Titolo Item 1"
+														sling:resourceType="cq/gui/components/authoring/dialog/richtext"
+														name="./titoloItem1" required="true"
+														useFixedInlineToolbar="{Boolean}true"
+														removeSingleParagraphContainer="{Boolean}true">
+														<rtePlugins jcr:primaryType="nt:unstructured"
+															removeSingleParagraphContainer="true">
+															<format jcr:primaryType="nt:unstructured"
+																features="bold,italic" />
+															<justify jcr:primaryType="nt:unstructured"
+																features="*" />
+															<links jcr:primaryType="nt:unstructured"
+																features="modifylink,unlink" />
+															<lists jcr:primaryType="nt:unstructured"
+																features="*" />
+															<paraformat jcr:primaryType="nt:unstructured"
+																features="*">
+																<formats jcr:primaryType="nt:unstructured">
+																	<default_p jcr:primaryType="nt:unstructured"
+																		description="Paragraph" tag="p" />
+																	<default_h1
+																		jcr:primaryType="nt:unstructured"
+																		description="Heading 1" tag="h1" />
+																	<default_h2
+																		jcr:primaryType="nt:unstructured"
+																		description="Heading 2" tag="h2" />
+																	<default_h3
+																		jcr:primaryType="nt:unstructured"
+																		description="Heading 3" tag="h3" />
+																</formats>
+															</paraformat>
+															<tracklinks jcr:primaryType="nt:unstructured"
+																features="*" />
+															<table jcr:primaryType="nt:unstructured"
+																features="*" />
+															<subsuperscript
+																jcr:primaryType="nt:unstructured" features="*" />
+															<misctools jcr:primaryType="nt:unstructured"
+																features="*" />
+															<experience-aem
+																jcr:primaryType="nt:unstructured" features="*" />
+														</rtePlugins>
+														<uiSettings jcr:primaryType="nt:unstructured">
+															<cui jcr:primaryType="nt:unstructured">
+																<inline jcr:primaryType="nt:unstructured"
+																	toolbar="[format#bold,format#italic,format#underline,subsuperscript#subscript,subsuperscript#superscript,justify#justifyleft,justify#justifycenter,justify#justifyright,#lists,experience-aem#colorPicker,links#modifylink,links#unlink,#paraformat,table#createoredit,table#removetable,misctools#sourceedit]">
+																	<popovers jcr:primaryType="nt:unstructured">
+																		<justify jcr:primaryType="nt:unstructured"
+																			items="[justify#justifyleft,justify#justifycenter,justify#justifyright]"
+																			ref="justify" />
+																		<lists jcr:primaryType="nt:unstructured"
+																			items="[lists#unordered,lists#ordered,lists#outdent,lists#indent]"
+																			ref="lists" />
+																		<misctools jcr:primaryType="nt:unstructured"
+																			items="[misctools#specialchars]" ref="misctools" />
+																		<paraformat
+																			jcr:primaryType="nt:unstructured"
+																			items="paraformat:getFormats:paraformat-pulldown"
+																			ref="paraformat" />
+																	</popovers>
+																</inline>
+																<dialogFullScreen
+																	jcr:primaryType="nt:unstructured"
+																	toolbar="[format#bold,format#italic,format#underline,subsuperscript#subscript,subsuperscript#superscript,justify#justifyleft,justify#justifycenter,justify#justifyright,#lists,experience-aem#colorPicker,links#modifylink,links#unlink,#paraformat,table#createoredit,table#removetable,misctools#sourceedit]">
+																	<popovers jcr:primaryType="nt:unstructured">
+																		<justify jcr:primaryType="nt:unstructured"
+																			items="[justify#justifyleft,justify#justifycenter,justify#justifyright]"
+																			ref="justify" />
+																		<lists jcr:primaryType="nt:unstructured"
+																			items="[lists#unordered,lists#ordered,lists#outdent,lists#indent]"
+																			ref="lists" />
+																		<misctools jcr:primaryType="nt:unstructured"
+																			items="[misctools#specialchars]" ref="misctools" />
+																		<paraformat
+																			jcr:primaryType="nt:unstructured"
+																			items="paraformat:getFormats:paraformat-pulldown"
+																			ref="paraformat" />
+																	</popovers>
+																</dialogFullScreen>
+															</cui>
+														</uiSettings>
+													</titoloItem1>
+													<sottoTitoloItem1
+														jcr:primaryType="nt:unstructured"
+														jcr:title="Sottotitolo Item 1"
+														fieldLabel="Sottotitolo Item 1"
+														sling:resourceType="cq/gui/components/authoring/dialog/richtext"
+														name="./sottoTitoloItem1"
+														useFixedInlineToolbar="{Boolean}true"
+														removeSingleParagraphContainer="{Boolean}true">
+														<rtePlugins jcr:primaryType="nt:unstructured"
+															removeSingleParagraphContainer="true">
+															<format jcr:primaryType="nt:unstructured"
+																features="bold,italic" />
+															<justify jcr:primaryType="nt:unstructured"
+																features="*" />
+															<links jcr:primaryType="nt:unstructured"
+																features="modifylink,unlink" />
+															<lists jcr:primaryType="nt:unstructured"
+																features="*" />
+															<paraformat jcr:primaryType="nt:unstructured"
+																features="*">
+																<formats jcr:primaryType="nt:unstructured">
+																	<default_p jcr:primaryType="nt:unstructured"
+																		description="Paragraph" tag="p" />
+																	<default_h1
+																		jcr:primaryType="nt:unstructured"
+																		description="Heading 1" tag="h1" />
+																	<default_h2
+																		jcr:primaryType="nt:unstructured"
+																		description="Heading 2" tag="h2" />
+																	<default_h3
+																		jcr:primaryType="nt:unstructured"
+																		description="Heading 3" tag="h3" />
+																</formats>
+															</paraformat>
+															<tracklinks jcr:primaryType="nt:unstructured"
+																features="*" />
+															<table jcr:primaryType="nt:unstructured"
+																features="*" />
+															<subsuperscript
+																jcr:primaryType="nt:unstructured" features="*" />
+															<misctools jcr:primaryType="nt:unstructured"
+																features="*" />
+															<experience-aem
+																jcr:primaryType="nt:unstructured" features="*" />
+														</rtePlugins>
+														<uiSettings jcr:primaryType="nt:unstructured">
+															<cui jcr:primaryType="nt:unstructured">
+																<inline jcr:primaryType="nt:unstructured"
+																	toolbar="[format#bold,format#italic,format#underline,subsuperscript#subscript,subsuperscript#superscript,justify#justifyleft,justify#justifycenter,justify#justifyright,#lists,experience-aem#colorPicker,links#modifylink,links#unlink,#paraformat,table#createoredit,table#removetable,misctools#sourceedit]">
+																	<popovers jcr:primaryType="nt:unstructured">
+																		<justify jcr:primaryType="nt:unstructured"
+																			items="[justify#justifyleft,justify#justifycenter,justify#justifyright]"
+																			ref="justify" />
+																		<lists jcr:primaryType="nt:unstructured"
+																			items="[lists#unordered,lists#ordered,lists#outdent,lists#indent]"
+																			ref="lists" />
+																		<misctools jcr:primaryType="nt:unstructured"
+																			items="[misctools#specialchars]" ref="misctools" />
+																		<paraformat
+																			jcr:primaryType="nt:unstructured"
+																			items="paraformat:getFormats:paraformat-pulldown"
+																			ref="paraformat" />
+																	</popovers>
+																</inline>
+																<dialogFullScreen
+																	jcr:primaryType="nt:unstructured"
+																	toolbar="[format#bold,format#italic,format#underline,subsuperscript#subscript,subsuperscript#superscript,justify#justifyleft,justify#justifycenter,justify#justifyright,#lists,experience-aem#colorPicker,links#modifylink,links#unlink,#paraformat,table#createoredit,table#removetable,misctools#sourceedit]">
+																	<popovers jcr:primaryType="nt:unstructured">
+																		<justify jcr:primaryType="nt:unstructured"
+																			items="[justify#justifyleft,justify#justifycenter,justify#justifyright]"
+																			ref="justify" />
+																		<lists jcr:primaryType="nt:unstructured"
+																			items="[lists#unordered,lists#ordered,lists#outdent,lists#indent]"
+																			ref="lists" />
+																		<misctools jcr:primaryType="nt:unstructured"
+																			items="[misctools#specialchars]" ref="misctools" />
+																		<paraformat
+																			jcr:primaryType="nt:unstructured"
+																			items="paraformat:getFormats:paraformat-pulldown"
+																			ref="paraformat" />
+																	</popovers>
+																</dialogFullScreen>
+															</cui>
+														</uiSettings>
+													</sottoTitoloItem1>
+													<labelCTAitem1
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+														fieldLabel="Label CTA 1" name="./labelCTAitem1" />
+													<tipoLink1 jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/select"
+														granite:class="cq-dialog-dropdown-showhide"
+														fieldLabel="Tipologia CTA 1" name="./tipologiaCTA1">
+														<items jcr:primaryType="nt:unstructured">
+															<option1 jcr:primaryType="nt:unstructured"
+																text="URL" value="url1" selected="true"/>
+															<option2 jcr:primaryType="nt:unstructured"
+																text="Modale Commodity" value="modaleCommodity1" />
+															<option3 jcr:primaryType="nt:unstructured"
+																text="Javascript" value="javascript1" />
+														</items>
+														<granite:data
+															jcr:primaryType="nt:unstructured"
+															cq-dialog-dropdown-showhide-target=".linkType-showhide-target" />
+													</tipoLink1>
+													<itemjavascript1
+														granite:class="linkType-showhide-target"
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/container">
+														<items jcr:primaryType="nt:unstructured">
+															<javascriptItem1
+																jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																fieldLabel="Javascript Text" name="./javascriptItem1">
+															</javascriptItem1>
+														</items>
+														<granite:data
+															jcr:primaryType="nt:unstructured"
+															showhidetargetvalue="javascript1" />
+													</itemjavascript1>
+													<tipoUrl1 jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/container">
+														<items jcr:primaryType="nt:unstructured">
+															<urlCTAitem1
+																jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+																fieldDescription="Inserisci il link per il secondo CTA"
+																fieldLabel="Path Link Prima CTA" name="./urlCTAitem1" />
+															<modalCTAitem1 jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/foundation/form/checkbox"
+																name="./modalCTAitem1" text="La CTA apre una modale" value="true" />									
+															<targetCTAItem1
+																jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/form/select"
+																fieldLabel="Target" name="./targetCTAitem1">
+																<items jcr:primaryType="nt:unstructured">
+																	<option1 jcr:primaryType="nt:unstructured"
+																		text="Self" value="_self" selected="true" />
+																	<option2 jcr:primaryType="nt:unstructured"
+																		text="Blank" value="_blank" />
+																</items>
+															</targetCTAItem1>
+														</items>
+													</tipoUrl1>
+													<altCTAItem1 jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+														fieldLabel="Alt Text" name="./altCTAitem1" />
+													<coloresfondocta1
+                                                        jcr:primaryType="nt:unstructured"
+                                                        sling:resourceType="granite/ui/components/coral/foundation/form/colorfield"
+                                                        fieldLabel="Colore sfondo cta1"
+                                                        name="./coloresfondocta1"/>
+												</items>
+											</firstItem>
+											<secondItem jcr:primaryType="nt:unstructured"
+												jcr:title="Secondo Item"
+												sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">
+												<items jcr:primaryType="nt:unstructured">
+													<titoloItem2 jcr:primaryType="nt:unstructured"
+														jcr:title="Titolo Item 2" fieldLabel="Titolo Item 2"
+														sling:resourceType="cq/gui/components/authoring/dialog/richtext"
+														name="./titoloItem2" useFixedInlineToolbar="{Boolean}true"
+														removeSingleParagraphContainer="{Boolean}true">
+														<rtePlugins jcr:primaryType="nt:unstructured"
+															removeSingleParagraphContainer="true">
+															<format jcr:primaryType="nt:unstructured"
+																features="bold,italic" />
+															<justify jcr:primaryType="nt:unstructured"
+																features="*" />
+															<links jcr:primaryType="nt:unstructured"
+																features="modifylink,unlink" />
+															<lists jcr:primaryType="nt:unstructured"
+																features="*" />
+															<paraformat jcr:primaryType="nt:unstructured"
+																features="*">
+																<formats jcr:primaryType="nt:unstructured">
+																	<default_p jcr:primaryType="nt:unstructured"
+																		description="Paragraph" tag="p" />
+																	<default_h1
+																		jcr:primaryType="nt:unstructured"
+																		description="Heading 1" tag="h1" />
+																	<default_h2
+																		jcr:primaryType="nt:unstructured"
+																		description="Heading 2" tag="h2" />
+																	<default_h3
+																		jcr:primaryType="nt:unstructured"
+																		description="Heading 3" tag="h3" />
+																</formats>
+															</paraformat>
+															<tracklinks jcr:primaryType="nt:unstructured"
+																features="*" />
+															<table jcr:primaryType="nt:unstructured"
+																features="*" />
+															<subsuperscript
+																jcr:primaryType="nt:unstructured" features="*" />
+															<misctools jcr:primaryType="nt:unstructured"
+																features="*" />
+															<experience-aem
+																jcr:primaryType="nt:unstructured" features="*" />
+														</rtePlugins>
+														<uiSettings jcr:primaryType="nt:unstructured">
+															<cui jcr:primaryType="nt:unstructured">
+																<inline jcr:primaryType="nt:unstructured"
+																	toolbar="[format#bold,format#italic,format#underline,subsuperscript#subscript,subsuperscript#superscript,justify#justifyleft,justify#justifycenter,justify#justifyright,#lists,experience-aem#colorPicker,links#modifylink,links#unlink,#paraformat,table#createoredit,table#removetable,misctools#sourceedit]">
+																	<popovers jcr:primaryType="nt:unstructured">
+																		<justify jcr:primaryType="nt:unstructured"
+																			items="[justify#justifyleft,justify#justifycenter,justify#justifyright]"
+																			ref="justify" />
+																		<lists jcr:primaryType="nt:unstructured"
+																			items="[lists#unordered,lists#ordered,lists#outdent,lists#indent]"
+																			ref="lists" />
+																		<misctools jcr:primaryType="nt:unstructured"
+																			items="[misctools#specialchars]" ref="misctools" />
+																		<paraformat
+																			jcr:primaryType="nt:unstructured"
+																			items="paraformat:getFormats:paraformat-pulldown"
+																			ref="paraformat" />
+																	</popovers>
+																</inline>
+																<dialogFullScreen
+																	jcr:primaryType="nt:unstructured"
+																	toolbar="[format#bold,format#italic,format#underline,subsuperscript#subscript,subsuperscript#superscript,justify#justifyleft,justify#justifycenter,justify#justifyright,#lists,experience-aem#colorPicker,links#modifylink,links#unlink,#paraformat,table#createoredit,table#removetable,misctools#sourceedit]">
+																	<popovers jcr:primaryType="nt:unstructured">
+																		<justify jcr:primaryType="nt:unstructured"
+																			items="[justify#justifyleft,justify#justifycenter,justify#justifyright]"
+																			ref="justify" />
+																		<lists jcr:primaryType="nt:unstructured"
+																			items="[lists#unordered,lists#ordered,lists#outdent,lists#indent]"
+																			ref="lists" />
+																		<misctools jcr:primaryType="nt:unstructured"
+																			items="[misctools#specialchars]" ref="misctools" />
+																		<paraformat
+																			jcr:primaryType="nt:unstructured"
+																			items="paraformat:getFormats:paraformat-pulldown"
+																			ref="paraformat" />
+																	</popovers>
+																</dialogFullScreen>
+															</cui>
+														</uiSettings>
+													</titoloItem2>
+													<sottoTitoloItem2
+														jcr:primaryType="nt:unstructured"
+														jcr:title="Sottotitolo Item 2"
+														fieldLabel="Sottotitolo Item 2"
+														sling:resourceType="cq/gui/components/authoring/dialog/richtext"
+														name="./sottoTitoloItem2"
+														useFixedInlineToolbar="{Boolean}true"
+														removeSingleParagraphContainer="{Boolean}true">
+														<rtePlugins jcr:primaryType="nt:unstructured"
+															removeSingleParagraphContainer="true">
+															<format jcr:primaryType="nt:unstructured"
+																features="bold,italic" />
+															<justify jcr:primaryType="nt:unstructured"
+																features="*" />
+															<links jcr:primaryType="nt:unstructured"
+																features="modifylink,unlink" />
+															<lists jcr:primaryType="nt:unstructured"
+																features="*" />
+															<paraformat jcr:primaryType="nt:unstructured"
+																features="*">
+																<formats jcr:primaryType="nt:unstructured">
+																	<default_p jcr:primaryType="nt:unstructured"
+																		description="Paragraph" tag="p" />
+																	<default_h1
+																		jcr:primaryType="nt:unstructured"
+																		description="Heading 1" tag="h1" />
+																	<default_h2
+																		jcr:primaryType="nt:unstructured"
+																		description="Heading 2" tag="h2" />
+																	<default_h3
+																		jcr:primaryType="nt:unstructured"
+																		description="Heading 3" tag="h3" />
+																</formats>
+															</paraformat>
+															<tracklinks jcr:primaryType="nt:unstructured"
+																features="*" />
+															<table jcr:primaryType="nt:unstructured"
+																features="*" />
+															<subsuperscript
+																jcr:primaryType="nt:unstructured" features="*" />
+															<misctools jcr:primaryType="nt:unstructured"
+																features="*" />
+															<experience-aem
+																jcr:primaryType="nt:unstructured" features="*" />
+														</rtePlugins>
+														<uiSettings jcr:primaryType="nt:unstructured">
+															<cui jcr:primaryType="nt:unstructured">
+																<inline jcr:primaryType="nt:unstructured"
+																	toolbar="[format#bold,format#italic,format#underline,subsuperscript#subscript,subsuperscript#superscript,justify#justifyleft,justify#justifycenter,justify#justifyright,#lists,experience-aem#colorPicker,links#modifylink,links#unlink,#paraformat,table#createoredit,table#removetable,misctools#sourceedit]">
+																	<popovers jcr:primaryType="nt:unstructured">
+																		<justify jcr:primaryType="nt:unstructured"
+																			items="[justify#justifyleft,justify#justifycenter,justify#justifyright]"
+																			ref="justify" />
+																		<lists jcr:primaryType="nt:unstructured"
+																			items="[lists#unordered,lists#ordered,lists#outdent,lists#indent]"
+																			ref="lists" />
+																		<misctools jcr:primaryType="nt:unstructured"
+																			items="[misctools#specialchars]" ref="misctools" />
+																		<paraformat
+																			jcr:primaryType="nt:unstructured"
+																			items="paraformat:getFormats:paraformat-pulldown"
+																			ref="paraformat" />
+																	</popovers>
+																</inline>
+																<dialogFullScreen
+																	jcr:primaryType="nt:unstructured"
+																	toolbar="[format#bold,format#italic,format#underline,subsuperscript#subscript,subsuperscript#superscript,justify#justifyleft,justify#justifycenter,justify#justifyright,#lists,experience-aem#colorPicker,links#modifylink,links#unlink,#paraformat,table#createoredit,table#removetable,misctools#sourceedit]">
+																	<popovers jcr:primaryType="nt:unstructured">
+																		<justify jcr:primaryType="nt:unstructured"
+																			items="[justify#justifyleft,justify#justifycenter,justify#justifyright]"
+																			ref="justify" />
+																		<lists jcr:primaryType="nt:unstructured"
+																			items="[lists#unordered,lists#ordered,lists#outdent,lists#indent]"
+																			ref="lists" />
+																		<misctools jcr:primaryType="nt:unstructured"
+																			items="[misctools#specialchars]" ref="misctools" />
+																		<paraformat
+																			jcr:primaryType="nt:unstructured"
+																			items="paraformat:getFormats:paraformat-pulldown"
+																			ref="paraformat" />
+																	</popovers>
+																</dialogFullScreen>
+															</cui>
+														</uiSettings>
+													</sottoTitoloItem2>
+													<labelCTAitem2
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+														fieldLabel="Label CTA 2" name="./labelCTAitem2" />
+													<tipoLink2 jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/select"
+														granite:class="cq-dialog-dropdown-showhide"
+														fieldLabel="Tipologia CTA 2" name="./tipologiaCTA2">
+														<items jcr:primaryType="nt:unstructured">
+															<option1 jcr:primaryType="nt:unstructured"
+																text="URL" value="url2" selected="true"  />
+															<option2 jcr:primaryType="nt:unstructured"
+																text="Modale Commodity" value="modaleCommodity2" />
+															<option3 jcr:primaryType="nt:unstructured"
+																text="Javascript" value="javascript2" />
+														</items>
+														<granite:data
+															jcr:primaryType="nt:unstructured"
+															cq-dialog-dropdown-showhide-target=".linkType2-showhide-target" />
+													</tipoLink2>
+
+													<itemjavascript
+														granite:class="linkType2-showhide-target"
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/container">
+														<items jcr:primaryType="nt:unstructured">
+															<javascriptItem2
+																jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																fieldLabel="Javascript Text" name="./javascriptItem2">
+															</javascriptItem2>
+														</items>
+														<granite:data
+															jcr:primaryType="nt:unstructured"
+															showhidetargetvalue="javascript2" />
+													</itemjavascript>
+													<tipoUrl2 jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/container">
+														<items jcr:primaryType="nt:unstructured">
+															<urlCTAitem2
+																jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+																fieldDescription="Inserisci il link per il secondo CTA"
+																fieldLabel="Path Link Secondo CTA" name="./urlCTAitem2" />
+															<modalCTAitem2 jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/foundation/form/checkbox"
+																name="./modalCTAitem2" text="La CTA apre una modale" value="true" />
+															<targetCTAItem2
+																jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/form/select"
+																fieldLabel="Target" name="./targetCTAitem2">
+																<items jcr:primaryType="nt:unstructured">
+																	<option1 jcr:primaryType="nt:unstructured"
+																		text="Self" value="_self" selected="true" />
+																	<option2 jcr:primaryType="nt:unstructured"
+																		text="Blank" value="_blank" />
+																</items>
+															</targetCTAItem2>
+														</items>
+													</tipoUrl2>
+													<altCTAItem2 jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+														fieldLabel="Alt Text" name="./altCTAitem2" />
+													<coloresfondocta2
+                                                        jcr:primaryType="nt:unstructured"
+                                                        sling:resourceType="granite/ui/components/coral/foundation/form/colorfield"
+                                                        fieldLabel="Colore sfondo cta2"
+                                                        name="./coloresfondocta2"/>
+												</items>
+											</secondItem>
+
+										</items>
+									</column>
+								</items>
+							</columns>
+						</items>
+					</configItem>
+
+
+				</items>
+			</tabs>
+		</items>
+	</content>
+</jcr:root>

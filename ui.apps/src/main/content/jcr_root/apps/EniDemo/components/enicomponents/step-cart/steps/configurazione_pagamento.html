@@ -1,0 +1,1069 @@
+<template data-sly-template.payConf="${@ cartModel, stepCartModel, lightEnabled, gasEnabled, isMonoraria}">
+  <sly data-sly-set.texts="${stepCartModel.textValues}"></sly>
+  <sly data-sly-set.businessCart="${cartModel.businessCart}"></sly>
+  <sly data-sly-set.residentialCart="${cartModel.residentialCart}"></sly>
+  <sly data-sly-set.cart="${businessCart || residentialCart}"></sly>
+  <sly data-sly-set.isTrioraria="${businessCart && businessCart.corrispettivoLuceF2}"></sly>
+  <sly data-sly-set.isScontoDirect="${cart.scontoDirect}"></sly>
+  <sly data-sly-set.isScontoDigitale="${cart.scontoDigitale}"></sly>
+  <sly data-sly-set.isScontoConfPagamento="${cart.scontoConfigurazionePagamento}"></sly>
+  <sly data-sly-set.obbligaScelteStep5="${residentialCart && residentialCart.obbligaScelteStep5}"></sly> 
+  <sly data-sly-set.isBollettinoDisabled="${obbligaScelteStep5 && residentialCart.obbligaConfigurazionePagamento == 'diretto'}"></sly>
+  <sly data-sly-set.isDirettoDisabled="${obbligaScelteStep5 && residentialCart.obbligaConfigurazionePagamento == 'bollettino'}"></sly>
+  <sly data-sly-set.isCartaceaDisabled="${obbligaScelteStep5 && residentialCart.obbligaTipoBolletta == 'digitale'}"></sly>
+  <sly data-sly-set.isDigitaleDisabled="${obbligaScelteStep5 && residentialCart.obbligaTipoBolletta == 'cartacea'}"></sly>
+
+  <!-- Titolo Disattivato -->
+  <sly data-sly-set.titoloDisattivatoDirect = "${isScontoDirect ? texts['directTitle'] : ''}"></sly>
+  <sly data-sly-set.titoloDisattivatoDigital = "${isScontoDigitale ? texts['digitalTitle'] : ''}"></sly>
+  <sly data-sly-set.titoloDisattivatoConfPagamento = "${isScontoConfPagamento ? cart.titoloConfPagamento1 : ''}"></sly>
+  
+  <sly data-sly-set.titoloDisattivato = "${titoloDisattivatoDirect || titoloDisattivatoDigital || titoloDisattivatoConfPagamento}"></sly>
+  
+	<!-- Paragrafo Disattivato -->
+  <sly data-sly-set.paragrafoDisattivatoDirect = "${isScontoDirect ? texts['directDescription'] : ''}"></sly>
+  <sly data-sly-set.paragrafoDisattivatoDigital = "${isScontoDigitale ? texts['digitalDescription'] : ''}"></sly>
+  <sly data-sly-set.paragrafoDisattivatoConfPagamento = "${isScontoConfPagamento ? cart.paragrafoConfPagamento1 : ''}"></sly>
+  
+  <sly data-sly-set.paragrafoDisattivato = "${paragrafoDisattivatoDirect || paragrafoDisattivatoDigital || paragrafoDisattivatoConfPagamento}"></sly>
+
+ <!-- Titolo Attivo -->
+  <sly data-sly-set.titoloAttivoDirect = "${isScontoDirect ? texts['directActive'] : ''}"></sly>
+  <sly data-sly-set.titoloAttivoDigital = "${isScontoDigitale ? texts['digitalActive'] : ''}"></sly>
+  <sly data-sly-set.titoloAttivoConfPagamento = "${isScontoConfPagamento ? cart.titoloConfPagamento2 : ''}"></sly>
+  
+  <sly data-sly-set.titoloAttivo = "${titoloAttivoDirect || titoloAttivoDigital || titoloAttivoConfPagamento}"></sly>
+
+<!-- PREZZI INDICIZZATI -->
+<sly data-sly-set.isPrezziIndicizzati="${cart.attivazioneVariantePrezziIndicizzati}"></sly>
+
+
+  <span
+    aria-hidden="true"
+    class="position-absolute egl-mod-comm-prevIcon d-lg-none"
+  >
+    <button
+      type="button"
+      class="freccia-torna-indietro"
+      onclick="goToStep('back')"
+      aria-label="indietro"
+    >
+      <i class="fas fa-chevron-left"></i>
+    </button>
+  </span>
+  <div class="progress w-100 position-absolute">
+    <div
+      style="width: 84%"
+      class="progress-bar"
+      role="progressbar"
+      aria-valuenow="84%"
+      aria-valuemin="0"
+      aria-valuemax="100"
+    ></div>
+  </div>
+  <div class="flex-b-100 step-configurazione-pagamento d-flex flex-wrap">
+    <div class="wrapper-contenuto-doppio d-flex flex-wrap">
+      <div data-sly-test="${residentialCart || isScontoDirect}" class="container-carrellostep-contenuto carrellostep-modo-pagamento">
+        <div class="carrellostep-config-pagamento-titolo">
+          <div>${texts['choosePayment'] @ context='html'}</div>
+        </div>
+        <div class="carrellostep-config-pagamento-bottoni tipo-pagamento">
+          <div
+            onclick="${isScontoDigitale? 'selezionaConfigPagamentiTipoPag(0)' : 'selezionaConfigPagamentiTipoPagDirect(0)' @ context='unsafe'}"
+            class="
+              box-bottoni-config-pmnt
+              opt-bollettino
+              ${isDirettoDisabled ? 'box-carrellostep-selezionato': ''}
+              ${isBollettinoDisabled ? 'button-disabled' : ''}
+            "
+          >
+            <div>${texts['bollettino'] @ context='html'}</div>
+          </div>
+          <div
+            onclick="${isScontoDigitale? 'selezionaConfigPagamentiTipoPag(1)' : 'selezionaConfigPagamentiTipoPagDirect(1)' @ context='unsafe'}"
+            class="box-bottoni-config-pmnt opt-addebitoDiretto ${isDirettoDisabled ? 'button-disabled' : 'box-carrellostep-selezionato'}"
+          >
+            <div style="width: 115px; text-align: center">${texts['diretto'] @ context='html'}</div>
+          </div>
+        </div>
+      </div>
+      <div class="container-carrellostep-contenuto carrellostep-tipo-bolletta">
+        <div class="carrellostep-config-pagamento-titolo">
+          ${texts['chooseBolletta'] @ context='html'}
+        </div>
+        <div class="carrellostep-config-pagamento-bottoni tipo-bolletta">
+          <div
+            onclick="${isScontoDigitale? 'selezionaConfigPagamentiTipoBolletta(0)' : 'selezionaConfigPagamentiTipoBollettaDirect(0)' @ context='unsafe'}"
+            class="box-bottoni-config-pmnt pmnt-cartaceo ${isDigitaleDisabled ? 'box-carrellostep-selezionato' : ''} ${isCartaceaDisabled ? 'button-disabled' : ''}"
+          >
+            <div>${texts['cartacea'] @ context='html'}</div>
+          </div>
+          <div
+            onclick="${isScontoDigitale? 'selezionaConfigPagamentiTipoBolletta(1)' : 'selezionaConfigPagamentiTipoBollettaDirect(1)' @ context='unsafe'}"
+            class="box-bottoni-config-pmnt pmnt-digitale ${isDigitaleDisabled ? 'button-disabled' : 'box-carrellostep-selezionato'}"
+          >
+          
+            <div>${texts['digitale'] @ context='html'}</div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="container-carrellostep-contenuto sconto-digitale-pagamento-step"
+      >
+        <div class="carrellostep-config-pmnt-scontoDigitale-disattivo d-none" data-sly-test="${(residentialCart && residentialCart.scontoDigitale) || isScontoDirect || isScontoConfPagamento}">
+          <div class="carrellostep-config-pmnt-scontoDigitale-disattivo-icon">
+            <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/tooltip-copy.svg" alt="tooltip" />
+          </div>
+          <div class="carrellostep-config-pmnt-scontoDigitale-disattivo-desc">
+            <div class="carrellostep-config-pagamento-titolo">
+              ${titoloDisattivato @ context='html'}
+            </div>
+            <div data-sly-test="${paragrafoDisattivato}"
+              class="
+                cap12-egl
+                carrellostep-config-pmnt-scontoDigitale-disattivo-desc-caption
+              "
+            >
+              ${paragrafoDisattivato @ context='html'}
+            </div>
+          </div>
+        </div>
+        <div class="carrellostep-config-pmnt-scontoDigitale-attivo ${isScontoConfPagamento && cart.paragrafoConfPagamento2 ? 'versione-paragrafo' : ''}" data-sly-test="${(residentialCart && residentialCart.scontoDigitale) || isScontoDirect || isScontoConfPagamento}">
+          <div class="carrellostep-config-pmnt-scontoDigitale-attivo-icon">
+            <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/sconto-digitale-attivo.svg" alt="tooltip" />
+          </div>
+          <div class="carrellostep-config-pmnt-scontoDigitale-attivo-desc">
+            <div class="carrellostep-config-pagamento-titolo">
+              ${titoloAttivo @ context='html'}
+            </div>
+            <div data-sly-test="${isScontoConfPagamento && cart.paragrafoConfPagamento2}"
+              class="
+                cap12-egl
+                carrellostep-config-pmnt-scontoDigitale-disattivo-desc-caption
+              "
+            >
+              ${cart.paragrafoConfPagamento2 @ context='html'}
+            </div>
+          </div>
+        </div>
+        <div class="carrellostep-config-pmnt-scontoDigitale-subtext" data-sly-test="${cart.showNotaCarrelloAStep5}">
+          <div class="cap12-egl">
+            ${cart.infoCarrelloAStep5 @ context='html'}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper-contenuto-doppio d-flex flex-wrap">
+      <div class="container-carrellostep-contenuto">
+        <div
+          class="
+            carrellostep-config-pagamento-titolo
+            position-relative
+            d-flex
+            flex-wrap
+            justify-content-lg-between
+          "
+        >
+          <div>${texts['rateStepSummary'] @ context='html'}</div>
+          <div class="lettura-consumi-tooltip-conf-pmnt d-flex" data-sly-test="${businessCart && lightEnabled}">
+            <div class="cap12-egl">${texts['consumiTitle'] @ context='html'}</div>
+            <div class="position-relative">
+              <img loading="lazy"
+                tabindex="-1"
+                onblur="mostraTooltipCarrelloStepFasciaOraria('aiuto-lettura-consumi')"
+                onfocus="mostraTooltipCarrelloStepFasciaOraria('aiuto-lettura-consumi')"
+                style="
+                  height: auto;
+                  width: 20px;
+                  margin-left: 5px;
+                  margin-bottom: 2px;
+                "
+                src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/tooltip-copy (2).svg"
+                alt="aiuto lettura consumi"
+              />
+              <div
+                id="aiuto-lettura-consumi"
+                class="position-absolute tooltip-carrello-step-custom d-none"
+              >
+                ${isTrioraria ? texts['businessTriorariaTooltip'] : texts['businessBiorariaTooltip'] @ context='html'}
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <sly data-sly-test="${!isPrezziIndicizzati}">
+        <div class="box-riepilogo-corrispettivi-carrellostep">
+          <!-- bioraria dual -->
+          <div data-sly-test="${residentialCart}">         
+            <div data-sly-test="${lightEnabled}"
+              class="
+                d-flex
+                justify-content-between
+                riepilogo-corrispettivi-carrellostep-dettaglio
+              "
+            >
+              <div class="box-fascia-f1 d-flex position-relative">
+                <div class="box-fascia-bold18">${isMonoraria ? 'LUCE 24h' : 'LUCE F1'}</div>
+                <div class="position-relative" data-sly-test="${isMonoraria ? residentialCart.tooltipCarrelloLuceH24 : residentialCart.tooltipCarrelloLuceF1}">
+                  <img loading="lazy"
+                    tabindex="-1"
+                    onblur="mostraTooltipCarrelloStepFasciaOraria('luce-f1-casa')"
+                    onfocus="mostraTooltipCarrelloStepFasciaOraria('luce-f1-casa')"
+                    class="box-fascia-oraria-tooltip"
+                    src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/tooltip-copy (1).svg"
+                    alt="tooltip"
+                  />
+                  <div
+                    id="luce-f1-casa"
+                    class="
+                      position-absolute
+                      tooltip-carrello-step-custom-dettaglio
+                      d-none
+                    "
+                  >
+                    ${isMonoraria ? residentialCart.tooltipCarrelloLuceH24 : residentialCart.tooltipCarrelloLuceF1 @ context='html'}
+                  </div>
+                </div>
+              </div>
+              <div class="egl-carrellostep-corrispettivi">
+                <div class="box-fascia-bold24">
+                  ${isMonoraria ? residentialCart.corrispettivoLuce24 : residentialCart.corrispettivoLuceF1}<span class="box-fascia-cap14" style="margin-left: 5px"
+                    >€/kWh</span
+                  >
+                </div>
+                <div class="box-fascia-cap12" style="float: right" data-sly-test="${ residentialCart.infoSecondLuce24 || residentialCart.infoSecondLuceF1}">
+                  ${isMonoraria ? residentialCart.infoSecondLuce24 : residentialCart.infoSecondLuceF1 @ context='html'}
+                </div>
+              </div>
+              <div class="egl-carrellostep-corrispettivi-sconto-attivo d-none">
+                <div class="box-fascia-bold24">
+                  ${isMonoraria ? residentialCart.digitalCorrispettivoLuce24 : residentialCart.digitalCorrispettivoLuceF1}<span class="box-fascia-cap14" style="margin-left: 5px"
+                    >€/kWh</span
+                  >
+                </div>
+                <div class="box-fascia-cap12" style="float: right"data-sly-test="${ residentialCart.digitalInfoSecondLuce24 || residentialCart.digitalInfoSecondLuceF1}">
+                  ${isMonoraria ? residentialCart.digitalInfoSecondLuce24 : residentialCart.digitalInfoSecondLuceF1 @ context='html'}
+                </div>
+              </div>
+            </div>
+            <div data-sly-test="${lightEnabled && !isMonoraria}"
+              class="
+                d-flex
+                justify-content-between
+                riepilogo-corrispettivi-carrellostep-dettaglio
+              "
+            >
+              <div class="box-fascia-f2 d-flex">
+                <div class="box-fascia-bold18">LUCE F2-F3</div>
+                <div class="position-relative" data-sly-test="${residentialCart.tooltipCarrelloLuceF23}">
+                  <img loading="lazy"
+                    tabindex="-1"
+                    onblur="mostraTooltipCarrelloStepFasciaOraria('luce-f2-f3-casa')"
+                    onfocus="mostraTooltipCarrelloStepFasciaOraria('luce-f2-f3-casa')"
+                    class="box-fascia-oraria-tooltip"
+                    src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/tooltip-copy (1).svg"
+                    alt="tooltip"
+                  />
+                  <div
+                    id="luce-f2-f3-casa"
+                    class="
+                      position-absolute
+                      tooltip-carrello-step-custom-dettaglio
+                      d-none
+                    "
+                  >
+                    ${residentialCart.tooltipCarrelloLuceF23 @ context='html'}
+                  </div>
+                </div>
+              </div>
+              <div class="egl-carrellostep-corrispettivi">
+                <div class="box-fascia-bold24">
+                  ${residentialCart.corrispettivoLuceF23}<span class="box-fascia-cap14" style="margin-left: 5px"
+                    >€/kWh</span
+                  >
+                </div>
+                <div class="box-fascia-cap12" style="float: right" data-sly-test="${residentialCart.infoSecondLuceF23}">
+                  ${residentialCart.infoSecondLuceF23 @ context='html'}
+                </div>
+              </div>
+              <div class="egl-carrellostep-corrispettivi-sconto-attivo d-none">
+                <div class="box-fascia-bold24">
+                  ${residentialCart.digitalCorrispettivoLuceF23}<span class="box-fascia-cap14" style="margin-left: 5px"
+                    >€/kWh</span
+                  >
+                </div>
+                <div class="box-fascia-cap12" style="float: right" data-sly-test="${residentialCart.digitalInfoSecondLuceF23}">
+                  ${residentialCart.digitalInfoSecondLuceF23 @ context='html'}
+                </div>
+              </div>
+            </div>
+            <div data-sly-test="${lightEnabled && residentialCart.commercializzazioneLuceMese}"
+              class="
+                d-flex
+                justify-content-between
+                riepilogo-corrispettivi-carrellostep-dettaglio
+              "
+            >
+              <div>
+                <div class="costi-commercializzazione box-fascia-cap14">
+                  Costi commercializzazione e vendita
+                </div>
+              </div>
+              <div style="align-self: center">
+                <div class="box-fascia-bold24">
+                  ${residentialCart.commercializzazioneLuceMese}<span class="box-fascia-cap14" style="margin-left: 5px"
+                    >€/mese</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div data-sly-test="${gasEnabled}"
+              class="
+                d-flex
+                justify-content-between
+                riepilogo-corrispettivi-carrellostep-dettaglio
+                corrispettivi-gas
+              " 
+              style="${lightEnabled ? '' : 'border-top: 0;' @ context='styleString'}"
+            >
+              <div class="box-fascia-f2 d-flex">
+                <div class="box-fascia-bold18">GAS</div>
+                <div class="position-relative" data-sly-test="${cart.tooltipCarrelloGas}">
+                  <img loading="lazy"
+                    tabindex="-1"
+                    onblur="mostraTooltipCarrelloStepFasciaOraria('luce-gas-casa')"
+                    onfocus="mostraTooltipCarrelloStepFasciaOraria('luce-gas-casa')"
+                    class="box-fascia-oraria-tooltip"
+                    src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/tooltip-copy (1).svg"
+                    alt="tooltip"
+                  />
+                  <div
+                    id="luce-gas-casa"
+                    class="
+                      position-absolute
+                      tooltip-carrello-step-custom-dettaglio
+                      d-none
+                    "
+                  >
+                    ${cart.tooltipCarrelloGas @ context='html'}
+                  </div>
+                </div>
+              </div>
+              <div class="egl-carrellostep-corrispettivi">
+                <div class="box-fascia-bold24">
+                  ${isMonoraria ? residentialCart.commercializzazioneGasSmcMonoraria : residentialCart.commercializzazioneGasSmcMultioraria}<span class="box-fascia-cap14" style="margin-left: 5px"
+                    >€/Smc</span
+                  >
+                </div>
+                <div class="box-fascia-cap12" style="float: right" data-sly-test="${residentialCart.infoSecondGas}">
+                  ${residentialCart.infoSecondGas @ context='html'}
+                </div>
+              </div>
+              <div class="egl-carrellostep-corrispettivi-sconto-attivo d-none">
+                <div class="box-fascia-bold24">
+                  ${isMonoraria ? residentialCart.digitalCommercializzazioneGasSmcMonoraria : residentialCart.digitalCommercializzazioneGasSmcMultioraria}<span class="box-fascia-cap14" style="margin-left: 5px"
+                    >€/Smc</span
+                  >
+                </div>
+                <div class="box-fascia-cap12" style="float: right" data-sly-test="${residentialCart.digitalInfoSecondGas}">
+                  ${residentialCart.digitalInfoSecondGas @ context='html'}
+                </div>
+              </div>
+            </div>
+            <div data-sly-test="${gasEnabled && residentialCart.commercializzazioneGasMese}"
+              class="
+                d-flex
+                justify-content-between
+                riepilogo-corrispettivi-carrellostep-dettaglio
+              "
+            >
+              <div>
+                <div class="costi-commercializzazione box-fascia-cap14">
+                  Costi commercializzazione e vendita
+                </div>
+              </div>
+              <div style="align-self: center">
+                <div class="box-fascia-bold24">
+                  ${residentialCart.commercializzazioneGasMese}<span class="box-fascia-cap14" style="margin-left: 5px"
+                    >€/mese</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- bioraria dual fine-->
+          <!-- bioraria BUSINESS dual-->
+          <div class="riepilogo-bioraria" data-sly-test="${businessCart && !isTrioraria}">
+            <div data-sly-test="${lightEnabled}" class="d-flex align-items-center" style="margin-bottom: 9px">
+              <img loading="lazy"
+                class="box-fascia-bi-titolo-icon"
+                src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/monoraria-icon.svg"
+                alt="icona-monoraria"
+              />
+              <div class="box-fascia-luce-titolo">LUCE MONORARIA</div>
+            </div>
+            <div data-sly-test="${lightEnabled}"
+              class="
+                d-flex
+                justify-content-between
+                riepilogo-corrispettivi-carrellostep-dettaglio
+              "
+            >
+              <div class="box-fascia-f1 d-flex">
+                <div class="box-fascia-bold18">LUCE 24h</div>
+                <div class="position-relative" data-sly-test="${businessCart.tooltipCarrelloLuceH24}">
+                  <img loading="lazy"
+                    tabindex="-1"
+                    onblur="mostraTooltipCarrelloStepFasciaOraria('luce-24-bioraria')"
+                    onfocus="mostraTooltipCarrelloStepFasciaOraria('luce-24-bioraria')"
+                    class="box-fascia-oraria-tooltip"
+                    src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/tooltip-copy (1).svg"
+                    alt="tooltip"
+                  />
+                  <div
+                    id="luce-24-bioraria"
+                    class="
+                      position-absolute
+                      tooltip-carrello-step-custom-dettaglio
+                      d-none
+                    "
+                  >
+                    ${businessCart.tooltipCarrelloLuceH24 @ context='html'}
+                  </div>
+                </div>
+              </div>
+              <div class="${isScontoDirect ? 'egl-carrellostep-corrispettivi' : ''}">
+                <div class="box-fascia-bold24">
+                  ${businessCart.corrispettivoLuce24}<span class="box-fascia-cap14" style="margin-left: 5px"
+                    >€/kWh</span
+                  >
+                </div>
+                <div class="box-fascia-cap12" style="float: right" data-sly-test="${businessCart.infoSecondLuce24}">
+                  ${businessCart.infoSecondLuce24 @ context='html'}
+                </div>
+              </div>
+              <div class="egl-carrellostep-corrispettivi-sconto-attivo d-none">
+                <div class="box-fascia-bold24">
+                  ${businessCart.directCorrispettivoLuce24}<span class="box-fascia-cap14" style="margin-left: 5px"
+                    >€/kWh</span
+                  >
+                </div>
+                <div class="box-fascia-cap12" style="float: right" data-sly-test="${businessCart.infoSecondLuce24}">
+                  ${businessCart.infoSecondLuce24 @ context='html'}
+                </div>
+              </div>
+            </div>
+            <div data-sly-test="${lightEnabled && businessCart.corrispettivoLuceF12 && businessCart.corrispettivoLuceF3}" class="d-flex align-items-center" style="margin-bottom: 9px">
+              <img loading="lazy"
+                class="box-fascia-bi-titolo-icon-doppia"
+                src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/bioraria-icon.svg"
+                alt="icona-monoraria"
+              />
+              <div class="box-fascia-luce-titolo">LUCE BIORARIA</div>
+            </div>
+            <div data-sly-test="${lightEnabled && businessCart.corrispettivoLuceF12 && businessCart.corrispettivoLuceF3}"
+              class="
+                d-flex
+                justify-content-between
+                riepilogo-corrispettivi-carrellostep-dettaglio
+              "
+            >
+              <div class="box-fascia-f1 d-flex">
+                <div class="box-fascia-bold18">LUCE F1-F2</div>
+                <div class="position-relative" data-sly-test="${businessCart.tooltipCarrelloLuceF12}">
+                  <img loading="lazy"
+                    tabindex="-1"
+                    onblur="mostraTooltipCarrelloStepFasciaOraria('luce-f1-bioraria')"
+                    onfocus="mostraTooltipCarrelloStepFasciaOraria('luce-f1-bioraria')"
+                    class="box-fascia-oraria-tooltip"
+                    src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/tooltip-copy (1).svg"
+                    alt="tooltip"
+                  />
+                  <div
+                    id="luce-f1-bioraria"
+                    class="
+                      position-absolute
+                      tooltip-carrello-step-custom-dettaglio
+                      d-none
+                    "
+                  >
+                    ${businessCart.tooltipCarrelloLuceF12 @ context='html'}
+                  </div>
+                </div>
+              </div>
+              <div class="${isScontoDirect ? 'egl-carrellostep-corrispettivi' : ''}">
+                <div class="box-fascia-bold24">
+                  ${businessCart.corrispettivoLuceF12}<span class="box-fascia-cap14" style="margin-left: 5px"
+                    >€/kWh</span
+                  >
+                </div>
+                <div class="box-fascia-cap12" style="float: right" data-sly-test="${businessCart.infoSecondLuceF12}">
+                  ${businessCart.infoSecondLuceF12 @ context='html'}
+                </div>
+              </div>
+              <div class="egl-carrellostep-corrispettivi-sconto-attivo d-none">
+                <div class="box-fascia-bold24">
+                  ${businessCart.directCorrispettivoLuceF12}<span class="box-fascia-cap14" style="margin-left: 5px"
+                    >€/kWh</span
+                  >
+                </div>
+                <div class="box-fascia-cap12" style="float: right" data-sly-test="${businessCart.infoSecondLuceF12}">
+                  ${businessCart.infoSecondLuceF12 @ context='html'}
+                </div>
+              </div>
+            </div>
+            <div data-sly-test="${lightEnabled && businessCart.corrispettivoLuceF12 && businessCart.corrispettivoLuceF3}"
+              class="
+                d-flex
+                justify-content-between
+                riepilogo-corrispettivi-carrellostep-dettaglio
+              "
+            >
+              <div class="box-fascia-f2 d-flex">
+                <div class="box-fascia-bold18">LUCE F3</div>
+                <div class="position-relative" data-sly-test="${businessCart.tooltipCarrelloLuceF23}">
+                  <img loading="lazy"
+                    tabindex="-1"
+                    onblur="mostraTooltipCarrelloStepFasciaOraria('luce-f2-f3-bioraria')"
+                    onfocus="mostraTooltipCarrelloStepFasciaOraria('luce-f2-f3-bioraria')"
+                    class="box-fascia-oraria-tooltip"
+                    src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/tooltip-copy (1).svg"
+                    alt="tooltip"
+                  />
+                  <div
+                    id="luce-f2-f3-bioraria"
+                    class="
+                      position-absolute
+                      tooltip-carrello-step-custom-dettaglio
+                      d-none
+                    "
+                  >
+                    ${businessCart.tooltipCarrelloLuceF23 @ context='html'}
+                  </div>
+                </div>
+              </div>
+              <div class="${isScontoDirect ? 'egl-carrellostep-corrispettivi' : ''}">
+                <div class="box-fascia-bold24">
+                  ${businessCart.corrispettivoLuceF3}<span class="box-fascia-cap14" style="margin-left: 5px"
+                    >€/kWh</span
+                  >
+                </div>
+                <div class="box-fascia-cap12" style="float: right" data-sly-test="${businessCart.infoSecondLuceF3}">
+                  ${businessCart.infoSecondLuceF3 @ context='html'}
+                </div>
+              </div>
+              <div class="egl-carrellostep-corrispettivi-sconto-attivo d-none">
+                <div class="box-fascia-bold24">
+                  ${businessCart.directCorrispettivoLuceF3}<span class="box-fascia-cap14" style="margin-left: 5px"
+                    >€/kWh</span
+                  >
+                </div>
+                <div class="box-fascia-cap12" style="float: right" data-sly-test="${businessCart.infoSecondLuceF3}">
+                  ${businessCart.infoSecondLuceF3 @ context='html'}
+                </div>
+              </div>
+            </div>
+            <div data-sly-test="${lightEnabled && businessCart.commercializzazioneLuceMese}"
+              class="
+                d-flex
+                justify-content-between
+                riepilogo-corrispettivi-carrellostep-dettaglio
+              "
+            >
+              <div>
+                <div class="costi-commercializzazione box-fascia-cap14">
+                  Costi commercializzazione e vendita
+                </div>
+              </div>
+              <div style="align-self: center">
+                <div class="box-fascia-bold24">
+                  ${businessCart.commercializzazioneLuceMese}<span class="box-fascia-cap14" style="margin-left: 5px"
+                    >€/mese</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div data-sly-test="${gasEnabled}"
+              class="
+                d-flex
+                justify-content-between
+                riepilogo-corrispettivi-carrellostep-dettaglio
+                corrispettivi-gas
+              "
+              style="${lightEnabled ? '' : 'border-top: 0;' @ context='styleString'}"
+            >
+              <div class="box-fascia-f2 d-flex">
+                <div class="box-fascia-bold18">GAS</div>
+                <div class="position-relative" data-sly-test="${cart.tooltipCarrelloGas}">
+                  <img loading="lazy"
+                    tabindex="-1"
+                    onblur="mostraTooltipCarrelloStepFasciaOraria('luce-gas-business')"
+                    onfocus="mostraTooltipCarrelloStepFasciaOraria('luce-gas-business')"
+                    class="box-fascia-oraria-tooltip"
+                    src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/tooltip-copy (1).svg"
+                    alt="tooltip"
+                  />
+                  <div
+                    id="luce-gas-business"
+                    class="
+                      position-absolute
+                      tooltip-carrello-step-custom-dettaglio
+                      d-none
+                    "
+                  >
+                    ${cart.tooltipCarrelloGas @ context='html'}
+                  </div>
+                </div>
+              </div>
+              <div class="${isScontoDirect ? 'egl-carrellostep-corrispettivi' : ''}">
+                <div class="box-fascia-bold24">
+                  ${businessCart.commercializzazioneGasSmcMultioraria}<span class="box-fascia-cap14" style="margin-left: 5px"
+                    >€/Smc</span
+                  >
+                </div>
+                <div class="box-fascia-cap12" style="float: right" data-sly-test="${businessCart.infoSecondGas}">
+                  ${businessCart.infoSecondGas @ context='html'}
+                </div>
+              </div>
+              <div class="egl-carrellostep-corrispettivi-sconto-attivo d-none">
+                <div class="box-fascia-bold24">
+                  ${businessCart.directCommercializzazioneGasSmcMultioraria}<span class="box-fascia-cap14" style="margin-left: 5px"
+                    >€/kWh</span
+                  >
+                </div>
+                <div class="box-fascia-cap12" style="float: right" data-sly-test="${businessCart.infoSecondGas}">
+                  ${businessCart.infoSecondGas @ context='html'}
+                </div>
+              </div>
+            </div>
+            <div data-sly-test="${gasEnabled && businessCart.commercializzazioneGasMese}"
+              class="
+                d-flex
+                justify-content-between
+                riepilogo-corrispettivi-carrellostep-dettaglio
+              "
+            >
+              <div>
+                <div class="costi-commercializzazione box-fascia-cap14">
+                  Costi commercializzazione e vendita
+                </div>
+              </div>
+              <div style="align-self: center">
+                <div class="box-fascia-bold24">
+                  ${businessCart.commercializzazioneGasMese}<span class="box-fascia-cap14" style="margin-left: 5px"
+                    >€/mese</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- bioraria BUSINESS dual fine-->
+          <!-- trioraria BUSINESS dual-->
+          <div class="riepilogo-trioraria" data-sly-test="${businessCart && isTrioraria}">
+            <div data-sly-test="${lightEnabled}" class="d-flex align-items-center" style="margin-bottom: 9px">
+              <img loading="lazy"
+                class="box-fascia-bi-titolo-icon"
+                src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/monoraria-icon.svg"
+                alt="icona-monoraria"
+              />
+              <div class="box-fascia-luce-titolo">LUCE MONORARIA</div>
+            </div>
+            <div data-sly-test="${lightEnabled}"
+              class="
+                d-flex
+                justify-content-between
+                riepilogo-corrispettivi-carrellostep-dettaglio
+              "
+            >
+              <div class="box-fascia-f1 d-flex">
+                <div class="box-fascia-bold18">LUCE 24h</div>
+                <div class="position-relative" data-sly-test="${businessCart.tooltipCarrelloLuceH24}">
+                  <img loading="lazy"
+                    tabindex="-1"
+                    onblur="mostraTooltipCarrelloStepFasciaOraria('luce-24-trioraria')"
+                    onfocus="mostraTooltipCarrelloStepFasciaOraria('luce-24-trioraria')"
+                    class="box-fascia-oraria-tooltip"
+                    src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/tooltip-copy (1).svg"
+                    alt="tooltip"
+                  />
+                  <div
+                    id="luce-24-trioraria"
+                    class="
+                      position-absolute
+                      tooltip-carrello-step-custom-dettaglio
+                      d-none
+                    "
+                  >
+                    ${businessCart.tooltipCarrelloLuceH24 @ context='html'}
+                  </div>
+                </div>
+              </div>
+              <div class="${isScontoDirect ? 'egl-carrellostep-corrispettivi' : ''}">
+                <div class="box-fascia-bold24">
+                  ${businessCart.corrispettivoLuce24}<span class="box-fascia-cap14" style="margin-left: 5px"
+                    >€/kWh</span
+                  >
+                </div>
+                <div class="box-fascia-cap12" style="float: right" data-sly-test="${businessCart.infoSecondLuce24}">
+                  ${businessCart.infoSecondLuce24 @ context='html'}
+                </div>
+              </div>
+              <div class="egl-carrellostep-corrispettivi-sconto-attivo d-none">
+                <div class="box-fascia-bold24">
+                  ${businessCart.directCorrispettivoLuce24}<span class="box-fascia-cap14" style="margin-left: 5px"
+                    >€/kWh</span
+                  >
+                </div>
+                <div class="box-fascia-cap12" style="float: right" data-sly-test="${businessCart.infoSecondLuce24}">
+                  ${businessCart.infoSecondLuce24 @ context='html'}
+                </div>
+              </div>
+            </div>
+            <div data-sly-test="${lightEnabled}" class="d-flex align-items-center" style="margin-bottom: 9px">
+              <img loading="lazy"
+                class="box-fascia-bi-titolo-icon-doppia"
+                src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/bioraria-icon.svg"
+                alt="icona-trioraria"
+              />
+              <div class="box-fascia-luce-titolo">LUCE TRIORARIA</div>
+            </div>
+            <div data-sly-test="${lightEnabled}"
+              class="
+                d-flex
+                justify-content-between
+                riepilogo-corrispettivi-carrellostep-dettaglio
+              "
+            >
+              <div class="box-fascia-f1 d-flex">
+                <div class="box-fascia-bold18">LUCE F1</div>
+                <div class="position-relative" data-sly-test="${businessCart.tooltipCarrelloLuceF1}">
+                  <img loading="lazy"
+                    tabindex="-1"
+                    onblur="mostraTooltipCarrelloStepFasciaOraria('luce-f1-trioraria')"
+                    onfocus="mostraTooltipCarrelloStepFasciaOraria('luce-f1-trioraria')"
+                    class="box-fascia-oraria-tooltip"
+                    src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/tooltip-copy (1).svg"
+                    alt="tooltip"
+                  />
+                  <div
+                    id="luce-f1-trioraria"
+                    class="
+                      position-absolute
+                      tooltip-carrello-step-custom-dettaglio
+                      d-none
+                    "
+                  >
+                    ${businessCart.tooltipCarrelloLuceF1 @ context='html'}
+                  </div>
+                </div>
+              </div>
+              <div class="${isScontoDirect ? 'egl-carrellostep-corrispettivi' : ''}">
+                <div class="box-fascia-bold24">
+                  ${businessCart.corrispettivoLuceF1}<span class="box-fascia-cap14" style="margin-left: 5px"
+                    >€/kWh</span
+                  >
+                </div>
+                <div class="box-fascia-cap12" style="float: right" data-sly-test="${businessCart.infoSecondLuceF1}">
+                  ${businessCart.infoSecondLuceF1 @ context='html'}
+                </div>
+              </div>
+              <div class="egl-carrellostep-corrispettivi-sconto-attivo d-none">
+                <div class="box-fascia-bold24">
+                  ${businessCart.directCorrispettivoLuceF1}<span class="box-fascia-cap14" style="margin-left: 5px"
+                    >€/kWh</span
+                  >
+                </div>
+                <div class="box-fascia-cap12" style="float: right" data-sly-test="${businessCart.infoSecondLuceF1}">
+                  ${businessCart.infoSecondLuceF1 @ context='html'}
+                </div>
+              </div>
+            </div>
+            <div data-sly-test="${lightEnabled}"
+              class="
+                d-flex
+                justify-content-between
+                riepilogo-corrispettivi-carrellostep-dettaglio
+              "
+            >
+              <div class="box-fascia-f2 d-flex">
+                <div class="box-fascia-bold18">LUCE F2</div>
+                <div class="position-relative" data-sly-test="${businessCart.tooltipCarrelloLuceF2}">
+                  <img loading="lazy"
+                    tabindex="-1"
+                    onblur="mostraTooltipCarrelloStepFasciaOraria('luce-f2-trioraria')"
+                    onfocus="mostraTooltipCarrelloStepFasciaOraria('luce-f2-trioraria')"
+                    class="box-fascia-oraria-tooltip"
+                    src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/tooltip-copy (1).svg"
+                    alt="tooltip"
+                  />
+                  <div
+                    id="luce-f2-trioraria"
+                    class="
+                      position-absolute
+                      tooltip-carrello-step-custom-dettaglio
+                      d-none
+                    "
+                  >
+                    ${businessCart.tooltipCarrelloLuceF2 @ context='html'}
+                  </div>
+                </div>
+              </div>
+              <div class="${isScontoDirect ? 'egl-carrellostep-corrispettivi' : ''}">
+                <div class="box-fascia-bold24">
+                  ${businessCart.corrispettivoLuceF2}<span class="box-fascia-cap14" style="margin-left: 5px"
+                    >€/kWh</span
+                  >
+                </div>
+                <div class="box-fascia-cap12" style="float: right" data-sly-test="${businessCart.infoSecondLuceF2}">
+                  ${businessCart.infoSecondLuceF2 @ context='html'}
+                </div>
+              </div>
+              <div class="egl-carrellostep-corrispettivi-sconto-attivo d-none">
+                <div class="box-fascia-bold24">
+                  ${businessCart.directCorrispettivoLuceF2}<span class="box-fascia-cap14" style="margin-left: 5px"
+                    >€/kWh</span
+                  >
+                </div>
+                <div class="box-fascia-cap12" style="float: right" data-sly-test="${businessCart.infoSecondLuceF2}">
+                  ${businessCart.infoSecondLuceF2 @ context='html'}
+                </div>
+              </div>
+            </div>
+            <div data-sly-test="${lightEnabled}"
+              class="
+                d-flex
+                justify-content-between
+                riepilogo-corrispettivi-carrellostep-dettaglio
+              "
+            >
+              <div class="box-fascia-f2 d-flex">
+                <div class="box-fascia-bold18">LUCE F3</div>
+                <div class="position-relative" data-sly-test="${businessCart.tooltipCarrelloLuceF3}">
+                  <img loading="lazy"
+                    tabindex="-1"
+                    onblur="mostraTooltipCarrelloStepFasciaOraria('luce-f3-trioraria')"
+                    onfocus="mostraTooltipCarrelloStepFasciaOraria('luce-f3-trioraria')"
+                    class="box-fascia-oraria-tooltip"
+                    src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/tooltip-copy (1).svg"
+                    alt="tooltip"
+                  />
+                  <div
+                    id="luce-f3-trioraria"
+                    class="
+                      position-absolute
+                      tooltip-carrello-step-custom-dettaglio
+                      d-none
+                    "
+                  >
+                    ${businessCart.tooltipCarrelloLuceF3 @ context='html'}
+                  </div>
+                </div>
+              </div>
+              <div class="${isScontoDirect ? 'egl-carrellostep-corrispettivi' : ''}">
+                <div class="box-fascia-bold24">
+                  ${businessCart.corrispettivoLuceF3}<span class="box-fascia-cap14" style="margin-left: 5px"
+                    >€/kWh</span
+                  >
+                </div>
+                <div class="box-fascia-cap12" style="float: right" data-sly-test="${businessCart.infoSecondLuceF3}">
+                  ${businessCart.infoSecondLuceF3 @ context='html'}
+                </div>
+              </div>
+              <div class="egl-carrellostep-corrispettivi-sconto-attivo d-none">
+                <div class="box-fascia-bold24">
+                  ${businessCart.directCorrispettivoLuceF3}<span class="box-fascia-cap14" style="margin-left: 5px"
+                    >€/kWh</span
+                  >
+                </div>
+                <div class="box-fascia-cap12" style="float: right" data-sly-test="${businessCart.infoSecondLuceF3}">
+                  ${businessCart.infoSecondLuceF3 @ context='html'}
+                </div>
+              </div>
+            </div>
+            <div data-sly-test="${lightEnabled && businessCart.commercializzazioneLuceMese}"
+              class="
+                d-flex
+                justify-content-between
+                riepilogo-corrispettivi-carrellostep-dettaglio
+              "
+            >
+              <div>
+                <div class="costi-commercializzazione box-fascia-cap14">
+                  Costi commercializzazione e vendita
+                </div>
+              </div>
+              <div style="align-self: center">
+                <div class="box-fascia-bold24">
+                  ${businessCart.commercializzazioneLuceMese}<span class="box-fascia-cap14" style="margin-left: 5px"
+                    >€/mese</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div data-sly-test="${gasEnabled}"
+              class="
+                d-flex
+                justify-content-between
+                riepilogo-corrispettivi-carrellostep-dettaglio
+                corrispettivi-gas
+              "
+              style="${lightEnabled ? '' : 'border-top: 0;' @ context='styleString'}"
+            >
+              <div class="box-fascia-f2 d-flex">
+                <div class="box-fascia-bold18">GAS</div>
+                <div class="position-relative" data-sly-test="${cart.tooltipCarrelloGas}">
+                  <img loading="lazy"
+                    tabindex="-1"
+                    onblur="mostraTooltipCarrelloStepFasciaOraria('luce-gas-business2')"
+                    onfocus="mostraTooltipCarrelloStepFasciaOraria('luce-gas-business2')"
+                    class="box-fascia-oraria-tooltip"
+                    src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/tooltip-copy (1).svg"
+                    alt="tooltip"
+                  />
+                  <div
+                    id="luce-gas-business2"
+                    class="
+                      position-absolute
+                      tooltip-carrello-step-custom-dettaglio
+                      d-none
+                    "
+                  >
+                    ${cart.tooltipCarrelloGas @ context='html'}
+                  </div>
+                </div>
+              </div>
+              <div class="${isScontoDirect ? 'egl-carrellostep-corrispettivi' : ''}">
+                <div class="box-fascia-bold24">
+                  ${businessCart.commercializzazioneGasSmcMultioraria}<span class="box-fascia-cap14" style="margin-left: 5px"
+                    >€/Smc</span
+                  >
+                </div>
+                <div class="box-fascia-cap12" style="float: right" data-sly-test="${businessCart.infoSecondGas}">
+                  ${businessCart.infoSecondGas @ context='html'}
+                </div>
+              </div>
+              <div class="egl-carrellostep-corrispettivi-sconto-attivo d-none">
+                <div class="box-fascia-bold24">
+                  ${businessCart.directCommercializzazioneGasSmcMultioraria}<span class="box-fascia-cap14" style="margin-left: 5px"
+                    >€/kWh</span
+                  >
+                </div>
+                <div class="box-fascia-cap12" style="float: right" data-sly-test="${businessCart.infoSecondGas}">
+                  ${businessCart.infoSecondGas @ context='html'}
+                </div>
+              </div>
+            </div>
+            <div data-sly-test="${gasEnabled && businessCart.commercializzazioneGasMese}"
+              class="
+                d-flex
+                justify-content-between
+                riepilogo-corrispettivi-carrellostep-dettaglio
+              "
+            >
+              <div>
+                <div class="costi-commercializzazione box-fascia-cap14">
+                  Costi commercializzazione e vendita
+                </div>
+              </div>
+              <div style="align-self: center">
+                <div class="box-fascia-bold24">
+                  ${businessCart.commercializzazioneGasMese}<span class="box-fascia-cap14" style="margin-left: 5px"
+                    >€/mese</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- trioraria BUSINESS dual fine-->
+        </div>
+        </sly>
+        
+        <!-- PREZZI INDICIZZATI -->
+        <sly data-sly-test="${isPrezziIndicizzati}">
+	       	<div class="box-riepilogo-corrispettivi-carrellostep">
+	        <!-- TREND-->
+	        <div class="riepilogo-trioraria">
+	        <!-- LUCE -->
+	          <div data-sly-test="${lightEnabled}" class="carrellostep-trend-fascia-box ">
+	            <div class="cart-card-opt-titolo">
+	              <div class="p18-egl d-flex align-items-center">
+	                <b>${isMonoraria ? 'MONORARIA' : 'BIORARIA'} ${businessCart ? ' E TRIORARIA' : ''}</b>
+	              </div>
+	            </div>
+	             <div class="dettaglio-trend-esploso">
+	              <div class="d-flex justify-content-between align-items-center">
+	                <p class="p18-egl ">Prezzo all'ingrosso
+	                </p>
+	                <p class="p18-egl mb-0 price-txt-bold">${cart.scontoDigitale ? cart.digitalPrezzoAllingrossoLuce : cart.prezzoAllingrossoLuce}</p>
+	              </div>
+	              <div class="d-flex justify-content-between align-items-center">
+	                <p class="p18-egl">Contributo al consumo
+	                </p>
+	                <p class="p18-egl  mb-0 price-txt-bold">${cart.scontoDigitale ? cart.digitalPrezzoAlConsumoLuce : cart.prezzoAlConsumoLuce} <small>€/kWh</small></p>
+	              </div>
+	              <div class="d-flex justify-content-between align-items-center">
+	                <p class="p18-egl"> Costi commercializzazione e vendita
+	                </p>
+	                <p class="p18-egl  mb-0 price-txt-bold">${cart.commercializzazioneLuceMese}<small>€/mese</small></p>
+	              </div>
+	            </div>
+	          </div>
+	          <!-- GAS -->
+	          <div data-sly-test="${gasEnabled}" class="carrellostep-trend-fascia-box ">
+	            <div class="cart-card-opt-titolo">
+	              <div class="p18-egl d-flex align-items-center">
+	                <b>GAS</b>
+	              </div>
+	            </div>
+	            <div class="dettaglio-trend-esploso">
+	              <div class="d-flex justify-content-between align-items-center">
+	                <p class="p18-egl ">Prezzo all'ingrosso
+	                </p>
+	                <p class="p18-egl mb-0 price-txt-bold">${cart.scontoDigitale ? cart.digitalPrezzoAllingrossoGas : cart.prezzoAllingrossoGas}</p>
+	              </div>
+	              <div class="d-flex justify-content-between align-items-center">
+	                <p class="p18-egl">Contributo al consumo
+	                </p>
+	                <p class="p18-egl  mb-0 price-txt-bold">${cart.scontoDigitale ? cart.digitalPrezzoAlConsumoGas : cart.prezzoAlConsumoGas} <small>€/Smc</small></p>
+	              </div>
+	              <div class="d-flex justify-content-between align-items-center">
+	                <p class="p18-egl"> Costi commercializzazione e vendita
+	                </p>
+	                <p class="p18-egl  mb-0 price-txt-bold">${cart.commercializzazioneGasMese} <small>€/mese</small></p>
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+	        <!-- TREND fine-->
+	      </div>
+        </sly>
+        
+      </div>
+    </div>
+  </div>
+  <!-- bottoni -->
+  <div
+    class="
+      d-flex
+      flex-wrap
+      egl-modal-body-carrellostep-footer
+      indietro-e-continua
+      flex-b-100
+    "
+  >
+    <button
+      type="button"
+      class="p20-egl egl-cart-cta-primary-white d-none d-lg-block"
+      onclick="goToStep('back')"
+    >
+      ${texts['back'] @ context='html'}
+    </button>
+    <button
+      type="button"
+      class="p20-egl egl-cart-cta-primary-yellow"
+      onclick="goToStep('next')"
+    >
+      ${texts['continue'] @ context='html'}
+    </button>
+  </div>
+</template>

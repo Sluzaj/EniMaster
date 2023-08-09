@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~ Copyright 2017 Adobe
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+          xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0"
+          xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Page"
+    sling:resourceType="cq/gui/components/authoring/dialog"
+    extraClientlibs="[cq.common.wcm,core.wcm.components.page.v2.editor,cq.wcm.msm.properties,granite.contexthub.configuration,cq.siteadmin.admin.properties]"
+    helpPath="https://www.adobe.com/go/aem_cmp_page_v2"
+    mode="edit"
+    trackingFeature="core-components:page:v2">
+    <content
+        granite:class="cq-dialog-content-page"
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/container">
+        <items jcr:primaryType="nt:unstructured">
+            <tabs
+                granite:class="cq-siteadmin-admin-properties-tabs"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/tabs"
+                size="L">
+                <items jcr:primaryType="nt:unstructured">
+                    <headerFooter
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Header &amp; Footer &amp; Page Configs"
+                        sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns">
+                        <items jcr:primaryType="nt:unstructured">
+                            <column
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/container">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <headerPath
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                        fieldLabel="Header XF Path"
+                                        name="./headerPath"
+                                        rootPath="/content/experience-fragments"/>
+                                    <footerPath
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                        fieldLabel="Footer XF Path"
+                                        name="./footerPath"
+                                        rootPath="/content/experience-fragments"/>
+                                    <courtesyPopUp jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="/libs/granite/ui/components/foundation/form/switch"
+                                        fieldLabel="Mostra pop-up di cortesia"
+                                        fieldDescription="Nasconde il contenuto della pagina e mostra il pop-up di cortesia" 
+                                        onText="Attivo"
+                                        offText="Disattivo" name="./courtesyPopUp" />
+                                </items>
+                            </column>
+                        </items>
+                    </headerFooter>
+                    <seoConfig
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="SEO Configurations"
+                        sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns">
+                        <items jcr:primaryType="nt:unstructured">
+                            <column
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/container">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <canonicalUrl
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                        fieldLabel="Canonical URL"
+                                        emptyText="Default: current page Vanity URL"
+                                        name="./pageCanonicalUrl"/>
+                                    <ogTitle
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                        fieldLabel="Open Graph Title"
+                                        emptyText="Default: current page Title"
+                                        name="./ogTitle"/>
+                                    <ogDescription
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                        fieldLabel="Open Graph Description"
+                                        emptyText="Default: current page Description"
+                                        name="./ogDescription"/>
+                                    <ogImage
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                        fieldLabel="Open Graph Image"
+                                        name="./ogImage"
+                                        rootPath="/content/dam/enigaseluce"/>
+                                    <accessBlocked jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="/libs/granite/ui/components/foundation/form/switch"
+                                        fieldLabel="Accesso Diretto Bloccato"
+                                        fieldDescription="Attivare per impedire l'accesso diretto alla pagina su web" 
+                                        onText="Attivo"
+                                        offText="Disattivo" name="./accessBlocked" />
+                                    <allowedParameters jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+                                        class="full-width" fieldLabel="Parametri consentiti"
+                                        composite="{Boolean}true">
+                                        <field jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/form/fieldset"
+                                            acs-commons-nested="" name="./allowedParameters">
+                                            <layout jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/layouts/container"
+                                                method="absolute" />
+                                            <items jcr:primaryType="nt:unstructured">
+                                                <key jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                                    fieldLabel="Parametro" name="./key" />
+                                                <value jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                                    fieldLabel="Valore atteso" name="./value" />
+                                            </items>
+                                        </field>
+                                    </allowedParameters>
+                                    <allowedReferrers jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+                                        class="full-width" fieldLabel="Referrer consentiti"
+                                        composite="{Boolean}true">
+                                        <field jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/form/fieldset"
+                                            acs-commons-nested="" name="./allowedReferrers">
+                                            <layout jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/layouts/container"
+                                                method="absolute" />
+                                            <items jcr:primaryType="nt:unstructured">
+                                                <referrer jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                                    fieldLabel="Referrer" name="./referrer" />
+                                            </items>
+                                        </field>
+                                    </allowedReferrers>
+                                    <urlRedirect
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                        fieldLabel="link for redirect"
+                                        name="./urlRedirect"/>
+                                    <redirType jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="/libs/granite/ui/components/foundation/form/switch"
+                                        fieldLabel="Tipologia Di Redirect"
+                                        fieldDescription="Richiede la configurazione del campo 'Redirect' nel tab 'Advanced'" 
+                                        onText="302"
+                                        offText="301" name="./redirType" />
+                                </items>
+                            </column>
+                        </items>
+                    </seoConfig>
+                </items>
+            </tabs>
+        </items>
+    </content>
+</jcr:root>

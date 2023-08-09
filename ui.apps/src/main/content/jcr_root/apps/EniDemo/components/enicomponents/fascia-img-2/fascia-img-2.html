@@ -1,0 +1,40 @@
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	    data-sly-test.testing="${!properties.titolo}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+
+    <div id="${properties.id}" class="bg-white fascia-img-2" style="background-color:${properties.coloreBackground @ context='styleString'} !important">
+        <div class="container-lg px-lg-0 fascia-img-2-container ${properties.variante}">
+            <div class="row">
+                <div class="col-12 ">
+                    <div class="d-flex flex-column flex-lg-row" data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagineReference}">
+                        <picture data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=properties.immagineReference}" >
+                            <sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+                                <source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+                                <source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+                            </sly>
+                            <img loading="lazy" class="fascia-img-2-img" src="${renditionsManager.renditions['1920px']}" alt="${image.description}">
+                        </picture>
+                        <div class="fascia-img-2-testo">
+                            <h2>${properties.titolo}</h2>
+                            <div data-sly-test="${properties.titolo}" class="fasciaImg-rettangolo"></div>
+                            <div class="p18-egl">${properties.testo @context='html'}</div>
+                            <div data-sly-test="${properties.urlLogo1 || properties.urlLogo2}" class="d-flex">
+	                            <a data-sly-test="${properties.urlLogo1}" href="${properties.urlLogo1}" target="${properties.targetLogo1}">
+	                            	<img loading="lazy" data-sly-use.image1="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.logo1Reference}" 
+                						src="${properties.logo1Reference}" alt="${image1.description}" class="cta-apple">
+	                            </a>
+                                <a data-sly-test="${properties.urlLogo2}" href="${properties.urlLogo2}" target="${properties.targetLogo2}">
+                                	<img loading="lazy" data-sly-use.image2="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.logo2Reference}" 
+                						src="${properties.logo2Reference}" alt="${image2.description}" class="cta-google">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+

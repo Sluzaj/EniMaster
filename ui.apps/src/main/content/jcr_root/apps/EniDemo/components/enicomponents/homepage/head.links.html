@@ -1,0 +1,24 @@
+<sly data-sly-use.eniEnvs="com.egl.core.models.utils.ENIEnvironmentConfig"></sly>
+<meta property="og:title" content="${pageProperties.ogTitle || currentPage.title}" />
+<meta property="og:description" content="${pageProperties.ogDescription || currentPage.description}" />
+<meta property="og:image" content="${eniEnvs.ogImage}" />
+<meta property="og:url" content="${eniEnvs.vanityUrl}" />
+<sly data-sly-test="${'/content/enigaseluce/it/it/homepage-casa' == currentPage.path}">
+    <meta name="facebook-domain-verification" content="q36knkpmksmu74m623yf57mrqcz0of" />
+</sly>
+<link data-sly-use.page="com.adobe.cq.wcm.core.components.models.Page"
+    data-sly-test="${eniEnvs.canonicalUrl}"
+    rel="canonical" href="${eniEnvs.canonicalUrl}">
+<link data-sly-test="${page.alternateLanguageLinks}"
+    data-sly-repeat="${page.alternateLanguageLinks.entrySet}"
+    rel="alternate" hreflang="${item.key.toLanguageTag}" href="${item.value}">
+    
+<sly data-sly-list.lista="${eniEnvs.priorityImageHome}">
+	<sly data-sly-use.images="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=lista}">
+		<sly data-sly-set.rendDesk="${images.renditions}"></sly>
+		<sly data-sly-set.doubleRendDesk="${images.doubledRenditions}"></sly>
+    	<link data-sly-test="${rendDesk['1920px']}" rel="preload" as="image" href="${rendDesk['1920px'] @ context='uri'}" 
+    	imagesrcset="${rendDesk['1440px'] @ context='uri'} 1440w, ${rendDesk['1024px'] @ context='uri'} 1024w, ${rendDesk['768px'] @ context='uri'} 768w, ${rendDesk['360px'] @ context='uri'} 360w">
+    </sly>
+
+</sly>

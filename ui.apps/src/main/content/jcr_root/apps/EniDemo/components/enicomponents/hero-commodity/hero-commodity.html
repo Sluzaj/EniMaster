@@ -1,0 +1,817 @@
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	    data-sly-test.testing="${!properties.titoloH1}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<sly data-sly-test.isFragment="${properties.compilazioneComponente == 'contentFragment'}"></sly>
+
+<sly data-sly-test.isOfferta="${isFragment && properties.pathFragment}"></sly>
+
+<sly data-sly-test.isBasic="${properties.tipoHeroCommodity == 'heroCommodity'}"></sly>
+
+<sly data-sly-use.fragModel="com.egl.core.models.herocommodity.FragmentPromozioneHeroModel"></sly>
+
+  <!-- HERO BASIC COLOR -->
+  <div id="${properties.id}" data-sly-test="${properties.tipoBackground == 'coloreBack' && !isFragment}" 
+    class="container-fluid egl-hero-basic-color-container heroC-edit-${resource.name}" 
+    style="background-color:${properties.coloreBackground @ context='styleString'};">
+      <div class="row">
+        <div class="col-12">
+          <div class="container-lg egl-hero-basic-item-container">
+            <div class="row egl-row-hero-cmdt-logos">
+              <div class="hero-cmdt-logo-1" data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.logo1Reference}">
+                <a data-sly-test="${properties.logo1Reference}" href= "${properties.urlLogo1}" target="${properties.targetLogo1}">
+                	<img src="${properties.logo1Reference}" alt="${image.description}"/>
+                </a>
+              </div>
+              <div class="hero-cmdt-logo-2" style="--bg-HeroComm-color:${properties.coloreSeparatore @context='styleToken'}" 
+              	data-sly-test="${properties.logo2Reference}" data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.logo2Reference}">
+                <a href= "${properties.urlLogo2}" target="${properties.targetLogo2}">
+                	<img src="${properties.logo2Reference}" alt="${image.description}"/>
+                </a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="h1-egl titolo-hero-cmdt">
+                ${properties.titoloH1 @context='html'}
+              </div>
+            </div>
+            <div class="row">
+              <div class="h3-egl content-hero-cmdt">
+                ${properties.sottoTitoloH3 @context='html'}
+              </div>
+            </div>
+            <div class="row">
+              <div class="cap12-egl caption-hero-cmdt">
+                ${properties.notaCaption @context='html'}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- KSP x 2 -->
+       <div data-sly-test="${properties.tipoHeroCommodity == 'heroCommodityKSPx2'}" class="row">
+        <div class="col-12">
+          <div
+            class="
+              container-fluid
+              position-absolute
+              egl-hero-ksp-band-container
+            "
+          >
+            <div class="container-lg px-lg-0">
+              <div class="row mx-0 egl-hero-ksp-band justify-content-md-start justify-content-center">
+                <div class="position-relative text-center text-md-left">
+                  <p class="p16-egl egl-hero-ksp-text mb-1">
+                    ${properties.titoloKSP1}
+                  </p>
+                  <span class="h3-egl egl-text-color"><b>${properties.descrizioneKSP1 @context='html'}</b></span>
+                </div>
+                <div data-sly-test="${properties.titoloKSP2 || properties.descrizioneKSP2}" class="position-relative d-none d-md-block">
+                  <p class="p16-egl egl-hero-ksp-text mb-1">
+                    ${properties.titoloKSP2}
+                  </p>
+                  <span class="h3-egl egl-text-color"><b>${properties.descrizioneKSP2 @context='html'}</b></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+       <!-- FINE KSP x 2 -->
+       
+             <!-- hero KSP+img-->
+        <div data-sly-test="${properties.tipoHeroCommodity == 'heroCommodityKSPimg'}" class="row">
+        <div class="col-12">
+          <div
+            class="
+              container-fluid
+              position-absolute
+              egl-hero-ksp-band-container
+            "
+          >
+            <div class="container-lg px-lg-0">
+              <div class="row mx-0 egl-hero-ksp-band">
+                <img
+                  class="hero-ksp-icon"
+                  src="${properties.imgKspReference}"
+                  alt="${properties.altImgKsp}"
+                />
+                <div class="col-md-9 text-center text-md-left">
+                  <p class="p16-egl egl-hero-ksp-text mb-1">${properties.titoloKSP}</p>
+                  <span class="h3-egl egl-text-color">
+                    <b>${properties.descrizioneKSP @context='html'}</b>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- FINE hero KSP+img--> 
+    </div>
+    
+  
+  <!-- HERO BASIC PHOTO -->
+  <div data-sly-use.heroC="com.egl.core.models.herocommodity.FragmentOffertaHeroModel"
+		data-sly-test.offerta="${heroC.fragOfferta}" data-sly-unwrap>
+    <sly data-sly-test="${properties.tipoBackground == 'immagineBack' || isFragment}">
+      <sly data-sly-set.img="${isOfferta ? offerta.imgHeroBanner : properties.immagineBackReference}"></sly>
+      <sly data-sly-use.rendMan="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=img}"></sly>
+      <sly data-sly-set.rendDesk="${rendMan.renditions}"></sly>
+      <sly data-sly-set.doubleRendDesk="${rendMan.doubledRenditions}"></sly>
+
+      <style>
+        .heroC-edit-${resource.name @ context='styleToken'}.egl-hero-basic-photo-container {
+          background: url(${rendDesk['360px'] @ context='uri'}) no-repeat center center ;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+        }
+        @media (min-resolution: 150dpi) {
+          .heroC-edit-${resource.name @ context='styleToken'}.egl-hero-basic-photo-container {
+            background: url(${doubleRendDesk['360px'] @ context='uri'}) no-repeat center center ;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+          }
+        }
+        @media (min-width: 768px) {
+          .heroC-edit-${resource.name @ context='styleToken'}.egl-hero-basic-photo-container {
+            background: url(${rendDesk['768px'] @ context='uri'}) no-repeat center center ;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+          }
+        }
+        @media (min-width: 768px) and (min-resolution: 150dpi) {
+          .heroC-edit-${resource.name @ context='styleToken'}.egl-hero-basic-photo-container {
+            background: url(${doubleRendDesk['768px'] @ context='uri'}) no-repeat center center ;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+          }
+        }
+        @media (min-width: 1024px) {
+          .heroC-edit-${resource.name @ context='styleToken'}.egl-hero-basic-photo-container {
+            background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+          }
+        }
+        @media (min-width: 1024px) and (min-resolution: 150dpi) {
+          .heroC-edit-${resource.name @ context='styleToken'}.egl-hero-basic-photo-container {
+            background: url(${doubleRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+          }
+        }
+        @media (min-width: 1440px) {
+          .heroC-edit-${resource.name @ context='styleToken'}.egl-hero-basic-photo-container {
+            background: url(${rendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+          }
+        }
+        @media (min-width: 1440px) and (min-resolution: 150dpi) {
+          .heroC-edit-${resource.name @ context='styleToken'}.egl-hero-basic-photo-container {
+            background: url(${doubleRendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+          }
+        }
+        @media (min-width: 1920px) {
+          .heroC-edit-${resource.name @ context='styleToken'}.egl-hero-basic-photo-container {
+            background: url(${rendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+          }
+        }
+        @media (min-width: 1920px) and (min-resolution: 150dpi) {
+          .heroC-edit-${resource.name @ context='styleToken'}.egl-hero-basic-photo-container {
+            background: url(${doubleRendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+          }
+        }
+      </style>
+
+      <div id="${properties.id}" data-sly-set.img="${isOfferta ? offerta.imgHeroBanner : properties.immagineBackReference}"
+        class="container-fluid egl-hero-basic-photo-container heroC-edit-${resource.name}">
+        <div class="row ${properties.coloreVelina}" style="--velina1-HeroComm-color:${properties.colore1 @context='styleToken'}" >
+          <div class="col-12">
+            <div class="container-lg egl-hero-basic-item-container">
+              <div class="row egl-row-hero-cmdt-logos">
+                <div class="hero-cmdt-logo-1" data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.logo1Reference}">
+                  <a data-sly-test="${properties.logo1Reference}" href= "${properties.urlLogo1}" target="${properties.targetLogo1}">
+                    <img src="${properties.logo1Reference}" alt="${image.description}"/>
+                  </a>
+                </div>
+                <div class="hero-cmdt-logo-2" style="--bg-HeroComm-color:${properties.coloreSeparatore @context='styleToken'}" 
+                	data-sly-test="${properties.logo2Reference}" data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.logo2Reference}">
+                <a href= "${properties.urlLogo2}" target="${properties.targetLogo2}">
+                    <img src="${properties.logo2Reference}" alt="${image.description}"/>
+                  </a>
+                </div>
+              </div>
+              <div class="row">
+                <div class="h1-egl titolo-hero-cmdt">
+                  ${properties.titoloH1 @context='html'}
+                </div>
+              </div>
+              <div class="row">
+                <sly data-sly-set.introduzione="${isOfferta ? offerta.introduzioneOfferta : properties.sottoTitoloH3}"></sly>
+                <div class="h3-egl content-hero-cmdt" data-sly-use.procText="${'com.egl.core.models.utils.RTEPlaceholderHandler' @ text=introduzione}">
+                  ${procText.processed @context='html'}
+                </div>
+              </div>
+              <div class="row">
+                <sly data-sly-set.noteLegali="${isOfferta ? offerta.noteLegaliHeroBanner : properties.notaCaption}"></sly>
+                <div class="cap12-egl caption-hero-cmdt" data-sly-use.procTextNote="${'com.egl.core.models.utils.RTEPlaceholderHandler' @ text=noteLegali}">
+                  ${procTextNote.processed @context='html'}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- KSP x 2 -->
+        <div data-sly-test="${properties.tipoHeroCommodity == 'heroCommodityKSPx2'}" class="row">
+          <div class="col-12">
+            <div
+              class="
+                container-fluid
+                position-absolute
+                egl-hero-ksp-band-container
+              "
+            >
+              <div class="container-lg px-lg-0">
+                <div class="row mx-0 egl-hero-ksp-band justify-content-md-start justify-content-center">
+                  <div class="position-relative text-center text-md-left">
+                    <p class="p16-egl egl-hero-ksp-text mb-1">
+                      ${isOfferta ? offerta.vsp1Titolo : properties.titoloKSP1}
+                    </p>
+                    <sly data-sly-set.vsp1D="${isFragment ? offerta.vsp1Descrizione : properties.descrizioneKSP1}"></sly>
+                    <span class="h3-egl egl-text-color" data-sly-use.procTextVsp1="${'com.egl.core.models.utils.RTEPlaceholderHandler' @ text=vsp1D}">
+                      <b>${procTextVsp1.processed @context='html'}</b>
+                    </span>
+                  </div>
+                  <div data-sly-test="${(!isOfferta && (properties.titoloKSP2 || properties.descrizioneKSP2)) || (isOfferta && (offerta.vsp2Titolo || offerta.vsp2Descrizione))}"  
+                  	class="position-relative d-none d-md-block">
+                    <p class="p16-egl egl-hero-ksp-text mb-1">
+                      ${isOfferta ? offerta.vsp2Titolo : properties.titoloKSP2}
+                    </p>
+                    <sly data-sly-set.vsp2D="${isFragment ? offerta.vsp2Descrizione : properties.descrizioneKSP2}"></sly>
+                    <span class="h3-egl egl-text-color" data-sly-use.procTextVsp2="${'com.egl.core.models.utils.RTEPlaceholderHandler' @ text=vsp2D}">
+                      <b>${procTextVsp2.processed @context='html'}</b>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- FINE KSP x 2 -->
+        
+        <!-- hero KSP+img-->
+          <div data-sly-test="${properties.tipoHeroCommodity == 'heroCommodityKSPimg'}" class="row">
+          <div class="col-12">
+            <div
+              class="
+                container-fluid
+                position-absolute
+                egl-hero-ksp-band-container
+              "
+            >
+              <div class="container-lg px-lg-0">
+                <div class="row mx-0 egl-hero-ksp-band">
+                  <img
+                    class="hero-ksp-icon"
+                    src="${isOfferta  ? offerta.imgSellingPoint : properties.imgKspReference}"
+                    alt="${properties.altImgKsp}"
+                  />
+                  <div class="col-md-9 text-center text-md-left">
+                    <p class="p16-egl egl-hero-ksp-text mb-1">${isOfferta ? offerta.vsp3Titolo : properties.titoloKSP}</p>
+                    <sly data-sly-set.vsp3D="${isOfferta ? offerta.vsp3Descrizione : properties.descrizioneKSP}"></sly>
+                    <span class="h3-egl egl-text-color" data-sly-use.procTextVsp3="${'com.egl.core.models.utils.RTEPlaceholderHandler' @ text=vsp3D}">
+                      <b>${procTextVsp3.processed @context='html'}</b>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- FINE hero KSP+img--> 
+        
+      </div>
+    </sly>
+   </div>
+    
+ 
+  
+    
+  <!-- HERO COMMODITY PROMOZIONE 1 photo -->
+  <div data-sly-test.promozione="${fragModel.fragPromo1}" data-sly-unwrap>    
+    <sly data-sly-test="${promozione}" >
+      <sly data-sly-set.imgPromo1="${promozione.immagineHeroBanner}"></sly>
+      <sly data-sly-use.rendManPromo1="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=imgPromo1}"></sly>
+      <sly data-sly-set.rendDeskPromo1="${rendManPromo1.renditions}"></sly>
+      <sly data-sly-set.doubleRendDeskPromo1="${rendManPromo1.doubledRenditions}"></sly>
+
+      <style>
+        .heroC-promo1-${resource.name @ context='styleToken'}.egl-hero-basic-photo-container {
+          background: url(${rendDeskPromo1['360px'] @ context='uri'}) no-repeat center center ;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+        }
+        @media (min-resolution: 150dpi) {
+          .heroC-promo1-${resource.name @ context='styleToken'}.egl-hero-basic-photo-container {
+            background: url(${doubleRendDeskPromo1['360px'] @ context='uri'}) no-repeat center center ;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+          }
+        }
+        @media (min-width: 768px) {
+          .heroC-promo1-${resource.name @ context='styleToken'}.egl-hero-basic-photo-container {
+            background: url(${rendDeskPromo1['768px'] @ context='uri'}) no-repeat center center ;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+          }
+        }
+        @media (min-width: 768px) and (min-resolution: 150dpi) {
+          .heroC-promo1-${resource.name @ context='styleToken'}.egl-hero-basic-photo-container {
+            background: url(${doubleRendDeskPromo1['768px'] @ context='uri'}) no-repeat center center ;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+          }
+        }
+        @media (min-width: 1024px) {
+          .heroC-promo1-${resource.name @ context='styleToken'}.egl-hero-basic-photo-container {
+            background: url(${rendDeskPromo1['1024px'] @ context='uri'}) no-repeat center center ;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+          }
+        }
+        @media (min-width: 1024px) and (min-resolution: 150dpi) {
+          .heroC-promo1-${resource.name @ context='styleToken'}.egl-hero-basic-photo-container {
+            background: url(${doubleRendDeskPromo1['1024px'] @ context='uri'}) no-repeat center center ;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+          }
+        }
+        @media (min-width: 1440px) {
+          .heroC-promo1-${resource.name @ context='styleToken'}.egl-hero-basic-photo-container {
+            background: url(${rendDeskPromo1['1440px'] @ context='uri'}) no-repeat center center ;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+          }
+        }
+        @media (min-width: 1440px) and (min-resolution: 150dpi) {
+          .heroC-promo1-${resource.name @ context='styleToken'}.egl-hero-basic-photo-container {
+            background: url(${doubleRendDeskPromo1['1440px'] @ context='uri'}) no-repeat center center ;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+          }
+        }
+        @media (min-width: 1920px) {
+          .heroC-promo1-${resource.name @ context='styleToken'}.egl-hero-basic-photo-container {
+            background: url(${rendDeskPromo1['1920px'] @ context='uri'}) no-repeat center center ;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+          }
+        }
+        @media (min-width: 1920px) and (min-resolution: 150dpi) {
+          .heroC-promo1-${resource.name @ context='styleToken'}.egl-hero-basic-photo-container {
+            background: url(${doubleRendDeskPromo1['1920px'] @ context='uri'}) no-repeat center center ;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+          }
+        }
+      </style>
+
+      <div id="${properties.id}" class="container-fluid egl-hero-basic-photo-container heroC-promo1-${resource.name}"
+        data-start-promo="${promozione.dataInizioPromozione}" data-end-promo="${promozione.dataFinePromozione}" >
+        <div class="row ${properties.coloreVelina}" style="--velina1-HeroComm-color:${properties.colore1 @context='styleToken'}">
+          <div class="col-12">
+            <div class="container-lg egl-hero-basic-item-container">
+              <div class="row egl-row-hero-cmdt-logos">
+                <div class="hero-cmdt-logo-1" data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.logo1Reference}">
+                  <a data-sly-test="${properties.logo1Reference}" href="${properties.urlLogo1}" target="${properties.targetLogo1}">
+                    <img src="${properties.logo1Reference}" alt="${image.description}"/>
+                  </a>
+                </div>
+                <div class="hero-cmdt-logo-2" style="--bg-HeroComm-color:${properties.coloreSeparatore @context='styleToken'}" 
+                	data-sly-test="${properties.logo2Reference}" data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.logo2Reference}">
+                <a href="${properties.urlLogo2}" target="${properties.targetLogo2}">
+                    <img src="${properties.logo2Reference}" alt="${image.description}"/>
+                  </a>
+                </div>
+              </div>
+              <div class="row">
+                <div class="h1-egl titolo-hero-cmdt">
+                  ${properties.titoloH1 @context='html'}
+                </div>
+              </div>
+              <div class="row">
+                <div class="h3-egl content-hero-cmdt">
+                  ${promozione.sottotitoloHeroCommodity @context='html'}
+                </div>
+              </div>
+              <div class="row">
+                <div class="cap12-egl caption-hero-cmdt">
+                  ${promozione.notaHeroCommodityPaginaOfferta @context='html'}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Hero Commodity PROMOZIONE -->
+        <div class="row">
+          <div class="col-12">
+            <div
+              class="
+                container-fluid
+                position-absolute
+                egl-hero-promotion-band-container
+                px-0
+              "
+            >
+              <div class="container-lg px-0">
+                <div class="row d-lg-none mx-xs-0 mx-0">
+                  <div class="col-7 egl-hero-cmdt-promo-div px-0 centraContent" style="--bg-fasciaPromoHC-color:${promozione.coloreBackgroundFasciaPromozionale @context='styleToken'}" >
+                    <div class="cap14-egl">
+                      ${promozione.copyPromozione @context='html'}
+                    </div>
+                  </div>
+                  <div class="col-5 egl-hero-cmdt-promo-countdown px-0">
+                    <p class="promo-cd-paragraph">
+                      <b>PROMO ATTIVA! </b>Scade tra:
+                    </p>
+                    <div class="d-flex position-relative justify-content-around">
+                      <div class="egl-promo-cd-giorno">
+                        <div>01</div>
+                      </div>
+                      <div class="egl-promo-cd-ore">
+                        <div>12</div>
+                      </div>
+                      <div class="egl-promo-cd-minuti">
+                        <div>12</div>
+                      </div>
+                    </div>
+                    <div class="d-flex">
+                      <div
+                        class="cap12-egl"
+                        style="color: #767676; margin-left: 9px; margin-right: 22px"
+                      >
+                        GIORNO
+                      </div>
+                      <div
+                        class="cap12-egl"
+                        style="color: #767676; margin-right: 26px"
+                      >
+                        ORE
+                      </div>
+                      <div class="cap12-egl" style="color: #767676">MINUTI</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mx-0 d-none d-lg-flex">
+                  <div class="col-7 egl-hero-cmdt-promo-div-desktop px-0 d-flex" style="--bg-fasciaPromoHC-color:${promozione.coloreBackgroundFasciaPromozionale @context='styleToken'}">
+                    <div class="p18-egl">        
+                        ${promozione.copyPromozione @context='html'}   
+                    </div>
+                    <div class="promo-desktop-icon centraContent">
+                      <img src="${promozione.immagineFasciaPromo}" alt="" />
+                    </div>
+                  </div>
+                  <div class="col-5 egl-hero-cmdt-promo-countdown-desktop px-0">
+                    <p class="promo-cd-paragraph">
+                      <b>PROMO ATTIVA! </b>Scade tra:
+                    </p>
+                    <div class="d-flex position-relative justify-content-around">
+                      <div class="egl-promo-cd-giorno">
+                        <div>01</div>
+                      </div>
+                      <div class="egl-promo-cd-ore">
+                        <div>12</div>
+                      </div>
+                      <div class="egl-promo-cd-minuti">
+                        <div>12</div>
+                      </div>
+                    </div>
+                    <div class="d-flex">
+                      <div
+                        class="cap12-egl"
+                        style="color: #767676; margin-left: 15px; margin-right: 32px"
+                      >
+                        GIORNO
+                      </div>
+                      <div
+                        class="cap12-egl"
+                        style="color: #767676; margin-right: 32px"
+                      >
+                        ORE
+                      </div>
+                      <div class="cap12-egl" style="color: #767676">MINUTI</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </sly>
+   </div>
+   
+   
+   
+   
+  <!-- HERO COMMODITY PROMOZIONE 2 photo -->
+  <div data-sly-test.promozione2="${fragModel.fragPromo2}" data-sly-unwrap> 
+    <sly data-sly-test="${promozione2}">
+      <sly data-sly-set.imgPromo2="${promozione2.immagineHeroBanner}"></sly>
+      <sly data-sly-use.rendManPromo2="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=imgPromo2}"></sly>
+      <sly data-sly-set.rendDeskPromo2="${rendManPromo2.renditions}"></sly>
+      <sly data-sly-set.doubleRendDeskPromo2="${rendManPromo2.doubledRenditions}"></sly>
+
+      <style>
+        .heroC-promo2-${resource.name @ context='styleToken'}.egl-hero-basic-photo-container {
+          background: url(${rendDeskPromo2['360px'] @ context='uri'}) no-repeat center center ;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+        }
+        @media (min-resolution: 150dpi) {
+          .heroC-promo2-${resource.name @ context='styleToken'}.egl-hero-basic-photo-container {
+            background: url(${doubleRendDeskPromo2['360px'] @ context='uri'}) no-repeat center center ;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+          }
+        }
+        @media (min-width: 768px) {
+          .heroC-promo2-${resource.name @ context='styleToken'}.egl-hero-basic-photo-container {
+            background: url(${rendDeskPromo2['768px'] @ context='uri'}) no-repeat center center ;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+          }
+        }
+        @media (min-width: 768px) and (min-resolution: 150dpi) {
+          .heroC-promo2-${resource.name @ context='styleToken'}.egl-hero-basic-photo-container {
+            background: url(${doubleRendDeskPromo2['768px'] @ context='uri'}) no-repeat center center ;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+          }
+        }
+        @media (min-width: 1024px) {
+          .heroC-promo2-${resource.name @ context='styleToken'}.egl-hero-basic-photo-container {
+            background: url(${rendDeskPromo2['1024px'] @ context='uri'}) no-repeat center center ;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+          }
+        }
+        @media (min-width: 1024px) and (min-resolution: 150dpi) {
+          .heroC-promo2-${resource.name @ context='styleToken'}.egl-hero-basic-photo-container {
+            background: url(${doubleRendDeskPromo2['1024px'] @ context='uri'}) no-repeat center center ;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+          }
+        }
+        @media (min-width: 1440px) {
+          .heroC-promo2-${resource.name @ context='styleToken'}.egl-hero-basic-photo-container {
+            background: url(${rendDeskPromo2['1440px'] @ context='uri'}) no-repeat center center ;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+          }
+        }
+        @media (min-width: 1440px) and (min-resolution: 150dpi) {
+          .heroC-promo2-${resource.name @ context='styleToken'}.egl-hero-basic-photo-container {
+            background: url(${doubleRendDeskPromo2['1440px'] @ context='uri'}) no-repeat center center ;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+          }
+        }
+        @media (min-width: 1920px) {
+          .heroC-promo2-${resource.name @ context='styleToken'}.egl-hero-basic-photo-container {
+            background: url(${rendDeskPromo2['1920px'] @ context='uri'}) no-repeat center center ;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+          }
+        }
+        @media (min-width: 1920px) and (min-resolution: 150dpi) {
+          .heroC-promo2-${resource.name @ context='styleToken'}.egl-hero-basic-photo-container {
+            background: url(${doubleRendDeskPromo2['1920px'] @ context='uri'}) no-repeat center center ;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+          }
+        }
+      </style>
+
+      <div id="${properties.id}" class="container-fluid egl-hero-basic-photo-container heroC-promo2-${resource.name}"
+        data-start-promo="${promozione2.dataInizioPromozione}" data-end-promo="${promozione2.dataFinePromozione}" >
+        <div class="row ${properties.coloreVelina}" style="--velina1-HeroComm-color:${properties.colore1 @context='styleToken'}">
+          <div class="col-12">
+            <div class="container-lg egl-hero-basic-item-container">
+              <div class="row egl-row-hero-cmdt-logos">
+                <div class="hero-cmdt-logo-1" data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.logo1Reference}">
+                  <a data-sly-test="${properties.logo1Reference}" href="${properties.urlLogo1}" target="${properties.targetLogo1}">
+                    <img src="${properties.logo1Reference}" alt="${image.description}"/>
+                  </a>
+                </div>
+                <div class="hero-cmdt-logo-2" style="--bg-HeroComm-color:${properties.coloreSeparatore @context='styleToken'}" 
+                	data-sly-test="${properties.logo2Reference}" data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.logo2Reference}">
+                <a href= "${properties.urlLogo2}" target="${properties.targetLogo2}">
+                    <img src="${properties.logo2Reference}" alt="${image.description}"/>
+                  </a>
+                </div>
+              </div>
+              <div class="row">
+                <div class="h1-egl titolo-hero-cmdt">
+                  ${properties.titoloH1 @context='html'}
+                </div>
+              </div>
+              <div class="row">
+                <div class="h3-egl content-hero-cmdt">
+                  ${promozione2.sottotitoloHeroCommodity @context='html'}
+                </div>
+              </div>
+              <div class="row">
+                <div class="cap12-egl caption-hero-cmdt">
+                  ${promozione2.notaHeroCommodityPaginaOfferta @context='html'}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Hero Commodity PROMOZIONE -->
+        <div class="row">
+          <div class="col-12">
+            <div
+              class="
+                container-fluid
+                position-absolute
+                egl-hero-promotion-band-container
+                px-0
+              "
+            >
+              <div class="container-lg px-0">
+                <div class="row d-lg-none mx-xs-0 mx-0">
+                  <div class="col-7 egl-hero-cmdt-promo-div px-0 centraContent" style="--bg-fasciaPromoHC-color:${promozione2.coloreBackgroundFasciaPromozionale @context='styleToken'}" >
+                    <div class="cap14-egl">
+                      ${promozione2.copyPromozione @context='html'}
+                    </div>
+                  </div>
+                  <div class="col-5 egl-hero-cmdt-promo-countdown px-0">
+                    <p class="promo-cd-paragraph">
+                      <b>PROMO ATTIVA! </b>Scade tra:
+                    </p>
+                    <div class="d-flex position-relative justify-content-around">
+                      <div class="egl-promo-cd-giorno">
+                        <div>01</div>
+                      </div>
+                      <div class="egl-promo-cd-ore">
+                        <div>12</div>
+                      </div>
+                      <div class="egl-promo-cd-minuti">
+                        <div>12</div>
+                      </div>
+                    </div>
+                    <div class="d-flex">
+                      <div
+                        class="cap12-egl"
+                        style="color: #767676; margin-left: 9px; margin-right: 22px"
+                      >
+                        GIORNO
+                      </div>
+                      <div
+                        class="cap12-egl"
+                        style="color: #767676; margin-right: 26px"
+                      >
+                        ORE
+                      </div>
+                      <div class="cap12-egl" style="color: #767676">MINUTI</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mx-0 d-none d-lg-flex">
+                  <div class="col-7 egl-hero-cmdt-promo-div-desktop px-0 d-flex" style="--bg-fasciaPromoHC-color:${promozione2.coloreBackgroundFasciaPromozionale @context='styleToken'}">
+                    <div class="p18-egl">        
+                        ${promozione2.copyPromozione @context='html'}   
+                    </div>
+                    <div class="promo-desktop-icon centraContent">
+                      <img src="${promozione2.immagineFasciaPromo}" alt="" />
+                    </div>
+                  </div>
+                  <div class="col-5 egl-hero-cmdt-promo-countdown-desktop px-0">
+                    <p class="promo-cd-paragraph">
+                      <b>PROMO ATTIVA! </b>Scade tra:
+                    </p>
+                    <div class="d-flex position-relative justify-content-around">
+                      <div class="egl-promo-cd-giorno">
+                        <div>01</div>
+                      </div>
+                      <div class="egl-promo-cd-ore">
+                        <div>12</div>
+                      </div>
+                      <div class="egl-promo-cd-minuti">
+                        <div>12</div>
+                      </div>
+                    </div>
+                    <div class="d-flex">
+                      <div
+                        class="cap12-egl"
+                        style="color: #767676; margin-left: 15px; margin-right: 32px"
+                      >
+                        GIORNO
+                      </div>
+                      <div
+                        class="cap12-egl"
+                        style="color: #767676; margin-right: 32px"
+                      >
+                        ORE
+                      </div>
+                      <div class="cap12-egl" style="color: #767676">MINUTI</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </sly>
+   </div>
+   
+   
+<script data-sly-test="${wcmmode.disabled && (fragModel.fragPromo1 || fragModel.fragPromo2)}">
+	(function($) {
+		$(document).ready( function() {
+			promotionHideShow(".heroC-edit-${resource.name @ context='scriptToken'}",".heroC-promo1-${resource.name @ context='scriptToken'}",".heroC-promo2-${resource.name @ context='scriptToken'}");
+      countdownElements(".heroC-promo1-${resource.name @ context='scriptToken'}", ".egl-promo-cd-giorno", ".egl-promo-cd-ore", ".egl-promo-cd-minuti");
+      countdownElements(".heroC-promo2-${resource.name @ context='scriptToken'}", ".egl-promo-cd-giorno", ".egl-promo-cd-ore", ".egl-promo-cd-minuti");
+    });
+	})($);
+</script>
+   
+   
+    
+ 

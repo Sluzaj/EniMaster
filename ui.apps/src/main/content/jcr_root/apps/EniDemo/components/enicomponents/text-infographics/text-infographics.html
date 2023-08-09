@@ -1,0 +1,149 @@
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	    data-sly-test.testing="${!properties.titoloH2}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<!-- INFO IMG GRANDE -->
+<div id="${properties.id}" class="container-lg egl-infographics">
+  <div class="row justify-content-between">
+    <div class="col-lg-3 egl-titolo-infographics">
+      <div class="h2-egl">${properties.titoloH2 @context='html'}</div>
+      <div class="p18-egl">
+        ${properties.sottoTitolo @context='html'}
+      </div>
+    </div>
+    <div class="col-lg-8 egl-infographics-media-scroll">
+      <div class="container-fluid egl-infographics-media">
+        <div class="row">
+          <div class="col-12 egl-cornice-infographics" data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.assetImmagineReference}">
+            <img loading="lazy" src="${properties.assetImmagineReference}"
+              alt="${image.description}" />
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-end d-none d-lg-block">
+        <div class="col-12 egl-subtext-infographics">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                <p class="p18-egl">
+                  ${properties.descrizioneImg @context='html'}
+                </p>
+              </div>
+              <div class="col-12">
+                <p class="cap14-egl">
+                  ${properties.notaCaption @context='html'}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-lg-8 egl-subtext-infographics d-block d-lg-none">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <p class="p18-egl">
+                ${properties.descrizioneImg @context='html'}
+              </p>
+            </div>
+            <div class="col-12">
+              <p class="cap14-egl">
+                ${properties.notaCaption @context='html'}
+              </p>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+    
+     
+    <!-- INFO IMG PICCOLA 
+    <div class="container-lg egl-infographics">
+      <div class="row justify-content-between">
+        <div class="col-lg-3 egl-titolo-infographics">
+          <h2 class="h2-egl">Lorem ipsum dolor sit amet</h2>
+          <p class="p18-egl">
+            Lorem ipsum dolor sit amet turpis auctor venenatis habitasse nisi ac
+            dolore. Ultricies tristique lectus labore ut etiam morbi ullamcorper
+            arcu odio fusce porta vestib.
+          </p>
+        </div>
+        <div class="col-lg-8 egl-infographics-media-scroll">
+          <div class="container-fluid egl-infographics-media">
+            <div class="row">
+              <div class="col-12 egl-cornice-infographics">
+                <img loading="lazy" src="${properties.assetImmagine}"
+                  alt="${properties.altImg}" />
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-end d-none d-lg-block">
+            <div class="col-12 egl-subtext-infographics">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-12">
+                    <p class="p18-egl">
+                      Con l�offerta luce SceltaSicura hai: � Il 20% di sconto
+                      fino al 31 dicembre 2021 sul Prezzo Energia tutelato luce,
+                      come definito e trimestralmente aggiornato da ARERA; � 6
+                      mesi di corrispettivo bloccato dal 1� gennaio 2022 al 30
+                      giugno 2022 e pari al Prezzo Energia tutelato luce
+                      definito da ARERA per il terzo trimestre del 2021.
+                    </p>
+                  </div>
+                  <div class="col-12">
+                    <p class="cap14-egl">
+                      lobortis tellus mauris auctor congue. Hac lectus diam odio
+                      risus non ut rhoncus. Lobortis vulputate curabitur lacinia
+                      eiusmod at dapibus tempor euismod aliquet platea iaculis
+                      orci laoreet. Orci mauris nullam pharetra blandit aliquet
+                      sapien platea nec vitae dapibus facilisi mattis etiam.
+                      Elementum sollicitudin urna turpis venenatis id lobortis
+                      netus. Est platea faucibus neque proin eu elit venenatis
+                      faucibus neque cras senectus. Arcu ultricies bibendum
+                      fusce at fusce quis donec morbi viverra feugiat donec a
+                      ultrices
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-8 egl-subtext-infographics d-block d-lg-none">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-12">
+                  <p class="p18-egl">
+                    Con l�offerta luce SceltaSicura hai: � Il 20% di sconto fino
+                    al 31 dicembre 2021 sul Prezzo Energia tutelato luce, come
+                    definito e trimestralmente aggiornato da ARERA; � 6 mesi di
+                    corrispettivo bloccato dal 1� gennaio 2022 al 30 giugno 2022
+                    e pari al Prezzo Energia tutelato luce definito da ARERA per
+                    il terzo trimestre del 2021.
+                  </p>
+                </div>
+                <div class="col-12">
+                  <p class="cap14-egl">
+                    lobortis tellus mauris auctor congue. Hac lectus diam odio
+                    risus non ut rhoncus. Lobortis vulputate curabitur lacinia
+                    eiusmod at dapibus tempor euismod aliquet platea iaculis
+                    orci laoreet. Orci mauris nullam pharetra blandit aliquet
+                    sapien platea nec vitae dapibus facilisi mattis etiam.
+                    Elementum sollicitudin urna turpis venenatis id lobortis
+                    netus. Est platea faucibus neque proin eu elit venenatis
+                    faucibus neque cras senectus. Arcu ultricies bibendum fusce
+                    at fusce quis donec morbi viverra feugiat donec a ultrices
+                  </p>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+-->
+

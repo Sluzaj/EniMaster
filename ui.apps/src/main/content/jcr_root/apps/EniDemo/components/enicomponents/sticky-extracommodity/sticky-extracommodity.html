@@ -1,0 +1,47 @@
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	    data-sly-test.testing="${!properties.titolo}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<sly data-sly-set.cta1Visible="${(properties.tipologiaCTA1 == 'url1' && properties.labelCta1 && properties.urlCta1) || properties.labelCta1}"></sly>
+
+<sly data-sly-use.model="com.egl.core.models.ancorestickycommodity.AncoreStickyCommodityModel"></sly>
+
+  <div class="${model.lista ? '' : 'd-none'} h-100 w-100" sf-component="ancore-sticky" sf-version="1.0" sf-themes="extracommodity">  
+	<!-- Ancore-sticky-dark -->
+	<!-- ID UNIVOCO NECESSARIO PER LA FUNZIONE STICKY -->
+		<div class="container-fluid ancore-sticky-container ${properties.colore != 'custom-color' ? properties.colore : properties.colorCustom} sticky-extracommodity" id="Sticky-Extracommodity">
+			<div class="container-lg px-0">
+				<div class="sticky-wrapper">
+					<div class="anchor-container justify-content-between">
+						<sly data-sly-list.asLista="${model.lista}">
+						<a class="egl-xc-anchor-link" href="#${asLista.parametro}" title="${asLista.altAncora}">${asLista.label}</a>
+						</sly>
+					</div>
+					<div class="cta-container">
+						<div class="itemwrap txt"> ${properties.text} </div>
+						<!-- URL CTA -->
+						<div class="itemwrap" data-sly-test="${properties.tipologiaCTA1 != 'modale1'}">
+							<a data-sly-test="${cta1Visible}"
+							class="cta-sticky itemwrap btn"
+							href="${properties.urlCta1}"
+							>
+							${properties.labelCta1}
+							</a>
+						</div>
+						<!-- MODALE GENERICA -->
+						<sly data-sly-test="${properties.tipologiaCTA1 == 'modale1'}">
+							<div class="itemwrap">
+								<a  data-sly-test="${cta1Visible}"
+									class="cta-sticky itemwrap btn" 
+									data-toggle="modal" 
+									data-target="${'#' in properties.ancoraModale1 ? '' : '#'}${properties.ancoraModale1}" title="${properties.titleTextCta1}">
+									${properties.labelCta1}
+							</a>
+							</div>
+						</sly>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

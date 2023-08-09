@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+	xmlns:cq="http://www.day.com/jcr/cq/1.0"
+	xmlns:jcr="http://www.jcp.org/jcr/1.0"
+	xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+	xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
+	extraClientlibs="[cq.author.accordion]"
+	jcr:primaryType="nt:unstructured" jcr:title="Properties"
+	sling:resourceType="cq/gui/components/authoring/dialog">
+	<content jcr:primaryType="nt:unstructured"
+		sling:resourceType="granite/ui/components/coral/foundation/container">
+		<items jcr:primaryType="nt:unstructured">
+			<tabs jcr:primaryType="nt:unstructured"
+				sling:resourceType="granite/ui/components/coral/foundation/tabs"
+				maximized="{Boolean}true">
+				<items jcr:primaryType="nt:unstructured">
+
+					<!-- PARTE SUPERIORE -->
+					<!-- 2) LOGO -->
+
+					<logo jcr:primaryType="nt:unstructured" jcr:title="Logo"
+						sling:resourceType="granite/ui/components/coral/foundation/container"
+						margin="{Boolean}true">
+						<items jcr:primaryType="nt:unstructured">
+							<columns jcr:primaryType="nt:unstructured"
+								sling:resourceType="granite/ui/components/coral/foundation/container"
+								margin="{Boolean}true">
+								<items jcr:primaryType="nt:unstructured">
+									<column jcr:primaryType="nt:unstructured"
+										sling:resourceType="granite/ui/components/coral/foundation/container">
+										<items jcr:primaryType="nt:unstructured">
+											<img granite:class="cmp-image__editor-file-upload"
+												jcr:primaryType="nt:unstructured"
+												sling:resourceType="cq/gui/components/authoring/dialog/fileupload"
+												autoStart="{Boolean}false" class="cq-droptarget"
+												fileNameParameter="./logo" fileReferenceParameter="./logo"
+												mimeTypes="[image/gif,image/jpeg,image/png,image/tiff,image/svg+xml]"
+												multiple="{Boolean}false" name="./logoName"
+												title="Link Immagine" uploadUrl="${suffix.path}"
+												fieldLabel="Link Immagine" useHTML5="{Boolean}true" />
+											<link jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+												fieldDescription="Enter the Link URL"
+												fieldLabel="Riferimento Logo" name="./logoLink" />
+											<alt jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+												fieldLabel="Alt Logo" name="./altLogo" />
+										</items>
+									</column>
+								</items>
+							</columns>
+						</items>
+					</logo>
+
+					<!-- 3/5) VOCI DI PRIMO LIVELLO -->
+
+					<shortcutLinks jcr:primaryType="nt:unstructured"
+						jcr:title="Link Rapidi"
+						sling:resourceType="granite/ui/components/coral/foundation/container"
+						margin="{Boolean}true">
+						<items jcr:primaryType="nt:unstructured">
+							<columns jcr:primaryType="nt:unstructured"
+								sling:resourceType="granite/ui/components/coral/foundation/container"
+								margin="{Boolean}true">
+								<items jcr:primaryType="nt:unstructured">
+									<column jcr:primaryType="nt:unstructured"
+										sling:resourceType="granite/ui/components/coral/foundation/container">
+										<items jcr:primaryType="nt:unstructured">
+											<service1 jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+												fieldLabel="Voce di Servizio 1" name="./service1" />
+											<linkService1 jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/pathbrowser"
+												fieldLabel="Link voce di servizio 1"
+												name="./linkService1" />
+											<titleTextLinkService1
+												jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+												fieldLabel="Alt text link voce di servizio 1"
+												name="./titleTextLinkService1" />
+											<targetLinkService1 jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/select"
+												fieldLabel="Target link voce di servizio 1" name="./targetLinkService1">
+												<items jcr:primaryType="nt:unstructured">
+													<option1 jcr:primaryType="nt:unstructured"
+														text="Self" value="_self" selected="true" />
+													<option2 jcr:primaryType="nt:unstructured"
+														text="Blank" value="_blank" />
+												</items>
+											</targetLinkService1>
+											<service2 jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+												fieldLabel="Voce di Servizio 2" name="./service2" />
+											<linkService2 jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/pathbrowser"
+												fieldLabel="Link voce di servizio 2"
+												name="./linkService2" />
+											<titleTextLinkService2
+												jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+												fieldLabel="Alt text link voce di servizio 2"
+												name="./titleTextLinkService2" />
+											<targetLinkService2 jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/select"
+												fieldLabel="Target link voce di servizio 2" name="./targetLinkService2">
+												<items jcr:primaryType="nt:unstructured">
+													<option1 jcr:primaryType="nt:unstructured"
+														text="Self" value="_self" selected="true" />
+													<option2 jcr:primaryType="nt:unstructured"
+														text="Blank" value="_blank" />
+												</items>
+											</targetLinkService2>
+											<firstLevelPages
+												jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+												class="full-width" fieldLabel="Voci di primo livello"
+												composite="{Boolean}true">
+												<granite:data jcr:primaryType="nt:unstructured"
+													max-item="3" />
+												<field jcr:primaryType="nt:unstructured"
+													sling:resourceType="granite/ui/components/foundation/form/fieldset"
+													acs-commons-nested="" name="./firstLevelShortcut">
+													<layout jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/foundation/layouts/container"
+														method="absolute" />
+													<items jcr:primaryType="nt:unstructured">
+														<column jcr:primaryType="nt:unstructured"
+															sling:resourceType="granite/ui/components/foundation/container">
+															<items jcr:primaryType="nt:unstructured">
+																<title jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																	fieldLabel="Titolo Menù (I Livello)"
+																	name="./titleFLShortcut" />
+																<link jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/pathbrowser"
+																	fieldLabel="Link Menù (I Livello)"
+																	name="./linkFLShortcut" />
+																<titleTextLink
+																	jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																	fieldLabel="Alt Text Menù (I livello)"
+																	name="./altFLShortcut" />
+																<target jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/select"
+																	fieldLabel="Target" name="./targetFLShortcut">
+																	<items jcr:primaryType="nt:unstructured">
+																		<option1 jcr:primaryType="nt:unstructured"
+																			text="Self" value="_self" selected="true" />
+																		<option2 jcr:primaryType="nt:unstructured"
+																			text="Blank" value="_blank" />
+																	</items>
+																</target>
+															</items>
+														</column>
+													</items>
+												</field>
+											</firstLevelPages>
+										</items>
+									</column>
+								</items>
+							</columns>
+						</items>
+					</shortcutLinks>
+
+					<!-- PARTE CENTRALE/FINALE -->
+					<!-- SOTTOMENU DIVISI IN TRE TAB -->
+
+
+					<section jcr:primaryType="nt:unstructured"
+						jcr:title="Sottomenu"
+						sling:resourceType="granite/ui/components/coral/foundation/container"
+						margin="{Boolean}true">
+						<items jcr:primaryType="nt:unstructured">
+							<columns jcr:primaryType="nt:unstructured"
+								sling:resourceType="granite/ui/components/coral/foundation/container"
+								margin="{Boolean}true">
+								<items jcr:primaryType="nt:unstructured">
+									<column jcr:primaryType="nt:unstructured"
+										sling:resourceType="granite/ui/components/coral/foundation/container">
+										<items jcr:primaryType="nt:unstructured">
+											<submenu jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+												class="full-width" fieldLabel="Sottomenu"
+												composite="{Boolean}true">
+												<granite:data jcr:primaryType="nt:unstructured"
+													max-item="6" />
+												<field jcr:primaryType="nt:unstructured"
+													sling:resourceType="granite/ui/components/foundation/form/fieldset"
+													acs-commons-nested="" name="./submenu">
+													<layout jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/foundation/layouts/container"
+														method="absolute" />
+													<items jcr:primaryType="nt:unstructured">
+														<column jcr:primaryType="nt:unstructured"
+															sling:resourceType="granite/ui/components/foundation/container">
+															<items jcr:primaryType="nt:unstructured">
+																<label fieldLabel="Label Sottomenu"
+																	jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																	name="./labelSLShortcut" />
+																<contentTypeSL
+																	jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/select"
+																	fieldLabel="Tipologia Contenuto" name="./contentTypeSL">
+																	<items jcr:primaryType="nt:unstructured">
+																		<option1 jcr:primaryType="nt:unstructured"
+																			text="Link" value="link" />
+																		<option2 jcr:primaryType="nt:unstructured"
+																			text="Dropdown" value="dropdown" selected="true" />
+																	</items>
+																</contentTypeSL>
+																<link jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+																	fieldLabel="Link Menu Secondo Livello"
+																	name="./linkSecondLevel" />
+																<titleTextLink
+																	jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																	fieldLabel="Alt Text Menù Secondo Livello"
+																	name="./altSecondLevel" />
+																<target jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/select"
+																	fieldLabel="Target Menu Secondo Livello"
+																	name="./targetSecondLevel">
+																	<items jcr:primaryType="nt:unstructured">
+																		<option1 jcr:primaryType="nt:unstructured"
+																			text="Self" value="_self" selected="true" />
+																		<option2 jcr:primaryType="nt:unstructured"
+																			text="Blank" value="_blank" />
+																	</items>
+																</target>
+
+															</items>
+														</column>
+													</items>
+												</field>
+											</submenu>
+										</items>
+									</column>
+								</items>
+							</columns>
+						</items>
+					</section>
+				</items>
+			</tabs>
+		</items>
+	</content>
+</jcr:root>

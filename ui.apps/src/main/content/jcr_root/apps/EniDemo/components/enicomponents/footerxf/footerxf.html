@@ -1,0 +1,7 @@
+<sly data-sly-test="${inheritedPageProperties.footerPath}">
+     <div data-sly-use.fragment="${'com.egl.core.models.utils.ExperienceFragmentFinder' @ xfPagePath=inheritedPageProperties.footerPath, resourcePath='enigaseluce/components/footer'}"
+          data-sly-test="${fragment.componentPath}"
+          data-sly-resource="${@path=fragment.componentPath, wcmmode='disabled'}"
+          data-sly-unwrap>
+     </div>
+</sly>

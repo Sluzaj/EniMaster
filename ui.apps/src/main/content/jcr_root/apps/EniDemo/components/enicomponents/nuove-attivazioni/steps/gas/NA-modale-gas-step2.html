@@ -1,0 +1,260 @@
+<sly data-sly-use.modaleNAModel="${'com.egl.core.models.nuoveattivazioni.ModaleNAModel' @ forniture='gas'}"></sly>
+<sly data-sly-use.stepCartModel="${'com.egl.core.models.carrello.StepCartModel' @ cfPath=modaleNAModel.pathCF, promotion1Path='', promotion2Path=''}"></sly>
+<sly data-sly-set.selections="${stepCartModel.selectedValues}"></sly>
+<sly data-sly-set.texts="${stepCartModel.textValues}"></sly>
+<sly data-sly-set.businessCart="${modaleNAModel.businessCart}"></sly>
+<sly data-sly-set.residentialCart="${modaleNAModel.residentialCart}"></sly>
+<sly data-sly-set.cart="${businessCart || residentialCart}"></sly>
+<sly data-sly-set.isScontoDirect="${cart.scontoDirect}"></sly>
+<sly data-sly-set.isScontoDigitale="${cart.scontoDigitale}"></sly>
+<sly data-sly-set.isScontoConfPagamento="${cart.scontoConfigurazionePagamento}"></sly>
+<sly data-sly-set.isFastweb="${'fastweb' in currentPage.path}"></sly>
+<sly data-sly-set.obbligaScelteStep5="${residentialCart && residentialCart.obbligaScelteStep5}"></sly> 
+<sly data-sly-set.isBollettinoDisabled="${obbligaScelteStep5 && residentialCart.obbligaConfigurazionePagamento == 'diretto'}"></sly>
+<sly data-sly-set.isDirettoDisabled="${obbligaScelteStep5 && residentialCart.obbligaConfigurazionePagamento == 'bollettino'}"></sly>
+<sly data-sly-set.isCartaceaDisabled="${obbligaScelteStep5 && residentialCart.obbligaTipoBolletta == 'digitale'}"></sly>
+<sly data-sly-set.isDigitaleDisabled="${obbligaScelteStep5 && residentialCart.obbligaTipoBolletta == 'cartacea'}"></sly>
+
+<!-- Titolo Disattivato -->
+<sly data-sly-set.titoloDisattivatoDirect = "${isScontoDirect ? texts['directTitle'] : ''}"></sly>
+<sly data-sly-set.titoloDisattivatoDigital = "${isScontoDigitale ? texts['digitalTitle'] : ''}"></sly>
+<sly data-sly-set.titoloDisattivatoConfPagamento = "${isScontoConfPagamento ? cart.titoloConfPagamento1 : ''}"></sly>
+
+<sly data-sly-set.titoloDisattivato = "${titoloDisattivatoDirect || titoloDisattivatoDigital || titoloDisattivatoConfPagamento}"></sly>
+
+<!-- Paragrafo Disattivato -->
+<sly data-sly-set.paragrafoDisattivatoDirect = "${isScontoDirect ? texts['directDescription'] : ''}"></sly>
+<sly data-sly-set.paragrafoDisattivatoDigital = "${isScontoDigitale ? texts['digitalDescription'] : ''}"></sly>
+<sly data-sly-set.paragrafoDisattivatoConfPagamento = "${isScontoConfPagamento ? cart.paragrafoConfPagamento1 : ''}"></sly>
+
+<sly data-sly-set.paragrafoDisattivato = "${paragrafoDisattivatoDirect || paragrafoDisattivatoDigital || paragrafoDisattivatoConfPagamento}"></sly>
+
+<!-- Titolo Attivo -->
+<sly data-sly-set.titoloAttivoDirect = "${isScontoDirect ? texts['directActive'] : ''}"></sly>
+<sly data-sly-set.titoloAttivoDigital = "${isScontoDigitale ? texts['digitalActive'] : ''}"></sly>
+<sly data-sly-set.titoloAttivoConfPagamento = "${isScontoConfPagamento ? cart.titoloConfPagamento2 : ''}"></sly>
+
+<sly data-sly-set.titoloAttivo = "${titoloAttivoDirect || titoloAttivoDigital || titoloAttivoConfPagamento}"></sly>
+
+<!-- PREZZI INDICIZZATI -->
+<sly data-sly-set.isPrezziIndicizzati="${cart.attivazioneVariantePrezziIndicizzati}"></sly>
+
+
+<div id="data-handler" data-codice-prodotto="${modaleNAModel.productCode}"></div>
+
+<div class="flex-b-100 step-configurazione-pagamento d-flex flex-wrap">
+  <div class="wrapper-contenuto-doppio d-flex flex-wrap">
+    <div data-sly-test="${residentialCart || isScontoDirect}" class="container-carrellostep-contenuto carrellostep-modo-pagamento">
+      <div class="carrellostep-config-pagamento-titolo">
+        <div>${texts['choosePayment'] @ context='html'}</div>
+      </div>
+      <div class="carrellostep-config-pagamento-bottoni tipo-pagamento">
+        <div onclick="${isScontoDigitale? 'selezionaConfigPagamentiTipoPag(0)' : 'selezionaConfigPagamentiTipoPagDirect(0)' @ context='unsafe'}" 
+        	class="box-bottoni-config-pmnt 
+        	opt-bollettino 
+          ${isDirettoDisabled ? 'box-carrellostep-selezionato': ''}
+          ${isBollettinoDisabled ? 'button-disabled' : ''}">
+          <div class="addebitoCheck">${texts['bollettino'] @ context='html'}</div>
+        </div>
+        <div onclick="${isScontoDigitale? 'selezionaConfigPagamentiTipoPag(1)' : 'selezionaConfigPagamentiTipoPagDirect(1)' @ context='unsafe'}"
+          class="box-bottoni-config-pmnt opt-addebitoDiretto ${isDirettoDisabled ? 'button-disabled' : 'box-carrellostep-selezionato'}">
+          <div class="addebitoCheck" style="width: 91px; text-align: center;">${texts['diretto'] @ context='html'}</div>
+        </div>
+      </div>
+    </div>
+    <div class="container-carrellostep-contenuto carrellostep-tipo-bolletta">
+      <div class="carrellostep-config-pagamento-titolo">
+        ${texts['chooseBolletta'] @ context='html'}
+      </div>
+      <div class="carrellostep-config-pagamento-bottoni tipo-bolletta">
+        <div onclick="${isScontoDigitale? 'selezionaConfigPagamentiTipoBolletta(0)' : 'selezionaConfigPagamentiTipoBollettaDirect(0)' @ context='unsafe'}" 
+        	class="box-bottoni-config-pmnt pmnt-cartaceo ${isDigitaleDisabled ? 'box-carrellostep-selezionato' : ''} ${isCartaceaDisabled ? 'button-disabled' : ''}">
+          <div class="bollettaCheck">${texts['cartacea'] @ context='html'}</div>
+        </div>
+        <div onclick="${isScontoDigitale? 'selezionaConfigPagamentiTipoBolletta(1)' : 'selezionaConfigPagamentiTipoBollettaDirect(1)' @ context='unsafe'}"
+          class="box-bottoni-config-pmnt pmnt-digitale ${isDigitaleDisabled ? 'button-disabled' : 'box-carrellostep-selezionato'}">
+          <div class="bollettaCheck">${texts['digitale'] @ context='html'}</div>
+        </div>
+      </div>
+    </div>
+    <div class="container-carrellostep-contenuto sconto-digitale-pagamento-step">
+      <div class="carrellostep-config-pmnt-scontoDigitale-disattivo d-none" data-sly-test="${(residentialCart && residentialCart.scontoDigitale) || isScontoDirect || isScontoConfPagamento}">
+        <div class="carrellostep-config-pmnt-scontoDigitale-disattivo-icon">
+          <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/tooltip-copy.svg" alt="tooltip" />
+        </div>
+        <div class="carrellostep-config-pmnt-scontoDigitale-disattivo-desc">
+          <div class="carrellostep-config-pagamento-titolo">
+             ${titoloDisattivato @ context='html'}
+          </div>
+          <div data-sly-test="${paragrafoDisattivato}"
+          	class="cap12-egl carrellostep-config-pmnt-scontoDigitale-disattivo-desc-caption">
+            ${paragrafoDisattivato @ context='html'}
+          </div>
+        </div>
+      </div>
+      <div class="carrellostep-config-pmnt-scontoDigitale-attivo ${isScontoConfPagamento && cart.paragrafoConfPagamento2 ? 'versione-paragrafo' : ''}" data-sly-test="${(residentialCart && residentialCart.scontoDigitale) || isScontoDirect || isScontoConfPagamento}">
+        <div class="carrellostep-config-pmnt-scontoDigitale-attivo-icon">
+          <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/sconto-digitale-attivo.svg" alt="tooltip" />
+        </div>
+        <!--         <div class="carrellostep-config-pmnt-scontoDigitale-attivo-desc">
+          <div class="carrellostep-config-pagamento-titolo">
+            SCONTO DIGITALE ATTIVO.
+          </div>
+        </div> -->
+        <div class="carrellostep-config-pmnt-scontoDigitale-attivo-desc">
+          <div class="carrellostep-config-pagamento-titolo">
+            ${titoloAttivo @ context='html'}
+          </div>
+          <div data-sly-test="${isScontoConfPagamento && cart.paragrafoConfPagamento2}" 
+          	class="cap12-egl carrellostep-config-pmnt-scontoDigitale-disattivo-desc-caption">
+            ${cart.paragrafoConfPagamento2 @ context='html'}
+          </div>
+        </div>
+      </div>
+      <div class="carrellostep-config-pmnt-scontoDigitale-subtext" data-sly-test="${cart.showNotaCarrelloAStep5}">
+        <div class="cap12-egl">
+           ${cart.infoCarrelloAStep5 @ context='html'}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="wrapper-contenuto-doppio d-flex flex-wrap">
+    <div class="container-carrellostep-contenuto">
+      <div
+        class="carrellostep-config-pagamento-titolo position-relative d-flex flex-wrap justify-content-lg-between">
+        <div>${texts['rateStepSummary'] @ context='html'}</div>
+        <div class="lettura-consumi-tooltip-conf-pmnt d-flex" data-sly-test="${businessCart && lightEnabled}">
+          <div class="cap12-egl">${texts['consumiTitle'] @ context='html'}</div>
+          <div class="position-relative">
+            <img loading="lazy" tabindex="-1" onblur="mostraTooltipCarrelloStepFasciaOraria('aiuto-lettura-consumi')"
+              onfocus="mostraTooltipCarrelloStepFasciaOraria('aiuto-lettura-consumi')" style="
+                height: auto;
+                width: 20px;
+                margin-left: 5px;
+                margin-bottom: 2px;
+              " src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/tooltip-copy (2).svg" alt="aiuto lettura consumi" />
+            <div id="aiuto-lettura-consumi" class="position-absolute tooltip-carrello-step-custom d-none">
+              ${isTrioraria ? texts['businessTriorariaTooltip'] : texts['businessBiorariaTooltip'] @ context='html'}
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <sly data-sly-test="${!isPrezziIndicizzati}">
+	      <div class="box-riepilogo-corrispettivi-carrellostep">
+	        <!-- GAS dual -->
+	        <div data-sly-test="${residentialCart}"> <!--  -->
+	          <div 
+	            class="d-flex justify-content-between riepilogo-corrispettivi-carrellostep-dettaglio corrispettivi-gas"
+	            style="border-top: 0">
+	            <div class="box-fascia-f2 d-flex">
+	              <div class="box-fascia-bold18">GAS</div>
+	              <div class="position-relative" data-sly-test="${cart.tooltipCarrelloGas}">
+	          <img loading="lazy"
+	            tabindex="-1"
+	            onblur="mostraTooltipCarrelloStepFasciaOraria('luce-gas-casa')"
+	            onfocus="mostraTooltipCarrelloStepFasciaOraria('luce-gas-casa')"
+	            class="box-fascia-oraria-tooltip"
+	            src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/tooltip-copy (1).svg"
+	            alt="tooltip"
+	          />
+	          <div
+	            id="luce-gas-casa"
+	            class="
+	              position-absolute
+	              tooltip-carrello-step-custom-dettaglio
+	              d-none
+	            "
+	          >
+	            ${cart.tooltipCarrelloGas @ context='html'}
+	        	</div>
+	      		</div>
+	            </div>
+	            <div class="egl-carrellostep-corrispettivi">
+	              <div class="box-fascia-bold24">
+	                ${isMonoraria ? residentialCart.commercializzazioneGasSmcMonoraria : residentialCart.commercializzazioneGasSmcMultioraria}
+	                <span class="box-fascia-cap14" style="margin-left: 5px;">
+	                  €/Smc
+	                </span>
+	              </div>
+	              <div class="box-fascia-cap12" style="float: right;" data-sly-test="${residentialCart.infoSecondGas}">
+	                ${residentialCart.infoSecondGas @ context='html'}
+	              </div>
+	            </div>
+	            <div class="egl-carrellostep-corrispettivi-sconto-attivo d-none">
+	              <div class="box-fascia-bold24">
+	                ${isMonoraria ? residentialCart.digitalCommercializzazioneGasSmcMonoraria : residentialCart.digitalCommercializzazioneGasSmcMultioraria}
+	                <span class="box-fascia-cap14" style="margin-left: 5px;">
+	                  €/Smc
+	                </span>
+	              </div>
+	              <div class="box-fascia-cap12" style="float: right;" data-sly-test="${residentialCart.digitalInfoSecondGas}">
+	                ${residentialCart.digitalInfoSecondGas @ context='html'}
+	              </div>
+	            </div>
+	          </div>
+	          <div data-sly-test="${residentialCart.commercializzazioneGasMese}" 
+	          	class="d-flex justify-content-between riepilogo-corrispettivi-carrellostep-dettaglio">
+	            <div>
+	              <div class="costi-commercializzazione box-fascia-cap14">
+	                Costi commercializzazione e vendita
+	              </div>
+	            </div>
+	            <div style="align-self: center;">
+	              <div class="box-fascia-bold24">
+	                ${residentialCart.commercializzazioneGasMese}
+	                <span class="box-fascia-cap14" style="margin-left: 5px;">
+	                  €/mese
+	                </span>
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+	        <!-- bioraria dual fine-->
+	  
+	      </div>
+      </sly>
+      
+      <!-- PREZZI INDICIZZATI -->
+      <sly data-sly-test="${isPrezziIndicizzati}">
+          <div class="box-riepilogo-corrispettivi-carrellostep">
+	        <!-- TREND-->
+	        <div class="riepilogo-trioraria">
+	          <div class="carrellostep-trend-fascia-box ">
+	            <div class="cart-card-opt-titolo">
+	              <div class="p18-egl d-flex align-items-center">
+	                <b>GAS</b>
+	              </div>
+	            </div>
+	            <div class="dettaglio-trend-esploso">
+	              <div class="d-flex justify-content-between align-items-center">
+	                <p class="p18-egl ">Prezzo all'ingrosso
+	                </p>
+	                <p class="p18-egl mb-0 price-txt-bold">${residentialCart.scontoDigitale ? residentialCart.digitalPrezzoAllingrossoGas : residentialCart.prezzoAllingrossoGas}</p>
+	              </div>
+	              <div class="d-flex justify-content-between align-items-center">
+	                <p class="p18-egl">Contributo al consumo
+	                </p>
+	                <p class="p18-egl  mb-0 price-txt-bold">${residentialCart.scontoDigitale ? residentialCart.digitalPrezzoAlConsumoGas : residentialCart.prezzoAlConsumoGas} <small>€/kWh</small></p>
+	              </div>
+	              <div class="d-flex justify-content-between align-items-center">
+	                <p class="p18-egl"> Costi commercializzazione e vendita
+	                </p>
+	                <p class="p18-egl  mb-0 price-txt-bold">${residentialCart.commercializzazioneGasMese} <small>€/mese</small></p>
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+	        <!-- TREND fine-->
+	      </div>
+        </sly>
+    </div>
+  </div>
+</div>
+<!-- bottoni -->
+<div class="d-flex flex-wrap egl-modal-body-carrellostep-footer indietro-e-continua flex-b-100">
+  <button type="button" class="p20-egl egl-cart-cta-primary-yellow" onclick="exitFluxNA('GAS')">
+    Attiva Gas
+  </button>
+</div>
+

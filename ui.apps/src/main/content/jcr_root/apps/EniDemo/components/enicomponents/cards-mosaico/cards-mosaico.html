@@ -1,0 +1,175 @@
+<sly data-sly-use.template="core/wcm/components/commons/v1/templates.html" xmlns="http://www.w3.org/1999/html"/>
+
+<sly data-sly-test.verticalAlign="${properties.generalAlignment}"></sly>
+<sly data-sly-test.leftHorizontalTextAlign="${properties.leftTextAlignment}"></sly>
+<sly data-sly-test.leftHorizontalTitleAlign="${properties.leftTextAlignment == 'center' ? 'center-titles': ''}"></sly>
+<sly data-sly-test.rightHorizontalTextAlign="${properties.rightTextAlignment}"></sly>
+<sly data-sly-test.rightHorizontalTitleAlign="${properties.rightTextAlignment == 'center' ? 'center-titles': ''}"></sly>
+<sly data-sly-test.leftBackgroundCardImg="${properties.leftBackgroundType =='image'}"></sly>
+<sly data-sly-test.rightBackgroundCardImg="${properties.rightBackgroundType =='image'}"></sly>
+<sly data-sly-test.leftCard="${properties.leftTag || properties.leftTitle || properties.leftSubtitle || leftBackgroundCardImg}"></sly>
+<sly data-sly-test.rightCard="${properties.rightTag || properties.rightTitle || properties.rightSubtitle || rightBackgroundCardImg}"></sly>
+
+<sly data-sly-test.hasContent="${leftCard || rightCard}"/>
+<sly data-sly-call="${template.placeholder @ isEmpty=!hasContent}"/>
+
+<div data-pln-component="basic-mosaico" pln-version="1.0" class="container-mosaico"
+     style="background-color:${properties.backgroundColor @ context='styleString'};">
+    <div data-pln-component="basic-mosaico" pln-version="1.0"
+         class="cards-container">
+
+        <!--/* Left Card */-->
+
+        <sly data-sly-test.leftShadow="${properties.leftShadowType =='light' ? 'shadowLight': ''}"></sly>
+        <sly data-sly-test.leftBackground="${leftBackgroundCardImg ? '' : properties.leftBackgroundColor}"></sly>
+
+        <div class="olimp-card alternativeImg col-xs-6 ${leftShadow}"
+             style="background-color:${leftBackground @ context='styleString'};"
+             data-sly-test="${leftCard || leftBackgroundCardImg}">
+
+            <picture data-sly-test="${leftBackgroundCardImg}">
+                <sly data-sly-use.rendMan="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=properties.leftCardbackgroundImgReference}"></sly>
+                <sly data-sly-set.rendDesk="${rendMan.renditions}"></sly>
+                <sly data-sly-set.doubleRendDesk="${rendMan.doubledRenditions}"></sly>
+
+                <sly data-sly-use.rendManMobile="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=properties.leftCardbackgroundImgReferenceMobile}"></sly>
+                <sly data-sly-set.rendMobile="${rendManMobile.renditions}"></sly>
+                <sly data-sly-set.doubleRendMobile="${rendManMobile.doubledRenditions}"></sly>
+
+                <sly data-sly-use.imageLeft="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.leftCardbackgroundImgReference}"></sly>
+
+                <!--/* Desktop */-->
+                <source media="(min-width: 1024px) and (min-resolution: 150dpi)"
+                        srcset="${doubleRendDesk['1024px'] @ context='uri'}"/>
+                <source media="(min-width: 1024px)" srcset="${rendDesk['1024px'] @ context='uri'}"/>
+
+                <source media="(min-width: 1440px) and (min-resolution: 150dpi)"
+                        srcset="${doubleRendDesk['1440px'] @ context='uri'}"/>
+                <source media="(min-width: 1440px)" srcset="${rendDesk['1440px'] @ context='uri'}"/>
+
+                <!--/* Tablet */-->
+                <source media="(min-width: 768px) and (min-resolution: 150dpi)"
+                        srcset="${doubleRendMobile['768px'] @ context='uri'}"/>
+                <source media="(min-width: 768px)" srcset="${rendMobile['768px'] @ context='uri'}"/>
+
+                <!--/* Mobile */-->
+                <source media="(min-width: 320px) and (min-resolution: 150dpi)"
+                        srcset="${doubleRendMobile['360px'] @ context='uri'}"/>
+                <source media="(min-width: 320px)" srcset="${rendMobile['360px'] @ context='uri'}"/>
+
+                <img class="zero-four-image-fixed-width-image" src="${doubleRendDesk['1920px'] @ context='uri'}"
+                     alt="${imageLeft.description}"/>
+            </picture>
+
+            <sly data-sly-test.leftVelinaClass="${properties.leftVelina == 'grey' ? 'velina-grey': ''}"></sly>
+            <sly data-sly-test.leftVelinaClass="${properties.leftVelina == 'white' ? 'velina-white': leftVelinaClass}"></sly>
+            <sly data-sly-test.leftVelinaClass="${properties.leftVelina == 'custom' ? 'velina-custom': leftVelinaClass}"></sly>
+            <sly data-sly-test.leftVelinaBackground="${leftVelinaClass == 'velina-custom' ? properties.leftVelinaCustom : ''}"></sly>
+            <div data-sly-unwrap="${properties.leftVelina == 'none'}" class="${leftVelinaClass}"
+                 style="background-color:${leftVelinaBackground @ context='styleString'};">
+
+                <div class="content ${verticalAlign} ${leftHorizontalTextAlign}">
+                    <div class="chips ${leftHorizontalTextAlign}"
+                         style="background-color:${properties.leftTagContainerColor @ context='styleString'};"
+                         data-sly-test="${properties.leftTag}">
+                    <span class="text-chips"
+                          style="color:${properties.leftTagTextColor @ context='styleString'};">
+                        ${properties.leftTag}</span>
+                    </div>
+
+                    <div class="title pln-h2 ${leftHorizontalTitleAlign}">
+                        ${properties.leftTitle @ context='html'}
+                    </div>
+
+                    <div class="subtitle pln-h4 ${leftHorizontalTitleAlign}">
+                        ${properties.leftSubtitle @ context='html'}
+                    </div>
+                    <div class="bottom ${leftHorizontalTextAlign}" data-sly-test="${properties.leftTextLink && properties.leftLink}">
+                        <a role="${properties.rightCtaStyle == 'link' ? 'link':'button'}"
+                           class="${properties.leftCtaStyle == 'link' ? 'pln-btn-arrow white':'link pln-btn-primary'}"
+                           href="${properties.leftLink}" data-sly-test="${properties.leftTextLink}">
+                            ${properties.leftTextLink}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--/* Right Card */-->
+
+        <sly data-sly-test.rightShadow="${properties.rightShadowType =='light' ? 'shadowLight': ''}"></sly>
+        <sly data-sly-test.rightBackground="${rightBackgroundCardImg ? '' : properties.rightBackgroundColor}"></sly>
+
+        <div class="olimp-card alternativeImg col-xs-6 ${rightShadow}"
+             style="background-color:${rightBackground @ context='styleString'};"
+             data-sly-test="${rightCard || rightBackgroundCardImg}">
+
+            <picture data-sly-test="${rightBackgroundCardImg}">
+                <sly data-sly-use.rendMan="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=properties.rightCardbackgroundImgReference}"></sly>
+                <sly data-sly-set.rendDesk="${rendMan.renditions}"></sly>
+                <sly data-sly-set.doubleRendDesk="${rendMan.doubledRenditions}"></sly>
+
+                <sly data-sly-use.rendManMobile="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=properties.rightCardbackgroundImgReferenceMobile}"></sly>
+                <sly data-sly-set.rendMobile="${rendManMobile.renditions}"></sly>
+                <sly data-sly-set.doubleRendMobile="${rendManMobile.doubledRenditions}"></sly>
+
+                <sly data-sly-use.imageRight="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.rightCardbackgroundImgReference}"></sly>
+
+                <!--/* Desktop */-->
+                <source media="(min-width: 1024px) and (min-resolution: 150dpi)"
+                        srcset="${doubleRendDesk['1024px'] @ context='uri'}"/>
+                <source media="(min-width: 1024px)" srcset="${rendDesk['1024px'] @ context='uri'}"/>
+
+                <source media="(min-width: 1440px) and (min-resolution: 150dpi)"
+                        srcset="${doubleRendDesk['1440px'] @ context='uri'}"/>
+                <source media="(min-width: 1440px)" srcset="${rendDesk['1440px'] @ context='uri'}"/>
+
+                <!--/* Tablet */-->
+                <source media="(min-width: 768px) and (min-resolution: 150dpi)"
+                        srcset="${doubleRendMobile['768px'] @ context='uri'}"/>
+                <source media="(min-width: 768px)" srcset="${rendMobile['768px'] @ context='uri'}"/>
+
+                <!--/* Mobile */-->
+                <source media="(min-width: 320px) and (min-resolution: 150dpi)"
+                        srcset="${doubleRendMobile['360px'] @ context='uri'}"/>
+                <source media="(min-width: 320px)" srcset="${rendMobile['360px'] @ context='uri'}"/>
+
+                <img class="zero-four-image-fixed-width-image" src="${doubleRendDesk['1920px'] @ context='uri'}" alt="${imageRight.description}"/>
+            </picture>
+
+            <sly data-sly-test.rightVelinaClass="${properties.rightVelina =='grey' ? 'velina-grey': ''}"></sly>
+            <sly data-sly-test.rightVelinaClass="${properties.rightVelina =='white' ? 'velina-white': rightVelinaClass}"></sly>
+            <sly data-sly-test.rightVelinaClass="${properties.rightVelina =='custom' ? 'velina-custom': rightVelinaClass}"></sly>
+            <sly data-sly-test.rightVelinaBackground="${rightVelinaClass == 'velina-custom' ? properties.rightVelinaCustom : ''}"></sly>
+
+            <div data-sly-unwrap="${properties.rightVelina == 'none'}" class="${rightVelinaClass}"
+                 style="background-color:${rightVelinaBackground @ context='styleString'};">
+                <div class="content ${verticalAlign} ${rightHorizontalTextAlign}">
+                    <div class="chips ${rightHorizontalTextAlign}"
+                         style="background-color:${properties.rightTagContainerColor @ context='styleString'};"
+                         data-sly-test="${properties.rightTag}">
+                    <span class="text-chips"
+                          style="color:${properties.rightTagTextColor @ context='styleString'};">
+                        ${properties.rightTag}</span>
+                    </div>
+
+                    <div class="title pln-h2 ${rightHorizontalTitleAlign}">
+                        ${properties.rightTitle @ context='html'}
+                    </div>
+
+                    <div class="subtitle pln-h4 ${rightHorizontalTitleAlign}">
+                        ${properties.rightSubtitle @ context='html'}
+                    </div>
+                    <div class="bottom ${rightHorizontalTextAlign}" data-sly-test="${properties.rightTextLink && properties.rightLink}">
+                        <a role="${properties.rightCtaStyle == 'link' ? 'link':'button'}"
+                           class="${properties.rightCtaStyle == 'link' ? 'pln-btn-arrow white':'link pln-btn-primary'}"
+                           href="${properties.rightLink}" data-sly-test="${properties.rightTextLink}">
+                            ${properties.rightTextLink}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

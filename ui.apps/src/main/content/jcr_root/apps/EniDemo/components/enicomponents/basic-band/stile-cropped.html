@@ -1,0 +1,328 @@
+<!-- gestione velina dsk e mobile versione cropped -->
+
+	<sly data-sly-test="${'rgba' in properties.colore1 && 'rgba' in properties.colore1dxsx}">
+		<style data-sly-test="${properties.orientamentoVelinacropped == 'sinistra' && properties.coloreVelinaDesk == 'filtro-background-basic-band-colorato-desktop'}">
+			@media (min-width: 1025px) {
+				[data-pln-component=basicCl-band-card-tx][pln-version="1.0"].egl-hero-centered-basic-color-container .filtro-background-img-hero-nero::before {
+					content: '';
+					background: linear-gradient(90deg, ${properties.colore1 @ context='styleToken'} 34%, ${properties.colore1dxsx @ context='styleToken'} 66%)!important;
+					height: 100%;
+					max-height: 640px;
+					width:100%;
+					max-width:1140px;
+					border-radius: 10px;
+				}
+			}
+		</style>
+	</sly>
+
+	<sly data-sly-test="${!('rgba' in properties.colore1)  && !('rgba' in properties.colore1dxsx)}">
+		<style data-sly-test="${properties.orientamentoVelinacropped == 'sinistra' && properties.coloreVelinaDesk == 'filtro-background-basic-band-colorato-desktop'}">
+			@media (min-width: 1025px) {
+				[data-pln-component=basicCl-band-card-tx][pln-version="1.0"].egl-hero-centered-basic-color-container .filtro-background-img-hero-nero::before {
+					content: '';
+					background: linear-gradient(90deg, ${properties.colore1 @ context='styleToken'}cc 34%, ${properties.colore1dxsx @ context='styleToken'}00 66%)!important;
+					height: 100%;
+					max-height: 640px;
+					width:100%;
+					max-width:1140px;
+					border-radius: 10px;
+				}
+			}
+		</style>
+	</sly>
+
+	<sly data-sly-test="${!('rgba' in properties.colore1)  && ('rgba' in properties.colore1dxsx)}">
+		<style data-sly-test="${properties.orientamentoVelinacropped == 'sinistra' && properties.coloreVelinaDesk == 'filtro-background-basic-band-colorato-desktop'}">
+			@media (min-width: 1025px) {
+				[data-pln-component=basicCl-band-card-tx][pln-version="1.0"].egl-hero-centered-basic-color-container .filtro-background-img-hero-nero::before {
+					content: '';
+					background: linear-gradient(90deg, ${properties.colore1 @ context='styleToken'}cc 34%, ${properties.colore1dxsx @ context='styleToken'} 66%)!important;
+					height: 100%;
+					max-height: 640px;
+					width:100%;
+					max-width:1140px;
+					border-radius: 10px;
+				}
+			}
+		</style>
+	</sly>
+
+	<sly data-sly-test="${('rgba' in properties.colore1)  && !('rgba' in properties.colore1dxsx)}">
+		<style data-sly-test="${properties.orientamentoVelinacropped == 'sinistra' && properties.coloreVelinaDesk == 'filtro-background-basic-band-colorato-desktop'}">
+			@media (min-width: 1025px) {
+				[data-pln-component=basicCl-band-card-tx][pln-version="1.0"].egl-hero-centered-basic-color-container .filtro-background-img-hero-nero::before {
+					content: '';
+					background: linear-gradient(90deg, ${properties.colore1 @ context='styleToken'} 34%, ${properties.colore1dxsx @ context='styleToken'}00 66%)!important;
+					height: 100%;
+					max-height: 640px;
+					width:100%;
+					max-width:1140px;
+					border-radius: 10px;
+				}
+			}
+		</style>
+	</sly>
+
+	<style data-sly-test="${properties.orientamentoVelinacropped == 'sinistra' && properties.coloreVelinaDesk != 'filtro-background-basic-band-colorato-desktop'}">
+		@media (min-width: 1025px) {
+			[data-pln-component=basicCl-band-card-tx][pln-version="1.0"].egl-hero-centered-basic-color-container .filtro-background-img-hero-nero::before {
+				content: '';
+				background: linear-gradient(90deg, #333333cc 34%, #3330 66%)!important;
+				height: 100%;
+					max-height: 640px;
+					width:100%;
+					max-width:1140px;
+					border-radius: 10px;
+			}
+		}
+	</style>
+
+	<sly data-sly-test="${'rgba' in properties.colore1 && 'rgba' in properties.colore1dxsx}">
+		<style data-sly-test="${properties.orientamentoVelinacropped == 'centrato' && properties.coloreVelinaDesk == 'filtro-background-basic-band-colorato-desktop'}">
+			@media (min-width: 1025px) {
+				.filtro-background-img-hero-nero::before {
+					content: "";
+					background: linear-gradient(to bottom,${properties.colore1 @ context='styleToken'},${properties.colore1dxsx @ context='styleToken'})!important;
+					height: 100%;
+					max-height: 640px;
+					width:100%;
+					max-width:1140px;
+					border-radius: 10px;
+					
+				}
+			}
+		</style>
+	</sly>
+
+	<sly data-sly-test="${!('rgba' in properties.colore1)  && !('rgba' in properties.colore1dxsx)}">
+		<style data-sly-test="${properties.orientamentoVelinacropped == 'centrato' && properties.coloreVelinaDesk == 'filtro-background-basic-band-colorato-desktop'}">
+			@media (min-width: 1025px) {
+				.filtro-background-img-hero-nero::before {
+					content: "";
+					background: linear-gradient(to bottom,${properties.colore1 @ context='styleToken'}80,${properties.colore1dxsx @ context='styleToken'}80)!important;
+					height: 100%;
+					max-height: 640px;
+					width:100%;
+					max-width:1140px;
+					border-radius: 10px;
+					
+				}
+			}
+		</style>
+	</sly>
+
+	<sly data-sly-test="${!('rgba' in properties.colore1)  && ('rgba' in properties.colore1dxsx)}">
+		<style data-sly-test="${properties.orientamentoVelinacropped == 'centrato' && properties.coloreVelinaDesk == 'filtro-background-basic-band-colorato-desktop'}">
+			@media (min-width: 1025px) {
+				.filtro-background-img-hero-nero::before {
+					content: "";
+					background: linear-gradient(to bottom,${properties.colore1 @ context='styleToken'}80,${properties.colore1dxsx @ context='styleToken'})!important;
+					height: 100%;
+					max-height: 640px;
+					width:100%;
+					max-width:1140px;
+					border-radius: 10px;
+					
+				}
+			}
+		</style>
+	</sly>
+
+	<sly data-sly-test="${('rgba' in properties.colore1)  && !('rgba' in properties.colore1dxsx)}">
+		<style data-sly-test="${properties.orientamentoVelinacropped == 'centrato' && properties.coloreVelinaDesk == 'filtro-background-basic-band-colorato-desktop'}">
+			@media (min-width: 1025px) {
+				.filtro-background-img-hero-nero::before {
+					content: "";
+					background: linear-gradient(to bottom,${properties.colore1 @ context='styleToken'},${properties.colore1dxsx @ context='styleToken'}80)!important;
+					height: 100%;
+					max-height: 640px;
+					width:100%;
+					max-width:1140px;
+					border-radius: 10px;
+					
+				}
+			}
+		</style>
+	</sly>
+	
+	<style data-sly-test="${properties.orientamentoVelinaMobilecropped == 'top'}">
+		@media (min-width: 320px) and (max-width: 1024px) {
+			[data-pln-component=basicCl-band-card-tx][pln-version="1.0"].egl-hero-centered-basic-color-container .filtro-background-img-hero-nero:before {
+				content: '';
+				background: linear-gradient(180deg, #333333cc 34%, #3330 66%);
+				height: 440px;
+				width: 100%;
+				max-width:330px;
+				border-radius: 10px;
+			}
+		}
+	</style>
+	
+	<style data-sly-test="${properties.orientamentoVelinaMobilecropped == 'bottom'}">
+		@media (min-width: 320px) and (max-width: 1024px) {
+			[data-pln-component=basicCl-band-card-tx][pln-version="1.0"].egl-hero-centered-basic-color-container .filtro-background-img-hero-nero:before {
+				content: '';
+				background: linear-gradient(0deg, #333333cc 34%, #3330 66%);
+				height: 440px;
+				width: 100%;
+				max-width:330px;
+				border-radius: 10px;
+			}
+		}
+	</style>
+
+	<!-- COLORE VELINA MOBILE -->
+	<sly data-sly-test="${properties.orientamentoVelinaMobilecropped == 'top'}">
+		<sly data-sly-test="${'rgba' in properties.colore1 && 'rgba' in properties.colore1dxsx}">
+			<style>
+				@media (min-width: 320px) and (max-width: 1024px) {
+					.filtro-background-img-hero-nero::before {
+						content: "";
+						background: linear-gradient(180deg,${properties.colore1 @ context='styleToken'},${properties.colore1dxsx @ context='styleToken'})!important;
+						height: 440px;
+						width: 100%;
+						max-width:330px;
+						border-radius: 10px;
+					}
+				}
+			</style>
+		</sly>
+
+		<sly data-sly-test="${!('rgba' in properties.colore1)  && !('rgba' in properties.colore1dxsx)}">
+			<style>
+				@media (min-width: 320px) and (max-width: 1024px) {
+					.filtro-background-img-hero-nero::before {
+						content: "";
+						background: linear-gradient(180deg,${properties.colore1 @ context='styleToken'}80,${properties.colore1dxsx @ context='styleToken'}80)!important;
+						height: 440px;
+						width: 100%;
+						max-width:330px;
+						border-radius: 10px;
+					}
+				}
+			</style>
+		</sly>
+
+		<sly data-sly-test="${!('rgba' in properties.colore1)  && ('rgba' in properties.colore1dxsx)}">
+			<style>
+				@media (min-width: 320px) and (max-width: 1024px) {
+					.filtro-background-img-hero-nero::before {
+						content: "";
+						background: linear-gradient(180deg,${properties.colore1 @ context='styleToken'}80,${properties.colore1dxsx @ context='styleToken'})!important;
+						height: 440px;
+						width: 100%;
+						max-width:330px;
+						border-radius: 10px;
+					}
+				}
+			</style>
+		</sly>
+
+		<sly data-sly-test="${('rgba' in properties.colore1)  && !('rgba' in properties.colore1dxsx)}">
+			<style>
+				@media (min-width: 320px) and (max-width: 1024px) {
+					.filtro-background-img-hero-nero::before {
+						content: "";
+						background: linear-gradient(180deg,${properties.colore1 @ context='styleToken'},${properties.colore1dxsx @ context='styleToken'}80)!important;
+						height: 440px;
+						width: 100%;
+						max-width:330px;
+						border-radius: 10px;
+					}
+				}
+			</style>
+		</sly>
+	</sly>
+
+	<sly data-sly-test="${properties.orientamentoVelinaMobilecropped == 'bottom'}">
+		<sly data-sly-test="${'rgba' in properties.colore1 && 'rgba' in properties.colore1dxsx}">
+			<style>
+				@media (min-width: 320px) and (max-width: 1024px) {
+					.filtro-background-img-hero-nero::before {
+						content: "";
+						background: linear-gradient(0deg,${properties.colore1 @ context='styleToken'},${properties.colore1dxsx @ context='styleToken'})!important;
+						height: 440px;
+						width: 100%;
+						max-width:330px;
+						border-radius: 10px;
+					}
+				}
+			</style>
+		</sly>
+
+		<sly data-sly-test="${!('rgba' in properties.colore1)  && !('rgba' in properties.colore1dxsx)}">
+			<style>
+				@media (min-width: 320px) and (max-width: 1024px) {
+					.filtro-background-img-hero-nero::before {
+						content: "";
+						background: linear-gradient(0deg,${properties.colore1 @ context='styleToken'}80,${properties.colore1dxsx @ context='styleToken'}80)!important;
+						height: 440px;
+						width: 100%;
+						max-width:330px;
+						border-radius: 10px;
+					}
+				}
+			</style>
+		</sly>
+
+		<sly data-sly-test="${!('rgba' in properties.colore1)  && ('rgba' in properties.colore1dxsx)}">
+			<style>
+				@media (min-width: 320px) and (max-width: 1024px) {
+					.filtro-background-img-hero-nero::before {
+						content: "";
+						background: linear-gradient(0deg,${properties.colore1 @ context='styleToken'}80,${properties.colore1dxsx @ context='styleToken'})!important;
+						height: 440px;
+						width: 100%;
+						max-width:330px;
+						border-radius: 10px;
+					}
+				}
+			</style>
+		</sly>
+
+		<sly data-sly-test="${('rgba' in properties.colore1)  && !('rgba' in properties.colore1dxsx)}">
+			<style>
+				@media (min-width: 320px) and (max-width: 1024px) {
+					.filtro-background-img-hero-nero::before {
+						content: "";
+						background: linear-gradient(0deg,${properties.colore1 @ context='styleToken'},${properties.colore1dxsx @ context='styleToken'}80)!important;
+						height: 440px;
+						width: 100%;
+						max-width:330px;
+						border-radius: 10px;
+					}
+				}
+			</style>
+		</sly>
+	</sly>
+	<!-- FINE COLORE VELINA MOBILE -->
+
+	<style data-sly-test="${properties.coloreVelinaDesk == 'filtro-background-basic-band-bianco-desktop' && properties.orientamentoVelinacropped == 'sinistra'}">
+		@media (min-width: 1025px) {
+			[data-pln-component=basicCl-band-card-tx][pln-version="1.0"].egl-hero-centered-basic-color-container .filtro-background-img-hero-nero:before {
+				content: '';
+				background: linear-gradient(90deg, #FFFFFFcc 34%, #00000000 66%)!important;
+				height: 100%;
+				max-height: 640px;
+				width:100%;
+				max-width:1140px;
+				border-radius: 10px;					
+			}
+		}
+	</style>
+
+	<style data-sly-test="${properties.coloreVelinaDesk == 'filtro-background-basic-band-bianco-desktop' && properties.orientamentoVelinacropped == 'centrato'}">
+		@media (min-width: 1025px) {
+			[data-pln-component=basicCl-band-card-tx][pln-version="1.0"].egl-hero-centered-basic-color-container .filtro-background-img-hero-nero:before {
+				content: '';
+				background: linear-gradient(to bottom, #FFFFFFcc 34%, #00000000 66%)!important;
+				height: 100%;
+				max-height: 640px;
+				width:100%;
+				max-width:1140px;
+				border-radius: 10px;
+			}
+		}
+	</style>
+<!-- fine gestione velina dsk e mobile versione cropped -->

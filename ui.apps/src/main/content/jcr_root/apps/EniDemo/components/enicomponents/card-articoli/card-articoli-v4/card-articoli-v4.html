@@ -1,0 +1,141 @@
+
+<sly data-sly-use.model="com.egl.core.models.cardarticoli.CardArticoliModel"></sly>
+
+<sly data-sly-test.card1="${model.card1}"></sly>
+<sly data-sly-test.card2="${model.card2}"></sly>
+<sly data-sly-test.card3="${model.card3}"></sly>
+<sly data-sly-test.card4="${model.card4}"></sly>
+
+<!-- QUATTRO CARD-->
+        <div id="${model.id}" class="container-lg card-articoli-spacing-huge px-lg-0">
+            <div class="d-flex">
+                <div class="card-articoli-rectangle" data-sly-test="${model.titolo}"></div>
+                <div class="d-flex flex-column">
+                    <span class="card-articoli-title">${model.titolo @context='html'}</span>
+                    <span class="card-articoli-label">
+                    ${model.sottotitolo @context='html'}
+                </span>
+                </div>
+            </div>
+            <div class="w-100 d-flex cards-container">
+                <!-- LEFT prima CARD -->               
+	                <a href="${card1.urlCTACard}" target="${card1.targetCTACard}" title="${card1.altCTACard}" 
+	                	class="card-articoli-container col-lg-3 col-12 px-0 card-cliccabile">
+	                    <div class="card-articoli-card d-flex flex-column">
+	                        <div class="card-articoli-card-img" 
+	                        	data-sly-use.image1="${'com.egl.core.models.utils.ImageModel' @ imagePath=card1.immagineReference}">
+	                       	<picture data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=card1.immagineReference}" >
+	                            <sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+	                                <source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+	                                <source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+	                            </sly>
+								<img loading="lazy" src="${renditionsManager.renditions['1920px']}" alt="${image1.description}" />
+							</picture>
+	                        </div>
+	
+	                        <div class="card-articoli-card-body d-flex flex-column">
+	                            <div class="card-articoli-card-body-label">
+	                                ${card1.categoriaCard @context='html'}
+	                            </div>
+	                            <div class="card-articoli-card-body-title">
+	                                ${card1.titoloCard @context='html'}
+	                            </div>
+	                            <div class="card-articoli-card-body-text">
+	                                ${card1.paragrafoCard @context='html'}
+	                            </div>
+	                        </div>
+	                        <div class="mask"></div>
+	                    </div>
+	                </a>
+                
+                <!-- CENTER LEFT seconda CARD -->
+	                <a href="${card2.urlCTACard}" target="${card2.targetCTACard}" title="${card2.altCTACard}"
+	                	 class="card-articoli-container col-lg-3 col-12 px-0 card-cliccabile">
+	                    <div class="card-articoli-card d-flex flex-column">
+	                        <div class="card-articoli-card-img" 
+	                        	data-sly-use.image2="${'com.egl.core.models.utils.ImageModel' @ imagePath=card2.immagineReference}">
+		                        <picture data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=card2.immagineReference}" >
+		                            <sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+		                                <source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+		                                <source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+		                            </sly>
+									<img loading="lazy" src="${renditionsManager.renditions['1920px']}" alt="${image2.description}" />
+								</picture>
+	                        </div>
+	
+	                        <div class="card-articoli-card-body d-flex flex-column">
+	                            <div class="card-articoli-card-body-label">
+	                               ${card2.categoriaCard @context='html'}
+	                            </div>
+	                            <div class="card-articoli-card-body-title">
+	                               ${card2.titoloCard @context='html'}
+	                            </div>
+	                            <div class="card-articoli-card-body-text">
+	                                ${card2.paragrafoCard @context='html'}
+	                            </div>
+	                        </div>
+	                        <div class="mask"></div>
+	                    </div>	              
+               		</a>
+                <!-- CENTER RIGHT terza CARD -->
+                <a href="${card3.urlCTACard}" target="${card3.targetCTACard}" title="${card3.altCTACard}" 
+                	class="card-articoli-container col-lg-3 col-12 px-0 card-cliccabile">
+                    <div class="card-articoli-card d-flex flex-column">
+                        <div class="card-articoli-card-img" 
+                        	data-sly-use.image3="${'com.egl.core.models.utils.ImageModel' @ imagePath=card3.immagineReference}">
+                        	<picture data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=card3.immagineReference}" >
+	                            <sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+	                                <source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+	                                <source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+	                            </sly>
+								<img loading="lazy" src="${renditionsManager.renditions['1920px']}" alt="${image3.description}" />
+							</picture>
+                        </div>
+
+                        <div class="card-articoli-card-body d-flex flex-column">
+                            <div class="card-articoli-card-body-label">
+                                ${card3.categoriaCard @context='html'}
+                            </div>
+                            <div class="card-articoli-card-body-title">
+                               ${card3.titoloCard @context='html'}
+                            </div>
+                            <div class="card-articoli-card-body-text">
+                                ${card3.paragrafoCard @context='html'}
+                            </div>
+                        </div>
+                        <div class="mask"></div>
+                    </div>
+                </a>
+                <!-- RIGHT quarta CARD -->
+                <a href="${card4.urlCTACard}" target="${card4.targetCTACard}" title="${card4.altCTACard}" 
+                	class="card-articoli-container col-lg-3 col-12 px-0 card-cliccabile">
+                    <div class="card-articoli-card d-flex flex-column">
+                        <div class="card-articoli-card-img" 
+                        	data-sly-use.image4="${'com.egl.core.models.utils.ImageModel' @ imagePath=card4.immagineReference}">
+                        	<picture data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=card4.immagineReference}" >
+	                            <sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+	                                <source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+	                                <source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+	                            </sly>
+								<img loading="lazy" src="${renditionsManager.renditions['1920px']}" alt="${image4.description}" />
+							</picture>
+                        </div>
+
+                        <div class="card-articoli-card-body d-flex flex-column">
+                            <div class="card-articoli-card-body-label">
+                                ${card4.categoriaCard @context='html'}
+                            </div>
+                            <div class="card-articoli-card-body-title">
+                                ${card4.titoloCard @context='html'}
+                            </div>
+                            <div class="card-articoli-card-body-text">
+                                ${card4.paragrafoCard @context='html'}
+                            </div>
+                        </div>
+                        <div class="mask"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+  

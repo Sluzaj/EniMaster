@@ -1,0 +1,45 @@
+<sly data-sly-use.eniEnvs="com.egl.core.models.utils.ENIEnvironmentConfig"></sly>
+<sly data-sly-use.model="${'com.egl.core.models.nuoveattivazioni.GasNATextsModel' @ stepName='gasPosaAttivazione', pathJson=properties.pathJson}" />
+<sly data-sly-test.text="${model.gasPosaAttivazione}"/>
+
+<div class="container-lg px-lg-0 NA-last-step" data-faq-tab="${properties.posaAttivazioneGasNonSo}">
+    <div class="row">
+        <div class="col-lg-4 na-riepilogo">
+            <div class="na-card-riepilogo na-tricard">
+                <div class="na-card-riepilogo-content">
+                    <div class="na-riepilogo-ripeti" onclick="caricaStepNuovaAttivazione('gas_step0')">${text.repeatQ}</div>
+                    <p>${text.gasMeterRec}</p>
+                    <div class="na-riepilogo-button">${text.lightGasMeterR2}</div>
+                    <p>${text.lightGasMeterConnection}</p>
+                    <div class="na-riepilogo-button">${text.gasMeterConnectionR1}</div>
+                    <p>${text.gasMeterWorkRec}</p>
+                    <div class="na-riepilogo-button">${text.gasMeterWorkR3}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 na-spazio-card na-step0 na-lavori-impianto-gas">
+            <div class="na-last-step-content">
+                <p>${text.finalStepTitle}</p>
+                <h2>${text.lightGasMeterActivationTitle}</h2>
+                <p>${text.gasMeterActivationR1R3Text @ context='html'}</p>
+                <div class="d-flex">
+                    <a data-toggle="modal" data-target="#modale-NA" data-backdrop="static"
+                    data-keyboard="false">${text.gasMeterActivationButton @ context='html'}</a>
+                    <button class="${properties.callme ? 'callmeback' : 'd-none'}" data-toggle="modal" data-target="#ti-chiamiamo-noi" onclick="sfCallMeBackDataLayer('1_i tuoi dati', null)">${properties.callme}</button>
+                	<sly  data-sly-test="${properties.whatsappgas}">
+	                	<button class="na-whatsapp" whatsapp="ModaleWA">WHATSAPP
+	                        <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/chevron-right-solid.svg"  class="chevron"/>
+	                    </button>
+                    </sly>
+                </div>
+            </div>
+            <p class="cap12-egl" style="margin: 15px 0px 0px;">${text.finalStepFAQNote @ context='html'}</p>
+        </div>
+    </div>
+</div>
+
+<div id="riepilogo-nuova-attivazione"
+    data-weborder-service="${eniEnvs.serviceUrl}"
+	data-gas-meter="${text.lightGasMeterR2}"
+	data-light-gas-meter-connection="${text.gasMeterConnectionR1}"
+	data-gas-meter-work="${text.gasMeterWorkR3}"></div>

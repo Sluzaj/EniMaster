@@ -1,0 +1,1457 @@
+<sly data-sly-use.cartModel="com.egl.core.models.carrello.PageCartModel"></sly>
+<sly data-sly-set.isDual="${properties.furniture == 'dual'}"></sly>
+<sly data-sly-set.isMonoLuce="${properties.furniture == 'luce'}"></sly>
+<sly data-sly-set.isMonoGas="${properties.furniture == 'gas'}"></sly>
+<sly data-sly-set.businessCart="${cartModel.businessCart}"></sly>
+<sly data-sly-set.residentialCart="${cartModel.residentialCart}"></sly>
+<sly data-sly-set.cart="${businessCart || residentialCart}"></sly>
+<sly data-sly-set.isTrioraria="${businessCart && businessCart.corrispettivoLuceF2}"></sly>
+
+<sly
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.titleAdv}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<sly data-sly-test.isPromo="${properties.promo}"></sly>
+<sly data-sly-test.isPartnership="${properties.partnership}"></sly>
+<sly data-sly-use.fragmentModel="com.egl.core.models.listing.FragmentModel"></sly>
+<sly data-sly-test.promo1="${fragmentModel.fragPromo1}"></sly>
+<sly data-sly-test.promo2="${fragmentModel.fragPromo2}"></sly>
+<sly data-sly-test.leftImage="${isPartnership ? properties.image : fragmentModel.imageOfferta}"></sly>
+
+<sly data-sly-use.eniEnvs="com.egl.core.models.utils.ENIEnvironmentConfig"></sly>
+<sly data-sly-use.stepCartModel="${'com.egl.core.models.carrello.StepCartModel' @ cfPath=cartModel.pathCF, promotion1Path=cartModel.promotion1Path, promotion2Path=cartModel.promotion2Path}"></sly>
+<sly data-sly-set.isScontoDirect="${cart.scontoDirect}"></sly>
+
+<!-- PREZZI INDICIZZATI -->
+<sly data-sly-set.isPrezziIndicizzati="${cart.attivazioneVariantePrezziIndicizzati}"></sly>
+
+
+<style>
+    .card-fornitura-carrello-footer div:last-child::after {
+        content: "€/mese";
+    }
+
+    .cart-${resource.name @ context='styleToken'} .egl-cart-checkbox-sconto-opt-1.sconto-checked {
+        background-color: ${properties.offerColor @ context='styleToken'}
+    }
+
+    .cart-${resource.name @ context='styleToken'} .egl-cart-checkbox-sconto-opt-2.sconto-checked {
+        background-color: ${properties.offerColor @ context='styleToken'}
+    }
+
+    .cart-${resource.name @ context='styleToken'} .egl-cart-checkbox-tariffa-luce-opt-1.sconto-checked {
+        background-color: ${properties.offerColor @ context='styleToken'}
+    }
+
+    .cart-${resource.name @ context='styleToken'} .egl-cart-checkbox-tariffa-luce-opt-2.sconto-checked {
+        background-color: ${properties.offerColor @ context='styleToken'}
+    }
+
+    .cart-${resource.name @ context='styleToken'} .card-fornitura-carrello-body.fornitura-selezionata {
+        background: ${properties.offerColor @ context='styleToken'}
+    } 
+</style>
+
+<sly data-sly-use.modalFinder="com.egl.core.models.ModaleCommodityFinder"></sly>
+<sly data-sly-test="${!modalFinder.isModalePresent}">
+<div>
+	<sly
+		data-sly-resource="${'modaleCommodity2' @ resourceType='enigaseluce/components/modale-commodity'}">
+	</sly>
+</div>
+<div>
+	<sly
+		data-sly-resource="${'modaleDisclaimer2' @ resourceType='enigaseluce/components/modale-disclaimer'}">
+	</sly>
+</div>
+</sly>
+
+<div id="cart-data" class="d-none" 
+  	data-offer-code="${cartModel.offerCode}">
+</div>
+
+<div id="${properties.id}" class="container-lg px-0 listing-spacing-huge"
+	data-component-path="${stepCartModel.componentPath}"
+	data-starting-selectors="${cartModel.startingSelectors}"
+	data-selected-furniture="${cartModel.furniture}"
+	data-cluster-fw="${stepCartModel.clusterFw}"              
+	data-weborder-service="${eniEnvs.serviceUrl}"
+	data-offer-code="${stepCartModel.offerCode}"
+	data-user-type="${businessCart ? 'business' : 'residential'}"
+	data-my-eni-url="${eniEnvs.myEniPath}"
+	data-codice-canale="${cart.codiceCanale}"
+	data-codice-tp-canale="${cart.codiceTpCanale}"
+	data-coupon="${cart.coupon}"
+	data-codice-convenzione="${cart.codiceConvenzione}"
+	data-is-sconto-direct="${isScontoDirect ? 'true' : 'false'}"
+	data-modal-title="${stepCartModel.modalTitle}"
+	data-offer-name="${stepCartModel.offerName}">
+	<div class="d-flex">
+		<div class="col-lg-4 p-0 container-img-to-show">
+			<div class="listing-img">
+				<div class="listing-offerta-${resource.name}"
+					data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=leftImage}">
+					<picture data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=leftImage}" >
+						<sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+							<source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+							<source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+						</sly>
+						<img loading="lazy" class="main-img" src="${renditionsManager.renditions['1920px']}" alt="${image.description}">
+					</picture>
+				</div>
+				<sly data-sly-test="${isPromo}">
+				<div data-sly-test="${properties.pathCF2}" class="listing-promo1-${resource.name}"
+					data-start-promo="${promo1.dataInizioPromozione}"
+					data-end-promo="${promo1.dataFinePromozione}"
+					data-sly-use.imagePromo1="${'com.egl.core.models.utils.ImageModel' @ imagePath=promo1.immagineHeroBanner}">
+					<picture data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=promo1.immagineHeroBanner}" >
+						<sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+							<source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+							<source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+						</sly>
+						<img loading="lazy" class="main-img" src="${renditionsManager.renditions['1920px']}" alt="${imagePromo1.description}">
+					</picture>
+					<div class="listing-img-mask" style="background-color: ${promo1.coloreBackgroundFasciaPromozionale @ context='styleToken'};">
+						<span> ${promo1.copyPromozione @ context='html'} </span>
+					</div>
+
+					<div class="w-100 d-flex justify-content-center">
+						<div class="listing-promo">
+							<div class="listing-promo-container">
+								<div class="p14-egl">
+									<b>PROMO ATTIVA!</b> Scade tra:
+								</div>
+								<div class="d-flex text-center">
+									<div class="listing-cd-giorno" style="font-weight: bold;">
+										<div class="h3-egl">
+											<b>01</b>
+										</div>
+										<div class="cap12-egl">GIORNO</div>
+									</div>
+									<div class="listing-cd-ore position-relative" style="font-weight: bold;">
+										<div class="h3-egl">
+											<b>12</b>
+										</div>
+										<div class="cap12-egl">ORE</div>
+									</div>
+									<div class="listing-cd-minuti" style="font-weight: bold;">
+										<div class="h3-egl">
+											<b>33</b>
+										</div>
+										<div class="cap12-egl">MINUTI</div>
+									</div>
+								</div>
+
+							</div>
+							<div class="listing-promo-img" data-sly-use.imageStickyPromo1="${'com.egl.core.models.utils.ImageModel' @ imagePath=promo1.immaginePerBandSticky}">
+								<picture data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=promo1.immaginePerBandSticky}" >
+									<sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+										<source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+										<source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+									</sly>
+									<img loading="lazy" class="img-promo" src="${renditionsManager.renditions['1920px']}" alt="${imageStickyPromo1.description}">
+								</picture>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div data-sly-test="${properties.pathCF3}" class="listing-promo2-${resource.name}"
+					data-start-promo="${promo2.dataInizioPromozione}"
+					data-end-promo="${promo2.dataFinePromozione}"
+					data-sly-use.imagePromo2="${'com.egl.core.models.utils.ImageModel' @ imagePath=promo2.immagineHeroBanner}">
+					<picture data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=promo2.immagineHeroBanner}" >
+						<sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+							<source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+							<source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+						</sly>
+						<img loading="lazy" class="main-img" src="${renditionsManager.renditions['1920px']}" alt="${imagePromo2.description}">
+					</picture>
+					<div class="listing-img-mask" style="background-color: ${promo2.coloreBackgroundFasciaPromozionale @ context='styleToken'};">
+						<span> ${promo2.copyPromozione @ context='html'} </span>
+					</div>
+
+					<div class="w-100 d-flex justify-content-center">
+						<div class="listing-promo">
+							<div class="listing-promo-container">
+								<div class="p14-egl">
+									<b>PROMO ATTIVA!</b> Scade tra:
+								</div>
+								<div class="d-flex text-center">
+									<div class="listing-cd-giorno" style="font-weight: bold;">
+										<div class="h3-egl">
+											<b>01</b>
+										</div>
+										<div class="cap12-egl">GIORNO</div>
+									</div>
+									<div class="listing-cd-ore position-relative" style="font-weight: bold;">
+										<div class="h3-egl">
+											<b>12</b>
+										</div>
+										<div class="cap12-egl">ORE</div>
+									</div>
+									<div class="listing-cd-minuti" style="font-weight: bold;">
+										<div class="h3-egl">
+											<b>33</b>
+										</div>
+										<div class="cap12-egl">MINUTI</div>
+									</div>
+								</div>
+
+							</div>
+							<div class="listing-promo-img" data-sly-use.imageStickyPromo2="${'com.egl.core.models.utils.ImageModel' @ imagePath=promo2.immaginePerBandSticky}">
+								<picture data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=promo2.immaginePerBandSticky}" >
+									<sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+										<source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+										<source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+									</sly>
+									<img loading="lazy" class="img-promo" src="${renditionsManager.renditions['1920px']}" alt="${imageStickyPromo2.description}">
+								</picture>
+							</div>
+						</div>
+					</div>
+				</div>
+				</sly>
+			</div>
+		</div>
+		<div class="col-lg-8 listing-spacing-between-promo">
+			<div class="listing-carrello-dual">
+				<div
+					class="listing-right-side-header d-flex justify-content-md-between" style="background-color: ${properties.offerColor @ context='styleToken'};">
+					<div class="d-flex flex-column justify-content-md-center">
+						<span class="listing-right-side-header-title">${isPartnership ? properties.saleName : fragmentModel.nomeOfferta @ context='html'}</span>
+						<span class="listing-right-side-header-label" style="text-transform:uppercase">${isPartnership ? properties.supply : fragmentModel.tipoFornitura}</span>
+					</div>
+					<div data-sly-test="${isPromo}"
+						class="listing-promo d-none d-md-flex d-lg-none mt-0 listing-promo1-${resource.name}"
+						data-start-promo="${promo1.dataInizioPromozione}"
+						data-end-promo="${promo1.dataFinePromozione}">
+						<div class="listing-promo-container">
+							<div class="p14-egl">
+								<b>PROMO ATTIVA!</b> Scade tra:
+							</div>
+							<div class="d-flex text-center">
+								<div class="listing-cd-giorno" style="font-weight: bold;">
+									<div class="h3-egl">
+										<b>01</b>
+									</div>
+									<div class="cap12-egl">GIORNO</div>
+								</div>
+								<div class="listing-cd-ore position-relative"
+									style="font-weight: bold;">
+									<div class="h3-egl">
+										<b>12</b>
+									</div>
+									<div class="cap12-egl">ORE</div>
+								</div>
+								<div class="listing-cd-minuti" style="font-weight: bold;">
+									<div class="h3-egl">
+										<b>33</b>
+									</div>
+									<div class="cap12-egl">MINUTI</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="listing-promo-img"
+							data-sly-use.imageStickyPromo1="${'com.egl.core.models.utils.ImageModel' @ imagePath=promo1.immaginePerBandSticky}">
+							<picture data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=promo1.immaginePerBandSticky}" >
+								<sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+									<source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+									<source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+								</sly>
+								<img loading="lazy" class="img-promo" src="${renditionsManager.renditions['1920px']}" alt="${imageStickyPromo1.description}">
+							</picture>
+						</div>
+					</div>
+					<div data-sly-test="${isPromo}"
+						class="listing-promo d-none d-md-flex d-lg-none mt-0 listing-promo2-${resource.name}"
+						data-start-promo="${promo2.dataInizioPromozione}"
+						data-end-promo="${promo2.dataFinePromozione}">
+						<div class="listing-promo-container">
+							<div class="p14-egl">
+								<b>PROMO ATTIVA!</b> Scade tra:
+							</div>
+							<div class="d-flex text-center">
+								<div class="listing-cd-giorno" style="font-weight: bold;">
+									<div class="h3-egl">
+										<b>01</b>
+									</div>
+									<div class="cap12-egl">GIORNO</div>
+								</div>
+								<div class="listing-cd-ore position-relative"
+									style="font-weight: bold;">
+									<div class="h3-egl">
+										<b>12</b>
+									</div>
+									<div class="cap12-egl">ORE</div>
+								</div>
+								<div class="listing-cd-minuti" style="font-weight: bold;">
+									<div class="h3-egl">
+										<b>33</b>
+									</div>
+									<div class="cap12-egl">MINUTI</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="listing-promo-img"
+							data-sly-use.imageStickyPromo2="${'com.egl.core.models.utils.ImageModel' @ imagePath=promo2.immaginePerBandSticky}">
+							<picture data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=promo2.immaginePerBandSticky}" >
+								<sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+									<source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+									<source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+								</sly>
+								<img loading="lazy" class="img-promo" src="${renditionsManager.renditions['1920px']}" alt="${imageStickyPromo2.description}">
+							</picture>
+						</div>
+					</div>
+				</div>
+
+				<div class="listing-carrello-dual-body">
+					<div class="row">
+						<div class="col-12">
+							<div class="listing-carrello-dual-body-title">${properties.titleAdv @ context='html'}</div>
+							<div class="d-flex listing-spacing-small">
+								<div class="d-flex">
+									<div>
+										<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/check-solid.svg" class="listing-icon"/>
+									</div>
+									<div class="listing-spacing-left-small ">
+										<span class="listing-carrello-dual-body-subtitle">
+											${properties.titleKSP1 @ context='html'} </span><br /> <span
+											class="listing-carrello-dual-body-text">
+											${properties.textKSP1 @ context='html'} </span>
+									</div>
+								</div>
+								<div class="listing-paragraph-to-hide">
+									<div>
+										 <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/check-solid.svg" class="listing-icon"/>
+									</div>
+									<div class="listing-spacing-left-small ">
+										<span class="listing-carrello-dual-body-subtitle">
+											${properties.titleKSP2 @ context='html'} </span> <br /> <span
+											class="listing-carrello-dual-body-text">
+											${properties.textKSP2 @ context='html'} </span>
+									</div>
+								</div>
+
+							</div>
+							<div data-sly-test="${properties.logo1 || properties.logo2}" class="d-flex listing-carrello-dual-body-img-container">
+								<img loading="lazy" data-sly-test="${properties.logo1}" data-sly-use.logo1="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.logo1}" 
+									src="${properties.logo1}" alt="${logo1.description}">
+								<img loading="lazy" data-sly-test="${properties.logo2}" data-sly-use.logo2="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.logo2}"
+									src="${properties.logo2}" alt="${logo2.description}">
+							</div>
+
+							<div data-sly-test="${isPromo}"
+								class="listing-promo d-none d-sm-flex d-lg-none d-md-none listing-promo1-${resource.name}"
+								data-start-promo="${promo1.dataInizioPromozione}"
+								data-end-promo="${promo1.dataFinePromozione}">
+								<div class="listing-promo-container">
+									<div class="p14-egl">
+										<b>PROMO ATTIVA!</b> Scade tra:
+									</div>
+									<div class="d-flex text-center">
+										<div class="listing-cd-giorno" style="font-weight: bold;">
+											<div class="h3-egl">
+												<b>01</b>
+											</div>
+											<div class="cap12-egl">GIORNO</div>
+										</div>
+										<div class="listing-cd-ore position-relative"
+											style="font-weight: bold;">
+											<div class="h3-egl">
+												<b>12</b>
+											</div>
+											<div class="cap12-egl">ORE</div>
+										</div>
+										<div class="listing-cd-minuti" style="font-weight: bold;">
+											<div class="h3-egl">
+												<b>33</b>
+											</div>
+											<div class="cap12-egl">MINUTI</div>
+										</div>
+									</div>
+
+								</div>
+								<div class="listing-promo-img"
+									data-sly-use.imageStickyPromo1="${'com.egl.core.models.utils.ImageModel' @ imagePath=promo1.immaginePerBandSticky}">
+									<picture data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=promo1.immaginePerBandSticky}" >
+										<sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+											<source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+											<source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+										</sly>
+										<img loading="lazy" class="img-promo" src="${renditionsManager.renditions['1920px']}" alt="${imageStickyPromo1.description}">
+									</picture>
+								</div>
+							</div>
+							<div data-sly-test="${isPromo}"
+								class="listing-promo d-none d-sm-flex d-lg-none d-md-none listing-promo2-${resource.name}"
+								data-start-promo="${promo2.dataInizioPromozione}"
+								data-end-promo="${promo2.dataFinePromozione}">
+								<div class="listing-promo-container">
+									<div class="p14-egl">
+										<b>PROMO ATTIVA!</b> Scade tra:
+									</div>
+									<div class="d-flex text-center">
+										<div class="listing-cd-giorno" style="font-weight: bold;">
+											<div class="h3-egl">
+												<b>01</b>
+											</div>
+											<div class="cap12-egl">GIORNO</div>
+										</div>
+										<div class="listing-cd-ore position-relative"
+											style="font-weight: bold;">
+											<div class="h3-egl">
+												<b>12</b>
+											</div>
+											<div class="cap12-egl">ORE</div>
+										</div>
+										<div class="listing-cd-minuti" style="font-weight: bold;">
+											<div class="h3-egl">
+												<b>33</b>
+											</div>
+											<div class="cap12-egl">MINUTI</div>
+										</div>
+									</div>
+
+								</div>
+								<div class="listing-promo-img"
+									data-sly-use.imageStickyPromo2="${'com.egl.core.models.utils.ImageModel' @ imagePath=promo2.immaginePerBandSticky}">
+									<picture data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=promo2.immaginePerBandSticky}" >
+										<sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+											<source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+											<source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+										</sly>
+										<img loading="lazy" class="img-promo" src="${renditionsManager.renditions['1920px']}" alt="${imageStickyPromo2.description}">
+									</picture>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="listing-space-bar"></div>
+
+					<div
+						class="listing-sconto-digitale-title d-flex justify-content-between">
+						<div>${properties.corrispettivi @ context='html'}</div>
+						<div class="listing-arrow">
+							<img loading="lazy" class="listing-rotate-reset"
+								src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/7-icons-1-principali.png" alt="">
+						</div>
+
+
+					</div>
+
+				<sly data-sly-test="${!isPrezziIndicizzati}">
+					<div data-sly-test="${(isDual || isMonoLuce) && isTrioraria && businessCart}" class="listing-content-to-show cart-${resource.name}">
+
+						<!-- CARRELLO DUAL LUCE TRIORARIA -->
+						<div class="row justify-content-end mx-0">
+							<div class="tariffa-luce-switch"
+								data-sly-test="${businessCart.corrispettivoLuceF1 && businessCart.corrispettivoLuce24}">
+								<div
+									class="d-flex justify-content-md-end justify-content-between">
+									<div class="cap14-egl">${properties.titleTariffa}</div>
+									<div class="egl-cart-checkbox-tariffa-luce d-flex">
+										<div class="cap14-egl egl-cart-checkbox-tariffa-luce-opt-1 sconto-checked"
+											style="padding: 6px 12px"
+											onclick="toggleTariffaLuce('monofascia')">
+											${properties.label1}</div>
+										<div
+											class="
+												cap14-egl
+												egl-cart-checkbox-tariffa-luce-opt-2
+											"
+											style="padding: 6px 16px"
+											onclick="toggleTariffaLuce('multifascia')">
+											${properties.label2}</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div
+							class="row cards-forniture-dual riga-forniture-dual-trioraria ${businessCart.corrispettivoLuce24 ? 'd-none' : ''}"
+							data-sly-test="${businessCart.corrispettivoLuceF1}">
+							<div class="col">
+								<div class="card-fornitura-carrello">
+									<div
+										class="
+											card-fornitura-carrello-body
+											fornitura-selezionata
+											d-flex
+											card-fornitura-toggle-luce
+										">
+										<div class="icona-card-fornitura"
+											data-sly-test="${isDual && businessCart.commercializzazioneGasSmcMultioraria}">
+											<i class="fas fa-check no-content" onclick="toggleFornitura(event)">
+												<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/check-solid.svg" class="listing-icon check"/>
+                                                <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/plus-solid.svg" class="listing-icon plus"/>
+											</i>
+										</div>
+										<div class="p20-egl card-carrello-nome-fornitura"
+											onclick="${isDual && businessCart.commercializzazioneGasSmcMultioraria ? 'toggleFornitura(event)' : '' @ context='unsafe'}">
+											<b>LUCE</b>
+										</div>
+										<div
+											class="
+												card-fornitura-carrello-dettaglio
+												flex-column flex-md-row
+												fornitura-luce-trioraria
+												${isMonoLuce ? 'fornitura-luce-mono' : ''}
+											">
+											<div class="card-fornitura-carrello-dettaglio-opzioni">
+												<div class="card-fornitura-carrello-opt-f1">
+													<div class="d-flex d-md-block justify-content-between">
+														<div class="cart-card-opt-titolo">
+															<div class="p18-egl d-flex align-items-center">
+																<b>Luce F1</b> <i
+																	data-sly-test="${businessCart.tooltipCarrelloLuceF1}"
+																	tabindex="-1" class="fas fa-exclamation no-content"
+																	data-trigger="focus" data-toggle="tooltip"
+																	data-placement="right"
+																	title="${businessCart.tooltipCarrelloLuceF1 @ context='html'}">
+																	<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/exclamation-solid.svg" class="listing-icon"/>
+																	</i>
+															</div>
+														</div>
+														<div class="cart-card-opt-rapporto">
+															<div class="h4-egl">
+																<b>${businessCart.corrispettivoLuceF1}</b>
+															</div>
+															<div data-sly-test="${businessCart.infoSecondLuceF1}"
+																class="cap14-egl">${businessCart.infoSecondLuceF1
+																@ context='html'}</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="card-fornitura-carrello-dettaglio-opzioni">
+												<div class="card-fornitura-carrello-opt-f2 py-1 py-md-0">
+													<div class="d-flex d-md-block justify-content-between">
+														<div class="cart-card-opt-titolo">
+															<div class="p18-egl d-flex align-items-center">
+																<b>Luce F2</b> <i
+																	data-sly-test="${businessCart.tooltipCarrelloLuceF2}"
+																	tabindex="-1" class="fas fa-exclamation no-content"
+																	data-trigger="focus" data-toggle="tooltip"
+																	data-placement="right"
+																	title="${businessCart.tooltipCarrelloLuceF2 @ context='html'}">
+																	<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/exclamation-solid.svg" class="listing-icon"/>
+																	</i>
+															</div>
+														</div>
+														<div class="cart-card-opt-rapporto">
+															<div class="h4-egl">
+																<b>${businessCart.corrispettivoLuceF2}</b>
+															</div>
+															<div data-sly-test="${businessCart.infoSecondLuceF2}"
+																class="cap14-egl">${businessCart.infoSecondLuceF2
+																@ context='html'}</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="card-fornitura-carrello-dettaglio-opzioni">
+												<div class="card-fornitura-carrello-opt-f3">
+													<div class="d-flex d-md-block justify-content-between">
+														<div class="cart-card-opt-titolo">
+															<div class="p18-egl d-flex align-items-center">
+																<b>Luce F3</b> <i
+																	data-sly-test="${businessCart.tooltipCarrelloLuceF3}"
+																	tabindex="-1" class="fas fa-exclamation no-content"
+																	data-trigger="focus" data-toggle="tooltip"
+																	data-placement="right"
+																	title="${businessCart.tooltipCarrelloLuceF3 @ context='html'}">
+																	<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/exclamation-solid.svg" class="listing-icon">
+																	</i>
+															</div>
+														</div>
+														<div class="cart-card-opt-rapporto">
+															<div class="h4-egl">
+																<b>${businessCart.corrispettivoLuceF3}</b>
+															</div>
+															<div data-sly-test="${businessCart.infoSecondLuceF3}"
+																class="cap14-egl">${businessCart.infoSecondLuceF3
+																@ context='html'}</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="card-fornitura-carrello-footer"
+										data-sly-test="${businessCart.commercializzazioneLuceMese}">
+										<div class="cap12-egl">Costi di commercializzazione e
+											vendita</div>
+										<div class="h4-egl">${businessCart.commercializzazioneLuceMese}</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4"
+								data-sly-test="${isDual && businessCart.commercializzazioneGasSmcMultioraria}">
+								<div class="card-fornitura-carrello">
+									<div
+										class="card-fornitura-carrello-body d-flex card-fornitura-toggle-gas fornitura-selezionata">
+										<div class="icona-card-fornitura">
+											<i class="fas fa-check no-content" onclick="toggleFornitura(event)">
+											<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/check-solid.svg" class="listing-icon check"/>
+                                            <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/plus-solid.svg" class="listing-icon plus"/>
+											</i>
+										</div>
+										<div class="p20-egl card-carrello-nome-fornitura"
+											onclick="toggleFornitura(event)">
+											<b>GAS</b>
+										</div>
+										<div class="card-fornitura-carrello-dettaglio">
+											<div class="card-fornitura-carrello-dettaglio-opzioni">
+												<div class="card-fornitura-carrello-opt-gas">
+													<div class="d-flex d-md-block justify-content-between">
+														<div class="cart-card-opt-titolo">
+															<div class="p18-egl d-flex align-items-center">
+																<b>Gas</b>
+																<i data-sly-test="${cart.tooltipCarrelloGas}"
+																	tabindex="-1"
+																	class="fas fa-exclamation no-content"
+																	data-trigger="focus"
+																	data-toggle="tooltip"
+																	data-placement="right"
+																	title="${cart.tooltipCarrelloGas @ context='html'}"
+																	>
+																	<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/exclamation-solid.svg" class="listing-icon"/>
+																	</i>
+															</div>
+														</div>
+														<div class="cart-card-opt-rapporto">
+															<div class="h4-egl">
+																<b>${businessCart.commercializzazioneGasSmcMultioraria}</b>
+															</div>
+															<div data-sly-test="${businessCart.infoSecondGas}"
+																class="cap14-egl">${businessCart.infoSecondGas @
+																context='html'}</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="card-fornitura-carrello-footer"
+										data-sly-test="${businessCart.commercializzazioneGasMese}">
+										<div class="cap12-egl">Costi di commercializzazione e
+											vendita</div>
+										<div class="h4-egl">${businessCart.commercializzazioneGasMese}</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div
+							class="row cards-forniture-dual riga-forniture-dual-mono"
+							data-sly-test="${businessCart.corrispettivoLuce24}">
+							<div class="col">
+								<div class="card-fornitura-carrello">
+									<div
+										class="card-fornitura-carrello-body fornitura-selezionata d-flex card-fornitura-toggle-luce">
+										<div class="icona-card-fornitura"
+											data-sly-test="${isDual && businessCart.commercializzazioneGasSmcMonoraria}">
+											<i class="fas fa-check no-content" onclick="toggleFornitura(event)">
+											<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/check-solid.svg" class="listing-icon check"/>
+                                            <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/plus-solid.svg" class="listing-icon plus"/>
+											</i>
+										</div>
+										<div class="p20-egl card-carrello-nome-fornitura"
+											onclick="${isDual && businessCart.commercializzazioneGasSmcMonoraria ? 'toggleFornitura(event)' : '' @ context='unsafe'}">
+											<b>LUCE</b>
+										</div>
+										<div
+											class="card-fornitura-carrello-dettaglio flex-column flex-md-row fornitura-luce-trioraria ${(isMonoLuce || !businessCart.commercializzazioneGasSmcMonoraria) ? 'luce-mono-oraria' : ''}">
+											<div class="card-fornitura-carrello-dettaglio-opzioni">
+												<div class="card-fornitura-carrello-opt-f1">
+													<div class="d-flex d-md-block justify-content-between">
+														<div class="cart-card-opt-titolo">
+															<div class="p18-egl d-flex align-items-center">
+																<b>Luce 24h</b> <i
+																	data-sly-test="${businessCart.tooltipCarrelloLuceH24}"
+																	tabindex="-1" class="fas fa-exclamation no-content"
+																	data-trigger="focus" data-toggle="tooltip"
+																	data-placement="right"
+																	title="${businessCart.tooltipCarrelloLuceH24 @ context='html'}">
+																	<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/exclamation-solid.svg" class="listing-icon"/>
+																	</i>
+															</div>
+														</div>
+														<div class="cart-card-opt-rapporto">
+															<div class="h4-egl">
+																<b>${businessCart.corrispettivoLuce24}</b>
+															</div>
+															<div data-sly-test="${businessCart.infoSecondLuce24}"
+																class="cap14-egl">${businessCart.infoSecondLuce24
+																@ context='html'}</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="card-fornitura-carrello-footer"
+										data-sly-test="${businessCart.commercializzazioneLuceMese}">
+										<div class="cap12-egl">Costi di commercializzazione e
+											vendita</div>
+										<div class="h4-egl">${businessCart.commercializzazioneLuceMese}</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6"
+								data-sly-test="${isDual && businessCart.commercializzazioneGasSmcMonoraria}">
+								<div class="card-fornitura-carrello">
+									<div
+										class="card-fornitura-carrello-body d-flex card-fornitura-toggle-gas fornitura-selezionata">
+										<div class="icona-card-fornitura">
+											<i class="fas fa-check no-content" onclick="toggleFornitura(event)">
+													<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/check-solid.svg" class="listing-icon check"/>
+                                                    <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/plus-solid.svg" class="listing-icon plus"/>
+											</i>
+										</div>
+										<div class="p20-egl card-carrello-nome-fornitura"
+											onclick="toggleFornitura(event)">
+											<b>GAS</b>
+										</div>
+										<div class="card-fornitura-carrello-dettaglio">
+											<div class="card-fornitura-carrello-dettaglio-opzioni">
+												<div class="card-fornitura-carrello-opt-gas">
+													<div class="d-flex d-md-block justify-content-between">
+														<div class="cart-card-opt-titolo">
+															<div class="p18-egl d-flex align-items-center">
+																<b>Gas</b>
+																<i data-sly-test="${cart.tooltipCarrelloGas}"
+																	tabindex="-1"
+																	class="fas fa-exclamation no-content"
+																	data-trigger="focus"
+																	data-toggle="tooltip"
+																	data-placement="right"
+																	title="${cart.tooltipCarrelloGas @ context='html'}"
+																	>
+																	<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/exclamation-solid.svg" class="listing-icon"/>
+																	</i>
+															</div>
+														</div>
+														<div class="cart-card-opt-rapporto">
+															<div class="h4-egl">
+																<b>${businessCart.commercializzazioneGasSmcMonoraria}</b>
+															</div>
+															<div data-sly-test="${businessCart.infoSecondGas}"
+																class="cap14-egl">${businessCart.infoSecondGas @
+																context='html'}</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="card-fornitura-carrello-footer"
+										data-sly-test="${businessCart.commercializzazioneGasMese}">
+										<div class="cap12-egl">Costi di commercializzazione e
+											vendita</div>
+										<div class="h4-egl">${businessCart.commercializzazioneGasMese}</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row"
+							data-sly-test="${businessCart.additionalInfoCart}">
+							<div class="col-12">
+								<div class="cap12-egl">${businessCart.additionalInfoCart @
+									context='html'}</div>
+							</div>
+						</div>
+					</div>
+					
+					 <!-- dual luce bioraria -->
+					<div
+						data-sly-test="${(isDual || isMonoLuce) && (residentialCart || (businessCart && !isTrioraria))}"
+						class="listing-content-to-show cart-${resource.name}">
+						<div class="row justify-content-end mx-0">
+							<div class="sconto-digitale-switch"
+								data-sly-test="${residentialCart && (residentialCart.scontoDigitale || residentialCart.scontoDirect)}">
+								<div
+									class="
+										d-flex
+										justify-content-md-end justify-content-between
+										py-3 py-md-0
+									">
+									<div class="cap14-egl">${residentialCart.scontoDigitale ? 'Sconto Digitale' : 'Sconto Addebito Diretto'}</div>
+									<div class="egl-cart-checkbox-sconto d-flex">
+										<div
+											class="
+												cap14-egl
+												egl-cart-checkbox-sconto-opt-1
+												sconto-checked
+											"
+											onclick="toggleSconto(event)">
+											Attivo</div>
+										<div class="cap14-egl egl-cart-checkbox-sconto-opt-2"
+											onclick="toggleSconto(event)">
+											Disattivo</div>
+									</div>
+								</div>
+							</div>
+							<div class="tariffa-luce-switch"
+								data-sly-test="${(residentialCart.corrispettivoLuceF1 || businessCart.corrispettivoLuceF12) && cart.corrispettivoLuce24}">
+								<div
+									class="d-flex justify-content-md-end justify-content-between">
+									<div class="cap14-egl">${properties.titleTariffa}</div>
+									<div class="egl-cart-checkbox-tariffa-luce d-flex">
+										<div class="cap14-egl egl-cart-checkbox-tariffa-luce-opt-1 sconto-checked"
+											style="padding: 6px 12px"
+											onclick="toggleTariffaLuceBioraria('monofascia')">
+											${properties.label1}</div>
+										<div
+											class="
+												cap14-egl
+												egl-cart-checkbox-tariffa-luce-opt-2
+											"
+											style="padding: 6px 16px"
+											onclick="toggleTariffaLuceBioraria('bifascia')">
+											${properties.label2}</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div
+							class="row cards-forniture-dual riga-forniture-dual-bi-bioraria ${cart.corrispettivoLuce24 ? 'd-none' : ''}"
+							data-sly-test="${residentialCart.corrispettivoLuceF1 || businessCart.corrispettivoLuceF12}">
+							<div class="col">
+								<div class="card-fornitura-carrello">
+									<div
+										class="
+											card-fornitura-carrello-body
+											fornitura-selezionata
+											d-flex
+											card-fornitura-toggle-luce
+										">
+										<div class="icona-card-fornitura"
+											data-sly-test="${isDual && cart.commercializzazioneGasSmcMultioraria}">
+											<i class="fas fa-check no-content" onclick="toggleFornitura(event)">
+												<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/check-solid.svg" class="listing-icon check"/>
+                                                <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/plus-solid.svg" class="listing-icon plus"/>
+											</i>
+										</div>
+										<div class="p20-egl card-carrello-nome-fornitura"
+											onclick="${isDual && cart.commercializzazioneGasSmcMultioraria ? 'toggleFornitura(event)' : '' @ context='unsafe'}">
+											<b>LUCE</b>
+										</div>
+										<div
+											class="
+												card-fornitura-carrello-dettaglio
+												flex-column flex-md-row
+												fornitura-luce-bioraria
+												${isMonoLuce ? 'fornitura-luce-mono' : ''}
+											">
+											<div class="card-fornitura-carrello-dettaglio-opzioni">
+												<div class="card-fornitura-carrello-opt-f1">
+													<div class="d-flex d-md-block justify-content-between">
+														<div class="cart-card-opt-titolo">
+															<div class="p18-egl d-flex align-items-center">
+																<b>${residentialCart ? 'Luce F1' : 'Luce F1-F2'}</b> <i
+																	data-sly-test="${residentialCart.tooltipCarrelloLuceF1 || businessCart.tooltipCarrelloLuceF12}"
+																	tabindex="-1" class="fas fa-exclamation no-content"
+																	data-trigger="focus" data-toggle="tooltip"
+																	data-placement="right"
+																	title="${residentialCart ? residentialCart.tooltipCarrelloLuceF1 : businessCart.tooltipCarrelloLuceF12 @ context='html'}">
+																	<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/exclamation-solid.svg" class="listing-icon"/>
+																</i>
+															</div>
+														</div>
+														<div class="cart-card-opt-rapporto">
+							                              <div class="h4-egl"><b>${residentialCart ? residentialCart.corrispettivoLuceF1 : businessCart.corrispettivoLuceF12}</b></div>
+							                              <div data-sly-test="${(residentialCart && residentialCart.infoSecondLuceF1) || (businessCart && businessCart.infoSecondLuceF12)}" 
+							                                class="cap14-egl">${residentialCart ? residentialCart.infoSecondLuceF1 : businessCart.infoSecondLuceF12 @ context='html'}</div>
+							                            </div>
+							                            <div data-sly-test="${residentialCart}" class="cart-card-opt-rapporto rapporto-scontato d-none">
+							                              <div class="h4-egl"><b>${residentialCart.digitalCorrispettivoLuceF1}</b></div>
+							                              <div data-sly-test="${residentialCart.digitalInfoSecondLuceF1}" class="cap14-egl">${residentialCart.digitalInfoSecondLuceF1 @ context='html'}</div>
+							                            </div>
+													</div>
+												</div>
+											</div>
+											<div class="card-fornitura-carrello-dettaglio-opzioni">
+												<div class="card-fornitura-carrello-opt-f2 py-1 py-md-0">
+													<div class="d-flex d-md-block justify-content-between">
+														<div class="cart-card-opt-titolo">
+															<div class="p18-egl d-flex align-items-center">
+																<b>${residentialCart ? 'Luce F2-F3' : 'Luce F3'}</b> <i
+																	data-sly-test="${residentialCart.tooltipCarrelloLuceF23 || businessCart.tooltipCarrelloLuceF23}"
+																	tabindex="-1" class="fas fa-exclamation no-content"
+																	data-trigger="focus" data-toggle="tooltip"
+																	data-placement="right"
+																	title="${residentialCart ? residentialCart.tooltipCarrelloLuceF23 : businessCart.tooltipCarrelloLuceF23 @ context='html'}">
+																	<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/exclamation-solid.svg" class="listing-icon"/>
+																	</i>
+															</div>
+														</div>
+														<div class="cart-card-opt-rapporto">
+							                              <div class="h4-egl"><b>${residentialCart ? residentialCart.corrispettivoLuceF23 : businessCart.corrispettivoLuceF3}</b></div>
+							                              <div data-sly-test="${(residentialCart && residentialCart.infoSecondLuceF23) || (businessCart && businessCart.infoSecondLuceF3)}"
+							                                class="cap14-egl">${residentialCart ? residentialCart.infoSecondLuceF23 : businessCart.infoSecondLuceF3 @ context='html'}</div>
+							                            </div>
+							                            <div data-sly-test="${residentialCart}" class="cart-card-opt-rapporto rapporto-scontato d-none">
+							                              <div class="h4-egl"><b>${residentialCart.digitalCorrispettivoLuceF23}</b></div>
+							                              <div data-sly-test="${residentialCart.digitalInfoSecondLuceF23}" class="cap14-egl">${residentialCart.digitalInfoSecondLuceF23 @ context='html'}</div>
+							                            </div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="card-fornitura-carrello-footer"
+										data-sly-test="${cart.commercializzazioneLuceMese}">
+										<div class="cap12-egl">Costi di commercializzazione e
+											vendita</div>
+										<div class="h4-egl">${cart.commercializzazioneLuceMese}</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4"
+								data-sly-test="${isDual && cart.commercializzazioneGasSmcMultioraria}">
+								<div class="card-fornitura-carrello">
+									<div
+										class="card-fornitura-carrello-body d-flex card-fornitura-toggle-gas fornitura-selezionata">
+										<div class="icona-card-fornitura">
+											<i class="fas fa-check no-content" onclick="toggleFornitura(event)">
+												<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/check-solid.svg" class="listing-icon check"/>
+                                            	<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/plus-solid.svg" class="listing-icon plus"/>
+											</i>
+										</div>
+										<div class="p20-egl card-carrello-nome-fornitura"
+											onclick="toggleFornitura(event)">
+											<b>GAS</b>
+										</div>
+										<div class="card-fornitura-carrello-dettaglio">
+											<div class="card-fornitura-carrello-dettaglio-opzioni">
+												<div class="card-fornitura-carrello-opt-gas">
+													<div class="d-flex d-md-block justify-content-between">
+														<div class="cart-card-opt-titolo">
+															<div class="p18-egl d-flex align-items-center">
+																<b>Gas</b>
+																<i data-sly-test="${cart.tooltipCarrelloGas}"
+																	tabindex="-1"
+																	class="fas fa-exclamation no-content"
+																	data-trigger="focus"
+																	data-toggle="tooltip"
+																	data-placement="right"
+																	title="${cart.tooltipCarrelloGas @ context='html'}"
+																	>
+																	<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/exclamation-solid.svg" class="listing-icon"/>
+																	</i>
+															</div>
+														</div>
+														<div class="cart-card-opt-rapporto">
+							                              <div class="h4-egl"><b>${cart.commercializzazioneGasSmcMultioraria}</b></div>
+							                              <div data-sly-test="${cart.infoSecondGas}" class="cap14-egl">${cart.infoSecondGas @ context='html'}</div>
+							                            </div>
+							                            <div data-sly-test="${residentialCart}" class="cart-card-opt-rapporto rapporto-scontato d-none">
+							                              <div class="h4-egl"><b>${residentialCart.digitalCommercializzazioneGasSmcMultioraria}</b></div>
+							                              <div data-sly-test="${residentialCart.digitalInfoSecondGas}" class="cap14-egl">${residentialCart.digitalInfoSecondGas @ context='html'}</div>
+							                            </div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="card-fornitura-carrello-footer"
+										data-sly-test="${cart.commercializzazioneGasMese}">
+										<div class="cap12-egl">Costi di commercializzazione e
+											vendita</div>
+										<div class="h4-egl">${cart.commercializzazioneGasMese}</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div
+							class="row cards-forniture-dual riga-forniture-dual-bi-mono"
+							data-sly-test="${cart.corrispettivoLuce24}">
+							<div class="col">
+								<div class="card-fornitura-carrello">
+									<div
+										class="card-fornitura-carrello-body fornitura-selezionata d-flex card-fornitura-toggle-luce">
+										<div class="icona-card-fornitura"
+											data-sly-test="${isDual && cart.commercializzazioneGasSmcMonoraria}">
+											<i class="fas fa-check no-content" onclick="toggleFornitura(event)">
+													<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/check-solid.svg" class="listing-icon check"/>
+                                                    <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/plus-solid.svg" class="listing-icon plus"/>
+											</i>
+										</div>
+										<div class="p20-egl card-carrello-nome-fornitura"
+											onclick="${isDual && cart.commercializzazioneGasSmcMonoraria ? 'toggleFornitura(event)' : '' @ context='unsafe'}">
+											<b>LUCE</b>
+										</div>
+										<div
+											class="card-fornitura-carrello-dettaglio flex-column flex-md-row fornitura-luce-trioraria ${(isMonoLuce || !cart.commercializzazioneGasSmcMonoraria) ? 'luce-mono-oraria' : ''}">
+											<div class="card-fornitura-carrello-dettaglio-opzioni">
+												<div class="card-fornitura-carrello-opt-f1">
+													<div class="d-flex d-md-block justify-content-between">
+														<div class="cart-card-opt-titolo">
+															<div class="p18-egl d-flex align-items-center">
+																<b>Luce 24h</b> <i
+																	data-sly-test="${cart.tooltipCarrelloLuceH24}"
+																	tabindex="-1" class="fas fa-exclamation no-content"
+																	data-trigger="focus" data-toggle="tooltip"
+																	data-placement="right"
+																	title="${cart.tooltipCarrelloLuceH24 @ context='html'}">
+																	<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/exclamation-solid.svg" class="listing-icon"/>	
+																</i>
+															</div>
+														</div>
+														<div class="cart-card-opt-rapporto">
+							                              <div class="h4-egl"><b>${cart.corrispettivoLuce24}</b></div>
+							                              <div data-sly-test="${cart.infoSecondLuce24}" class="cap14-egl">${cart.infoSecondLuce24 @ context='html'}</div>
+							                            </div>
+							                            <div data-sly-test="${residentialCart}" class="cart-card-opt-rapporto rapporto-scontato d-none">
+							                              <div class="h4-egl"><b>${residentialCart.digitalCorrispettivoLuce24}</b></div>
+							                              <div data-sly-test="${residentialCart.digitalInfoSecondLuce24}" class="cap14-egl">${residentialCart.digitalInfoSecondLuce24 @ context='html'}</div>
+							                            </div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="card-fornitura-carrello-footer"
+										data-sly-test="${cart.commercializzazioneLuceMese}">
+										<div class="cap12-egl">Costi di commercializzazione e
+											vendita</div>
+										<div class="h4-egl">${cart.commercializzazioneLuceMese}</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6"
+								data-sly-test="${isDual && cart.commercializzazioneGasSmcMonoraria}">
+								<div class="card-fornitura-carrello">
+									<div
+										class="card-fornitura-carrello-body d-flex card-fornitura-toggle-gas fornitura-selezionata">
+										<div class="icona-card-fornitura">
+											<i class="fas fa-check no-content" onclick="toggleFornitura(event)">
+											<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/check-solid.svg" class="listing-icon check"/>
+                                            <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/plus-solid.svg" class="listing-icon plus"/>
+											</i>
+										</div>
+										<div class="p20-egl card-carrello-nome-fornitura"
+											onclick="toggleFornitura(event)">
+											<b>GAS</b>
+										</div>
+										<div class="card-fornitura-carrello-dettaglio">
+											<div class="card-fornitura-carrello-dettaglio-opzioni">
+												<div class="card-fornitura-carrello-opt-gas">
+													<div class="d-flex d-md-block justify-content-between">
+														<div class="cart-card-opt-titolo">
+															<div class="p18-egl d-flex align-items-center">
+																<b>Gas</b>
+																<i data-sly-test="${cart.tooltipCarrelloGas}"
+																	tabindex="-1"
+																	class="fas fa-exclamation no-content"
+																	data-trigger="focus"
+																	data-toggle="tooltip"
+																	data-placement="right"
+																	title="${cart.tooltipCarrelloGas @ context='html'}"
+																	>
+																	<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/exclamation-solid.svg" class="listing-icon"/>
+																	</i>
+															</div>
+														</div>
+														<div class="cart-card-opt-rapporto">
+							                              <div class="h4-egl"><b>${cart.commercializzazioneGasSmcMonoraria}</b></div>
+							                              <div data-sly-test="${cart.infoSecondGas}" class="cap14-egl">${cart.infoSecondGas @ context='html'}</div>
+							                            </div>
+							                            <div data-sly-test="${residentialCart}" class="cart-card-opt-rapporto rapporto-scontato d-none">
+							                              <div class="h4-egl"><b>${residentialCart.digitalCommercializzazioneGasSmcMonoraria}</b></div>
+							                              <div data-sly-test="${residentialCart.digitalInfoSecondGas}" class="cap14-egl">${residentialCart.digitalInfoSecondGas @ context='html'}</div>
+							                            </div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="card-fornitura-carrello-footer"
+										data-sly-test="${cart.commercializzazioneGasMese}">
+										<div class="cap12-egl">Costi di commercializzazione e
+											vendita</div>
+										<div class="h4-egl">${cart.commercializzazioneGasMese}</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row" data-sly-test="${cart.additionalInfoCart}">
+							<div class="col-12">
+								<div class="cap12-egl">${cart.additionalInfoCart @
+									context='html'}</div>
+							</div>
+						</div>
+					</div>
+
+					<!--mono gas-->
+					<div data-sly-test="${isMonoGas && cart}"
+						class="listing-content-to-show cart-${resource.name}">
+						<div class="row justify-content-end mx-0">
+							<div class="sconto-digitale-switch"
+								data-sly-test="${residentialCart && (residentialCart.scontoDigitale || residentialCart.scontoDirect)}">
+								<div
+									class="
+										d-flex
+										justify-content-md-end justify-content-between
+										py-3 py-md-0
+									">
+									<div class="cap14-egl">${residentialCart.scontoDigitale ? 'Sconto Digitale' : 'Sconto Addebito Diretto'}</div>
+									<div class="egl-cart-checkbox-sconto d-flex">
+										<div
+											class="
+												cap14-egl
+												egl-cart-checkbox-sconto-opt-1
+												sconto-checked
+											"
+											onclick="toggleSconto(event)">Attivo</div>
+										<div class="cap14-egl egl-cart-checkbox-sconto-opt-2"
+											onclick="toggleSconto(event)">Disattivo</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row cards-forniture-dual">
+							<div class="col">
+								<div class="card-fornitura-carrello">
+									<div
+										class="
+											card-fornitura-carrello-body
+											fornitura-selezionata
+											d-flex
+											card-fornitura-toggle-gas
+										">
+										<div class="p20-egl card-carrello-nome-fornitura">
+											<b>GAS</b>
+										</div>
+										<div
+											class="
+												card-fornitura-carrello-dettaglio
+												flex-column flex-md-row
+												fornitura-luce-mono
+												luce-mono-oraria
+											">
+											<div class="card-fornitura-carrello-dettaglio-opzioni">
+												<div class="card-fornitura-carrello-opt-gas">
+													<div class="d-flex justify-content-between">
+														<div class="cart-card-opt-titolo">
+															<div class="p18-egl d-flex align-items-center">
+																<b>Gas</b>
+																<i data-sly-test="${cart.tooltipCarrelloGas}"
+																	tabindex="-1"
+																	class="fas fa-exclamation no-content"
+																	data-trigger="focus"
+																	data-toggle="tooltip"
+																	data-placement="right"
+																	title="${cart.tooltipCarrelloGas @ context='html'}"
+																	>
+																	<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/exclamation-solid.svg" class="listing-icon"/>
+																	</i>
+															</div>
+														</div>
+														<div class="cart-card-opt-rapporto">
+							                              <div class="h4-egl"><b>${cart.commercializzazioneGasSmcMultioraria}</b></div>
+							                              <div data-sly-test="${cart.infoSecondGas}" class="cap14-egl">${cart.infoSecondGas @ context='html'}</div>
+							                            </div>
+							                            <div data-sly-test="${residentialCart}" class="cart-card-opt-rapporto rapporto-scontato d-none">
+							                              <div class="h4-egl"><b>${residentialCart.digitalCommercializzazioneGasSmcMultioraria}</b></div>
+							                              <div data-sly-test="${residentialCart.digitalInfoSecondGas}" class="cap14-egl">${residentialCart.digitalInfoSecondGas @ context='html'}</div>
+							                            </div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="card-fornitura-carrello-footer"
+										data-sly-test="${cart.commercializzazioneGasMese}">
+										<div class="cap12-egl">Costi di commercializzazione e
+											vendita</div>
+										<div class="h4-egl">${cart.commercializzazioneGasMese}</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row" data-sly-test="${cart.additionalInfoCart}">
+							<div class="col-12">
+								<div class="cap12-egl">${cart.additionalInfoCart @
+									context='html'}</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row padding-top-15">
+						<div class="col-md-6" data-sly-test="${(properties.openingCta2 == 'details' && properties.labelCta2 && properties.urlCta2) || (properties.openingCta2 == 'modalStep' && properties.labelCta2) || (properties.openingCta2 == 'modalCall' && properties.labelCta2)}">
+							<a data-sly-test="${properties.openingCta2 == 'details' && properties.labelCta2 && properties.urlCta2}"
+								href="${properties.urlCta2}" target="${properties.targetCta2}"
+								title="${properties.titleTextCta2}">
+								<button type="button"
+									class="p20-egl listing-cart-cta-primary-white">${properties.labelCta2}</button>
+							</a>
+							<button
+								data-sly-test="${properties.openingCta2 == 'modalCall' && properties.labelCta2}"
+								type="button" class="p20-egl btn listing-cart-cta-primary-white"
+								data-toggle="modal" data-target="#ti-chiamiamo-noi">${properties.labelCta2}</button>
+							<sly data-sly-test="${!(properties.abilitaNuovoCarrello) || properties.abilitaNuovoCarrello == 'N'}">
+							<button
+								data-sly-test="${properties.openingCta2 == 'modalStep' && properties.labelCta2 && !properties.modalDisclaimer2}"
+								type="button" class="p20-egl btn listing-cart-cta-primary-white"
+								data-toggle="modal" data-target="#Modale-Carrello-Step"
+								data-backdrop="static" data-keyboard="false"
+								onclick="openStartingStep(this)">${properties.labelCta2}</button>
+							</sly>
+							<sly data-sly-test="${(properties.abilitaNuovoCarrello) && properties.abilitaNuovoCarrello == 'Y'}">
+							<button
+								data-sly-test="${properties.openingCta2 == 'modalStep' && properties.labelCta2 && !properties.modalDisclaimer2}"
+								type="button" class="p20-egl btn listing-cart-cta-primary-white"
+								data-backdrop="static" data-keyboard="false"
+								stepcart="${properties.pathCFNuovoCarrello}"
+								>${properties.labelCta2}</button>
+							</sly>
+							<button
+								data-sly-test="${properties.openingCta2 == 'modalStep' && properties.labelCta2 && properties.modalDisclaimer2}"
+								type="button" class="p20-egl btn listing-cart-cta-primary-white"
+								data-toggle="modal" data-target="#modale-disclaimer"
+								onclick="saveClickedCart(this)">${properties.labelCta2}</button>
+						</div>
+						<div class="col-md-6" data-sly-test="${(properties.openingCta1 == 'details' && properties.labelCta1 && properties.urlCta1) || (properties.openingCta1 == 'modalStep' && properties.labelCta1) || (properties.openingCta1 == 'modalCall' && properties.labelCta1)}">
+							<a data-sly-test="${properties.openingCta1 == 'details' && properties.labelCta1 && properties.urlCta1}"
+								href="${properties.urlCta1}" target="${properties.targetCta1}"
+								title="${properties.titleTextCta1}">
+								<button type="button"
+									class="p20-egl listing-cart-cta-primary-yellow">${properties.labelCta1}</button></a>
+							<button
+								data-sly-test="${properties.openingCta1 == 'modalCall' && properties.labelCta1}"
+								type="button" class="p20-egl btn listing-cart-cta-primary-yellow"
+								data-toggle="modal" data-target="#ti-chiamiamo-noi">${properties.labelCta1}</button>
+							<sly data-sly-test="${!(properties.abilitaNuovoCarrello) || properties.abilitaNuovoCarrello == 'N'}">
+							<button
+								data-sly-test="${properties.openingCta1 == 'modalStep' && properties.labelCta1 && !properties.modalDisclaimer1}"
+								type="button" class="p20-egl btn listing-cart-cta-primary-yellow"
+								data-toggle="modal" data-target="#Modale-Carrello-Step"
+								data-backdrop="static" data-keyboard="false"
+								onclick="openStartingStep(this)">${properties.labelCta1}</button>
+							</sly>
+							<sly data-sly-test="${(properties.abilitaNuovoCarrello) && properties.abilitaNuovoCarrello == 'Y'}">
+							<button
+								data-sly-test="${properties.openingCta1 == 'modalStep' && properties.labelCta1 && !properties.modalDisclaimer1}"
+								type="button" class="p20-egl btn listing-cart-cta-primary-yellow"								
+								data-backdrop="static" data-keyboard="false"
+								stepcart="${properties.pathCFNuovoCarrello}"
+								>${properties.labelCta1}</button>
+							</sly>
+							<button
+								data-sly-test="${properties.openingCta1 == 'modalStep' && properties.labelCta1 && properties.modalDisclaimer1}"
+								type="button" class="p20-egl btn listing-cart-cta-primary-yellow"
+								data-toggle="modal" data-target="#modale-disclaimer"onclick="saveClickedCart(this)">
+								${properties.labelCta1}</button>
+						</div>
+					</div>
+					</sly>
+					
+					 <!-- PREZZI INDICIZZATI -->
+				    <sly data-sly-test="${isPrezziIndicizzati}">
+				      <!-- trend res e biz -->
+				      <div class="listing-content-to-show cart-${resource.name}">
+			          <div class="row cards-forniture-dual">
+			            <div class="${isMonoLuce ? 'col-12' : 'col-md-6'}"> 
+			              <div data-sly-test="${isMonoLuce || isDual}" class="card-fornitura-carrello"> <!--  -->
+			                <div class="card-fornitura-carrello-body card-fornitura-toggle-luce fornitura-selezionata d-flex">
+			                  <div class="icona-card-fornitura">
+			                    <i class="fas fa-check no-content" onclick="toggleFornitura(event)">
+			                    	<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/check-solid.svg" class="listing-icon check"/>
+                                    <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/plus-solid.svg" class="listing-icon plus"/>
+			                    </i>
+			                  </div>
+			                  <div class="p20-egl card-carrello-nome-fornitura" onclick="toggleFornitura(event)">
+			                    <b>LUCE</b>
+			                  </div>
+			                  <div class="card-fornitura-carrello-dettaglio flex-column flex-md-row fornitura-luce-trioraria">
+			                    <div class="card-fornitura-carrello-dettaglio-opzioni">
+			                      <div class="card-fornitura-carrello-opt-f1">
+			                        <!-- nella versione trend aggiungere le ultime due classi -->
+			                        <div class="d-flex d-md-block justify-content-between flex-md-row flex-column">
+			                          <div class="cart-card-opt-titolo">
+			                            <div class="p18-egl d-flex align-items-center">
+			                              <b>Luce monoraria${businessCart ? ' e trioraria' : ' e bioraria'}</b>
+			                              <i tabindex="-1" class="fas fa-exclamation no-content" data-trigger="focus" data-toggle="tooltip"
+			                                data-placement="right" title="${cart.tooltipLuceCarrelloInPaginaPrezziIndicizzati}" >
+			                                <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/exclamation-solid.svg" class="listing-icon"/>
+			                                </i>
+			                            </div>
+			                          </div>
+			                          <!-- contenitore del dettaglio trend esploso da mettere come rimpiazzo all'altro -->
+			                          <div class="dettaglio-trend-esploso">
+			                            <div class="d-flex justify-content-between align-items-center">
+			                              <p class="p18-egl ">Prezzo all'ingrosso <i tabindex="-1" class="fas fa-exclamation no-content"
+			                                  data-trigger="focus" data-toggle="tooltip" data-placement="right"
+			                                  title="${cart.tooltipLuceCarrelloInPaginaPrezzoAllingrosso}">
+			                                  <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/exclamation-solid.svg" class="listing-icon"/>
+			                                  </i>
+			                              </p>
+			                              <p class="p18-egl mb-0 price-txt">${cart.scontoDigitale ? cart.digitalPrezzoAllingrossoLuce : cart.prezzoAllingrossoLuce}</p>
+			                            </div>
+			                            <div class="d-flex justify-content-between align-items-center">
+			                              <p class="p18-egl">Contributo al consumo
+			                              </p>
+			                              <p class="p18-egl  mb-0 price-txt">${cart.scontoDigitale ? cart.digitalPrezzoAlConsumoLuce : cart.prezzoAlConsumoLuce} <small>€/kWh</small></p>
+			                            </div>
+			                          </div>
+			                        </div>
+			                      </div>
+			                    </div>
+			                  </div>
+			                </div>
+			                <div class="card-fornitura-carrello-footer">
+			                  <div class="cap12-egl">
+			                    Costi di commercializzazione e vendita
+			                  </div>
+			                  <div class="h4-egl">${cart.commercializzazioneLuceMese}</div>
+			                </div>
+			              </div>
+			            </div>
+			            <div class="${isMonoGas ? 'col-12' : 'col-md-6'}"> <!-- col-12 -->
+			              <div data-sly-test="${isMonoGas || isDual}" class="card-fornitura-carrello"> <!--  --> 
+			                <div class="card-fornitura-carrello-body card-fornitura-toggle-gas fornitura-selezionata d-flex">
+			                  <div class="icona-card-fornitura">
+			                    <i class="fas fa-check no-content" onclick="toggleFornitura(event)">
+			                    	<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/check-solid.svg" class="listing-icon check"/>
+                                 	<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/plus-solid.svg" class="listing-icon plus"/>
+			                    </i>
+			                  </div>
+			                  <div class="p20-egl card-carrello-nome-fornitura" onclick="toggleFornitura(event)">
+			                    <b>GAS</b>
+			                  </div>
+			                  <div class="card-fornitura-carrello-dettaglio">
+			                    <div class="card-fornitura-carrello-dettaglio-opzioni">
+			                      <div class="card-fornitura-carrello-opt-gas">
+			                        <!-- nella versione trend aggiungere le ultime due classi -->
+			                        <div class="d-flex d-md-block justify-content-between flex-md-row flex-column">
+			                          <div class="cart-card-opt-titolo">
+			                            <div class="p18-egl"><b>Gas</b></div>
+			                          </div>
+			                          <!-- contenitore del dettaglio trend esploso da mettere come rimpiazzo all'altro -->
+			                          <div class="dettaglio-trend-esploso">
+			                            <div class="d-flex justify-content-between align-items-center">
+			                              <p class="p18-egl ">Prezzo all'ingrosso <i tabindex="-1" class="fas fa-exclamation no-content"
+			                                  data-trigger="focus" data-toggle="tooltip" data-placement="right"
+			                                  title="${cart.tooltipGasCarrelloInPaginaPrezzoAllingrosso}" >
+			                                   <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/exclamation-solid.svg" class="listing-icon"/>
+			                                  </i>
+			                              </p>
+			                              <p class="p18-egl mb-0 price-txt">${cart.scontoDigitale ? cart.digitalPrezzoAllingrossoGas : cart.prezzoAllingrossoGas}</p>
+			                            </div>
+			                            <div class="d-flex justify-content-between align-items-center">
+			                              <p class="p18-egl">Contributo al consumo
+			                              </p>
+			                              <p class="p18-egl  mb-0 price-txt">${cart.scontoDigitale ? cart.digitalPrezzoAlConsumoGas : cart.prezzoAlConsumoGas} <small>€/Smc</small></p>
+			                            </div>
+			                          </div>
+			                        </div>
+			                      </div>
+			                    </div>
+			                  </div>
+			                </div>
+			                <div class="card-fornitura-carrello-footer">
+			                  <div class="cap12-egl">
+			                    Costi di commercializzazione e vendita
+			                  </div>
+			                  <div class="h4-egl">${cart.commercializzazioneGasMese}</div>
+			                </div>
+			              </div>
+			            </div>
+			          </div>
+					                <div class="row" data-sly-test="${cart.additionalInfoCart}">
+				              <div class="col-12">
+				                <div class="cap12-egl">
+				                  ${cart.additionalInfoCart @ context='html'}
+				                </div>
+				              </div>
+				            </div>
+				            <div class="row padding-top-15">
+				              <div class="col-md-6" data-sly-test="${(properties.openingCta2 == 'details' && properties.labelCta2 && properties.urlCta2) || (properties.openingCta2 == 'modal' && properties.labelCta2)}">
+				                <a data-sly-test="${properties.openingCta2 == 'details' && properties.labelCta2 && properties.urlCta2}" href="${properties.urlCta2}" target="${properties.targetCta2}" title="${properties.titleTextCta2}">
+				                    <button data-sly-test="${properties.labelCta2}"
+				                        type="button"
+				                        class="p20-egl egl-cart-cta-primary-white mb-sm-4 d-md-block">
+				                        ${properties.labelCta2}
+				                    </button>
+				                </a>
+				                <button data-sly-test="${properties.openingCta2 == 'modal' && properties.labelCta2}"
+				                  type="button"
+				                  class="p20-egl btn egl-cart-cta-primary-white mb-sm-4 d-md-block"
+				                  data-toggle="modal"
+				                  data-target="#ti-chiamiamo-noi"
+				                  onclick="sfCallMeBackDataLayer('1_i tuoi dati', null)">
+				                    ${properties.labelCta2}
+				                </button>
+				              </div>
+				              <div class="col-md-6" data-sly-test="${(properties.openingCta1 == 'details' && properties.labelCta1 && properties.urlCta1) || (properties.openingCta1 == 'modalStep' && properties.labelCta1) || (properties.openingCta1 == 'modalCall' && properties.labelCta1)}">
+				                <a data-sly-test="${properties.openingCta1 == 'details' && properties.labelCta1 && properties.urlCta1}" href="${properties.urlCta1}" target="${properties.targetCta1}" title="${properties.titleTextCta1}">
+				                  <button
+				                    type="button"
+				                    class="p20-egl egl-cart-cta-primary-yellow">
+				                      ${properties.labelCta1}
+				                  </button>
+				                </a>
+				                <sly data-sly-test="${!(properties.abilitaNuovoCarrello) || properties.abilitaNuovoCarrello == 'N'}">
+				                <button data-sly-test="${properties.openingCta1 == 'modalStep' && properties.labelCta1 && !properties.modalDisclaimer}"
+				                  type="button"
+				                  class="p20-egl egl-cart-cta-primary-yellow"
+				                  data-toggle="modal"
+				                  data-target="#Modale-Carrello-Step"
+				                  data-backdrop="static"
+				                  data-keyboard="false"
+				                  onclick="openStartingStep(this)">
+				                    ${properties.labelCta1}
+				                </button>
+				                </sly>
+				                <sly data-sly-test="${(properties.abilitaNuovoCarrello) && properties.abilitaNuovoCarrello == 'Y'}">
+				                <button data-sly-test="${properties.openingCta1 == 'modalStep' && properties.labelCta1 && !properties.modalDisclaimer}"
+				                  type="button"
+				                  class="p20-egl egl-cart-cta-primary-yellow"
+				                  data-backdrop="static"
+				                  data-keyboard="false"
+				                  stepcart="${properties.pathCFNuovoCarrello}"
+				                  >
+				                    ${properties.labelCta1}
+				                </button>
+				                </sly>
+				                <button data-sly-test="${properties.openingCta1 == 'modalStep' && properties.labelCta1 && properties.modalDisclaimer}"
+				                  type="button"
+				                  class="p20-egl egl-cart-cta-primary-yellow"
+				                  data-toggle="modal" data-target="#modale-disclaimer">
+				                    ${properties.labelCta1}
+				                </button>
+				                <button data-sly-test="${properties.openingCta1 == 'modalCall' && properties.labelCta1}"
+				                  type="button"
+				                  class="p20-egl btn egl-cart-cta-primary-yellow"
+				                  data-toggle="modal"
+				                  data-target="#ti-chiamiamo-noi"
+				                  onclick="sfCallMeBackDataLayer('1_i tuoi dati', null)">
+				                    ${properties.labelCta1}
+				                </button>
+				              </div>
+				            </div>
+				            </div>
+					  
+				    
+				    </sly>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script data-sly-test="${wcmmode.disabled && (fragmentModel.fragPromo1 || fragmentModel.fragPromo2)}">
+	(function($) {
+		$(document).ready( function() {
+			promotionHideShow(".listing-offerta-${resource.name @ context='scriptToken'}",".listing-promo1-${resource.name @ context='scriptToken'}",".listing-promo2-${resource.name @ context='scriptToken'}");
+			countdownElements(".listing-promo1-${resource.name @ context='scriptToken'}", ".listing-cd-giorno", ".listing-cd-ore", ".listing-cd-minuti");
+			countdownElements(".listing-promo2-${resource.name @ context='scriptToken'}", ".listing-cd-giorno", ".listing-cd-ore", ".listing-cd-minuti");
+		});
+	})($);
+</script>

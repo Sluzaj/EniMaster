@@ -1,0 +1,822 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+	xmlns:cq="http://www.day.com/jcr/cq/1.0"
+	xmlns:jcr="http://www.jcp.org/jcr/1.0"
+	xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
+	xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+	jcr:primaryType="nt:unstructured" jcr:title="Properties"
+	sling:resourceType="cq/gui/components/authoring/dialog">
+	<content jcr:primaryType="nt:unstructured"
+		sling:resourceType="granite/ui/components/coral/foundation/container">
+		<items jcr:primaryType="nt:unstructured">
+			<tabs jcr:primaryType="nt:unstructured"
+				sling:resourceType="granite/ui/components/coral/foundation/tabs"
+				maximized="{Boolean}true">
+				<items jcr:primaryType="nt:unstructured">
+
+					<desktop jcr:primaryType="nt:unstructured"
+						jcr:title="Desktop Config."
+						sling:resourceType="granite/ui/components/coral/foundation/container"
+						margin="{Boolean}true">
+						<items jcr:primaryType="nt:unstructured">
+							<columns jcr:primaryType="nt:unstructured"
+								sling:resourceType="granite/ui/components/coral/foundation/container"
+								margin="{Boolean}true">
+								<items jcr:primaryType="nt:unstructured">
+									<column jcr:primaryType="nt:unstructured"
+										sling:resourceType="granite/ui/components/coral/foundation/container">
+										<items jcr:primaryType="nt:unstructured">
+											<typeBasic jcr:primaryType="nt:unstructured"
+												granite:class="cq-dialog-dropdown-showhide"
+												sling:resourceType="granite/ui/components/coral/foundation/form/select"
+												fieldLabel="Tipologia Variante" name="./typeBasic">
+												<items jcr:primaryType="nt:unstructured">
+													<option1 jcr:primaryType="nt:unstructured"
+														text="Default" value="default" selected="true" />
+													<option2 jcr:primaryType="nt:unstructured"
+														text="Large" value="large" />
+													<option3 jcr:primaryType="nt:unstructured"
+														text="Cropped" value="cropped" />
+												</items>
+												<granite:data jcr:primaryType="nt:unstructured"
+													cq-dialog-dropdown-showhide-target=".typeBasic-showhide-target" />
+											</typeBasic>
+											<id jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+												fieldLabel="ID" name="./id" />
+											<class jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+												fieldLabel="CLASS" name="./class" />
+											<contentType jcr:primaryType="nt:unstructured"
+												granite:class="cq-dialog-dropdown-showhide"
+												sling:resourceType="granite/ui/components/coral/foundation/form/select"
+												fieldLabel="Tipologia Sfondo" name="./bgSelect">
+												<items jcr:primaryType="nt:unstructured">
+													<option1 jcr:primaryType="nt:unstructured"
+														text="Foto" value="photo" selected="true" />
+													<option2 jcr:primaryType="nt:unstructured"
+														text="Colore" value="color" />
+												</items>
+												<granite:data jcr:primaryType="nt:unstructured"
+													cq-dialog-dropdown-showhide-target=".bgType-showhide-target" />
+											</contentType>
+
+											<photoType granite:class="bgType-showhide-target"
+												jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/container">
+												<items jcr:primaryType="nt:unstructured">
+													<pathBG
+														granite:class="cmp-image__editor-file-upload"
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="cq/gui/components/authoring/dialog/fileupload"
+														autoStart="{Boolean}false" class="cq-droptarget"
+														fileNameParameter="./pathBGName"
+														fileReferenceParameter="./pathBG"
+														mimeTypes="[image/gif,image/jpeg,image/png,image/tiff,image/svg+xml]"
+														multiple="{Boolean}false" name="./pathBG1"
+														title="Immagine background"
+														fieldLabel="Immagine background"
+														uploadUrl="${suffix.path}" useHTML5="{Boolean}true" />
+												</items>
+												<granite:data jcr:primaryType="nt:unstructured"
+													showhidetargetvalue="photo" />
+											</photoType>
+
+											<colorType granite:class="bgType-showhide-target"
+												jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/container">
+												<items jcr:primaryType="nt:unstructured">
+													<bgColor jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/colorfield"
+														fieldLabel="Colore di background" name="./colorBG" />
+												</items>
+												<granite:data jcr:primaryType="nt:unstructured"
+													showhidetargetvalue="color" />
+											</colorType>
+
+											<coloreVelina jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/select"
+												fieldLabel="Colore Velina"
+												granite:class="cq-dialog-dropdown-showhide"
+												name="./coloreVelinaDesk">
+												<items jcr:primaryType="nt:unstructured">
+													<option1 jcr:primaryType="nt:unstructured"
+														text="Grigio"
+														value="filtro-background-basic-band-nero-desktop" />
+													<option2 jcr:primaryType="nt:unstructured"
+														text="Bianco"
+														value="filtro-background-basic-band-bianco-desktop" />
+													<option3 jcr:primaryType="nt:unstructured"
+														text="Colore Esadecimale"
+														value="filtro-background-basic-band-colorato-desktop" />
+													<option4 jcr:primaryType="nt:unstructured"
+														text="Nessuna Velina" value="none" selected="true" />
+												</items>
+												<granite:data jcr:primaryType="nt:unstructured"
+													cq-dialog-dropdown-showhide-target=".coloreVelinaDesk-showhide-target" />
+											</coloreVelina>
+
+											<coloreEsadecimale
+												granite:class="coloreVelinaDesk-showhide-target"
+												jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/container">
+												<items jcr:primaryType="nt:unstructured">
+													<coloreVelinaEsadecimale1
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/colorfield"
+														fieldLabel="Colore Velina (centrata/da SX a DX)" name="./colore1" />
+													<typeDefaultVelina 
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/container">
+														<items jcr:primaryType="nt:unstructured">
+															<coloreVelinaEsadecimale1dxsx
+																jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/form/colorfield"
+																fieldLabel="Colore Velina da DX a SX (da usare solo per variante large e cropped)" name="./colore1dxsx" />
+														</items>
+														
+													</typeDefaultVelina>
+												</items>
+												<granite:data jcr:primaryType="nt:unstructured"
+													showhidetargetvalue="filtro-background-basic-band-colorato-desktop" />
+											</coloreEsadecimale>
+
+											<alignType jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/select"
+												fieldLabel="Allineamento testo" name="./alignSelect">
+												<items jcr:primaryType="nt:unstructured">
+													<option1 jcr:primaryType="nt:unstructured"
+														text="Sinistra" value="sx" selected="true" />
+													<option2 jcr:primaryType="nt:unstructured"
+														text="Centrale" value="cx" />
+												</items>
+											</alignType>
+
+											<title jcr:primaryType="nt:unstructured"
+												jcr:title="Titolo" fieldLabel="Titolo"
+												sling:resourceType="cq/gui/components/authoring/dialog/richtext"
+												name="./title" useFixedInlineToolbar="{Boolean}true"
+												removeSingleParagraphContainer="{Boolean}true">
+												<rtePlugins jcr:primaryType="nt:unstructured"
+													removeSingleParagraphContainer="true">
+													<format jcr:primaryType="nt:unstructured"
+														features="bold,italic" />
+													<justify jcr:primaryType="nt:unstructured"
+														features="*" />
+													<links jcr:primaryType="nt:unstructured"
+														features="modifylink,unlink" />
+													<lists jcr:primaryType="nt:unstructured" features="*" />
+													<paraformat jcr:primaryType="nt:unstructured"
+														features="*">
+														<formats jcr:primaryType="nt:unstructured">
+															<default_p jcr:primaryType="nt:unstructured"
+																description="Paragraph" tag="p" />
+															<default_h1 jcr:primaryType="nt:unstructured"
+																description="Heading 1" tag="h1" />
+															<default_h2 jcr:primaryType="nt:unstructured"
+																description="Heading 2" tag="h2" />
+															<default_h3 jcr:primaryType="nt:unstructured"
+																description="Heading 3" tag="h3" />
+														</formats>
+													</paraformat>
+													<tracklinks jcr:primaryType="nt:unstructured"
+														features="*" />
+													<table jcr:primaryType="nt:unstructured" features="*" />
+													<subsuperscript
+														jcr:primaryType="nt:unstructured" features="*" />
+													<misctools jcr:primaryType="nt:unstructured"
+														features="*" />
+													<experience-aem
+														jcr:primaryType="nt:unstructured" features="*" />
+												</rtePlugins>
+												<uiSettings jcr:primaryType="nt:unstructured">
+													<cui jcr:primaryType="nt:unstructured">
+														<inline jcr:primaryType="nt:unstructured"
+															toolbar="[format#bold,format#italic,format#underline,subsuperscript#subscript,subsuperscript#superscript,justify#justifyleft,justify#justifycenter,justify#justifyright,#lists,experience-aem#colorPicker,links#modifylink,links#unlink,#paraformat,table#createoredit,table#removetable,misctools#sourceedit]">
+															<popovers jcr:primaryType="nt:unstructured">
+																<justify jcr:primaryType="nt:unstructured"
+																	items="[justify#justifyleft,justify#justifycenter,justify#justifyright]"
+																	ref="justify" />
+																<lists jcr:primaryType="nt:unstructured"
+																	items="[lists#unordered,lists#ordered,lists#outdent,lists#indent]"
+																	ref="lists" />
+																<misctools jcr:primaryType="nt:unstructured"
+																	items="[misctools#specialchars]" ref="misctools" />
+																<paraformat jcr:primaryType="nt:unstructured"
+																	items="paraformat:getFormats:paraformat-pulldown"
+																	ref="paraformat" />
+															</popovers>
+														</inline>
+														<dialogFullScreen
+															jcr:primaryType="nt:unstructured"
+															toolbar="[format#bold,format#italic,format#underline,subsuperscript#subscript,subsuperscript#superscript,justify#justifyleft,justify#justifycenter,justify#justifyright,#lists,experience-aem#colorPicker,links#modifylink,links#unlink,#paraformat,table#createoredit,table#removetable,misctools#sourceedit]">
+															<popovers jcr:primaryType="nt:unstructured">
+																<justify jcr:primaryType="nt:unstructured"
+																	items="[justify#justifyleft,justify#justifycenter,justify#justifyright]"
+																	ref="justify" />
+																<lists jcr:primaryType="nt:unstructured"
+																	items="[lists#unordered,lists#ordered,lists#outdent,lists#indent]"
+																	ref="lists" />
+																<misctools jcr:primaryType="nt:unstructured"
+																	items="[misctools#specialchars]" ref="misctools" />
+																<paraformat jcr:primaryType="nt:unstructured"
+																	items="paraformat:getFormats:paraformat-pulldown"
+																	ref="paraformat" />
+															</popovers>
+														</dialogFullScreen>
+													</cui>
+												</uiSettings>
+											</title>
+
+											<subtitle jcr:primaryType="nt:unstructured"
+												jcr:title="Sottotitolo" fieldLabel="Sottotitolo"
+												sling:resourceType="cq/gui/components/authoring/dialog/richtext"
+												name="./subtitle" useFixedInlineToolbar="{Boolean}true"
+												removeSingleParagraphContainer="{Boolean}true">
+												<rtePlugins jcr:primaryType="nt:unstructured"
+													removeSingleParagraphContainer="true">
+													<format jcr:primaryType="nt:unstructured"
+														features="bold,italic" />
+													<justify jcr:primaryType="nt:unstructured"
+														features="*" />
+													<links jcr:primaryType="nt:unstructured"
+														features="modifylink,unlink" />
+													<lists jcr:primaryType="nt:unstructured" features="*" />
+													<paraformat jcr:primaryType="nt:unstructured"
+														features="*">
+														<formats jcr:primaryType="nt:unstructured">
+															<default_p jcr:primaryType="nt:unstructured"
+																description="Paragraph" tag="p" />
+															<default_h1 jcr:primaryType="nt:unstructured"
+																description="Heading 1" tag="h1" />
+															<default_h2 jcr:primaryType="nt:unstructured"
+																description="Heading 2" tag="h2" />
+															<default_h3 jcr:primaryType="nt:unstructured"
+																description="Heading 3" tag="h3" />
+														</formats>
+													</paraformat>
+													<tracklinks jcr:primaryType="nt:unstructured"
+														features="*" />
+													<table jcr:primaryType="nt:unstructured" features="*" />
+													<subsuperscript
+														jcr:primaryType="nt:unstructured" features="*" />
+													<misctools jcr:primaryType="nt:unstructured"
+														features="*" />
+													<experience-aem
+														jcr:primaryType="nt:unstructured" features="*" />
+												</rtePlugins>
+												<uiSettings jcr:primaryType="nt:unstructured">
+													<cui jcr:primaryType="nt:unstructured">
+														<inline jcr:primaryType="nt:unstructured"
+															toolbar="[format#bold,format#italic,format#underline,subsuperscript#subscript,subsuperscript#superscript,justify#justifyleft,justify#justifycenter,justify#justifyright,#lists,experience-aem#colorPicker,links#modifylink,links#unlink,#paraformat,table#createoredit,table#removetable,misctools#sourceedit]">
+															<popovers jcr:primaryType="nt:unstructured">
+																<justify jcr:primaryType="nt:unstructured"
+																	items="[justify#justifyleft,justify#justifycenter,justify#justifyright]"
+																	ref="justify" />
+																<lists jcr:primaryType="nt:unstructured"
+																	items="[lists#unordered,lists#ordered,lists#outdent,lists#indent]"
+																	ref="lists" />
+																<misctools jcr:primaryType="nt:unstructured"
+																	items="[misctools#specialchars]" ref="misctools" />
+																<paraformat jcr:primaryType="nt:unstructured"
+																	items="paraformat:getFormats:paraformat-pulldown"
+																	ref="paraformat" />
+															</popovers>
+														</inline>
+														<dialogFullScreen
+															jcr:primaryType="nt:unstructured"
+															toolbar="[format#bold,format#italic,format#underline,subsuperscript#subscript,subsuperscript#superscript,justify#justifyleft,justify#justifycenter,justify#justifyright,#lists,experience-aem#colorPicker,links#modifylink,links#unlink,#paraformat,table#createoredit,table#removetable,misctools#sourceedit]">
+															<popovers jcr:primaryType="nt:unstructured">
+																<justify jcr:primaryType="nt:unstructured"
+																	items="[justify#justifyleft,justify#justifycenter,justify#justifyright]"
+																	ref="justify" />
+																<lists jcr:primaryType="nt:unstructured"
+																	items="[lists#unordered,lists#ordered,lists#outdent,lists#indent]"
+																	ref="lists" />
+																<misctools jcr:primaryType="nt:unstructured"
+																	items="[misctools#specialchars]" ref="misctools" />
+																<paraformat jcr:primaryType="nt:unstructured"
+																	items="paraformat:getFormats:paraformat-pulldown"
+																	ref="paraformat" />
+															</popovers>
+														</dialogFullScreen>
+													</cui>
+												</uiSettings>
+											</subtitle>
+
+											<typeDefault granite:class="typeBasic-showhide-target"
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/container">
+												<items jcr:primaryType="nt:unstructured">
+													<bottomType jcr:primaryType="nt:unstructured"
+														granite:class="cq-dialog-dropdown-showhide"
+														sling:resourceType="granite/ui/components/coral/foundation/form/select"
+														fieldLabel="Tipologia Variante" name="./bottomType">
+														<items jcr:primaryType="nt:unstructured">
+															<option1 jcr:primaryType="nt:unstructured"
+																text="Variante CTA" value="ctaVer" selected="true" />
+															<option2 jcr:primaryType="nt:unstructured"
+																text="Variante Logo" value="imageVer" />
+														</items>
+														<granite:data jcr:primaryType="nt:unstructured"
+															cq-dialog-dropdown-showhide-target=".bottomType-showhide-target" />
+													</bottomType>
+
+													<ctaVer granite:class="bottomType-showhide-target"
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/container">
+														<items jcr:primaryType="nt:unstructured">
+															<cta jcr:title="Configurazione CTA"
+																jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">
+																<items jcr:primaryType="nt:unstructured">
+																	<label jcr:primaryType="nt:unstructured"
+																		sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																		fieldLabel="Label" name="./labelCTA" />
+																	<titleTextLink
+																		jcr:primaryType="nt:unstructured"
+																		sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																		fieldLabel="Alt Text" name="./titleTextLink" />
+																	<link jcr:primaryType="nt:unstructured"
+																		sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+																		fieldLabel="Link" name="./linkCTA" />
+																	<jscustom
+																		jcr:primaryType="nt:unstructured"
+																		sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																		fieldLabel="Js per apertura modale" name="./jscustom" 
+																	/>
+																	<colorecta
+																		jcr:primaryType="nt:unstructured"
+																		sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																		fieldLabel="colore cta (inserisci esadecimale)" name="./colorecta" 
+																	/>
+																	<target jcr:primaryType="nt:unstructured"
+																		sling:resourceType="granite/ui/components/coral/foundation/form/select"
+																		fieldLabel="Target" name="./targetCTA">
+																		<items jcr:primaryType="nt:unstructured">
+																			<option1 jcr:primaryType="nt:unstructured"
+																				text="Self" value="_self" selected="true" />
+																			<option2 jcr:primaryType="nt:unstructured"
+																				text="Blank" value="_blank" />
+																		</items>
+																	</target>
+																</items>
+															</cta>
+
+															<cta2 jcr:title="Configurazione CTA 2"
+																jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">
+																<items jcr:primaryType="nt:unstructured">
+																	<label2 jcr:primaryType="nt:unstructured"
+																		sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																		fieldLabel="Label" name="./labelCTA2" />
+																	<titleTextLink2
+																		jcr:primaryType="nt:unstructured"
+																		sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																		fieldLabel="Alt Text" name="./titleTextLink2" />
+																	<link2 jcr:primaryType="nt:unstructured"
+																		sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+																		fieldLabel="Link" name="./linkCTA2" />
+																	<jscustom2
+																		jcr:primaryType="nt:unstructured"
+																		sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																		fieldLabel="Js per apertura modale" name="./jscustom2" 
+																	/>
+																	<colorecta2
+																		jcr:primaryType="nt:unstructured"
+																		sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																		fieldLabel="colore cta2 (inserisci esadecimale)" name="./colorecta2" 
+																	/>
+																	<target2 jcr:primaryType="nt:unstructured"
+																		sling:resourceType="granite/ui/components/coral/foundation/form/select"
+																		fieldLabel="Target" name="./targetCTA2">
+																		<items jcr:primaryType="nt:unstructured">
+																			<option1 jcr:primaryType="nt:unstructured"
+																				text="Self" value="_self" selected="true" />
+																			<option2 jcr:primaryType="nt:unstructured"
+																				text="Blank" value="_blank" />
+																		</items>
+																	</target2>
+																</items>
+															</cta2>
+														</items>
+														<granite:data jcr:primaryType="nt:unstructured"
+															showhidetargetvalue="ctaVer" />
+													</ctaVer>
+										
+													<imageVer granite:class="bottomType-showhide-target"
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/container">
+														<items jcr:primaryType="nt:unstructured">
+															<imageVer
+																granite:class="cmp-image__editor-file-upload"
+																jcr:primaryType="nt:unstructured"
+																sling:resourceType="cq/gui/components/authoring/dialog/fileupload"
+																autoStart="{Boolean}false" class="cq-droptarget"
+																fileNameParameter="./imgLogoName"
+																fileReferenceParameter="./imgLogo"
+																mimeTypes="[image/gif,image/jpeg,image/png,image/tiff,image/svg+xml]"
+																multiple="{Boolean}false" name="./imgLogo1"
+																title="Immagine Logo"
+																fieldLabel="Immagine Logo"
+																uploadUrl="${suffix.path}" useHTML5="{Boolean}true" />
+														</items>
+														<granite:data jcr:primaryType="nt:unstructured"
+															showhidetargetvalue="imageVer" />
+													</imageVer>
+												</items>
+												<granite:data jcr:primaryType="nt:unstructured"
+												showhidetargetvalue="default" />
+											</typeDefault>
+
+											<typeLarge granite:class="typeBasic-showhide-target"
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/container">
+												<items jcr:primaryType="nt:unstructured">
+													<marginilarge jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/foundation/form/checkbox"
+														name="./marginilarge" text="Aggiungi margine"
+														value="true" />
+													<orientamentoVelina jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/select"
+														fieldLabel="Orientamento Velina"
+														granite:class="cq-dialog-dropdown-showhide"
+														name="./orientamentoVelina">
+														<items jcr:primaryType="nt:unstructured">
+															<option1 jcr:primaryType="nt:unstructured"
+																text="Sinistra"
+																value="sinistra" selected="true"/>
+															<option2 jcr:primaryType="nt:unstructured"
+																text="Centrato"
+																value="centrato" />
+														</items>
+														<granite:data jcr:primaryType="nt:unstructured"
+															cq-dialog-dropdown-showhide-target=".orientamentoVelina-showhide-target" />
+													</orientamentoVelina>
+
+													<orientamentoVelinaMobile jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/select"
+														fieldLabel="Orientamento Velina Mobile"
+														granite:class="cq-dialog-dropdown-showhide"
+														name="./orientamentoVelinaMobile">
+														<items jcr:primaryType="nt:unstructured">
+															<option1 jcr:primaryType="nt:unstructured"
+																text="Top"
+																value="top" selected="true"/>
+															<option2 jcr:primaryType="nt:unstructured"
+																text="Bottom"
+																value="bottom" />
+														</items>
+														<granite:data jcr:primaryType="nt:unstructured"
+															cq-dialog-dropdown-showhide-target=".orientamentoVelina-showhide-target" />
+													</orientamentoVelinaMobile>
+
+													<imageVerLarge
+														granite:class="cmp-image__editor-file-upload"
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="cq/gui/components/authoring/dialog/fileupload"
+														autoStart="{Boolean}false" class="cq-droptarget"
+														fileNameParameter="./imgLogoNameLarge"
+														fileReferenceParameter="./imgLogoLarge"
+														mimeTypes="[image/gif,image/jpeg,image/png,image/tiff,image/svg+xml]"
+														multiple="{Boolean}false" name="./imgLogo1Large"
+														title="Immagine Logo Large"
+														fieldLabel="Immagine Logo Large"
+														uploadUrl="${suffix.path}" useHTML5="{Boolean}true" />
+
+													<imageVerLarge2
+														granite:class="cmp-image__editor-file-upload"
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="cq/gui/components/authoring/dialog/fileupload"
+														autoStart="{Boolean}false" class="cq-droptarget"
+														fileNameParameter="./imgLogoNameLarge2"
+														fileReferenceParameter="./imgLogoLarge2"
+														mimeTypes="[image/gif,image/jpeg,image/png,image/tiff,image/svg+xml]"
+														multiple="{Boolean}false" name="./imgLogo1Large2"
+														title="Immagine Logo Large 2"
+														fieldLabel="Immagine Logo Large 2"
+														uploadUrl="${suffix.path}" useHTML5="{Boolean}true" />
+
+													<ctaLarge jcr:title="Configurazione CTA Large"
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">
+															<items jcr:primaryType="nt:unstructured">
+																<labelLarge jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																	fieldLabel="Label" name="./labelCTALarge" />
+																<titleTextLinkLarge
+																	jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																	fieldLabel="Alt Text" name="./titleTextLinkLarge" />
+																<linkLarge jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+																	fieldLabel="Link" name="./linkCTALarge" />
+																<jscustomLarge
+																	jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																	fieldLabel="Js per apertura modale" name="./jscustomLarge" 
+																/>
+																<targetLarge jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/select"
+																	fieldLabel="Target" name="./targetCTALarge">
+																	<items jcr:primaryType="nt:unstructured">
+																		<option1 jcr:primaryType="nt:unstructured"
+																			text="Self" value="_self" selected="true" />
+																		<option2 jcr:primaryType="nt:unstructured"
+																			text="Blank" value="_blank" />
+																	</items>
+																</targetLarge>
+															</items>
+														</ctaLarge>
+
+														<ctaLarge2 jcr:title="Configurazione CTA Large 2"
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">
+															<items jcr:primaryType="nt:unstructured">
+																<labelLarge2 jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																	fieldLabel="Label" name="./labelCTALarge2" />
+																<titleTextLinkLarge2
+																	jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																	fieldLabel="Alt Text" name="./titleTextLinkLarge2" />
+																<linkLarge2 jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+																	fieldLabel="Link" name="./linkCTALarge2" />
+																<jscustomLarge2
+																	jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																	fieldLabel="Js per apertura modale" name="./jscustomLarge2" 
+																/>
+																<targetLarge2 jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/select"
+																	fieldLabel="Target" name="./targetCTALarge2">
+																	<items jcr:primaryType="nt:unstructured">
+																		<option1 jcr:primaryType="nt:unstructured"
+																			text="Self" value="_self" selected="true" />
+																		<option2 jcr:primaryType="nt:unstructured"
+																			text="Blank" value="_blank" />
+																	</items>
+																</targetLarge2>
+															</items>
+														</ctaLarge2>
+												</items>
+												<granite:data jcr:primaryType="nt:unstructured"
+												showhidetargetvalue="large" />
+											</typeLarge>
+
+											<typeCropped granite:class="typeBasic-showhide-target"
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/container">
+												<items jcr:primaryType="nt:unstructured">
+												
+												<orientamentoVelinacropped jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/select"
+														fieldLabel="Orientamento Velina cropped"														
+														name="./orientamentoVelinacropped">
+														<items jcr:primaryType="nt:unstructured">
+															<option1 jcr:primaryType="nt:unstructured"
+																text="Sinistra"
+																value="sinistra" selected="true"/>
+															<option2 jcr:primaryType="nt:unstructured"
+																text="Centrato"
+																value="centrato" />
+														</items>														
+													</orientamentoVelinacropped>
+													<orientamentoVelinaMobilecropped jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/select"
+														fieldLabel="Orientamento Velina Mobile Cropped"														
+														name="./orientamentoVelinaMobilecropped">
+														<items jcr:primaryType="nt:unstructured">
+															<option1 jcr:primaryType="nt:unstructured"
+																text="Top"
+																value="top" selected="true"/>
+															<option2 jcr:primaryType="nt:unstructured"
+																text="Bottom"
+																value="bottom" />
+														</items>														
+													</orientamentoVelinaMobilecropped>
+													<coloreBackgroundComponent
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/colorfield"
+														fieldLabel="Colore Background Component" name="./coloreComponenteBG" />
+
+													<shadow jcr:primaryType="nt:unstructured"
+														granite:class="cq-dialog-dropdown-showhide"
+														sling:resourceType="granite/ui/components/coral/foundation/form/select"
+														fieldLabel="Tipologia Variante" name="./shadow">
+														<items jcr:primaryType="nt:unstructured">
+															<option1 jcr:primaryType="nt:unstructured"
+																text="Default" value="default" selected="true" />
+															<option2 jcr:primaryType="nt:unstructured"
+																text="Light" value="light" />
+														</items>
+														<granite:data jcr:primaryType="nt:unstructured"
+															cq-dialog-dropdown-showhide-target=".shadow-showhide-target" />
+													</shadow>
+
+													<ctaCropped jcr:title="Configurazione CTA Cropped"
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">
+															<items jcr:primaryType="nt:unstructured">
+																<labelCropped jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																	fieldLabel="Label" name="./labelCTACrp" />
+																<titleTextLinkCropped
+																	jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																	fieldLabel="Alt Text" name="./titleTextLinkCrp" />
+																<linkLargeCropped jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+																	fieldLabel="Link" name="./linkCTACrp" />
+																<jscustomCropped
+																	jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																	fieldLabel="Js per apertura modale" name="./jscustomCrp" 
+																/>
+																<targetCropped jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/select"
+																	fieldLabel="Target" name="./targetCTACrp">
+																	<items jcr:primaryType="nt:unstructured">
+																		<option1 jcr:primaryType="nt:unstructured"
+																			text="Self" value="_self" selected="true" />
+																		<option2 jcr:primaryType="nt:unstructured"
+																			text="Blank" value="_blank" />
+																	</items>
+																</targetCropped>
+															</items>
+														</ctaCropped>
+
+														<ctaCropped2 jcr:title="Configurazione CTA Cropped 2"
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">
+															<items jcr:primaryType="nt:unstructured">
+																<labelCropped2 jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																	fieldLabel="Label" name="./labelCTACrp2" />
+																<titleTextLinkCropped2
+																	jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																	fieldLabel="Alt Text" name="./titleTextLinkCrp2" />
+																<linkCropped2 jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+																	fieldLabel="Link" name="./linkCTACrp2" />
+																<jscustomCropped2
+																	jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																	fieldLabel="Js per apertura modale" name="./jscustomCrp2" 
+																/>
+																<targetCropped2 jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/select"
+																	fieldLabel="Target" name="./targetCTACrp2">
+																	<items jcr:primaryType="nt:unstructured">
+																		<option1 jcr:primaryType="nt:unstructured"
+																			text="Self" value="_self" selected="true" />
+																		<option2 jcr:primaryType="nt:unstructured"
+																			text="Blank" value="_blank" />
+																	</items>
+																</targetCropped2>
+															</items>
+														</ctaCropped2>
+												</items>
+												<granite:data jcr:primaryType="nt:unstructured"
+												showhidetargetvalue="cropped" />
+											</typeCropped>
+
+										</items>
+									</column>
+								</items>
+							</columns>
+						</items>
+					</desktop>
+
+					<mobile jcr:primaryType="nt:unstructured"
+						jcr:title="Mobile Config."
+						sling:resourceType="granite/ui/components/coral/foundation/container"
+						margin="{Boolean}true">
+						<items jcr:primaryType="nt:unstructured">
+							<columns jcr:primaryType="nt:unstructured"
+								sling:resourceType="granite/ui/components/coral/foundation/container"
+								margin="{Boolean}true">
+								<items jcr:primaryType="nt:unstructured">
+									<column jcr:primaryType="nt:unstructured"
+										sling:resourceType="granite/ui/components/coral/foundation/container">
+										<items jcr:primaryType="nt:unstructured">
+										<!-- typeMobile jcr:primaryType="nt:unstructured"
+												granite:class="cq-dialog-dropdown-showhide"
+												sling:resourceType="granite/ui/components/coral/foundation/form/select"
+												fieldLabel="Tipologia Variante" name="./typeMobile">
+												<items jcr:primaryType="nt:unstructured">
+													<option1 jcr:primaryType="nt:unstructured"
+														text="Default" value="default" selected="true" />
+													<option2 jcr:primaryType="nt:unstructured"
+														text="Large" value="large" />
+													<option3 jcr:primaryType="nt:unstructured"
+														text="Cropped" value="cropped" />
+												</items>
+												<granite:data jcr:primaryType="nt:unstructured"
+													cq-dialog-dropdown-showhide-target=".typeMobile-showhide-target" />
+											</typeMobile-->
+											<contentType jcr:primaryType="nt:unstructured"
+												granite:class="cq-dialog-dropdown-showhide"
+												sling:resourceType="granite/ui/components/coral/foundation/form/select"
+												fieldLabel="Tipologia Sfondo" name="./bgSelectMobile">
+												<items jcr:primaryType="nt:unstructured">
+													<option1 jcr:primaryType="nt:unstructured"
+														text="Foto" value="photo" selected="true" />
+													<option2 jcr:primaryType="nt:unstructured"
+														text="Colore" value="color" />
+												</items>
+												<granite:data jcr:primaryType="nt:unstructured"
+													cq-dialog-dropdown-showhide-target=".bgTypeMobile-showhide-target" />
+											</contentType>
+
+											<photoType
+												granite:class="bgTypeMobile-showhide-target"
+												jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/container">
+												<items jcr:primaryType="nt:unstructured">
+													<pathBG
+														granite:class="cmp-image__editor-file-upload"
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="cq/gui/components/authoring/dialog/fileupload"
+														autoStart="{Boolean}false" class="cq-droptarget"
+														fileNameParameter="./pathBGMobileName"
+														fileReferenceParameter="./pathBGMobile"
+														mimeTypes="[image/gif,image/jpeg,image/png,image/tiff,image/svg+xml]"
+														multiple="{Boolean}false" name="./pathBGMobile1"
+														title="Immagine background"
+														fieldLabel="Immagine background"
+														uploadUrl="${suffix.path}" useHTML5="{Boolean}true" />
+												</items>
+												<granite:data jcr:primaryType="nt:unstructured"
+													showhidetargetvalue="photo" />
+											</photoType>
+
+											<colorType												
+												jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/container">
+												<items jcr:primaryType="nt:unstructured">
+													<bgColor jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/colorfield"
+														fieldLabel="Colore di background" name="./colorBGMobile" />
+												</items>
+												<granite:data jcr:primaryType="nt:unstructured"
+													showhidetargetvalue="color" />
+											</colorType>
+											
+											<listMobile granite:class="typeMobile-showhide-target"
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/container">
+												<items jcr:primaryType="nt:unstructured">
+													<coloreVelina jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/select"
+														fieldLabel="Colore Velina (da usare solo se selezionata variante default lato desktop)"
+														granite:class="cq-dialog-dropdown-showhide"
+														name="./coloreVelinaMob">
+														<items jcr:primaryType="nt:unstructured">
+															<option1 jcr:primaryType="nt:unstructured"
+																text="Grigio"
+																value="filtro-background-basic-band-nero-mobile" />
+															<option2 jcr:primaryType="nt:unstructured"
+																text="Bianco"
+																value="filtro-background-basic-band-bianco-mobile" />
+															<option3 jcr:primaryType="nt:unstructured"
+																text="Colore Esadecimale"
+																value="filtro-background-basic-band-colorato-mobile" />
+															<option4 jcr:primaryType="nt:unstructured"
+																text="Nessuna Velina" value="" selected="true" />
+														</items>
+														<granite:data jcr:primaryType="nt:unstructured"
+															cq-dialog-dropdown-showhide-target=".coloreVelinaMob-showhide-target" />
+													</coloreVelina>
+
+													<coloreEsadecimale
+														granite:class="coloreVelinaMob-showhide-target"
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/container">
+														<items jcr:primaryType="nt:unstructured">
+															<coloreVelinaEsadecimale2
+																jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/form/colorfield"
+																fieldLabel="Colore Velina (da usare solo se selezionata variante default lato desktop)" name="./colore2" />
+														</items>
+														<granite:data jcr:primaryType="nt:unstructured"
+															showhidetargetvalue="filtro-background-basic-band-colorato-mobile" />
+													</coloreEsadecimale>
+												</items>
+												<!-- granite:data jcr:primaryType="nt:unstructured"
+												showhidetargetvalue="default" /-->
+											</listMobile>
+											
+										</items>
+									</column>
+								</items>
+							</columns>
+						</items>
+					</mobile>
+				</items>
+			</tabs>
+		</items>
+	</content>
+</jcr:root>

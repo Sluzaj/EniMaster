@@ -1,0 +1,28 @@
+<sly data-sly-use.model="${'com.egl.core.models.nuoveattivazioni.LuceNATextsModel' @ stepName='luceSteps', pathJson=properties.pathJson}" />
+<sly data-sly-test.text="${model.luceSteps}"/>
+
+<div class="container-lg px-lg-0">
+    <div class="row">
+        <div class="col-lg-4 na-titolo">
+            <h2>${properties.title}</h2>
+            <div class="na-rettangolo"></div>
+            ${properties.description @ context='html'}
+        </div>
+        <div class="col-lg-8 na-spazio-card na-step0 na-lavori-impianto-gas">
+            <div class="na-card">
+                <div class="na-card-content">
+                    <div class="w-100">
+                        <p>${text.lightTitle}</p>
+                        <h3>${text.lightGasMeterConnection}</h3>
+                        <div class="d-flex na-contenitore-bottoni na-double-luce">
+                            <button type="button" class="na-white-button"
+                                onclick="caricaStepNuovaAttivazione('luce_posa_attivazione')">${text.lightMeterConnectionR1}</button>
+                            <button type="button" class="na-white-button"
+                                onclick="caricaStepNuovaAttivazione('luce_allaccio_posa_attivazione')">${text.lightMeterConnectionR2}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

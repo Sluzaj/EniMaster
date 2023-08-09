@@ -1,0 +1,65 @@
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.titoloH4}"> </sly>
+	
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<sly data-sly-use.modalFinder="com.egl.core.models.ModaleCommodityFinder"></sly>
+<sly data-sly-use.tabListing="com.egl.core.models.TabListingModel"></sly>
+
+<style data-sly-test="${wcmmode.edit}">
+  .egl-sticky-tab {
+    position: relative; 
+    top: 0 !important;
+  }
+</style>
+
+<div id="${properties.id}" class="h-100 w-100">
+  <div class="h-100 w-100">
+    <div
+      class="
+        container-lg
+        egl-tab-bg-yellow egl-sticky-tab
+        p-3
+      "
+      id="Sticky-Tab">
+      <div class="row">
+        <div class="offset-lg-1 col-12 col-lg-4">
+          <p class="h4-egl egl-paragraph">
+            ${properties.titoloH4 @context='html'}
+          </p>
+        </div>
+        <div class="col-12 col-lg-7 text-lg-left text-center tab-listing-bot-btn">
+        
+          <a data-sly-test="${properties.labelPrimoCTA && properties.urlPrimoCTA}"
+            class="btn btn-primary cta-box-white cta-tab-listing ml-xl-5 ${tabListing.currentPage1 ? 'active' : ''}" href="${properties.urlPrimoCTA}" target="${properties.targetPrimoCTA}" title="${properties.altPrimoCTA}">
+            ${properties.labelPrimoCTA}
+          </a>
+          
+          <a data-sly-test="${properties.labelSecondoCTA && properties.urlSecondoCTA}" 
+            class="btn btn-primary cta-box-white cta-tab-listing ${tabListing.currentPage2 ? 'active' : ''}" href="${properties.urlSecondoCTA}" target="${properties.targetSecondoCTA}" title="${properties.altSecondoCTA}">
+            ${properties.labelSecondoCTA}
+          </a>
+        
+          <a data-sly-test="${properties.labelTerzoCTA && properties.urlTerzoCTA}"
+            class="btn btn-primary cta-box-white cta-tab-listing ${tabListing.currentPage3 ? 'active' : ''}" href="${properties.urlTerzoCTA}" target="${properties.targetTerzoCTA}" title="${properties.altTerzoCTA}">
+            ${properties.labelTerzoCTA}
+          </a>
+     
+        </div>
+      </div>
+    </div>    
+  </div>
+</div>
+
+<sly data-sly-test="${!modalFinder.isModalePresent}">
+<div>
+	<sly
+		data-sly-resource="${'modaleCommodity2' @ resourceType='enigaseluce/components/modale-commodity'}">
+	</sly>
+</div>
+<div>
+	<sly
+		data-sly-resource="${'modaleDisclaimer2' @ resourceType='enigaseluce/components/modale-disclaimer'}">
+	</sly>
+</div>
+</sly>

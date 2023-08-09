@@ -1,0 +1,97 @@
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+		data-sly-use.articoli="com.egl.core.models.articolievidenza.ArticoliEvidenzaModel"
+	    data-sly-test.testing="${!properties.titolo}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<!--FULL-->
+
+<sly data-sly-test="${properties.versioneCard == 'full'}">
+<div pln-components="card-snodo-grid" pln-version="2.0" pln-template="" class=" " id="" 
+            style="background-color:${properties.coloreBackground @context='styleToken'}">
+		    <div data-sly-test="${properties.titolo}" class="title-underlined-corporate">
+			    ${properties.titolo @context='html'} </div>
+            <div data-sly-test="${properties.sottotitolo}" class="subtitle">
+                <p>${properties.sottotitolo @context='html'}</p>
+            </div>
+        <div class="content-switch container">
+            <div class="card-snodo-grid__container" 
+            data-sly-list.listArticoli="${articoli.lista}">
+                    <div class="item">
+                        <div class="item--content click">
+                            <picture>
+                                <img loading="lazy" src="${listArticoli.asset}" alt="">
+                            </picture>
+                            <div class="chips">
+                                <img data-sly-test="${listArticoli.assetFormato}" src="${listArticoli.assetFormato}" alt="">
+                                <span data-sly-test="${listArticoli.labelFormato}" class="chips-text">${listArticoli.labelFormato}</span>
+                            </div>
+                    <article>
+                        <p class="category">
+                            <sly data-sly-test="${listArticoli.labelCategoria}"> 
+                            ${listArticoli.labelCategoria}</sly>   
+                            <sly data-sly-test="${listArticoli.dateCard}">•
+                             ${listArticoli.dateCard}</sly> 
+                             <sly data-sly-test="${listArticoli.minLettura}">• 
+                             ${listArticoli.minLettura}</sly>
+                            </p>
+                        <p class="text" mh="textCardsSnodo">${listArticoli.titoloCard @context='html'}</p>
+                        <a href="${listArticoli.urlCtaCard}" target="${listArticoli.targetCtaCard}" class="${listArticoli.varianteCTA} card-snodo-btn"
+                        title="${listArticoli.altCtaCard}">${listArticoli.labelCtaCard}</a>
+                    </article>
+                </div>
+            </div>
+        </div>
+        
+			    	<div class="content-arrows container">
+                        <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-left-solid.svg"
+                        onclick="CardsPrev()" class="arrowLeft" />
+                        <span class="currentCard">1</span> / <span class="totalCards"></span>
+                        <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-right-solid.svg" 
+                        onclick="CardsNext()" class="arrowRight" />
+                    </div>
+                </div>
+            
+             </div>
+        </sly>
+
+<!--SLIM-->
+<sly data-sly-test="${properties.versioneCard == 'slim'}">
+    <div pln-component="card-snodo-grid" pln-version="4.0" pln-template="" class=" " id="" 
+            style="background-color:${properties.coloreBackground @context='styleToken'}">
+            <div data-sly-test="${properties.titolo}" class="title-underlined-card-snodo">
+			    ${properties.titolo @context='html'} </div>
+            <div data-sly-test="${properties.sottotitolo}" class="subtitle">
+                <p>${properties.sottotitolo @context='html'}</p>
+            </div>
+        <div class="content-switch container">
+            <div class="card-snodo-grid__container-4" 
+            data-sly-list.listArticoli="${articoli.lista}">
+            <div class="item-4">
+                <div class="item--content-4 click">
+                     <picture> 
+                        <img src="${listArticoli.asset}" alt="">
+                    </picture>
+                    <article>
+                        <div class="chips-4">
+                            <span class="chips-text-4" data-sly-test="${listArticoli.labelFormato}">${listArticoli.labelFormato}</span>
+                        </div>
+                        <p class="text-4" mh="textCardSnodo">${listArticoli.titoloCard @context='html'}
+                        </p>
+                        <a href="${listArticoli.urlCtaCard}" target="${listArticoli.targetCtaCard}" class="${listArticoli.varianteCTA} card-snodo-btn"
+                        title="${listArticoli.altCtaCard}">${listArticoli.labelCtaCard}</a>
+                    </article>
+                </div>
+            </div>
+        </div>
+            <div class="content-arrows container">
+                <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-left-solid.svg"
+              class="arrowLeft" />
+                <span class="currentCard">1</span> / <span class="totalCards-4"></span>
+                <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-right-solid.svg" 
+                 class="arrowRight" />
+            </div>
+        </div>
+    </div>
+</sly>
+

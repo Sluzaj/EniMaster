@@ -1,0 +1,133 @@
+<sly
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.accList}"> </sly>
+
+<sly
+	data-sly-call="${templates.placeholder @ isEmpty=testing, emptyTextAppend=request.requestPathInfo.selectors[1]}"></sly>
+
+<sly data-sly-use.accModel="com.egl.core.models.faq.AccordionModel"></sly>
+<sly data-sly-test.ap1="${accModel.ap1}"></sly>
+<sly data-sly-test.ap2="${accModel.ap2}"></sly>
+
+
+<sly data-sly-list.acc="${accModel.accordions}">
+<div class="card faq-card" style="background-color: transparent;"
+	itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+	<div class="card-header" id="heading${acc.id}">
+		<h2 class="mb-0" itemprop="name">
+			<button aria-label="espandi-contenuto" title="${acc.altTextFrag}"
+				class="button-faq btn btn-block text-left" type="button"
+				data-toggle="collapse" data-target="#collapse${acc.id}"
+				aria-expanded="false" aria-controls="collapse${acc.id}"
+				onclick="checkAriaLabelAccordion()">
+				${acc.titoloDomanda} 
+				<img loading="lazy"
+					class="position-absolute icona-accordion-faq icona-accordion-faq-chiuso"
+					src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/chevron-down-yellow.svg"
+					alt="freccia-dropdown-chiuso" /> 
+				<img loading="lazy"
+					class="position-absolute icona-accordion-faq icona-accordion-faq-aperto"
+					src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/chevron-down-yellow.svg"
+					alt="freccia-dropdown-aperto" />
+			</button>
+		</h2>
+	</div>
+
+	<div id="collapse${acc.id}" class="collapse"
+		aria-labelledby="heading${acc.id}"
+		data-parent="${request.requestPathInfo.selectors[0]}"
+		itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+		<div class="card-body faq-card-body-media pt-0 pb-0"
+			data-sly-use.procText="${'com.egl.core.models.utils.RTEPlaceholderHandler' @ text=acc.rispostaDomanda}"
+			itemprop="text">
+			${procText.processed @ context='unsafe'}</div>
+	</div>
+</div>
+</sly>
+
+<div data-sly-test="${properties.pathFragmentPromo1}"
+	class="card faq-card faq-promo1-${resource.name}"
+	style="background-color: transparent;"
+	data-start-promo="${ap1.dataInizio}" data-end-promo="${ap1.dataFine}"
+	itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+	<div class="card-header" id="heading${ap1.id}">
+		<h2 class="mb-0" itemprop="name">
+			<button aria-label="espandi-contenuto"
+				title="${properties.altTextPromo1}"
+				class="button-faq btn btn-block text-left" type="button"
+				data-toggle="collapse" data-target="#collapse${ap1.id}"
+				aria-expanded="false" aria-controls="collapse${ap1.id}"
+				onclick="checkAriaLabelAccordion()">
+				${ap1.titoloDomanda} 
+				<img loading="lazy"
+					class="position-absolute icona-accordion-faq icona-accordion-faq-chiuso"
+					src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/chevron-down-yellow.svg"
+					alt="freccia-dropdown-chiuso" /> 
+				<img loading="lazy"
+					class="position-absolute icona-accordion-faq icona-accordion-faq-aperto"
+					src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/chevron-down-yellow.svg"
+					alt="freccia-dropdown-aperto" />
+			</button>
+
+		</h2>
+	</div>
+
+	<div id="collapse${ap1.id}" class="collapse"
+		aria-labelledby="heading${ap1.id}"
+		data-parent="${request.requestPathInfo.selectors[0]}"
+		itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+		<div class="card-body faq-card-body-media pt-0 pb-0"
+			data-sly-use.procText="${'com.egl.core.models.utils.RTEPlaceholderHandler' @ text=ap1.rispostaDomanda}"
+			itemprop="text">
+			${procText.processed @ context='unsafe'}</div>
+	</div>
+</div>
+
+<div data-sly-test="${properties.pathFragmentPromo2}"
+	class="card faq-card faq-promo2-${resource.name}"
+	style="background-color: transparent;"
+	data-start-promo="${ap2.dataInizio}" data-end-promo="${ap2.dataFine}"
+	itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+	<div class="card-header" id="heading${ap2.id}">
+		<h2 class="mb-0" itemprop="name">
+			<button aria-label="espandi-contenuto"
+				title="${properties.altTextPromo2}"
+				class="button-faq btn btn-block text-left" type="button"
+				data-toggle="collapse" data-target="#collapse${ap2.id}"
+				aria-expanded="false" aria-controls="collapse${ap2.id}"
+				onclick="checkAriaLabelAccordion()">
+				${ap2.titoloDomanda} 
+				<img loading="lazy"
+					class="position-absolute icona-accordion-faq icona-accordion-faq-chiuso"
+					src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/chevron-down-yellow.svg"
+					alt="freccia-dropdown-chiuso" /> 
+				<img loading="lazy"
+					class="position-absolute icona-accordion-faq icona-accordion-faq-aperto"
+					src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/chevron-down-yellow.svg"
+					alt="freccia-dropdown-aperto" />
+			</button>
+
+		</h2>
+	</div>
+
+	<div id="collapse${ap2.id}" class="collapse"
+		aria-labelledby="heading${ap2.id}"
+		data-parent="request.requestPathInfo.selectors[0]"
+		itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+		<div class="card-body faq-card-body-media pt-0 pb-0"
+			data-sly-use.procText="${'com.egl.core.models.utils.RTEPlaceholderHandler' @ text=ap2.rispostaDomanda}"
+			itemprop="text">
+			${procText.processed @ context='unsafe'}</div>
+	</div>
+</div>
+
+<script
+	data-sly-test="${wcmmode.disabled && (properties.pathFragmentPromo1 || properties.pathFragmentPromo2)}">
+	(function($) {
+		$(document).ready(
+			promotionHideShow(null,".faq-promo1-${resource.name @ context='scriptToken'}",".faq-promo2-${resource.name @ context='scriptToken'}")
+		);
+	})($);
+</script>
+
+

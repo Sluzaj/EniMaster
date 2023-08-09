@@ -1,0 +1,45 @@
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	    data-sly-test.testing="${!properties.titolo}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+
+
+<div id="${properties.id}" class="container-fluid key-point ksp-rework" style="--bg--KeySelling--color:${properties.coloreBackground @context='styleToken'}">
+  <div class="container-lg px-0">
+    <div class="row row-key-point">
+      <div class="col-12 ksp-title ${properties.posizioneTitolo == 'centrato' ? 'text-center justify-content-center align-items-center' : ''}">
+	      <div>
+	        <h2 class="h2-egl">${properties.titolo @context='html'}</h2>
+	        <h3 class="h3-egl">${properties.sottoTitolo @context='html'}</h3>
+	      </div>
+      </div>
+    </div>
+    
+
+    <div class="row row-key-point ">
+      <div data-sly-use.key="com.egl.core.models.keyselling.KeyPointModel"
+        data-sly-list.lista="${key.lista}" data-sly-unwrap>
+        <div class="col-12 ${properties.griglia ? properties.griglia : 'col-lg-4'}">
+	        <div class="d-flex">
+	          <sly data-sly-test="${properties.tipoItem != 'bullet'}">
+	          	<img loading="lazy" class="egl-key-point-img" src="${lista.iconaItem}" alt="${lista.altIconaItem}"/>
+	          </sly>
+		        <div class="${properties.tipoItem == 'bullet' ? 'position-relative' : ''}">
+		          <p class="p20-egl" tabindex="0">${lista.titoloItem @context='html'}</p>
+		          <p class="p16-egl" tabindex="0">${lista.descrizioneItem @context='html'}</p>
+		        </div>
+	        </div>
+        </div>
+      </div>      
+    </div>
+
+    <div class="row row-key-point">
+      <div class="col-12">
+        <p class="cap12-egl">
+          ${properties.nota @context='html'}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

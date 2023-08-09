@@ -1,0 +1,247 @@
+<sly
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.title}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<sly data-sly-use.logoMobileModel="com.egl.core.models.LogoMobileModel"></sly>
+
+<!-- HEADER MOBILE -->
+<div
+	class="
+          container-fluid
+          navbar-dark navbar-expand-lg
+          headerMobile
+          d-lg-none
+        ">
+	<div class="row" id="NavbarMobileDropdownMenu">
+		<div class="col-lg-10">
+			<div class="pl-3 pl-lg-0 row" id="smallHeader">
+				<div class="d-lg-none" 
+							data-sly-test.logoMobile="${logoMobileModel.lm}">
+					<a href="${logoMobile.logoLink}"> 
+						<img loading="lazy" class="" src="${logoMobile.logo}" alt="${logoMobile.altLogo}" style="max-height:28px;" />
+					</a>
+				</div>
+				<div class="col">
+					<div class="row">
+						<div class="col d-flex justify-content-end"
+							data-sly-set.personalArea="${logoMobileModel.personalArea}">
+							<a href="${personalArea.url}" target="${personalArea.target || '_self'}" title="${personalArea.titleText}"> 
+								<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-user.svg"
+									alt="AreaPrivataLogo" style="width: 20px; height: 20px"/>
+							</a>
+						</div>
+						<button class="navbar-toggler second-button" type="button"
+							data-toggle="collapse"
+							data-target="#navbarToggleExternalContent10"
+							aria-controls="navbarToggleExternalContent10"
+							aria-expanded="false" 
+							aria-label="Apri menù a tendina"
+                    		id="DropdownMenuButton">
+							<div class="animated-icon2">
+								<span></span><span></span><span></span><span></span>
+							</div>
+						</button>
+					</div>
+				</div>
+			</div>
+			<ul class="nav nav-justified navListMobile">
+				<sly data-sly-use.shortcut="com.egl.core.models.ShortcutModel"
+					data-sly-list.list="${shortcut.list}">
+					<li class="nav-item p16-egl">
+						<a class="nav-link ${list.isActive ? 'active' : ''}" href="${list.linkFLShortcut}" target="${list.targetFLShortcut}" title="${list.altFLShortcut}">${list.titleFLShortcut}</a>
+					</li>
+				</sly>
+			</ul>
+		</div>
+	</div>
+</div>
+<!-- HEADER DROPDOWN -->
+<div
+	class="collapse navbar-collapse d-lg-none egl-nav-dropdown-sticky-top"
+	id="navbarToggleExternalContent10">
+	<div class="container-fluid container-categorie" data-sly-use.mobilemenu="com.egl.core.models.MobileMenuModel">
+		<!-- CATEGORIE DROPDOWN MOBILE -->
+		<div class="row row-categorieHeader"
+			data-sly-test="${mobilemenu.list && mobilemenu.list.size > 0}">
+			<div data-sly-list.list="${mobilemenu.list}" data-sly-unwrap>
+				<div class="col-md-2 col-sm-4 col-6 centraContent flex-column">
+					<div class="categorieHeader" data-sly-test="${list.doubleImage}">
+						<!-- DOPPIA ICON -->
+						<a href="${list.link}" target="${list.target}"
+							title="${list.altImage1}"> <img loading="lazy" class="categorieIconDoppia"
+							src="${list.image1}" alt="${list.altImage1}" />
+						</a><a href="${list.link}" target="${list.target}"
+							title="${list.altImage2}"> <img loading="lazy" class="categorieIconDoppia"
+							src="${list.image2}" alt="${list.altImage2}" />
+						</a>
+
+					</div>
+					<div class="categorieHeader" data-sly-test="${!list.doubleImage}">
+						<!-- SINGOLA ICON -->
+						<a href="${list.link}" target="${list.target}"
+							title="${list.altImage1}"> <img loading="lazy" class="categorieIcon"
+							src="${list.image1}" alt="${list.altImage1}" />
+						</a>
+					</div>
+					<div class="cap12-egl">${list.label}</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- OFFERTE DROPDOWN MOBILE -->
+		<div class="row row-offerteHeader">
+			<div class="col-12 cap14-egl boldText subcatTitle" data-sly-test="${properties.titleSubmenuMobile}">
+				${properties.titleSubmenuMobile}</div>
+			<div
+				data-sly-use.mobilesubmenu="com.egl.core.models.MobileSubmenuModel"
+				data-sly-list.list="${mobilesubmenu.list}" data-sly-unwrap>
+				<div class="col-12 p16-egl subCat noSlider"
+					data-sly-test="${!list.hasSubsection}">
+					<a href="${list.link}" target="${list.target}" title="${list.altText}"
+						style="color: black;">${list.label}</a>
+				</div>
+
+				<!-- SUBCATEGORIA CON A SLIDER -->
+				<div class="col-12 p16-egl subCat"
+					data-sly-test="${list.hasSubsection}">
+					<div class="accordion"
+						id="${['accordion-', list.accordion] @ join=''}">
+						<div class="off-serv-item">
+							<h2 class="mb-0">
+								<button
+									class="btn btn-block text-left px-0 btn-noshadow p16-egl"
+									type="button" data-toggle="collapse"
+									data-target="${['#', list.accordion] @ join=''}"
+									aria-expanded="true" 
+									aria-controls="${list.accordion}"
+									aria-describedby="Apri sottomenù"
+                      				aria-label="${list.accordion}">
+									${list.label} <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-right-solid.svg"
+                      class="header-comp-arrows-right float-right"/>
+								</button>
+							</h2>
+						</div>
+						<!-- SLIDER DD MOBILE -->
+						<div id="${list.accordion}" class="collapse slideMegaDropdown"
+							aria-labelledby="sottomenù"
+							data-parent="${['#accordion-', list.accordion] @ join=''}">
+							<div class="container-fluid container-categorie">
+								<div class="row row-offerteHeader titoloSezione">
+									<div class="col-1">
+										<button class="btn btn-block text-center px-0 btn-noshadow"
+											type="button" data-toggle="collapse"
+											data-target="${['#', list.accordion] @ join=''}"
+											aria-expanded="true" aria-controls="${list.label}">
+											<i class="fas fa-chevron-left float-left no-content">
+												<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-left-solid.svg" class="header-comp-arrows-mob"/>
+											</i>
+										</button>
+									</div>
+									<div class="col-12 p18-egl text-center">
+										<b>${list.label}</b>
+									</div>
+									<div class="col-12 cap12-egl text-center">${list.page}</div>
+								</div>
+								<div class="row row-categorieHeader" data-sly-test="${list.menuSubsection && list.menuSubsection.size > 0}">
+									<div data-sly-list.menuSS="${list.menuSubsection}"
+										data-sly-unwrap>
+										<div class="
+											col-md-2 col-sm-4 col-6
+											centraContent
+											flex-column">
+											<div class="categorieHeader">
+												<a href="${menuSS.link}" target="${menuSS.target}" title="${menuSS.altImage1}"> <img loading="lazy"
+													class="categorieIcon" src="${menuSS.image1}"
+													alt="${menuSS.altImage1}" />
+												</a>
+											</div>
+											<div class="cap12-egl">${menuSS.label}</div>
+										</div>
+									</div>
+								</div>
+								<div class="row row-offerteHeader">
+									<div class="col-12 cap14-egl boldText subcatTitle" data-sly-test="${list.titleSubsection}">
+										${list.titleSubsection}</div>
+									<div data-sly-list.submenuSS="${list.subMenuSubsection}"
+										data-sly-unwrap>
+										<div class="col-12 p16-egl subCat">
+											<a class="${submenuSS.newElement}" href="${submenuSS.link}" target="${submenuSS.target}" title="${menuSS.altText}"
+												style="color: black;">${submenuSS.label}</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- SLIDER DD MOBILE  FINE-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row row-caroselloCarteHeader"
+			data-sly-use.dropdownMobile="com.egl.core.models.CardMobileModel">
+			<div class="col-12 cap14-egl boldText subcatTitle" data-sly-test="${properties.titleCardCarousel && dropdownMobile.cardMobile}">${properties.titleCardCarousel}</div>
+			<div class="col-12" data-sly-test="${dropdownMobile.cardMobile && dropdownMobile.cardMobile.size > 0}">
+				<div class="container-fluid container-myCarousel">
+					<!-- CAROSELLO -->
+					<div class="row myCardCarousel">
+						<div
+							data-sly-list.listMobile="${dropdownMobile.cardMobile}"
+							data-sly-unwrap>
+							<div class="col-md-4">
+								<div class="cardOfferteMobile egl-max-width-cards">
+									<div class="row">
+										<div class="col-8">
+											<div class="p18-egl titoloCardOfferta">
+												<b>${listMobile.title @ context='html'}</b>
+											</div>
+											<div class="pb-2 descCardOfferta">${listMobile.subtitle}</div>
+											<a data-sly-test="${listMobile.labelLink && listMobile.urlLink}" 
+											href="${listMobile.urlLink}"
+												target="${listMobile.targetLink}"
+												title="${listMobile.altLink}">
+												<button type="button" class="btn btn-link cta-secondary">
+													${listMobile.labelLink}</button>
+											</a>
+										</div>
+										<div class="col-4">
+											<img loading="lazy" src="${listMobile.image}" alt="${listMobile.altImage}" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="container impaginazione-carosello-header">
+						<div class="row justify-content-center">
+							<div class="position-relative text-center">
+								<div class="news__arrows_">
+									<div class="news__arrow news__arrow_dir_left"
+										onclick="slideGo('-')">
+										<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-left-solid.svg" class="header-comp-arrows-slider"/>
+									</div>
+									<div class="news__arrow news__arrow_dir_right"
+										onclick="slideGo('+')">
+										<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-right-solid.svg" class="header-comp-arrows-slider"/>
+									</div>
+								</div>
+								<p class="pagingInfo p18-egl"></p>
+							</div>
+						</div>
+					</div>
+					<!-- fine CAROSELLO -->
+				</div>
+			</div>
+		</div>
+		<!-- inizio bottone -->
+		<div class="row justify-content-center egl-mobDropdown-row-btn">
+			<div class="col-8" data-sly-test="${properties.labelCTA && properties.linkCTA}"  >
+				<a href="${properties.linkCTA}" target="${properties.targetCTA}" title="${properties.altCTA}">
+					<button type="button"
+						class="btn btn-primary btn-lg btn-block egl-blue-btn">${properties.labelCTA}</button>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>

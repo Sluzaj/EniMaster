@@ -1,0 +1,92 @@
+<sly
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.contentSelect}"> </sly>
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<sly data-sly-test.id="${properties.id ? properties.id : 'modale-promozione'}"></sly>
+
+<!-- modale promozione -->
+<div class="modal fade" id="${id}" tabindex="-1"
+	aria-labelledby="modale-promozione" aria-hidden="true">
+	<div class="modal-dialog egl-modale-promozione">
+		<div class="modal-content position-relative">
+			<span aria-hidden="true"
+				class="position-absolute egl-mod-comm-closeIcon" style="z-index: 1">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<img loading="lazy"
+						src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/7-icons-close-x.png"
+						alt="chiudi-modale" />
+				</button>
+			</span>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12 justify-content-center text-center d-flex"
+					data-sly-use.logo1="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.logo1}"
+					data-sly-use.logo2="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.logo2}">
+						<img loading="lazy" class="egl-modale-promo-immagine-promo"
+							src="${properties.logo1}" alt="${logo1.description}" /> 
+						<img loading="lazy" class="egl-modale-promo-immagine-promo" src="${properties.logo2}"
+							alt="${logo2.description}" />
+					</div>
+					<div class="col-12">
+						<div class="egl-modale-promo-titolo text-center">${properties.title
+							@ context='html'}</div>
+					</div>
+				</div>
+				<div class="row egl-modale-promozione-contenuto">
+					<div class="col-12 col-lg-4 px-0">
+						<div class="d-lg-flex d-none justify-content-center text-center"
+							data-sly-use.icon1="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.icon1}">
+							<img loading="lazy" class="img-promo" src="${properties.icon1}"
+								alt="${icon1.description}" />
+						</div>
+						<div class="d-flex align-items-center">
+							<div class="numeratore-modale-promozione">1</div>
+							<div class="egl-modale-promo-contenuto-titolo">${properties.titleItem1
+								@ context='html'}</div>
+						</div>
+						<div class="egl-modale-promo-contenuto-testo">${properties.descrItem1
+							@ context='html'}</div>
+					</div>
+					<div class="col-12 col-lg-4 px-0">
+						<div class="d-lg-flex d-none justify-content-center text-center"
+							data-sly-use.icon2="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.icon2}">
+							<img loading="lazy" class="img-promo" src="${properties.icon2}"
+								alt="${icon2.description}" />
+						</div>
+						<div class="d-flex align-items-center">
+							<div class="numeratore-modale-promozione">2</div>
+							<div class="egl-modale-promo-contenuto-titolo">${properties.titleItem2
+								@ context='html'}</div>
+						</div>
+						<div class="egl-modale-promo-contenuto-testo">${properties.descrItem2
+							@ context='html'}</div>
+					</div>
+					<div class="col-12 col-lg-4 px-0">
+						<div class="d-lg-flex d-none justify-content-center text-center"
+						data-sly-use.icon3="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.icon3}">
+							<img loading="lazy" class="img-promo" src="${properties.icon3}"
+								alt="${icon3.description}" />
+						</div>
+						<div class="d-flex align-items-center">
+							<div class="numeratore-modale-promozione ultima-opzione">3</div>
+							<div class="egl-modale-promo-contenuto-titolo ultima-opzione">
+								${properties.titleItem3 @ context='html'}</div>
+						</div>
+						<div class="egl-modale-promo-contenuto-testo">${properties.descrItem3
+							@ context='html'}</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12 text-center" data-sly-test="${properties.labelCTA}">
+							<button type="button" class="p20-egl egl-cart-cta-primary-yellow"
+								data-dismiss="modal" href="#carrelloinpagina" title="${properties.titleTextLink}">
+								${properties.labelCTA}
+							</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

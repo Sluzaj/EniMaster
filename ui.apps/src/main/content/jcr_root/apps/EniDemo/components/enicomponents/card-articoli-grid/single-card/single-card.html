@@ -1,0 +1,21 @@
+<sly
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.title}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<a href="${properties.urlCTA}" class="cag-bodylink" tabindex="0" title="${properties.altCTA}">
+	<div class="position-relative" data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.imgRef}">
+		<img loading="lazy"
+			src="${properties.imgRef}"
+			alt="${image.description}">
+	</div>
+	<div class="cag-body">
+		<div class="cag-testo">
+			<p class="cap14-egl" tabindex="0">${properties.category @ context='html'}</p>
+			<h4 class="h4-egl" tabindex="0">${properties.title @ context='html'}</h4>
+			<p class="p16-egl" tabindex="0">${properties.paragraph @ context='html'}</p>
+		</div>
+	</div>
+</a>
+

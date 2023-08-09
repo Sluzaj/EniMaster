@@ -1,0 +1,157 @@
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	    data-sly-test.testing="${!properties.titolo}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+
+<!-- Cerco nelle properties dei figli -->
+<sly data-sly-list.proprieta="${resource.listChildren}">
+	  <sly data-sly-test= "${proprieta.name == 'cardSx'}">
+	  	<sly data-sly-test.promoSx = "${proprieta.promo}">
+	  	</sly>
+	  </sly>
+	  
+	  <sly data-sly-test= "${proprieta.name == 'cardCx'}">
+	  	<sly data-sly-test.promoCx = "${proprieta.promo}">
+	  	</sly>
+	  </sly>
+</sly>
+
+
+<sly data-sly-test.isPromo= "${promoSx || promoCx}"></sly>
+
+    <!-- CARD OFFERTE -->
+<sly data-sly-test="${properties.varianteComponente == 'cardOfferte'}">
+    <div id="${properties.id}" class="container-lg card-offerte-spacing-huge ${properties.colorType == 'gradient' ? 'bg-card-gradiente' : ''} px-lg-0 ${!isPromo ? 'card-offerte-nopromo' : ''}">
+        <div class="d-flex">
+            <div data-sly-test="${properties.titolo}" class="card-offerte-rectangle"></div>
+            <div class="d-flex flex-column">
+                <span class="card-offerte-title">${properties.titolo @context='html'}</span>
+            </div>
+        </div>
+        <div class="w-100 d-flex cards-container flex-wrap pl-0">
+        
+	<!-- INSERIRE IL SOTTOCOMPONENTE -->
+	 <div class="card-offerte-container card-offerte-container-left col-lg-4 col-md-6 col-12 pl-lg-0 pr-lg-3 pl-md-0 pr-md-2">
+		<sly data-sly-resource="${'cardSx' @ resourceType='enigaseluce/components/card-offerte/card-offerte-commodity'}"></sly>
+	</div>
+	
+	<div class="card-offerte-container card-offerte-container-center col-lg-4 col-md-6 col-12 px-lg-2 pl-md-2">
+		<sly data-sly-resource="${'cardCx' @ resourceType='enigaseluce/components/card-offerte/card-offerte-commodity'}"></sly>
+	</div>
+            <!-- RIGHT CARDS-->
+            <div class="card-offerte-container card-offerte-container-right col-lg-4 col-12 pr-lg-0 pl-lg-3 pr-md-0">
+                <!--  -->
+                <div class="card-offerte-wrapper-carousel">
+                    <!-- RIGHT CARD TOP-->
+                    <div class="card-offerte-card card-offerte-card-no-bg d-flex flex-column mx-lg-0" style="background-color:${properties.coloreCard3 @ context='styleString'} !important;" >
+                        <div class="card-offerte-right-card-body d-flex flex-column" >
+                        	<div>
+	                            <div class="card-offerte-right-card-body-title">
+	                                ${properties.titoloCard3 @context='html'}
+	                            </div>
+	                            <div class="card-offerte-right-card-body-text">
+	                                ${properties.descrizioneCard3 @context='html'}
+	                            </div>
+                            </div>
+                            <div class="bg-link right">
+                                <div class="container-button-and-line">
+	                                <a data-sly-test="${properties.urlCtaCard3 && properties.labelCtaCard3}"
+	            						href="${properties.urlCtaCard3}" target="${properties.targetCtaCard3}" title="${properties.altCtaCard3}" >
+	                                    <button type="button" class="btn btn-link card-offerte-right-cta-secondary pl-0">
+	                                        <span>${properties.labelCtaCard3}</span>
+	                                    </button> 
+	                                   <span class="button-text-decoration"></span>
+	                                </a>         
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mask"></div>
+                    </div>
+                    <!-- RIGHT CARD BOTTOM-->
+                    <div class="card-offerte-card card-offerte-card-no-bg d-flex flex-column mx-lg-0"  style="background-color:${properties.coloreCard4 @ context='styleString'} !important;">
+                        <div class="card-offerte-right-card-body d-flex flex-column">
+	                        <div>
+	                            <div class="card-offerte-right-card-body-title">
+	                                ${properties.titoloCard4 @context='html'}
+	                            </div>
+	                            <div class="card-offerte-right-card-body-text">
+	                                ${properties.descrizioneCard4 @context='html'}
+	                            </div>
+                            </div>
+                            <div class="bg-link right">
+                                <div class="container-button-and-line">
+                                <a data-sly-test="${properties.urlCtaCard4 && properties.labelCtaCard4}"
+	            						href="${properties.urlCtaCard4}" target="${properties.targetCtaCard4}" title="${properties.altCtaCard4}" >
+                                    <button type="button" class="btn btn-link card-offerte-right-cta-secondary pl-0">
+                                        <span>${properties.labelCtaCard4}</span>
+                                    </button>
+                                    <span class="button-text-decoration"></span>
+                               </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mask"></div>
+                    </div>
+                </div>
+                <div class="card-offerte-navigatore-carosello d-md-none">
+                    <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-left-solid.svg"
+                        class="card-offerte-previous-arrow card-offerte-arrows"
+                        onclick="slideCardOfferteCard('-')"/>
+                    <p class="card-offerte-status-text" style="margin-bottom: 0px;">
+                    </p>
+                    <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-right-solid.svg"
+                        class="card-offerte-next-arrow card-offerte-arrows"
+                        onclick="slideCardOfferteCard('+')"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</sly>
+
+    <!-- SINGLE CARD -->
+<sly data-sly-test="${properties.varianteComponente == 'singleCard'}">
+    <div id="${properties.id}" class="container-lg card-offerte-spacing-huge card-offerte-singola px-lg-0">
+        <div class="d-flex">
+            <div data-sly-test="${properties.titolo}" class="card-offerte-rectangle"></div>
+            <div class="d-flex flex-column">
+                <span class="card-offerte-title">${properties.titolo @context='html'}</span>
+            </div>
+        </div>
+        <div class="d-flex wrapper-card-offerta-singola">
+            <div class="card-offerte-card card-offerte-singola d-flex flex-column flex-md-row">
+                <div class="card-offerte-img" data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagineSingleReference}">
+                   <picture data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=properties.immagineSingleReference}" >
+	                            <sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+	                                <source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+	                                <source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+	                            </sly>
+                    			<img loading="lazy"  src="${renditionsManager.renditions['1920px']}" alt="${image.description}">
+                    </picture>
+                </div>
+                <div class="card-offerte-card-body-center d-flex flex-column">
+                    <div class="d-flex title-subtitle-container">
+                        <div class="card-offerte-card-body-title">
+                            ${properties.titoloSingle @context='html'}
+                        </div>
+                        <div class="card-offerte-card-body-description">
+                            ${properties.tipoFornitura}
+                        </div>
+                    </div>
+                    <div class="card-offerte-card-body-text">
+                        ${properties.descrizioneSingle @context='html'}
+                    </div>
+                    <div class="bg-link text-center">
+                    	<a data-sly-test="${properties.labelCtaSingle && properties.urlCtaSingle}"
+            				href="${properties.urlCtaSingle}" target="${properties.targetCtaSingle}" title="${properties.altCtaSingle}" >
+	                        <button type="button" class="btn btn-link card-offerte-cta-secondary">
+	                            ${properties.labelCtaSingle}
+	                        </button>
+                        </a>
+                    </div>
+                </div>
+                <div class="mask"></div>
+            </div>
+        </div>
+    </div>
+</sly>

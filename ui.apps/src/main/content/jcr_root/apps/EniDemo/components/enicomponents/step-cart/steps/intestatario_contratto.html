@@ -1,0 +1,144 @@
+<template data-sly-template.intest="${@ cartModel, stepCartModel, isLight, furnitureName}">
+  <sly data-sly-set.texts="${stepCartModel.textValues}"></sly>
+  <sly data-sly-set.isDual="${furnitureName == 'DUAL'}"></sly>
+  <sly data-sly-set.isPerNoiBase="${'/pernoi-base' in currentPage.path}"></sly>
+  <sly data-sly-set.isForSwitchInLuce="${isPerNoiBase && isLight && stepCartModel.selectedValues['luceState']=='1'}"></sly>
+  <sly data-sly-set.isForSwitchInGas="${isPerNoiBase && !isLight && stepCartModel.selectedValues['gasState']=='1'}"></sly>
+
+  <style>
+    .egl-box-fornitura-carrellostep.interstatario_contratto.nuovo-interstatario .egl-box-fornitura-carrellostep-nome:after {
+      content: "";
+      bottom: -55px;
+      left: -44px;
+      width: max-content;
+      display: inline-block;
+      position: absolute;
+      font-size: 14px;
+      font-weight: 400;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: center;
+      color: #767676;
+    }
+  </style>
+
+  <style data-sly-test="${isForSwitchInLuce || isForSwitchInGas}">
+    .egl-box-fornitura-carrellostep.interstatario_contratto.pernoi.pernoi-switch .egl-box-fornitura-carrellostep-nome:after {
+      content: "";
+      bottom: -64px;
+      white-space: pre;
+      left: -87px;
+      width: max-content;
+      display: inline-block;
+      position: absolute;
+      font-size: 14px;
+      font-weight: 400;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: center;
+      color: #767676;
+    }
+
+    @media (max-width: 1023px) {
+      .egl-selezione-fornitura .egl-modal-body-carrellostep-contenuto .egl-box-fornitura-carrellostep.interstatario_contratto.pernoi.pernoi-switch {
+        margin: 0 0 3pc;
+      }
+    }
+  </style>
+
+  <span
+    aria-hidden="true"
+    class="position-absolute egl-mod-comm-prevIcon d-lg-none"
+  >
+    <button
+      type="button"
+      class="freccia-torna-indietro"
+      onclick="goToStep('back')"
+      aria-label="indietro"
+    >
+      <i class="fas fa-chevron-left"></i>
+    </button>
+  </span>
+  <div class="progress w-100 position-absolute">
+    <sly data-sly-set.bar="${isLight ? '28%' : '56%'}"></sly>
+    <div
+      style="width: ${bar @ context='styleToken'}"
+      class="progress-bar"
+      role="progressbar"
+      aria-valuenow="${bar}"
+      aria-valuemin="0"
+      aria-valuemax="100"
+    ></div>
+  </div>
+  <div class="egl-stato-fornitura-dettaglio">
+    <div class="egl-stato-fornitura-dettaglio-testo" data-sly-test="${isDual}">
+      ${isLight ? texts['furnitureQuestionLight'] : texts['furnitureQuestionGasDual'] @ context='html'}
+    </div>
+    <div class="egl-stato-fornitura-dettaglio-testo" data-sly-test="${!isDual}">
+      ${isLight ? texts['furnitureQuestionLight'] : texts['furnitureQuestionGas'] @ context='html'}
+    </div>
+  </div>
+  <div style="flex-basis: 100%">
+    <div
+      class="
+        d-flex
+        flex-wrap
+        egl-modal-body-carrellostep-contenuto
+        step-interstatario-contratto
+      "
+    >
+      <div class="flex-b-100 d-flex justify-content-center">
+        <div class="text-left egl-modal-carrellostep-titolo">
+          <b>${texts['furnitureIntested'] @ context='html'}</b>
+        </div>
+      </div>
+      <div
+        class="egl-box-fornitura-carrellostep interstatario_contratto ${(isForSwitchInLuce || isForSwitchInGas) ? 'pernoi pernoi-switch' : ''}"
+        onclick="selezionaOpzioneCarrelloStep()"
+      >
+        <div class="egl-box-fornitura-carrellostep-nome">
+          <b>${texts['furnitureMine'] @ context='html'}</b>
+        </div>
+      </div>
+      <div
+        onclick="selezionaOpzioneCarrelloStep()"
+        class="
+          egl-box-fornitura-carrellostep
+          interstatario_contratto
+          nuovo-interstatario
+        "
+      >
+        <div class="egl-box-fornitura-carrellostep-nome">
+          <b>${texts['furnitureOtherPerson'] @ context='html'}</b>
+        </div>
+      </div>
+    </div>
+    <div
+      class="
+        d-flex
+        flex-wrap
+        egl-modal-body-carrellostep-footer
+        indietro-e-continua
+      "
+    >
+      <button
+        type="button"
+        class="p20-egl egl-cart-cta-primary-white d-none d-lg-block"
+        onclick="goToStep('back')"
+      >
+        ${texts['back'] @ context='html'}
+      </button>
+      <button
+        type="button"
+        class="p20-egl egl-cart-cta-primary-yellow"
+        onclick="goToStep('next')"
+      >
+        ${texts['continue'] @ context='html'}
+      </button>
+    </div>
+  </div>
+</template>

@@ -1,0 +1,98 @@
+<sly
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.title}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+<sly data-sly-test.isTab="${properties.tab}"></sly>
+<sly data-sly-test.isDoc="${properties.doc}"></sly>
+<sly data-sly-test.isBase="${!isTab && !isDoc}"></sly>
+<sly data-sly-test="${isTab}"
+	data-sly-use.tabModel="com.egl.core.models.faq.TabsModel"></sly>
+<sly data-sly-test="${isDoc}"
+	data-sly-use.docModel="com.egl.core.models.documenti.FragmentDocumentiModel"></sly>
+
+<div id="${properties.idRef}" class="container-fluid px-0" style="background-color: ${properties.bgColor@ context='styleString'}">
+	<div class="container-fluid egl-contenitore-tabs-faq" data-sly-test="${isTab}">
+		<div class="tabs-faq container-lg d-flex justify-content-start p-0"
+			data-sly-list.tab="${tabModel.tabsFaq}">
+			<div class="tabs-faq-item ${tabList.first?'tabs-item-active':''}">
+				<a>${tab.name}</a>
+			</div>
+		</div>
+	</div>
+	<div class="container-lg ${!isTab ? 'faq-spacing-huge' : ''} ${isTab ? 'egl-contenitore-tabs-faq-contenuto' : ''} ${isBase ? 'px-lg-0' : ''}">
+		<div class="row-FAQ">
+			<div class="egl-faq-contenuto-container">
+				<div class="h2-egl d-flex flex-column">
+					<span><b>${properties.title}</b></span> <span
+						class="title-icon-faq faq-spacing-medium" id="title-tab"
+						data-sly-test="${isTab}"><sly
+							data-sly-list.tabs="${tabModel.tabsFaq}">${tabsList.first ?
+						tabs.name : ''}</sly></span>
+				</div>
+				<div class="icon-list-pdf-top" data-sly-test="${isDoc}">
+					<div class="faq-spacing-big">
+						<span class="title-icon-faq">${properties.titleDoc}</span>
+					</div>
+					<sly data-sly-list.doc="${docModel.lista}">
+					<div class="faq-spacing-big">
+						<img loading="lazy"
+							src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/icona-documenti.svg"
+							alt="documento" /> <span
+							class="faq-spacing-left paragraph-icon-faq"><a
+							href="${doc.allegato}" target="_blank" title="${doc.altTextDoc}" style="color:black;">${doc.titoloNomeDelDocumento}</a></span>
+					</div>
+					</sly>
+				</div>
+			</div>
+			<div class="egl-faq-accordion-container" itemscope="" itemtype="http://schema.org/FAQPage">
+				<div class="accordion" id="accordionFAQ">
+					<sly
+						data-sly-resource="${'faq0' @ resourceType='enigaseluce/components/faq/accordions', selectors=['#accordionFAQ', 'Tab 1']}"></sly>
+				</div>
+				<div data-sly-test.faq="${tabModel.tabsFaq}" data-sly-unwrap>
+					<div class="accordion" id="accordionFAQ2"
+						data-sly-test="${faq.size>1}">
+						<sly
+							data-sly-resource="${'faq1' @ resourceType='enigaseluce/components/faq/accordions', selectors=['#accordionFAQ2', 'Tab 2']}"></sly>
+					</div>
+					<div class="accordion" id="accordionFAQ3"
+						data-sly-test="${faq.size>2}">
+						<sly
+							data-sly-resource="${'faq2' @ resourceType='enigaseluce/components/faq/accordions', selectors=['#accordionFAQ3', 'Tab 3']}"></sly>
+					</div>
+					<div class="accordion" id="accordionFAQ4"
+						data-sly-test="${faq.size>3}">
+						<sly
+							data-sly-resource="${'faq3' @ resourceType='enigaseluce/components/faq/accordions', selectors=['#accordionFAQ4', 'Tab 4']}"></sly>
+					</div>
+					<div class="accordion" id="accordionFAQ5"
+						data-sly-test="${faq.size>4}">
+						<sly
+							data-sly-resource="${'faq4' @ resourceType='enigaseluce/components/faq/accordions', selectors=['#accordionFAQ5', 'Tab 5']}"></sly>
+					</div>
+					<div class="accordion" id="accordionFAQ6"
+						data-sly-test="${faq.size>5}">
+						<sly
+							data-sly-resource="${'faq5' @ resourceType='enigaseluce/components/faq/accordions', selectors=['#accordionFAQ6', 'Tab 6']}"></sly>
+					</div>
+				</div>
+			</div>
+			
+			<div class="icon-list-pdf-bottom" data-sly-test="${isDoc}">
+					<div class="faq-spacing-big">
+						<span class="title-icon-faq">${properties.titleDoc}</span>
+					</div>
+					<sly data-sly-list.doc="${docModel.lista}">
+					<div class="faq-spacing-big">
+						<img loading="lazy"
+							src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/icona-documenti.svg"
+							alt="documento" /> <span
+							class="faq-spacing-left paragraph-icon-faq"><a
+							href="${doc.allegato}" target="_blank" title="${doc.altTextDoc}" style="color:black;">${doc.titoloNomeDelDocumento}</a></span>
+					</div>
+					</sly>
+				</div>
+		</div>
+	</div>
+</div>

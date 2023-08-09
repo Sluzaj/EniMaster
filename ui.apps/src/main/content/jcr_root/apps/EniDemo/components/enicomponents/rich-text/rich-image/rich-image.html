@@ -1,0 +1,14 @@
+<sly
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.testoImg}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+	
+      <div class="rich-image" data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagineReference}">
+        <img loading="lazy" class="${properties.posizioneImg}" src="${properties.immagineReference}" alt="${image.description}" >
+       	 <p data-sly-use.text="${'com.egl.core.models.utils.TableModel' @ richText=properties.testoImg}">
+        	${text.tableFormatted @context='html'}
+        </p> 
+      </div>
+

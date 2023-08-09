@@ -1,0 +1,122 @@
+<sly
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.logoLink}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<div id="skip-menu">
+	<a href="#contenuto-pagina"
+		title="Salta il menu e vai al contenuto di pagina">Salta il menu e
+		vai al contenuto di pagina</a>
+</div>
+<!-- DESKTOP HEADER -->
+<div class="container-fluid headerDesktop sticky-top d-none d-lg-block"
+	id="bigHeader">
+	<div class="container-xl px-0">
+		<div class="row row-header-desktop">
+			<div class="contenuto-logo-navbar">
+				<a aria-label="Vai alla homepage" href="${properties.logoLink}">
+					<img loading="lazy" class="navbarMobileLogo" src="${properties.logo}" alt="${properties.altLogo}"/>
+				</a>
+				<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/ombra.png" class="ombra" />
+			</div>
+			<div class="secondaNav">
+				<div class="container-fluid pr-0">
+					<!-- MENU PRIMARIO -->
+					<div class="row menuPrimario p16-egl">
+						<div class="col-8">
+							<ul class="row submenuPrimario">
+								<sly data-sly-use.shortcut="com.egl.core.models.ShortcutModel"
+									data-sly-list.list="${shortcut.list}">
+								<li class="pMenuItems text-left">
+									<a class="${list.isActive ? 'active' : ''}" href="${list.linkFLShortcut}" target="${list.targetFLShortcut}" title="${list.altFLShortcut}">${list.titleFLShortcut}</a>
+								</li>
+								</sly>
+							</ul>
+						</div>
+						<div class="col-4">
+							<div class="row submenuPrimario justify-content-end info">
+								<div class="pMenuItems cap14-egl text-right"
+									data-info="areaprivata">
+									<a href="${properties.linkService1}" target="${properties.targetLinkService1 || '_self'}" title="${properties.titleTextLinkService1}"> 
+										<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-user.svg"
+											class="AP-logo-desktop" alt="AreaPrivataLogo" />
+										${properties.service1}
+									</a>
+								</div>
+								<div class="pMenuItems cap14-egl text-right">
+									<a href="${properties.linkService2}" target="${properties.targetLinkService2 || '_self'}" title="${properties.titleTextLinkService2}">
+										${properties.service2}
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- MENU SECONDARIO -->
+					<div class="row menuSecondario">
+						<div data-sly-use.shortcutSL="com.egl.core.models.ShortcutSLModel"
+							data-sly-list.list2="${shortcutSL.list2}" data-sly-unwrap>
+							<div class="sMenuItems d-flex align-items-center" data-sly-test="${!list2.contentType || list2.contentType=='dropdown'}">
+								<button tabindex="0"
+									class="btn text-left px-0 btn-noshadow cap14-egl btn-collapse-nav"
+									type="button" data-toggle="collapse"
+									data-target="${list2.dropdown}" aria-expanded="false"
+									aria-controls="${list2.labelSLShortcut}"
+									aria-label="Apri menù a tendina e scegli una voce">
+									${list2.labelSLShortcut}
+									 <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-down-solid.svg" class="header-comp-arrows"/>
+								</button>
+							</div>
+							<div class="sMenuItems d-flex align-items-center" data-sly-test="${list2.contentType=='link'}">
+								<a href="${list2.linkSecondLevel}"
+									target="${list2.targetSecondLevel}"
+									title="${list2.altSecondLevel}"
+									class="btn text-left px-0 btn-noshadow cap14-egl btn-collapse-nav"
+									tabindex="0">${list2.labelSLShortcut}</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- DESKTOP DROPDOWN -->
+	<div class="row flex-column egl-riga-dropdown-position-absolute" id="DesktopDropdownContainer" style="${wcmmode.edit ? 'position: relative;' : '' @ context='styleString'}">
+		<div class="col-12 px-lg-0">
+			<div data-sly-use.shortcutSL="com.egl.core.models.ShortcutSLModel"
+				data-sly-test.shl="${shortcutSL.list2}" data-sly-unwrap>
+				<div data-sly-test="${shl.size>0}">
+					<sly
+						data-sly-resource="${'item0' @ resourceType='enigaseluce/components/header/header-dropdown'}"></sly>
+				</div>
+				<div data-sly-test="${shl.size>1}">
+					<sly
+						data-sly-resource="${'item1' @ resourceType='enigaseluce/components/header/header-dropdown'}"></sly>
+				</div>
+				<div data-sly-test="${shl.size>2}">
+					<sly
+						data-sly-resource="${'item2' @ resourceType='enigaseluce/components/header/header-dropdown'}"></sly>
+				</div>
+				<div data-sly-test="${shl.size>3}">
+					<sly
+						data-sly-resource="${'item3' @ resourceType='enigaseluce/components/header/header-dropdown'}"></sly>
+				</div>
+				<div data-sly-test="${shl.size>4}">
+					<sly
+						data-sly-resource="${'item4' @ resourceType='enigaseluce/components/header/header-dropdown'}"></sly>
+				</div>
+				<div data-sly-test="${shl.size>5}">
+					<sly
+						data-sly-resource="${'item5' @ resourceType='enigaseluce/components/header/header-dropdown'}"></sly>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div>
+	<sly
+		data-sly-resource="${'mobile' @ resourceType='enigaseluce/components/header/header-mobile'}"></sly>
+</div>
+
+<div id="contenuto-pagina"></div>

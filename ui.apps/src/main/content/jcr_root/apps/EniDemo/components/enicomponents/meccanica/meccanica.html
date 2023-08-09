@@ -1,0 +1,40 @@
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.title}"> </sly>
+	
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<div id="${properties.id}" class="container-fluid px-0 ${properties.contentSelect ? 'egl-meccanica-number-container' : 'egl-meccanica'}" 
+	style="background-color:${properties.bgColor @ context='styleToken'}">
+	<div class="container-lg px-lg-0">
+		<div class="row justify-content-between">
+			<div class="col-lg-4 egl-titolo-meccanica">
+				<h2 class="h2-egl"><b>${properties.title}</b></h2>
+			</div>
+			<div class="col-lg-8 egl-meccanica-content-wrapper">
+				<div class="row">
+					<div data-sly-use.meccanica="com.egl.core.models.MeccanicaModel"
+						data-sly-list.list="${meccanica.list}" data-sly-unwrap>
+						<div data-sly-test="${properties.contentSelect}" data-sly-unwrap>
+							<div class="col-lg-1 egl-meccanica-numbers">
+								<img loading="lazy" src="${list.image}" alt="${list.altImage}">
+							</div>
+							<div class="col-lg-11 egl-meccanica-contenuto">
+								<h4 class="h4-egl">${list.title}</h4>
+								${list.text @ context = 'html'}
+							</div>
+						</div>
+						<div data-sly-test="${!properties.contentSelect}" data-sly-unwrap>
+							<div class="col-lg-3 egl-meccanica-icon">
+								<img loading="lazy" src="${list.image}" alt="${list.altImage}">
+							</div>
+							<div class="col-lg-9 egl-meccanica-contenuto">
+								<h4 class="h4-egl">${list.title}</h4>
+								${list.text @ context = 'html'}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

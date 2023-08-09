@@ -1,0 +1,186 @@
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.test}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<sly data-sly-test.modaleType="${properties.modaleType}"></sly>
+<sly data-sly-test.dipendente="${properties.dipendente}"></sly>
+<sly data-sly-use.eniEnvs="com.egl.core.models.utils.ENIEnvironmentConfig"></sly>
+
+<sly data-sly-test.id="${properties.id ? properties.id : 'CallMeBackFormModale-fotovoltaico'}"></sly>
+
+
+<script>
+window.ModaleFotovoltaico = { 
+		superbonus : '${modaleType @ context="scriptString"}',
+		dipendente : '${dipendente @ context="scriptString"}'}
+
+$(function(){
+	$('#${id @ context="scriptString"}').on('shown.bs.modal', function () {
+		const superbonus = window.ModaleFotovoltaico.superbonus;
+		var evolvere = superbonus === true ? '110' : '50';
+		sfCallMeBackExtraDataLayer('1_i tuoi dati', null, "Evolvere " + evolvere);
+	});
+});
+</script>
+
+<!-- Modale fotovol -->
+<div class="modal callmeback-2" id="${id}" tabindex="-1" aria-labelledby="${id}"
+    aria-hidden="true">
+    <div id="fotovoltaico" class="callmeback2-dialog">
+        <div class="callmeback2-modal">
+            <span aria-hidden="true" class="position-absolute egl-mod-comm-closeIcon">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+                    <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-close-bold.svg" alt="chiudi-modale" />
+                </button>
+            </span>
+            <div class="callmeback2-header">
+                <div class="d-flex justify-content-center"> <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-colored-telefono.svg"
+                        class="icona-callmeback2" alt="">
+                </div>
+                <h2>${properties.titolo}</h2>
+                <div class="p16-egl">${properties.sottotitolo}</div>
+            </div>
+            <div class="callmeback2-body">
+                <form class="needs-validation" novalidate>
+                    <div class="form-row">
+                        <div class="col-lg-6">
+                            <div class="label-box non-richiesto input-no-numeri">
+                                <label for="validationCustom01">Nome</label>
+                                <input type="text" class="form-control" id="validationCustom01">
+                                <div class="invalid-feedback">
+                                    Questo campo è obbligatorio.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="label-box non-richiesto input-no-numeri">
+                                <label for="validationCustom02">Cognome</label>
+                                <input type="text" class="form-control" id="validationCustom02">
+                                <div class="invalid-feedback">
+                                    Questo campo è obbligatorio.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-lg-6">
+                            <div class="label-box">
+                                <label for="exampleInputEmail1">Telefono</label>
+                                <input type="number" maxlength="16" pattern="[0-9]*"
+                                    title="sono ammessi 16 caratteri numerici" class="form-control"
+                                    id="inputPhoneNumber" aria-describedby="Telefono"
+                                    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                    required />
+                                <div class="invalid-feedback">
+                                    Questo campo è obbligatorio.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="label-box">
+                                <label for="exampleInputEmail1">Email</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp" required>
+                                <div class="invalid-feedback">
+                                    Inserisci un indirizzo email valido.
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="label-box">
+                            	<label class="label-index-up" for="validationCustom03">Provincia in cui si trova l'immobile</label>
+                                <input autocomplete="off" data-info="input-select" type="text" 
+                                class="form-control position-relative"  id="provinceFotovol" required>
+                             	<ul class="citySugg position-absolute">    
+                                </ul>
+                                <div class="invalid-feedback">
+                                    Questo campo è obbligatorio.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cap14-egl">
+                    	${properties.disclaimer @context='html'}
+                    </div>
+                    <div class="d-lg-flex">
+                        <div class="form-group">
+
+                        </div>
+                        <button class="btn btn-primary cta-primary cta-fotovol" type="submit">Richiamami</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modale caldaia,climattizatore etc -->
+<div class="modal callmeback-2" id="ModaleAttesa" tabindex="-1" aria-labelledby="ModaleAttesa" aria-hidden="true">
+    <div class="callmeback2-dialog">
+        <div class="callmeback2-modal modale-attesa">
+            <span aria-hidden="true" class="position-absolute egl-mod-comm-closeIcon">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-close-bold.svg" alt="chiudi-modale" />
+                </button>
+            </span>
+            <div class="loading-animation">
+                <span></span>
+                <span></span>
+            </div>
+            <p>Attendere prego</p>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modale OK -->
+<div class="modal callmeback-2" id="ModaleSuccesso" tabindex="-1" aria-labelledby="ModaleSuccesso"
+    aria-hidden="true">
+    <div class="callmeback2-dialog">
+        <div class="callmeback2-modal modale-successo">
+            <span aria-hidden="true" class="position-absolute egl-mod-comm-closeIcon">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-close-bold.svg" alt="chiudi-modale" />
+                </button>
+            </span>
+            <div class="d-flex justify-content-center">
+                <img loading="lazy" class="modale-successo-arr" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/arrivederci-colorato.svg" alt="">
+            </div>
+            <p>Richiesta inviata, a presto!</p>
+            <div class="d-flex justify-content-center">
+                <button class="btn btn-primary cta-primary" data-dismiss="modal" aria-label="Close" type="submit">Chiudi</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modale KO -->
+<div class="modal callmeback-2" id="ModaleFallimento" tabindex="-1" aria-labelledby="ModaleFallimento"
+    aria-hidden="true">
+    <div class="callmeback2-dialog">
+        <div class="callmeback2-modal modale-fallimento">
+            <span aria-hidden="true" class="position-absolute egl-mod-comm-closeIcon">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-close-bold.svg" alt="chiudi-modale" />
+                </button>
+            </span>
+            <div class="d-flex justify-content-center">
+                <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/lead-ko.svg" alt="">
+            </div>
+            <p class="text-center"><b>Si &egrave; verificato un errore imprevisto.</b></p>
+            <p class="text-center">Riprovare pi&ugrave; tardi </p>
+            <div class="d-flex justify-content-center">
+                <button class="btn btn-primary cta-primary" data-dismiss="modal" aria-label="Close" type="submit">Ritorna alla pagina</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

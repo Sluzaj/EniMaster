@@ -1,0 +1,21 @@
+<sly
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.title}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<div class="KspComplex-card-container-mobile d-lg-none">
+	<div class="KspComplex-card-content-mobile d-flex" data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.imageReference}">
+		<img loading="lazy" src="${properties.imageReference}" alt="${image.description}">
+		<h4>${properties.title}</h4>
+		<p>${properties.paragraph @ context='html'}</p>
+	</div>
+</div>
+
+<div class="KspComplex-card-container d-lg-block d-none">
+	<div class="KspComplex-card-content d-flex" data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.imageReference}">
+		<img loading="lazy" src="${properties.imageReference}" alt="${image.description}">
+		<h4>${properties.title}</h4>
+		<p>${properties.paragraph @ context='html'}</p>
+	</div>
+</div>

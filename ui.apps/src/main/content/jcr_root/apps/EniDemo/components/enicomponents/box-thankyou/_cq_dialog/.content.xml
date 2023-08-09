@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+	xmlns:cq="http://www.day.com/jcr/cq/1.0"
+	xmlns:jcr="http://www.jcp.org/jcr/1.0"
+	xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+	xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
+	jcr:primaryType="nt:unstructured" jcr:title="Box Thank You Properties"
+	extraClientlibs="[cq.author.accordion]"
+	sling:resourceType="cq/gui/components/authoring/dialog">
+	<content jcr:primaryType="nt:unstructured"
+		sling:resourceType="granite/ui/components/coral/foundation/container">
+		<items jcr:primaryType="nt:unstructured">
+			<tabs jcr:primaryType="nt:unstructured"
+				sling:resourceType="granite/ui/components/coral/foundation/tabs"
+				maximized="{Boolean}true">
+				<items jcr:primaryType="nt:unstructured">
+
+					<general jcr:primaryType="nt:unstructured"
+						jcr:title="Proprietà Componente"
+						sling:resourceType="granite/ui/components/coral/foundation/container"
+						margin="{Boolean}true">
+						<items jcr:primaryType="nt:unstructured">
+							<columns jcr:primaryType="nt:unstructured"
+								sling:resourceType="granite/ui/components/coral/foundation/container"
+								margin="{Boolean}true">
+								<items jcr:primaryType="nt:unstructured">
+									<column jcr:primaryType="nt:unstructured"
+										sling:resourceType="granite/ui/components/coral/foundation/container">
+										<items jcr:primaryType="nt:unstructured">
+											<id jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+												fieldLabel="ID" name="./id" />
+
+											<contentType jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/select"
+												granite:class="cq-dialog-dropdown-showhide"
+												fieldLabel="Variante Componente" name="./contentType">
+												<items jcr:primaryType="nt:unstructured">
+													<option1 jcr:primaryType="nt:unstructured"
+														selected="true" text="Nuova attivazione Gas" value="gas" />
+													<option2 jcr:primaryType="nt:unstructured"
+														text="Nuova attivazione Luce" value="luce" />
+													<option3 jcr:primaryType="nt:unstructured"
+														text="Nuova sottoscrizione con promozione" value="promo" />
+													<!-- option4 jcr:primaryType="nt:unstructured" text="Nuova sottoscrizione" 
+														value="newSub" / -->
+												</items>
+												<granite:data jcr:primaryType="nt:unstructured"
+													cq-dialog-dropdown-showhide-target=".contentType-showhide-target" />
+											</contentType>
+
+											<gas granite:class="contentType-showhide-target"
+												jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/container">
+												<items jcr:primaryType="nt:unstructured">
+													<titleGas jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+														fieldLabel="Titolo" name="./titleGas" emptyText="Ben fatto!"/>
+													<titleGas-default
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="/libs/granite/ui/components/coral/foundation/form/hidden"
+														name="./titleGas@DefaultValue" value="Ben fatto!" />
+													<subtitleGas jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+														fieldLabel="Sottotitolo" name="./subtitleGas"
+														emptyText="Hai richiesto l'attivazione con" />
+													<subtitleGas-default jcr:primaryType="nt:unstructured"
+														sling:resourceType="/libs/granite/ui/components/coral/foundation/form/hidden"
+														fieldLabel="Sottotitolo" name="./subtitleGas@DefaultValue"
+														value="Hai richiesto l'attivazione con"/>
+													<textItem1Gas
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+														fieldLabel="Testo item 1" name="./textItem1Gas"
+														emptyText="Controlla la tua e-mail! Ti invieremo la documentazione contrattuale." />
+													<textItem1Gas-default
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="/libs/granite/ui/components/coral/foundation/form/hidden"
+														name="./textItem1Gas@DefaultValue" 
+														value="Controlla la tua e-mail! Ti invieremo la documentazione contrattuale." />
+													<textItem2Gas
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+														fieldLabel="Testo item 2" name="./textItem2Gas"
+														emptyText="Registrati a My Eni per controllare lo stato della tua attivazione." />
+													<textItem2Gas-default
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="/libs/granite/ui/components/coral/foundation/form/hidden"
+														name="./textItem2Gas@DefaultValue" 
+														value="Registrati a My Eni per controllare lo stato della tua attivazione." />
+													<textItem3Gas
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+														fieldLabel="Testo item 3" name="./textItem3Gas"
+														emptyText="In più riceverai un'e-mail o un SMS con la data in cui incontrerai il tecnico." />
+													<textItem3Gas-default
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="/libs/granite/ui/components/coral/foundation/form/hidden"
+														name="./textItem3Gas@DefaultValue" 
+														value="In più riceverai un'e-mail o un SMS con la data in cui incontrerai il tecnico." />
+													<textItem4Gas
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+														fieldLabel="Testo item 4" name="./textItem4Gas"
+														emptyText="Se non hai indicato il PDR sarai contatto da un operatore per recuperare il codice." />
+													<textItem4Gas-default
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="/libs/granite/ui/components/coral/foundation/form/hidden"
+														name="./textItem4Gas@DefaultValue" 
+														value="Se non hai indicato il PDR sarai contatto da un operatore per recuperare il codice." />
+													<notaCTAGas jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+														fieldLabel="Nota CTA" name="./notaCTAGas"
+														emptyText="Se non ce l'hai, attiva anche la luce!" />
+													<notaCTAGas-default
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="/libs/granite/ui/components/coral/foundation/form/hidden"
+														name="./notaCTAGas@DefaultValue" 
+														value="Se non ce l'hai, attiva anche la luce!"/>
+													<ctaGas jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/fieldset"
+														jcr:title="Configurazione CTA Primaria">
+														<items jcr:primaryType="nt:unstructured">
+															<labelGas jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																fieldLabel="Label CTA" name="./labelCTAGas"
+																emptyText="Attiva la luce" />
+															<labelGas-default
+																jcr:primaryType="nt:unstructured"
+																sling:resourceType="/libs/granite/ui/components/coral/foundation/form/hidden"
+																name="./labelCTAGas@DefaultValue" 
+																value="Attiva la luce"/>
+															<linkGas jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+																fieldLabel="Link CTA" name="./linkCTAGas"
+																rootPath="/content/enigaseluce" />
+															<targetGas jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/form/select"
+																fieldLabel="Target CTA" name="./targetCTAGas">
+																<items jcr:primaryType="nt:unstructured">
+																	<option1 jcr:primaryType="nt:unstructured"
+																		text="Self" value="_self" selected="true" />
+																	<option2 jcr:primaryType="nt:unstructured"
+																		text="Blank" value="_blank" />
+																</items>
+															</targetGas>
+															<titleTextLinkGas
+																jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																fieldLabel="Alt Text CTA" name="./altCTAGas" />
+														</items>
+													</ctaGas>
+												</items>
+												<granite:data jcr:primaryType="nt:unstructured"
+													showhidetargetvalue="gas" />
+											</gas>
+
+											<luce granite:class="contentType-showhide-target"
+												jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/container">
+												<items jcr:primaryType="nt:unstructured">
+													<titleLuce jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+														fieldLabel="Titolo" name="./titleLuce" emptyText="Ben fatto!" />
+													<titleLuce-default
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="/libs/granite/ui/components/coral/foundation/form/hidden"
+														name="./titleLuce@DefaultValue" value="Ben fatto!" />
+													<subtitleLuce
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+														fieldLabel="Sottotitolo" name="./subtitleLuce"
+														emptyText="Hai richiesto l'attivazione con" />
+													<subtitleLuce-default
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="/libs/granite/ui/components/coral/foundation/form/hidden"
+														name="./subtitleLuce@DefaultValue" value="Hai richiesto l'attivazione con" />
+													<textItem1Luce
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+														fieldLabel="Testo item 1" name="./textItem1Luce"
+														emptyText="Controlla la tua e-mail! Ti invieremo la documentazione contrattuale." />
+													<textItem1Luce-default
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="/libs/granite/ui/components/coral/foundation/form/hidden"
+														name="./textItem1Luce@DefaultValue" value="Controlla la tua e-mail! Ti invieremo la documentazione contrattuale." />
+													<textItem2Luce
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+														fieldLabel="Testo item 2" name="./textItem2Luce"
+														emptyText="Registrati a My Eni per controllare lo stato della tua attivazione." />
+													<textItem2Luce-default
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="/libs/granite/ui/components/coral/foundation/form/hidden"
+														name="./textItem2Luce@DefaultValue" value="Registrati a My Eni per controllare lo stato della tua attivazione." />
+													<textItem3Luce
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+														fieldLabel="Testo item 3" name="./textItem3Luce"
+														emptyText="Se non hai indicato il POD sarai contatto da un operatore per recuperare il codice." />
+													<textItem3Luce-default
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="/libs/granite/ui/components/coral/foundation/form/hidden"
+														name="./textItem3Luce@DefaultValue" value="Se non hai indicato il POD sarai contatto da un operatore per recuperare il codice." />
+													<notaCTALuce jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+														fieldLabel="Nota CTA" name="./notaCTALuce"
+														emptyText="Se non ce l'hai, attiva anche il gas!" />
+													<notaCTALuce-default
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="/libs/granite/ui/components/coral/foundation/form/hidden"
+														name="./notaCTALuce@DefaultValue" value="Se non ce l'hai, attiva anche il gas!" />
+													<ctaLuce jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/fieldset"
+														jcr:title="Configurazione CTA Primaria">
+														<items jcr:primaryType="nt:unstructured">
+															<labelLuce jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																fieldLabel="Label CTA" name="./labelCTALuce"
+																emptyText="Attiva il gas" />
+															<labelLuce-default
+																jcr:primaryType="nt:unstructured"
+																sling:resourceType="/libs/granite/ui/components/coral/foundation/form/hidden"
+																name="./labelCTALuce@DefaultValue" value="Attiva il gas" />
+															<linkLuce jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+																fieldLabel="Link CTA" name="./linkCTALuce"
+																rootPath="/content/eniLuceeluce" />
+															<targetLuce jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/form/select"
+																fieldLabel="Target CTA" name="./targetCTALuce">
+																<items jcr:primaryType="nt:unstructured">
+																	<option1 jcr:primaryType="nt:unstructured"
+																		text="Self" value="_self" selected="true" />
+																	<option2 jcr:primaryType="nt:unstructured"
+																		text="Blank" value="_blank" />
+																</items>
+															</targetLuce>
+															<titleTextLinkLuce
+																jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																fieldLabel="Alt Text CTA" name="./altCTALuce" />
+														</items>
+													</ctaLuce>
+												</items>
+												<granite:data jcr:primaryType="nt:unstructured"
+													showhidetargetvalue="luce" />
+											</luce>
+
+											<promo granite:class="contentType-showhide-target"
+												jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/container">
+												<items jcr:primaryType="nt:unstructured">
+													<pathCF2 jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+														fieldLabel="Path Content Fragment Promozione 1"
+														name="./pathCF2" rootPath="/content/dam/enigaseluce" />
+													<pathCF3 jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+														fieldLabel="Path Content Fragment Promozione 2"
+														name="./pathCF3" rootPath="/content/dam/enigaseluce" />
+													<titlePromo jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+														fieldLabel="Titolo" name="./titlePromo" emptyText="Grazie" />
+													<titlePromo-default
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="/libs/granite/ui/components/coral/foundation/form/hidden"
+														name="./titlePromo@DefaultValue" value="Grazie" />
+													<subtitlePromo
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+														fieldLabel="Sottotitolo" name="./subtitlePromo"
+														emptyText="Hai richiesto l'attivazione di" />
+													<subtitlePromo-default
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="/libs/granite/ui/components/coral/foundation/form/hidden"
+														name="./subtitlePromo@DefaultValue" value="Hai richiesto l'attivazione di" />
+													<descriptionPromo
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+														fieldLabel="Descrizione" name="./descriptionPromo"
+														emptyText="Controlla la tua e-mail: ti invieremo la documentazione contrattuale e le istruzioni per accedere all'area My Eni riservata ai clienti, dove potrai controllare lo stato di attivazione." />
+													<descriptionPromo-default
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="/libs/granite/ui/components/coral/foundation/form/hidden"
+														name="./descriptionPromo@DefaultValue" 
+														value="Controlla la tua e-mail: ti invieremo la documentazione contrattuale e le istruzioni per accedere all'area My Eni riservata ai clienti, dove potrai controllare lo stato di attivazione." />
+													<notaPromo jcr:primaryType="nt:unstructured"
+														jcr:title="Nota promo"
+														fieldLabel="Nota promo"
+														sling:resourceType="cq/gui/components/authoring/dialog/richtext"
+														name="./notaPromo" useFixedInlineToolbar="{Boolean}true"
+														removeSingleParagraphContainer="{Boolean}true">
+														<rtePlugins jcr:primaryType="nt:unstructured"
+															removeSingleParagraphContainer="true">
+															<format jcr:primaryType="nt:unstructured"
+																features="bold,italic" />
+															<justify jcr:primaryType="nt:unstructured"
+																features="*" />
+															<links jcr:primaryType="nt:unstructured"
+																features="modifylink,unlink" />
+															<lists jcr:primaryType="nt:unstructured"
+																features="*" />
+															<paraformat jcr:primaryType="nt:unstructured"
+																features="*">
+																<formats jcr:primaryType="nt:unstructured">
+																	<default_p jcr:primaryType="nt:unstructured"
+																		description="Paragraph" tag="p" />
+																	<default_h1
+																		jcr:primaryType="nt:unstructured"
+																		description="Heading 1" tag="h1" />
+																	<default_h2
+																		jcr:primaryType="nt:unstructured"
+																		description="Heading 2" tag="h2" />
+																	<default_h3
+																		jcr:primaryType="nt:unstructured"
+																		description="Heading 3" tag="h3" />
+																</formats>
+															</paraformat>
+															<tracklinks jcr:primaryType="nt:unstructured"
+																features="*" />
+															<table jcr:primaryType="nt:unstructured"
+																features="*" />
+															<subsuperscript
+																jcr:primaryType="nt:unstructured" features="*" />
+															<misctools jcr:primaryType="nt:unstructured"
+																features="*" />
+															<experience-aem
+																jcr:primaryType="nt:unstructured" features="*" />
+														</rtePlugins>
+														<uiSettings jcr:primaryType="nt:unstructured">
+															<cui jcr:primaryType="nt:unstructured">
+																<inline jcr:primaryType="nt:unstructured"
+																	toolbar="[format#bold,format#italic,format#underline,subsuperscript#subscript,subsuperscript#superscript,justify#justifyleft,justify#justifycenter,justify#justifyright,#lists,experience-aem#colorPicker,links#modifylink,links#unlink,#paraformat,table#createoredit,table#removetable,misctools#sourceedit]">
+																	<popovers jcr:primaryType="nt:unstructured">
+																		<justify jcr:primaryType="nt:unstructured"
+																			items="[justify#justifyleft,justify#justifycenter,justify#justifyright]"
+																			ref="justify" />
+																		<lists jcr:primaryType="nt:unstructured"
+																			items="[lists#unordered,lists#ordered,lists#outdent,lists#indent]"
+																			ref="lists" />
+																		<misctools jcr:primaryType="nt:unstructured"
+																			items="[misctools#specialchars]" ref="misctools" />
+																		<paraformat
+																			jcr:primaryType="nt:unstructured"
+																			items="paraformat:getFormats:paraformat-pulldown"
+																			ref="paraformat" />
+																	</popovers>
+																</inline>
+																<dialogFullScreen
+																	jcr:primaryType="nt:unstructured"
+																	toolbar="[format#bold,format#italic,format#underline,subsuperscript#subscript,subsuperscript#superscript,justify#justifyleft,justify#justifycenter,justify#justifyright,#lists,experience-aem#colorPicker,links#modifylink,links#unlink,#paraformat,table#createoredit,table#removetable,misctools#sourceedit]">
+																	<popovers jcr:primaryType="nt:unstructured">
+																		<justify jcr:primaryType="nt:unstructured"
+																			items="[justify#justifyleft,justify#justifycenter,justify#justifyright]"
+																			ref="justify" />
+																		<lists jcr:primaryType="nt:unstructured"
+																			items="[lists#unordered,lists#ordered,lists#outdent,lists#indent]"
+																			ref="lists" />
+																		<misctools jcr:primaryType="nt:unstructured"
+																			items="[misctools#specialchars]" ref="misctools" />
+																		<paraformat
+																			jcr:primaryType="nt:unstructured"
+																			items="paraformat:getFormats:paraformat-pulldown"
+																			ref="paraformat" />
+																	</popovers>
+																</dialogFullScreen>
+															</cui>
+														</uiSettings>
+													</notaPromo>
+													<ctaPromo1 jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/fieldset"
+														jcr:title="Configurazione CTA Primaria">
+														<items jcr:primaryType="nt:unstructured">
+															<labelPromo1
+																jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																fieldLabel="Label CTA" name="./labelCTAPromo1"
+																emptyText="Lascia un feedback" />
+															<labelPromo1-default
+																jcr:primaryType="nt:unstructured"
+																sling:resourceType="/libs/granite/ui/components/coral/foundation/form/hidden"
+																name="./labelCTAPromo1@DefaultValue" value="Lascia un feedback" />
+															<linkPromo1 jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+																fieldLabel="Link CTA (default: https://it.surveymonkey.com/r/XYQFLJS)" name="./linkCTAPromo1"
+																rootPath="/content/enigaseluce" />
+															<linkPromo1-default
+																jcr:primaryType="nt:unstructured"
+																sling:resourceType="/libs/granite/ui/components/coral/foundation/form/hidden"
+																name="./linkCTAPromo1@DefaultValue" value="https://it.surveymonkey.com/r/XYQFLJS"/>
+															<targetPromo1
+																jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/form/select"
+																fieldLabel="Target CTA" name="./targetCTAPromo1">
+																<items jcr:primaryType="nt:unstructured">
+																	<option1 jcr:primaryType="nt:unstructured"
+																		text="Self" value="_self" selected="true" />
+																	<option2 jcr:primaryType="nt:unstructured"
+																		text="Blank" value="_blank" />
+																</items>
+															</targetPromo1>
+															<titleTextLinkPromo1
+																jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																fieldLabel="Alt Text CTA" name="./altCTAPromo1" />
+														</items>
+													</ctaPromo1>
+													<ctaPromo2 jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/fieldset"
+														jcr:title="Configurazione CTA Centrale">
+														<items jcr:primaryType="nt:unstructured">
+															<labelPromo2
+																jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																fieldLabel="Label CTA" name="./labelCTAPromo2" />
+															<linkPromo2 jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+																fieldLabel="Link CTA" name="./linkCTAPromo2"
+																rootPath="/content/enigaseluce" />
+															<targetPromo2
+																jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/form/select"
+																fieldLabel="Target CTA" name="./targetCTAPromo2">
+																<items jcr:primaryType="nt:unstructured">
+																	<option1 jcr:primaryType="nt:unstructured"
+																		text="Self" value="_self" selected="true" />
+																	<option2 jcr:primaryType="nt:unstructured"
+																		text="Blank" value="_blank" />
+																</items>
+															</targetPromo2>
+															<titleTextLinkPromo2
+																jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																fieldLabel="Alt Text CTA" name="./altCTAPromo2" />
+														</items>
+													</ctaPromo2>
+													<ctaPromo3 jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/fieldset"
+														jcr:title="Configurazione CTA Secondaria">
+														<items jcr:primaryType="nt:unstructured">
+															<labelPromo3
+																jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																fieldLabel="Label CTA" name="./labelCTAPromo3"
+																emptyText="Torna alla home" />
+															<labelPromo3-default
+																jcr:primaryType="nt:unstructured"
+																sling:resourceType="/libs/granite/ui/components/coral/foundation/form/hidden"
+																name="./labelCTAPromo3@DefaultValue" value="Torna alla home" />
+															<linkPromo3 jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+																fieldLabel="Link CTA" name="./linkCTAPromo3"
+																rootPath="/content/enigaseluce" />
+															<targetPromo3
+																jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/form/select"
+																fieldLabel="Target CTA" name="./targetCTAPromo3">
+																<items jcr:primaryType="nt:unstructured">
+																	<option1 jcr:primaryType="nt:unstructured"
+																		text="Self" value="_self" selected="true" />
+																	<option2 jcr:primaryType="nt:unstructured"
+																		text="Blank" value="_blank" />
+																</items>
+															</targetPromo3>
+															<titleTextLinkPromo3
+																jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																fieldLabel="Alt Text CTA" name="./altCTAPromo3" />
+														</items>
+													</ctaPromo3>
+												</items>
+												<granite:data jcr:primaryType="nt:unstructured"
+													showhidetargetvalue="promo" />
+											</promo>
+
+											<!-- newSub granite:class="contentType-showhide-target" jcr:primaryType="nt:unstructured" 
+												sling:resourceType="granite/ui/components/coral/foundation/container"> <items 
+												jcr:primaryType="nt:unstructured"> <ctaNewSub1 jcr:primaryType="nt:unstructured" 
+												sling:resourceType="granite/ui/components/coral/foundation/form/fieldset" 
+												jcr:title="Configurazione CTA Primaria"> <items jcr:primaryType="nt:unstructured"> 
+												<labelNewSub1 jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/coral/foundation/form/textfield" 
+												fieldLabel="Label CTA" name="./labelCTANewSub1" value="Lascia un feedback" 
+												emptyText="Lascia un feedback" /> <linkNewSub1 jcr:primaryType="nt:unstructured" 
+												sling:resourceType="granite/ui/components/coral/foundation/form/pathfield" 
+												fieldLabel="Link CTA" name="./linkCTANewSub1" rootPath="/content/enigaseluce" 
+												value="https://it.surveymonkey.com/r/XYQFLJS" emptyText="https://it.surveymonkey.com/r/XYQFLJS" 
+												/> <targetNewSub1 jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/coral/foundation/form/select" 
+												fieldLabel="Target CTA" name="./targetCTANewSub1"> <items jcr:primaryType="nt:unstructured"> 
+												<option1 jcr:primaryType="nt:unstructured" text="Self" value="_self" selected="true" 
+												/> <option2 jcr:primaryType="nt:unstructured" text="Blank" value="_blank" 
+												/> </items> </targetNewSub1> <titleTextLinkNewSub1 jcr:primaryType="nt:unstructured" 
+												sling:resourceType="granite/ui/components/coral/foundation/form/textfield" 
+												fieldLabel="Alt Text CTA" name="./altCTANewSub1" /> </items> </ctaNewSub1> 
+												<ctaNewSub2 jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/coral/foundation/form/fieldset" 
+												jcr:title="Configurazione CTA Secondaria"> <items jcr:primaryType="nt:unstructured"> 
+												<labelNewSub2 jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/coral/foundation/form/textfield" 
+												fieldLabel="Label CTA" name="./labelCTANewSub2" value="Torna alla home" emptyText="Torna 
+												alla home" /> <linkNewSub2 jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/coral/foundation/form/pathfield" 
+												fieldLabel="Link CTA" name="./linkCTANewSub2" rootPath="/content/enigaseluce" 
+												/> <targetNewSub2 jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/coral/foundation/form/select" 
+												fieldLabel="Target CTA" name="./targetCTANewSub2"> <items jcr:primaryType="nt:unstructured"> 
+												<option1 jcr:primaryType="nt:unstructured" text="Self" value="_self" selected="true" 
+												/> <option2 jcr:primaryType="nt:unstructured" text="Blank" value="_blank" 
+												/> </items> </targetNewSub2> <titleTextLinkNewSub2 jcr:primaryType="nt:unstructured" 
+												sling:resourceType="granite/ui/components/coral/foundation/form/textfield" 
+												fieldLabel="Alt Text CTA" name="./altCTANewSub2" /> </items> </ctaNewSub2> 
+												</items> <granite:data jcr:primaryType="nt:unstructured" showhidetargetvalue="newSub" 
+												/> </newSub -->
+
+										</items>
+									</column>
+								</items>
+							</columns>
+						</items>
+					</general>
+
+
+				</items>
+			</tabs>
+		</items>
+	</content>
+</jcr:root>

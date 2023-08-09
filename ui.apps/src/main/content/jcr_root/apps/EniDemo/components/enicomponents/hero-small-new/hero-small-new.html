@@ -1,0 +1,141 @@
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	    data-sly-test.testing="${!properties.sceltaBackground}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<!--<sly data-sly-test="${properties.tipoBackground == 'immagineBack'}">-->
+	<sly data-sly-use.rendMan="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=properties.immagineReference }"></sly>
+	  <sly data-sly-set.rendDesk="${rendMan.renditions}"></sly>
+	  <sly data-sly-set.doubleRendDesk="${rendMan.doubledRenditions}"></sly>
+
+<style>
+	
+.sc-new-heroSmall-bg-container {
+			
+            background: url(${rendDesk['360px'] @ context='uri'}) no-repeat center center ;
+	          -webkit-background-size: cover;
+	          -moz-background-size: cover;
+	          -o-background-size: cover;
+	          background-size: cover;
+			  height: 420px;
+	        }
+	        @media (min-resolution: 150dpi) {
+				.sc-new-heroSmall-bg-container {
+	            background: url(${doubleRendDesk['360px'] @ context='uri'}) no-repeat center center ;
+	            -webkit-background-size: cover;
+	            -moz-background-size: cover;
+	            -o-background-size: cover;
+	            background-size: cover;
+	          }
+	        }
+	        @media (min-width: 768px) {
+				.sc-new-heroSmall-bg-container {
+	            background: url(${rendDesk['768px'] @ context='uri'}) no-repeat center center ;
+	            -webkit-background-size: cover;
+	            -moz-background-size: cover;
+	            -o-background-size: cover;
+	            background-size: cover;
+				height: 420px;
+	          }
+	        }
+	        @media (min-width: 768px) and (min-resolution: 150dpi) {
+				.sc-new-heroSmall-bg-container {
+	            background: url(${doubleRendDesk['768px'] @ context='uri'}) no-repeat center center ;
+	            -webkit-background-size: cover;
+	            -moz-background-size: cover;
+	            -o-background-size: cover;
+	            background-size: cover;
+				height: 420px;
+	          }
+	        }
+	        @media (min-width: 1024px) {
+				.sc-new-heroSmall-bg-container{
+	            background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+	            -webkit-background-size: cover;
+	            -moz-background-size: cover;
+	            -o-background-size: cover;
+	            background-size: cover;
+				height: 460px;
+	          }
+	        }
+	        @media (min-width: 1024px) and (min-resolution: 150dpi) {
+				.sc-new-heroSmall-bg-container {
+	            background: url(${doubleRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+	            -webkit-background-size: cover;
+	            -moz-background-size: cover;
+	            -o-background-size: cover;
+	            background-size: cover;
+				height: 460px;
+	          }
+	        }
+	        @media (min-width: 1440px) {
+				.sc-new-heroSmall-bg-container {
+	            background: url(${rendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+	            -webkit-background-size: cover;
+	            -moz-background-size: cover;
+	            -o-background-size: cover;
+	            background-size: cover;
+				height: 460px;
+	          }
+	        }
+	        @media (min-width: 1440px) and (min-resolution: 150dpi) {
+				.sc-new-heroSmall-bg-container {
+	            background: url(${doubleRendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+	            -webkit-background-size: cover;
+	            -moz-background-size: cover;
+	            -o-background-size: cover;
+	            background-size: cover;
+				height: 460px;
+	          }
+	        }
+	        @media (min-width: 1920px) {
+				.sc-new-heroSmall-bg-container {
+	            background: url(${rendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+	            -webkit-background-size: cover;
+	            -moz-background-size: cover;
+	            -o-background-size: cover;
+	            background-size: cover;
+				height: 460px;
+	          }
+	        }
+	        @media (min-width: 1920px) and (min-resolution: 150dpi) {
+				.sc-new-heroSmall-bg-container {
+	            background: url(${doubleRendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+	            -webkit-background-size: cover;
+	            -moz-background-size: cover;
+	            -o-background-size: cover;
+	            background-size: cover;
+				height: 460px;
+	          }
+	        }
+
+.sc-new-heroSmall-overlay {
+  background: linear-gradient(360deg, ${properties.coloreVelina @ context='styleToken'}00 0%, ${properties.coloreVelina @ context='styleToken'}99 56%, ${properties.coloreVelina @ context='styleToken'}b3 100%);
+
+}
+.sc-new-heroSmall-bg-color-container {
+  background-color: ${properties.colore @ context='styleToken'};
+
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .sc-new-heroSmall-overlay {
+    background: linear-gradient(270deg, ${properties.coloreVelina @ context='styleToken'}00 0%, ${properties.coloreVelina @ context='styleToken'}99 56%, ${properties.coloreVelina @ context='styleToken'}b3 100%);
+  }
+}
+
+@media screen and (min-width: 1024px){
+  .sc-new-heroSmall-overlay {
+    background: linear-gradient(270deg, ${properties.coloreVelina @ context='styleToken'}00 0%, ${properties.coloreVelina @ context='styleToken'}99 56%, ${properties.coloreVelina @ context='styleToken'}b3 100%);
+  }
+}
+</style>
+
+
+<div class="${properties.sceltaBackground == 'immagine' ? 'sc-new-heroSmall-bg-container' : 'sc-new-heroSmall-bg-color-container'}">
+  <div class="sc-new-heroSmall-content container-lg">
+  	<div>${properties.titolo @context='html'}</div>
+  	<div>${properties.sottotitolo @context='html'}</div>
+  	<div class="${properties.tipoVelina}"></div>
+  </div>
+</div>    

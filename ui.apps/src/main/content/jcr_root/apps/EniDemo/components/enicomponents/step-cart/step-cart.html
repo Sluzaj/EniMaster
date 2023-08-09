@@ -1,0 +1,165 @@
+<sly data-sly-use.cartModel="com.egl.core.models.carrello.PageCartModel"></sly>
+<sly data-sly-use.eniEnvs="com.egl.core.models.utils.ENIEnvironmentConfig"></sly>
+
+<sly data-sly-test="${cartModel.pathCF}">
+
+<sly
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"> </sly>
+<sly data-sly-call="${templates.placeholder @ isEmpty=true}"></sly>
+
+<sly data-sly-use.stepCartModel="${'com.egl.core.models.carrello.StepCartModel' @ cfPath=cartModel.pathCF, promotion1Path=cartModel.promotion1Path, promotion2Path=cartModel.promotion2Path, pathJson=cartModel.pathJson}"></sly>
+<sly data-sly-set.isDual="${cartModel.furniture == 'dual'}"></sly>
+<sly data-sly-set.isMonoLuce="${cartModel.furniture == 'luce'}"></sly>
+<sly data-sly-set.isMonoGas="${cartModel.furniture == 'gas'}"></sly>
+<sly data-sly-set.businessCart="${cartModel.businessCart}"></sly>
+<sly data-sly-set.residentialCart="${cartModel.residentialCart}"></sly>
+<sly data-sly-set.cart="${businessCart || residentialCart}"></sly>
+<sly data-sly-set.isTrioraria="${businessCart && businessCart.corrispettivoLuceF2}"></sly>
+<sly data-sly-set.isScontoDirect="${cart.scontoDirect}"></sly>
+<sly data-sly-set.selections="${stepCartModel.selectedValues}"></sly>
+
+<!-- modale carrello a step involucro -->
+<div data-sly-test="${!stepCartModel.selectors || stepCartModel.selectors.length == 0}"
+  class="modal fade"
+  id="Modale-Carrello-Step"
+  tabindex="-1"
+  aria-labelledby="Modale-Carrello-Step"
+  aria-hidden="true"
+>
+  <div
+    class="
+      modal-dialog
+      egl-modale-commodity egl-modale-carrello-step egl-selezione-fornitura
+    "
+  >
+    <div class="modal-content position-relative">
+      
+      <span
+        aria-hidden="true"
+        class="position-absolute egl-mod-comm-closeIcon"
+      >
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/7-icons-close-x.png" alt="chiudi-modale" />
+        </button>
+      </span>
+      <div
+        class="
+          modal-header
+          flex-wrap
+          position-relative
+          justify-content-center justify-content-lg-start
+        "
+      >
+        <div class="modal-title p20-egl flex-lg-row">
+          <p class="modal-title-forniture">
+            ${stepCartModel.modalTitle @ context='html'}
+          </p>
+        </div>
+      </div>
+      <!-- body modale carrello step -->
+      <div
+        class="modal-body egl-modal-body-carrellostep"
+        id="modale-carrelloStep-content"
+        data-component-path="${stepCartModel.componentPath}"
+        data-starting-selectors="${cartModel.startingSelectors}"
+        data-offer-name="${stepCartModel.offerName}"
+        data-selected-furniture="${cartModel.furniture}"
+        data-cluster-fw="${stepCartModel.clusterFw}"              
+        data-weborder-service="${eniEnvs.serviceUrl}"
+        data-offer-code="${stepCartModel.offerCode}"
+        data-user-type="${businessCart ? 'business' : 'residential'}"
+        data-my-eni-url="${eniEnvs.myEniPath}"
+        data-codice-canale="${cart.codiceCanale}"
+        data-codice-tp-canale="${cart.codiceTpCanale}"
+        data-coupon="${cart.coupon}"
+        data-codice-convenzione="${cart.codiceConvenzione}"
+        data-modal-title="${stepCartModel.modalTitle @ context='html'}"
+        data-is-sconto-direct="${isScontoDirect ? 'true' : 'false'}"
+        data-frag-na="${residentialCart.usaFragmentInNuoveAttivazioni ? 'true' : 'false'}"
+      >
+      <!-- contenuto modale carrello step body -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<sly data-sly-test="${'seleziona-fornitura' == stepCartModel.currentStep}">
+  <sly data-sly-use.step="steps/seleziona_fornitura_promo.html"
+    data-sly-call="${step.furniturePromo @ cartModel=cartModel, stepCartModel=stepCartModel}"></sly>
+</sly> 
+
+<sly data-sly-test="${'intestatario-contratto' == stepCartModel.currentStep}">
+  <sly data-sly-set.isLight="${'LUCE' == selections['selectedFurniture'] || ('DUAL' == selections['selectedFurniture'] && !selections['luceIntested'])}"></sly>
+  <sly data-sly-use.step="steps/intestatario_contratto.html"
+    data-sly-call="${step.intest @ cartModel=cartModel, stepCartModel=stepCartModel, isLight=isLight, furnitureName=selections['selectedFurniture']}"></sly>
+</sly>
+
+<sly data-sly-test="${'stato-fornitura' == stepCartModel.currentStep}">
+  <sly data-sly-set.isMono="${'LUCE' == selections['selectedFurniture'] || 'GAS' == selections['selectedFurniture']}"></sly>
+  <sly data-sly-set.isLight="${'LUCE' == selections['selectedFurniture'] || ('DUAL' == selections['selectedFurniture'] && !selections['luceState'])}"></sly>
+  <sly data-sly-use.step="steps/stato_fornitura.html"
+    data-sly-call="${step.furnitureState @ cartModel=cartModel, stepCartModel=stepCartModel, isLight=isLight, isMono=isMono}"></sly>
+</sly>
+
+<sly data-sly-test="${'scelta-fascia-oraria' == stepCartModel.currentStep}">
+  <sly data-sly-use.step="steps/scelta_fascia_oraria_luce_bioraria.html"
+    data-sly-call="${step.fascia @ cartModel=cartModel, stepCartModel=stepCartModel}"></sly>
+</sly>
+
+<sly data-sly-test="${'configurazione-pagamento' == stepCartModel.currentStep}">
+  <sly data-sly-set.lightEnabled="${stepCartModel.isSwitchInLuce}"></sly>
+  <sly data-sly-set.gasEnabled="${stepCartModel.isSwitchInGas}"></sly>
+  <sly data-sly-set.isMonoraria="${'0' == selections['fasciaOraria']}"></sly>
+  <sly data-sly-use.step="steps/configurazione_pagamento.html"
+    data-sly-call="${step.payConf @ cartModel=cartModel, stepCartModel=stepCartModel, lightEnabled=lightEnabled, gasEnabled=gasEnabled, isMonoraria=isMonoraria}"></sly>
+</sly>
+
+<sly data-sly-test="${'uscita' == stepCartModel.currentStep}">
+  <sly data-sly-test="${'KO' == selections['selectedFurniture']}">
+    <sly data-sly-use.step="steps/uscita_switch_in_KO_voltura.html"
+      data-sly-call="${step.switchInKO @ cartModel=cartModel, stepCartModel=stepCartModel}"></sly>
+  </sly>
+
+  <sly data-sly-set.lightFlux="${stepCartModel.lightFlux}"></sly>
+  <sly data-sly-set.gasFlux="${stepCartModel.lightFlux}"></sly>
+  <sly data-sly-test="${stepCartModel.isExitBanner}">
+    <sly data-sly-use.step="steps/uscita_switch_in_promo.html"
+      data-sly-call="${step.switchInPromo @ cartModel=cartModel, 
+        stepCartModel=stepCartModel, 
+        furnitureName=selections['selectedFurniture'], 
+        isCambioLuce=stepCartModel.isCambioLuce, 
+        isCambioGas=stepCartModel.isCambioGas,
+        isSwitchInLuce=stepCartModel.isSwitchInLuce, 
+        isSwitchInGas=stepCartModel.isSwitchInGas, 
+        isVoltureLuce=stepCartModel.isVoltureLuce, 
+        isVoltureGas=stepCartModel.isVoltureGas, 
+        isNewActivationLuce=stepCartModel.isNewActivationLuce, 
+        isNewActivationGas=stepCartModel.isNewActivationGas, 
+        isDirectDebit=stepCartModel.isDirectDebit,
+        voltureInactive=stepCartModel.voltureInactive}"></sly>
+  </sly>
+  <sly data-sly-test="${!stepCartModel.isExitBanner && 'KO' != selections['selectedFurniture']}">
+    <sly data-sly-use.step="steps/uscita_switch_in_box_doppio.html"
+      data-sly-call="${step.switchInDouble @ cartModel=cartModel, 
+        stepCartModel=stepCartModel, 
+        furnitureName=selections['selectedFurniture'], 
+        isCambioLuce=stepCartModel.isCambioLuce, 
+        isCambioGas=stepCartModel.isCambioGas,
+        isSwitchInLuce=stepCartModel.isSwitchInLuce, 
+        isSwitchInGas=stepCartModel.isSwitchInGas, 
+        isVoltureLuce=stepCartModel.isVoltureLuce, 
+        isVoltureGas=stepCartModel.isVoltureGas, 
+        isVoltureOffGas=stepCartModel.isVoltureOffGas,
+        isNewActivationLuce=stepCartModel.isNewActivationLuce, 
+        isNewActivationGas=stepCartModel.isNewActivationGas, 
+        isDirectDebit=stepCartModel.isDirectDebit, 
+        voltureInactive=stepCartModel.voltureInactive}"></sly>
+  </sly>
+</sly>
+
+</sly>

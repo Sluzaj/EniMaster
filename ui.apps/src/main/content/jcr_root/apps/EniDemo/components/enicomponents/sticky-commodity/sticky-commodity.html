@@ -1,0 +1,309 @@
+ 	
+ <sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.text}"> </sly>
+	
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+<sly data-sly-set.isYellow="${properties.background == 'egl-anchor-bg-yellow'}"></sly>
+
+<sly data-sly-set.isCarrello1="${properties.tipologiaCTA1 == 'carrelloStep1'}"></sly>
+<sly data-sly-set.isMC1="${properties.tipologiaCTA1 == 'modaleCommodity1'}"></sly>
+<sly data-sly-set.isMD1="${properties.tipologiaCTA1 == 'modaleDisclaimer1'}"></sly>
+<sly data-sly-set.isAncora1="${properties.tipologiaCTA1 == 'ancora1'}"></sly>
+<sly data-sly-set.isCarrello2="${properties.tipologiaCTA2 == 'carrelloStep2'}"></sly>
+<sly data-sly-set.isMC2="${properties.tipologiaCTA2 == 'modaleCommodity2'}"></sly>
+<sly data-sly-set.isMD2="${properties.tipologiaCTA2 == 'modaleDisclaimer2'}"></sly>
+<sly data-sly-set.isAncora2="${properties.tipologiaCTA2 == 'ancora2'}"></sly>
+<sly data-sly-set.isWhatsapp="${properties.whatsapp == 'true'}"></sly>
+
+<sly data-sly-set.cta1Visible="${(properties.tipologiaCTA1 == 'url1' && properties.labelCta1 && properties.urlCta1) || properties.labelCta1}"></sly>
+<sly data-sly-set.cta2Visible="${(properties.tipologiaCTA2 == 'url2' && properties.labelCta2 && properties.urlCta2) || properties.labelCta2}"></sly>
+
+<sly data-sly-set.mainClasses="${cta1Visible && cta2Visible ? 'col-lg-6 text-lg-right egl-sticky-commodity-margin-b' : 
+	'col-lg-6 text-lg-right mt-lg-2 egl-sticky-commodity-margin-b'}"></sly>
+
+<sly data-sly-set.buttonClasses="${cta1Visible && cta2Visible ? 'col-lg-6 col-12 text-left egl-sticky-comm-button-container-doppia' : 
+	'col-lg-3 col-12 text-left egl-sticky-comm-button-container'}"></sly>
+
+<div id="heroSticky"></div>
+
+<div class="container-fluid ${properties.background} egl-anchor-bg-dark ${wcmmode.edit ? '' : 'd-none'}" style="opacity:1" id="Sticky-Commodity" data-sly-test="${properties.text}">
+  	<div class="container-xl px-0">
+		<div class="row justify-content-end">
+			<div class="${mainClasses}">
+				<p class="h4-egl egl-paragraph">
+					${properties.text @ context='html'}
+				</p>
+			</div>
+			<div class="${buttonClasses}">
+			
+			<!-- MODALE GENERICA 2-->
+			<sly data-sly-test="${properties.tipologiaCTA2 == 'modale2'}">
+				<button data-sly-test="${cta2Visible}" 
+					class="
+					${isYellow ? 'cta-primary egl-anchor-button-yellow' : 'cta-primary-white'}
+					btn btn-primary
+					egl-anchor-button
+					${cta1Visible ? 'cta-doppia-margin egl-sticky-comm-cta-doppia' : 'egl-sticky-comm-cta-singola cta-singola-margin'}
+					${isWhatsapp ? 'd-lg-block d-none' : ''}"
+					data-toggle="modal" data-target="${'#' in properties.ancoraModale2 ? '' : '#'}${properties.ancoraModale2}" title="${properties.titleTextCta2}"
+				>
+					${properties.labelCta2}
+				</button>
+			</sly>
+			
+			<sly data-sly-test="${properties.tipologiaCTA2 == 'url2'}">
+				<!-- TIPO URL 2 -->
+				<a data-sly-test="${cta2Visible}" 
+					class="
+					${isYellow ? 'cta-primary egl-anchor-button-yellow' : 'cta-primary-white'}
+					btn btn-primary
+					egl-anchor-button
+					${cta1Visible ? 'cta-doppia-margin egl-sticky-comm-cta-doppia' : 'egl-sticky-comm-cta-singola cta-singola-margin'}
+					${isWhatsapp ? 'd-lg-block d-none' : ''}"
+					href="${properties.urlCta2}" target="${properties.targetCta2}" title="${properties.titleTextCta2}"
+				>
+					${properties.labelCta2}
+				</a>
+			</sly>
+			
+			<sly data-sly-test="${isMC2}">
+				<!-- TIPO Modale Commodity 2 -->
+				<button data-sly-test="${cta2Visible}" 
+					class="
+					${isYellow ? 'cta-primary egl-anchor-button-yellow' : 'cta-primary-white'}
+					btn btn-primary
+					egl-anchor-button
+					${cta1Visible ? 'cta-doppia-margin egl-sticky-comm-cta-doppia' : 'egl-sticky-comm-cta-singola cta-singola-margin'} 
+					${isWhatsapp ? 'd-lg-block d-none' : ''}" 
+					data-toggle="modal" data-target="#ti-chiamiamo-noi"
+					onclick="sfCallMeBackDataLayer('1_i tuoi dati', null)">
+					${properties.labelCta2}
+				</button>
+			</sly>
+
+			<sly data-sly-test="${isMD2}">
+				<button data-sly-test="${cta2Visible}" 
+					class="
+					${isYellow ? 'cta-primary egl-anchor-button-yellow' : 'cta-primary-white'}
+					btn btn-primary
+					egl-anchor-button
+					${cta1Visible ? 'cta-doppia-margin egl-sticky-comm-cta-doppia' : 'egl-sticky-comm-cta-singola cta-singola-margin'}
+					${isWhatsapp ? 'd-lg-block d-none' : ''} " 
+					data-toggle="modal" data-target="#modale-disclaimer">
+					${properties.labelCta2}
+				</button>
+			</sly>
+
+			<sly data-sly-test="${isCarrello2}">
+			<sly data-sly-test="${!(properties.abilitaNuovoCarrello) || properties.abilitaNuovoCarrello == 'N'}">
+				<button data-sly-test="${cta2Visible}" 
+					class="
+					${isYellow ? 'cta-primary egl-anchor-button-yellow' : 'cta-primary-white'}
+					btn btn-primary
+					egl-anchor-button
+					${cta1Visible ? 'cta-doppia-margin egl-sticky-comm-cta-doppia' : 'egl-sticky-comm-cta-singola cta-singola-margin'}
+					${isWhatsapp ? 'd-lg-block d-none' : ''}" 
+					data-toggle="modal" data-target="#Modale-Carrello-Step"
+					data-backdrop="static"
+        			data-keyboard="false"
+					onclick="openStartingStep()">
+					${properties.labelCta2}
+				</button>
+			</sly>
+			<sly data-sly-test="${(properties.abilitaNuovoCarrello) && properties.abilitaNuovoCarrello == 'Y'}">
+			<button data-sly-test="${cta2Visible}" 
+					class="
+					${isYellow ? 'cta-primary egl-anchor-button-yellow' : 'cta-primary-white'}
+					btn btn-primary
+					egl-anchor-button
+					${cta1Visible ? 'cta-doppia-margin egl-sticky-comm-cta-doppia' : 'egl-sticky-comm-cta-singola cta-singola-margin'}
+					${isWhatsapp ? 'd-lg-block d-none' : ''}" 
+					data-backdrop="static"
+        			data-keyboard="false"
+					stepcart="${properties.pathCFNuovoCarrello}">
+					${properties.labelCta2}
+			</button>
+			</sly>
+			</sly>
+
+			<sly data-sly-test="${isAncora2}">
+				<a data-sly-test="${cta2Visible}" 
+					class="
+					${isYellow ? 'cta-primary egl-anchor-button-yellow' : 'cta-primary-white'}
+					btn btn-primary
+					egl-anchor-button
+					${cta1Visible ? 'cta-doppia-margin egl-sticky-comm-cta-doppia' : 'egl-sticky-comm-cta-singola cta-singola-margin'}
+					${isWhatsapp ? 'd-lg-block d-none' : ''}"
+					href="#${properties.ancoraComp2}" title="${properties.titleTextCta2}"
+				>
+					${properties.labelCta2}
+				</a>
+			</sly>
+			
+			<!-- Variante Whatsapp -->
+			<sly data-sly-test="${isWhatsapp}">
+				<a id="telefonoWA" href="#" class="cta-primary-white btn btn-primary egl-anchor-button cta-sticky-whatsapp d-lg-none">
+	            	<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-telefono-0885-ae.svg" alt="">
+	          	</a>
+		        <a href="" class="cta-primary-white btn btn-primary egl-anchor-button cta-sticky-whatsapp d-lg-none" data-toggle="modal"
+		          data-target="#ModaleWA" onclick= "$('body').data('sf-dataLayerPush').pushWhatsappLayer()">
+		          <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-whatsapp.svg" alt="">
+		        </a>
+			</sly>
+			
+			<!-- MODALE GENERICA 1-->
+			<sly data-sly-test="${properties.tipologiaCTA1 == 'modale1'}">
+				<button data-sly-test="${cta1Visible}"
+					class="
+					${isYellow ? 'cta-primary-white' : 'cta-primary'} 
+					btn btn-primary 
+					egl-anchor-button
+					${cta2Visible ? 'egl-sticky-comm-cta-doppia' : 'egl-sticky-comm-cta-singola cta-singola-margin'}
+					"
+					data-toggle="modal" data-target="${'#' in properties.ancoraModale1 ? '' : '#'}${properties.ancoraModale1}" title="${properties.titleTextCta1}"
+				>
+					${properties.labelCta1}
+				</button>
+			</sly>
+
+			<sly data-sly-test="${properties.tipologiaCTA1 == 'url1'}">
+				<!-- TIPO URL 1 -->
+				<a data-sly-test="${cta1Visible}"
+					class="
+					${isYellow ? 'cta-primary-white' : 'cta-primary'} 
+					btn btn-primary 
+					egl-anchor-button
+					${cta2Visible ? 'egl-sticky-comm-cta-doppia' : 'egl-sticky-comm-cta-singola cta-singola-margin'}
+					"
+					href="${properties.urlCta1}" target="${properties.targetCta1}" title="${properties.titleTextCta1}"
+				>
+					${properties.labelCta1}
+				</a>
+			</sly>
+
+			<sly data-sly-test="${isMC1}">
+				<!-- TIPO CARRELLO 1 -->
+				<button data-sly-test="${cta1Visible}" 
+					class="
+					${isYellow ? 'cta-primary-white' : 'cta-primary'} 
+					btn btn-primary 
+					egl-anchor-button
+					${cta2Visible ? 'egl-sticky-comm-cta-doppia' : 'egl-sticky-comm-cta-singola cta-singola-margin'}
+					" 
+					data-toggle="modal" data-target="#ti-chiamiamo-noi"
+					onclick="sfCallMeBackDataLayer('1_i tuoi dati', null)"
+				>
+					${properties.labelCta1}
+				</button>
+			</sly>
+
+			<sly data-sly-test="${isMD1}">
+				<!-- TIPO CARRELLO 1 -->
+				<button data-sly-test="${cta1Visible}" 
+					class="
+					${isYellow ? 'cta-primary-white' : 'cta-primary'} 
+					btn btn-primary 
+					egl-anchor-button
+					${cta2Visible ? 'egl-sticky-comm-cta-doppia' : 'egl-sticky-comm-cta-singola cta-singola-margin'}
+					" 
+					data-toggle="modal" data-target="#modale-disclaimer"
+				>
+					${properties.labelCta1}
+				</button>
+			</sly>
+			
+			<sly data-sly-test="${isCarrello1}">
+				<!-- TIPO CARRELLO 1 -->
+				<sly data-sly-test="${!(properties.abilitaNuovoCarrello) || properties.abilitaNuovoCarrello == 'N'}">
+				<button data-sly-test="${cta1Visible}" 
+					class="
+					${isYellow ? 'cta-primary-white' : 'cta-primary'} 
+					btn btn-primary 
+					egl-anchor-button
+					${cta2Visible ? 'egl-sticky-comm-cta-doppia' : 'egl-sticky-comm-cta-singola cta-singola-margin'}
+					" 
+					data-toggle="modal" data-target="#Modale-Carrello-Step"
+					data-backdrop="static"
+        			data-keyboard="false"
+					onclick="openStartingStep()"
+				>
+					${properties.labelCta1}
+				</button>
+				</sly>
+				<sly data-sly-test="${(properties.abilitaNuovoCarrello) && properties.abilitaNuovoCarrello == 'Y'}">
+				<button data-sly-test="${cta1Visible}" 
+					class="
+					${isYellow ? 'cta-primary-white' : 'cta-primary'} 
+					btn btn-primary 
+					egl-anchor-button
+					${cta2Visible ? 'egl-sticky-comm-cta-doppia' : 'egl-sticky-comm-cta-singola cta-singola-margin'}
+					" 
+					data-backdrop="static"
+        			data-keyboard="false"
+					stepcart="${properties.pathCFNuovoCarrello}"
+				>
+					${properties.labelCta1}
+				</button>
+				</sly>
+			</sly>
+
+			<sly data-sly-test="${isAncora1}">
+				<!-- TIPO URL 1 -->
+				<a data-sly-test="${cta1Visible}"
+					class="
+					${isYellow ? 'cta-primary-white' : 'cta-primary'} 
+					btn btn-primary 
+					egl-anchor-button
+					${cta2Visible ? 'egl-sticky-comm-cta-doppia' : 'egl-sticky-comm-cta-singola cta-singola-margin'}
+					"
+					href="#${properties.ancoraComp1}" title="${properties.titleTextCta1}"
+				>
+					${properties.labelCta1}
+				</a>
+			</sly>
+			</div>
+			
+		</div>
+  	</div>
+</div>
+
+ 
+<div>
+	<sly
+		data-sly-resource="${'modaleCommodity2' @ resourceType='enigaseluce/components/modale-commodity'}">
+	</sly>
+</div>
+<div>
+	<sly
+		data-sly-resource="${'modaleDisclaimer2' @ resourceType='enigaseluce/components/modale-disclaimer'}">
+	</sly>
+</div>
+
+  <!-- modale wa -->
+  <div class="modal callmeback-2" id="ModaleWA" tabindex="-1" aria-labelledby="ModaleWA" aria-hidden="true">
+    <div class="callmeback2-dialog">
+      <div class="callmeback2-modal modale-wa">
+        <span aria-hidden="true" class="position-absolute egl-mod-comm-closeIcon">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-close-bold.svg" alt="chiudi-modale" />
+          </button>
+        </span>
+        <img loading="lazy" class="whatsappIcon" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-whatsapp-color.svg" alt="icona whatsapp">
+        <div class="modaleWA-body">
+          <div>
+            <h2 class="mb-0">Contattaci con WhatsApp</h2>
+            <p class="p16-egl">Attiva una conversazione WhatsApp con i nostri operatori e richiedi
+              informazioni sui
+              prodotti.</p>
+            <p class="p14-egl">Cliccando su "Apri WhatsApp" dichiaro di aver preso visione dell'<a
+                href="https://eniplenitude.com/info/privacy-policy">informativa</a>
+              sul
+              trattamento dei dati personali per richiesta di ricontatto.</p>
+          </div>
+          <a  data-testoWa="${properties.testoWhatsapp}" data-numberwa="${properties.numeroWhatsapp}" data-offertaName="${properties.nomeOfferta}" href="#"
+            class="buttonlink-pleni-cta whatsappNew" >Apri WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+

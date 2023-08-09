@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+	xmlns:cq="http://www.day.com/jcr/cq/1.0"
+	xmlns:jcr="http://www.jcp.org/jcr/1.0"
+	xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+	xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
+	jcr:primaryType="nt:unstructured" jcr:title="Footer"
+	extraClientlibs="[cq.author.accordion]"
+	sling:resourceType="cq/gui/components/authoring/dialog">
+	<content jcr:primaryType="nt:unstructured"
+		sling:resourceType="granite/ui/components/coral/foundation/container">
+		<items jcr:primaryType="nt:unstructured">
+			<tabs jcr:primaryType="nt:unstructured"
+				sling:resourceType="granite/ui/components/coral/foundation/tabs"
+				maximized="{Boolean}true">
+				<items jcr:primaryType="nt:unstructured">
+					<footerType jcr:primaryType="nt:unstructured"
+						jcr:title="Tipo Footer"
+						sling:resourceType="granite/ui/components/coral/foundation/container"
+						margin="{Boolean}true">
+						<items jcr:primaryType="nt:unstructured">
+							<columns jcr:primaryType="nt:unstructured"
+								sling:resourceType="granite/ui/components/coral/foundation/container"
+								margin="{Boolean}true">
+								<items jcr:primaryType="nt:unstructured">
+									<column jcr:primaryType="nt:unstructured"
+										sling:resourceType="granite/ui/components/coral/foundation/container">
+										<items jcr:primaryType="nt:unstructured">
+											<tipoFooter cq:showOnCreate="{Boolean}true"
+												jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/foundation/form/select"
+												class="cq-dialog-dropdown-showhide"
+												cq-dialog-dropdown-showhide-target=".link1-hide-show"
+												fieldLabel="Tipo Footer" name="./tipoFooter">
+												<items jcr:primaryType="nt:unstructured">
+													<footer jcr:primaryType="nt:unstructured"
+														text="Footer" value="footer" />
+													<footerRidotto
+														jcr:primaryType="nt:unstructured" text="Footer Ridotto"
+														value="footerRidotto" />
+												</items>
+											</tipoFooter>
+										</items>
+									</column>
+								</items>
+							</columns>
+						</items>
+					</footerType>
+					<logo jcr:primaryType="nt:unstructured" jcr:title="Logo"
+						sling:resourceType="granite/ui/components/coral/foundation/container"
+						margin="{Boolean}true">
+						<items jcr:primaryType="nt:unstructured">
+							<footerLogo
+								granite:class="cmp-image__editor-file-upload"
+								jcr:primaryType="nt:unstructured"
+								sling:resourceType="cq/gui/components/authoring/dialog/fileupload"
+								autoStart="{Boolean}false" class="cq-droptarget"
+								fileNameParameter="./footerLogoName"
+								fileReferenceParameter="./footerLogoReference"
+								mimeTypes="[image/gif,image/jpeg,image/png,image/tiff,image/svg+xml]"
+								multiple="{Boolean}false" name="./footerLogo"
+								title="Logo Footer" fieldLabel="Logo Footer"
+								uploadUrl="${suffix.path}" useHTML5="{Boolean}true" />
+							<altLogo jcr:primaryType="nt:unstructured"
+								sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+								fieldLabel="Alt Logo" name="./altLogo" />
+						</items>
+					</logo>
+					<firstColumn jcr:primaryType="nt:unstructured"
+						jcr:title="Prima Colonna"
+						sling:resourceType="granite/ui/components/coral/foundation/container"
+						margin="{Boolean}true">
+						<items jcr:primaryType="nt:unstructured">
+							<columns jcr:primaryType="nt:unstructured"
+								sling:resourceType="granite/ui/components/coral/foundation/container"
+								margin="{Boolean}true">
+								<items jcr:primaryType="nt:unstructured">
+									<column jcr:primaryType="nt:unstructured"
+										sling:resourceType="granite/ui/components/coral/foundation/container">
+										<items jcr:primaryType="nt:unstructured">
+											<sectionTitle jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+												fieldLabel="Titolo Sezione" maxlength="50"
+												name="./sectionTitle" />
+											<firstLink jcr:primaryType="nt:unstructured"
+												jcr:title="Primo Link"
+												sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">
+												<items jcr:primaryType="nt:unstructured">
+													<labelLink jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+														fieldLabel="Label" maxlength="110" name="./labelLink" />
+													<urlLink jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+														fieldLabel="Path URL" name="./urlLink" />
+													<targetLink jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/select"
+														fieldLabel="Target" name="./targetLink">
+														<items jcr:primaryType="nt:unstructured">
+															<option1 jcr:primaryType="nt:unstructured"
+																selected="true" text="Self" value="_self" />
+															<option2 jcr:primaryType="nt:unstructured"
+																text="Blank" value="_blank" />
+														</items>
+													</targetLink>
+													<titleTextLink
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+														fieldLabel="Alt Text" name="./titleTextLink" />
+												</items>
+											</firstLink>
+											<infoLegali jcr:primaryType="nt:unstructured"
+												jcr:title="Info Legali" fieldLabel="Info Legali"
+												sling:resourceType="cq/gui/components/authoring/dialog/richtext"
+												maxlength="350" name="./infoLegali"
+												useFixedInlineToolbar="{Boolean}true"
+												removeSingleParagraphContainer="{Boolean}true">
+												<rtePlugins jcr:primaryType="nt:unstructured"
+													removeSingleParagraphContainer="true">
+													<format jcr:primaryType="nt:unstructured"
+														features="bold,italic" />
+													<justify jcr:primaryType="nt:unstructured"
+														features="*" />
+													<links jcr:primaryType="nt:unstructured"
+														features="modifylink,unlink" />
+													<lists jcr:primaryType="nt:unstructured" features="*" />
+													<paraformat jcr:primaryType="nt:unstructured"
+														features="*">
+														<formats jcr:primaryType="nt:unstructured">
+															<default_p jcr:primaryType="nt:unstructured"
+																description="Paragraph" tag="p" />
+															<default_h1 jcr:primaryType="nt:unstructured"
+																description="Heading 1" tag="h1" />
+															<default_h2 jcr:primaryType="nt:unstructured"
+																description="Heading 2" tag="h2" />
+															<default_h3 jcr:primaryType="nt:unstructured"
+																description="Heading 3" tag="h3" />
+														</formats>
+													</paraformat>
+													<tracklinks jcr:primaryType="nt:unstructured"
+														features="*" />
+													<table jcr:primaryType="nt:unstructured" features="*" />
+													<subsuperscript
+														jcr:primaryType="nt:unstructured" features="*" />
+													<misctools jcr:primaryType="nt:unstructured"
+														features="*" />
+													<experience-aem
+														jcr:primaryType="nt:unstructured" features="*" />
+												</rtePlugins>
+												<uiSettings jcr:primaryType="nt:unstructured">
+													<cui jcr:primaryType="nt:unstructured">
+														<inline jcr:primaryType="nt:unstructured"
+															toolbar="[format#bold,format#italic,format#underline,subsuperscript#subscript,subsuperscript#superscript,justify#justifyleft,justify#justifycenter,justify#justifyright,#lists,experience-aem#colorPicker,links#modifylink,links#unlink,#paraformat,table#createoredit,table#removetable,misctools#sourceedit]">
+															<popovers jcr:primaryType="nt:unstructured">
+																<justify jcr:primaryType="nt:unstructured"
+																	items="[justify#justifyleft,justify#justifycenter,justify#justifyright]"
+																	ref="justify" />
+																<lists jcr:primaryType="nt:unstructured"
+																	items="[lists#unordered,lists#ordered,lists#outdent,lists#indent]"
+																	ref="lists" />
+																<misctools jcr:primaryType="nt:unstructured"
+																	items="[misctools#specialchars]" ref="misctools" />
+																<paraformat jcr:primaryType="nt:unstructured"
+																	items="paraformat:getFormats:paraformat-pulldown"
+																	ref="paraformat" />
+															</popovers>
+														</inline>
+														<dialogFullScreen
+															jcr:primaryType="nt:unstructured"
+															toolbar="[format#bold,format#italic,format#underline,subsuperscript#subscript,subsuperscript#superscript,justify#justifyleft,justify#justifycenter,justify#justifyright,#lists,experience-aem#colorPicker,links#modifylink,links#unlink,#paraformat,table#createoredit,table#removetable,misctools#sourceedit]">
+															<popovers jcr:primaryType="nt:unstructured">
+																<justify jcr:primaryType="nt:unstructured"
+																	items="[justify#justifyleft,justify#justifycenter,justify#justifyright]"
+																	ref="justify" />
+																<lists jcr:primaryType="nt:unstructured"
+																	items="[lists#unordered,lists#ordered,lists#outdent,lists#indent]"
+																	ref="lists" />
+																<misctools jcr:primaryType="nt:unstructured"
+																	items="[misctools#specialchars]" ref="misctools" />
+																<paraformat jcr:primaryType="nt:unstructured"
+																	items="paraformat:getFormats:paraformat-pulldown"
+																	ref="paraformat" />
+															</popovers>
+														</dialogFullScreen>
+													</cui>
+												</uiSettings>
+											</infoLegali>
+											<firstColumnLinks
+												jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+												composite="{Boolean}true" fieldLabel="Links">
+												<field jcr:primaryType="nt:unstructured"
+													sling:resourceType="granite/ui/components/coral/foundation/container"
+													name="./firstColumnLinks">
+													<items jcr:primaryType="nt:unstructured">
+														<label jcr:primaryType="nt:unstructured"
+															sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+															fieldLabel="Label" maxlength="110" name="./label" />
+														<url jcr:primaryType="nt:unstructured"
+															sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+															fieldLabel="Path URL" name="./url" />
+														<target jcr:primaryType="nt:unstructured"
+															sling:resourceType="granite/ui/components/coral/foundation/form/select"
+															fieldLabel="Target" name="./target">
+															<items jcr:primaryType="nt:unstructured">
+																<option1 jcr:primaryType="nt:unstructured"
+																	selected="true" text="Self" value="_self" />
+																<option2 jcr:primaryType="nt:unstructured"
+																	text="Blank" value="_blank" />
+															</items>
+														</target>
+														<titleText jcr:primaryType="nt:unstructured"
+															sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+															fieldLabel="Alt Text" name="./titleText" />
+													</items>
+												</field>
+											</firstColumnLinks>
+										</items>
+									</column>
+								</items>
+							</columns>
+						</items>
+					</firstColumn>
+					<secondColumn jcr:primaryType="nt:unstructured"
+						jcr:title="Seconda Colonna"
+						sling:resourceType="granite/ui/components/coral/foundation/container"
+						margin="{Boolean}true">
+						<items jcr:primaryType="nt:unstructured">
+							<columns jcr:primaryType="nt:unstructured"
+								sling:resourceType="granite/ui/components/coral/foundation/container"
+								margin="{Boolean}true">
+								<items jcr:primaryType="nt:unstructured">
+									<column jcr:primaryType="nt:unstructured"
+										sling:resourceType="granite/ui/components/coral/foundation/container">
+										<items jcr:primaryType="nt:unstructured">
+											<sections jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+												composite="{Boolean}true" fieldLabel="Sezioni">
+												<field jcr:primaryType="nt:unstructured"
+													sling:resourceType="granite/ui/components/coral/foundation/container"
+													name="./secondSections">
+													<items jcr:primaryType="nt:unstructured">
+														<sectionTitle
+															jcr:primaryType="nt:unstructured"
+															sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+															fieldLabel="Titolo Sezione" maxlength="50"
+															name="./sectionTitle" />
+														<links jcr:primaryType="nt:unstructured"
+															sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+															composite="{Boolean}true" fieldLabel="Links">
+															<field jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/container"
+																name="./links">
+																<items jcr:primaryType="nt:unstructured">
+																	<label jcr:primaryType="nt:unstructured"
+																		sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+																		fieldLabel="Label" maxlength="110" name="./label" />
+																	<url jcr:primaryType="nt:unstructured"
+																		sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+																		fieldLabel="Path URL" name="./url" />
+																	<target jcr:primaryType="nt:unstructured"
+																		sling:resourceType="granite/ui/components/coral/foundation/form/select"
+																		fieldLabel="Target" name="./target">
+																		<items jcr:primaryType="nt:unstructured">
+																			<option1 jcr:primaryType="nt:unstructured"
+																				selected="true" text="Self" value="_self" />
+																			<option2 jcr:primaryType="nt:unstructured"
+																				text="Blank" value="_blank" />
+																		</items>
+																	</target>
+																	<titleText jcr:primaryType="nt:unstructured"
+																		sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																		fieldLabel="Alt Text" name="./titleText" />
+																</items>
+															</field>
+														</links>
+													</items>
+												</field>
+											</sections>
+										</items>
+									</column>
+								</items>
+							</columns>
+						</items>
+					</secondColumn>
+					<thirdColumn jcr:primaryType="nt:unstructured"
+						jcr:title="Terza Colonna"
+						sling:resourceType="granite/ui/components/coral/foundation/container"
+						margin="{Boolean}true">
+						<items jcr:primaryType="nt:unstructured">
+							<columns jcr:primaryType="nt:unstructured"
+								sling:resourceType="granite/ui/components/coral/foundation/container"
+								margin="{Boolean}true">
+								<items jcr:primaryType="nt:unstructured">
+									<column jcr:primaryType="nt:unstructured"
+										sling:resourceType="granite/ui/components/coral/foundation/container">
+										<items jcr:primaryType="nt:unstructured">
+											<sections jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+												composite="{Boolean}true" fieldLabel="Sezioni">
+												<field jcr:primaryType="nt:unstructured"
+													sling:resourceType="granite/ui/components/coral/foundation/container"
+													name="./thirdSections">
+													<items jcr:primaryType="nt:unstructured">
+														<sectionTitle
+															jcr:primaryType="nt:unstructured"
+															sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+															fieldLabel="Titolo Sezione" maxlength="50"
+															name="./sectionTitle" />
+														<links jcr:primaryType="nt:unstructured"
+															sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+															composite="{Boolean}true" fieldLabel="Links">
+															<field jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/container"
+																name="./links">
+																<items jcr:primaryType="nt:unstructured">
+																	<label jcr:primaryType="nt:unstructured"
+																		sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+																		fieldLabel="Label" maxlength="110" name="./label" />
+																	<url jcr:primaryType="nt:unstructured"
+																		sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+																		fieldLabel="Path URL" name="./url" />
+																	<target jcr:primaryType="nt:unstructured"
+																		sling:resourceType="granite/ui/components/coral/foundation/form/select"
+																		fieldLabel="Target" name="./target">
+																		<items jcr:primaryType="nt:unstructured">
+																			<option1 jcr:primaryType="nt:unstructured"
+																				selected="true" text="Self" value="_self" />
+																			<option2 jcr:primaryType="nt:unstructured"
+																				text="Blank" value="_blank" />
+																		</items>
+																	</target>
+																	<titleText jcr:primaryType="nt:unstructured"
+																		sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																		fieldLabel="Alt Text" name="./titleText" />
+																</items>
+															</field>
+														</links>
+													</items>
+												</field>
+											</sections>
+										</items>
+									</column>
+								</items>
+							</columns>
+						</items>
+					</thirdColumn>
+					<fourthColumn jcr:primaryType="nt:unstructured"
+						jcr:title="Quarta Colonna"
+						sling:resourceType="granite/ui/components/coral/foundation/container"
+						margin="{Boolean}true">
+						<items jcr:primaryType="nt:unstructured">
+							<columns jcr:primaryType="nt:unstructured"
+								sling:resourceType="granite/ui/components/coral/foundation/container"
+								margin="{Boolean}true">
+								<items jcr:primaryType="nt:unstructured">
+									<column jcr:primaryType="nt:unstructured"
+										sling:resourceType="granite/ui/components/coral/foundation/container">
+										<items jcr:primaryType="nt:unstructured">
+											<sections jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+												composite="{Boolean}true" fieldLabel="Sezioni">
+												<field jcr:primaryType="nt:unstructured"
+													sling:resourceType="granite/ui/components/coral/foundation/container"
+													name="./fourthSections">
+													<items jcr:primaryType="nt:unstructured">
+														<sectionTitle
+															jcr:primaryType="nt:unstructured"
+															sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+															fieldLabel="Titolo Sezione" maxlength="50"
+															name="./sectionTitle" />
+														<links jcr:primaryType="nt:unstructured"
+															sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+															composite="{Boolean}true" fieldLabel="Links">
+															<field jcr:primaryType="nt:unstructured"
+																sling:resourceType="granite/ui/components/coral/foundation/container"
+																name="./links">
+																<items jcr:primaryType="nt:unstructured">
+																	<label jcr:primaryType="nt:unstructured"
+																		sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+																		fieldLabel="Label" maxlength="110" name="./label" />
+																	<url jcr:primaryType="nt:unstructured"
+																		sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+																		fieldLabel="Path URL" name="./url" />
+																	<target jcr:primaryType="nt:unstructured"
+																		sling:resourceType="granite/ui/components/coral/foundation/form/select"
+																		fieldLabel="Target" name="./target">
+																		<items jcr:primaryType="nt:unstructured">
+																			<option1 jcr:primaryType="nt:unstructured"
+																				selected="true" text="Self" value="_self" />
+																			<option2 jcr:primaryType="nt:unstructured"
+																				text="Blank" value="_blank" />
+																		</items>
+																	</target>
+																	<titleText jcr:primaryType="nt:unstructured"
+																		sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																		fieldLabel="Alt Text" name="./titleText" />
+																</items>
+															</field>
+														</links>
+													</items>
+												</field>
+											</sections>
+										</items>
+									</column>
+								</items>
+							</columns>
+						</items>
+					</fourthColumn>
+					<subFooter jcr:primaryType="nt:unstructured"
+						jcr:title="Sub-Footer"
+						sling:resourceType="granite/ui/components/coral/foundation/container"
+						margin="{Boolean}true">
+						<items jcr:primaryType="nt:unstructured">
+							<columns jcr:primaryType="nt:unstructured"
+								sling:resourceType="granite/ui/components/coral/foundation/container"
+								margin="{Boolean}true">
+								<items jcr:primaryType="nt:unstructured">
+									<column jcr:primaryType="nt:unstructured"
+										sling:resourceType="granite/ui/components/coral/foundation/container">
+										<items jcr:primaryType="nt:unstructured">
+											<subVoices jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+												composite="{Boolean}true" fieldLabel="Voci">
+												<granite:data jcr:primaryType="nt:unstructured"
+													max-item="8" />
+												<field jcr:primaryType="nt:unstructured"
+													sling:resourceType="granite/ui/components/coral/foundation/container"
+													name="./subVoices">
+													<items jcr:primaryType="nt:unstructured">
+														<column jcr:primaryType="nt:unstructured"
+															sling:resourceType="granite/ui/components/coral/foundation/container">
+															<items jcr:primaryType="nt:unstructured">
+																<label jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+																	fieldLabel="Label" maxlength="20" name="./label" />
+																<url jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+																	fieldLabel="Path URL" name="./url" />
+																<target jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/select"
+																	fieldLabel="Target" name="./target">
+																	<items jcr:primaryType="nt:unstructured">
+																		<option1 jcr:primaryType="nt:unstructured"
+																			selected="true" text="Self" value="_self" />
+																		<option2 jcr:primaryType="nt:unstructured"
+																			text="Blank" value="_blank" />
+																	</items>
+																</target>
+																<titleText jcr:primaryType="nt:unstructured"
+																	sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+																	fieldLabel="Alt Text" name="./titleText" />
+															</items>
+														</column>
+													</items>
+												</field>
+											</subVoices>
+										</items>
+									</column>
+								</items>
+							</columns>
+						</items>
+					</subFooter>
+				</items>
+			</tabs>
+		</items>
+	</content>
+</jcr:root>

@@ -1,0 +1,462 @@
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	    data-sly-test.testing="${!properties.titleSection}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<!-- CARD N°1 CONTAINER -->
+
+<div id="${properties.id}" class="container-fluid egl-container-card py-5 ${properties.navigatorColor}" 
+	style="--bg-ci-color:${properties.bgColor @ context='styleToken'}">
+	<div class="container-md px-0">
+		<div class="row">
+			<div class="col-xl-3 pl-xl-5 col-lg-2 col-md-12">
+				<h2 class="egl-container-card-title mb-0" style="--marker-ci-color:${properties.markerColor @ context='styleToken'}">
+					${properties.titleSection @ context='html'}</h2>
+				<div class="egl-container-card-content mt-4">
+					${properties.textSection @ context='html'}</div>
+			</div>
+			<div data-sly-test="${properties.contentSelect == 'egl-card-n1'}"
+				data-sly-unwrap>
+				<div class="col-xl-9 col-lg-10 col-md-12 pt-4 pt-lg-0">
+					<div class="container-fluid px-0">
+						<div class="row spazio-carosello-carte">
+							<div class="col-4 col-lg-4">
+								<div class="egl-card card egl-card-n1">
+									<div class="egl-card-main card" style="--bg-card-ci-color:${properties.firstBgColorCard1 @ context='styleToken'}">
+										<div class="body egl-card-body">
+											<img loading="lazy"  src="${properties.firstIconCard1}"
+												alt="${properties.firstAltIconCard1}" class="egl-card-icon egl-card-main-icon" />
+											<div class="egl-card-subtitle">${properties.firstTitle1
+												@ context='html'}</div>
+											<div class="egl-card-text" style="--marker-card-ci-color:${properties.firstMarkerColorCard1 @ context='styleToken'}">${properties.firstCaption1 @
+												context='html'}</div>
+
+											<div class="egl-card-subtitle">${properties.firstTitle2
+												@ context='html'}</div>
+											<div class="egl-card-text pl-0 container-fluid" style="--marker-card-ci-color:${properties.firstMarkerColorCard1 @ context='styleToken'}">
+												<div class="row mx-0">
+													<div style="flex: 1;">
+														<img loading="lazy" 
+															src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/famiglia 1-2.png"
+															alt="Icona Famiglia" class="egl-card-icon" />
+													</div>
+													<div style="flex: 8;">
+														<div class="egl-card-text">${properties.firstCaption2
+															@ context='html'}</div>
+													</div>
+												</div>
+											</div>
+
+											<div class="egl-card-subtitle">${properties.firstTitle3
+												@ context='html'}</div>
+											<div class="egl-card-subtext">${properties.firstCaption3
+												@ context='html'}</div>
+										</div>
+									</div>
+									<div class="egl-card-secondary card">
+										<div class="body egl-card-body">
+											<div class="egl-card-title">${properties.firstTitle4 @
+												context='html'}</div>
+											<div class="egl-card-content container-fluid">
+												<div class="row">
+													<div class="col-12 pl-0">
+														<div class="egl-card-subtext">
+															${properties.firstCaption4 @ context='html'}</div>
+													</div>
+													<div class="egl-card-content container-fluid">
+														<div class="row">
+															<div class="col-12 pl-0">
+																<p class="egl-card-text card-text">
+																	<span class="egl-card-price">${properties.firstPrice @ context='html'}</span> &euro;/anno
+																</p>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div data-sly-test="${properties.secondTitle1}" data-sly-unwrap>
+								<div class="col-4 col-lg-4">
+									<div class="egl-card card egl-card-n1">
+										<div class="egl-card-main card" style="--bg-card-ci-color:${properties.secondBgColorCard1 @ context='styleToken'}">
+											<div class="body egl-card-body">
+												<img loading="lazy"  src="${properties.secondIconCard1}"
+													alt="${properties.secondAltIconCard1}" class="egl-card-icon egl-card-main-icon" />
+												<div class="egl-card-subtitle">${properties.secondTitle1
+													@ context='html'}</div>
+												<div class="egl-card-text" style="--marker-card-ci-color:${properties.secondMarkerColorCard1 @ context='styleToken'}">${properties.secondCaption1
+													@ context='html'}</div>
+
+												<div class="egl-card-subtitle">${properties.secondTitle2
+													@ context='html'}</div>
+												<div class="egl-card-text pl-0 container-fluid" style="--marker-card-ci-color:${properties.secondMarkerColorCard1 @ context='styleToken'}">
+													<div class="row mx-0">
+														<div style="flex: 1;">
+															<img loading="lazy" 
+																src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/famiglia 1-2.png"
+																alt="Icona Famiglia" class="egl-card-icon" />
+														</div>
+														<div style="flex: 8;">
+															<div class="egl-card-text">${properties.secondCaption2
+																@ context='html'}</div>
+														</div>
+													</div>
+												</div>
+
+												<div class="egl-card-subtitle">${properties.secondTitle3
+													@ context='html'}</div>
+												<div class="egl-card-subtext">${properties.secondCaption3
+													@ context='html'}</div>
+											</div>
+										</div>
+										<div class="egl-card-secondary card">
+											<div class="body egl-card-body">
+												<div class="egl-card-title">${properties.secondTitle4 @
+													context='html'}</div>
+												<div class="egl-card-content container-fluid">
+													<div class="row">
+														<div class="col-12 pl-0">
+															<div class="egl-card-subtext">
+																${properties.secondCaption4 @ context='html'}</div>
+														</div>
+														<div class="egl-card-content container-fluid">
+														<div class="row">
+															<div class="col-12 pl-0">
+																<p class="egl-card-text card-text">
+																	<span class="egl-card-price">${properties.secondPrice @ context='html'}</span> &euro;/anno
+																</p>
+															</div>
+														</div>
+													</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div data-sly-test="${properties.thirdTitle1}" data-sly-unwrap>
+								<div class="col-4 col-lg-4">
+									<div class="egl-card card egl-card-n1">
+										<div class="egl-card-main card" style="--bg-card-ci-color:${properties.thirdBgColorCard1 @ context='styleToken'}">
+											<div class="body egl-card-body">
+												<img loading="lazy"  src="${properties.thirdIconCard1}"
+													alt="${properties.thirdAltIconCard1}" class="egl-card-icon egl-card-main-icon" />
+												<div class="egl-card-subtitle">${properties.thirdTitle1
+													@ context='html'}</div>
+												<div class="egl-card-text" style="--marker-card-ci-color:${properties.thirdMarkerColorCard1 @ context='styleToken'}">${properties.thirdCaption1 @
+													context='html'}</div>
+
+												<div class="egl-card-subtitle">${properties.thirdTitle2
+													@ context='html'}</div>
+												<div class="egl-card-text pl-0 container-fluid" style="--marker-card-ci-color:${properties.thirdMarkerColorCard1 @ context='styleToken'}">
+													<div class="row mx-0">
+														<div style="flex: 1;">
+															<img loading="lazy" 
+																src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/famiglia 1-2.png"
+																alt="Icona Famiglia" class="egl-card-icon" />
+														</div>
+														<div style="flex: 8;">
+															<div class="egl-card-text">${properties.thirdCaption2
+																@ context='html'}</div>
+														</div>
+													</div>
+												</div>
+
+												<div class="egl-card-subtitle">${properties.thirdTitle3
+													@ context='html'}</div>
+												<div class="egl-card-subtext">${properties.thirdCaption3
+													@ context='html'}</div>
+											</div>
+										</div>
+										<div class="egl-card-secondary card">
+											<div class="body egl-card-body">
+												<div class="egl-card-title">${properties.thirdTitle4 @
+													context='html'}</div>
+												<div class="egl-card-content container-fluid">
+													<div class="row">
+														<div class="col-12 pl-0">
+															<div class="egl-card-subtext">
+																${properties.thirdCaption4 @ context='html'}</div>
+														</div>
+														<div class="egl-card-content container-fluid">
+														<div class="row">
+															<div class="col-12 pl-0">
+																<p class="egl-card-text card-text">
+																	<span class="egl-card-price">${properties.thirdPrice @ context='html'}</span> &euro;/anno
+																</p>
+															</div>
+														</div>
+													</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row justify-content-center riga-frecce">
+							<div class="col-6">
+								<div
+									class="
+										impaginazione									
+										flex-direction-row
+										justify-content-center
+									">
+									<div class="news__arrow news__arrow_dir_left"
+										onclick="slideCards('-', event)">
+										 <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-left-solid-white.svg" class="news__arrow"/>
+									</div>
+
+									<p class="pagingInfo-cards p18-egl"></p>
+									<div class="news__arrow news__arrow_dir_right"
+										onclick="slideCards('+', event)">
+										<img  loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-right-solid-white.svg" class="news__arrow"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12">
+								<div class="egl-card-container-subtext">${properties.noteCaption
+									@ context='html'}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div data-sly-test="${properties.contentSelect == 'egl-card-n2'}"
+				data-sly-unwrap>
+				<div class="col-xl-9 col-lg-10 col-md-12 pt-4 pt-lg-0">
+					<div class="container-fluid px-0">
+						<div class="row spazio-carosello-carte">
+							<div class="col-4">
+								<div class="egl-card card egl-card-n2" >
+									<div class="egl-card-main card">
+										<div class="body egl-card-body">
+											<div class="egl-card-title" style="--marker-card2-ci-color:${properties.firstMarkerColorCard2 @ context='styleToken'}">${properties.firstTitleCard2 @ context='html'}</div>
+											<h5 class="egl-card-subtitle card-title">Bonus</h5>
+											<div class="egl-card-content container-fluid">
+												<div class="row">
+													<div class="col-3 pl-0">
+														<img loading="lazy"  src="${properties.firstIconCard2}" alt="${properties.firstAltIconCard2}"
+															class="egl-card-icon egl-card-main-icon" />
+													</div>
+													<div class="col-9 pr-0">
+														<div class="egl-card-text">${properties.firstCaptionImgCard2 @ context='html'}</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="egl-card-secondary card">
+										<div class="body egl-card-body">
+											<div class="egl-card-subtitle">${properties.firstTitleSubcaptionCard2 @ context='html'}</div>
+											<div class="egl-card-content container-fluid">
+												<div class="row">
+													<div class="col-12 pl-0">
+														<div class="egl-card-text">${properties.firstSubcaptionCard2 @ context='html'}</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-4" data-sly-test="${properties.secondTitleCard2}">
+								<div class="egl-card card egl-card-n2" >
+									<div class="egl-card-main card">
+										<div class="body egl-card-body">
+											<div class="egl-card-title" style="--marker-card2-ci-color:${properties.secondMarkerColorCard2 @ context='styleToken'}">${properties.secondTitleCard2 @ context='html'}</div>
+											<h5 class="egl-card-subtitle card-title">Bonus</h5>
+											<div class="egl-card-content container-fluid">
+												<div class="row">
+													<div class="col-3 pl-0">
+														<img loading="lazy"  src="${properties.secondIconCard2}" alt="${properties.secondAltIconCard2}"
+															class="egl-card-icon egl-card-main-icon" />
+													</div>
+													<div class="col-9 pr-0">
+														<div class="egl-card-text">${properties.secondCaptionImgCard2 @ context='html'}</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="egl-card-secondary card">
+										<div class="body egl-card-body">
+											<div class="egl-card-subtitle">${properties.secondTitleSubcaptionCard2 @ context='html'}</div>
+											<div class="egl-card-content container-fluid">
+												<div class="row">
+													<div class="col-12 pl-0">
+														<div class="egl-card-text">${properties.secondSubcaptionCard2 @ context='html'}</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-4" data-sly-test="${properties.thirdTitleCard2}">
+								<div class="egl-card card egl-card-n2" >
+									<div class="egl-card-main card">
+										<div class="body egl-card-body">
+											<div class="egl-card-title" style="--marker-card2-ci-color:${properties.thirdMarkerColorCard2 @ context='styleToken'}">${properties.thirdTitleCard2 @ context='html'}</div>
+											<h5 class="egl-card-subtitle card-title">Bonus</h5>
+											<div class="egl-card-content container-fluid">
+												<div class="row">
+													<div class="col-3 pl-0">
+														<img loading="lazy"  src="${properties.thirdIconCard2}" alt="${properties.thirdAltIconCard2}"
+															class="egl-card-icon egl-card-main-icon" />
+													</div>
+													<div class="col-9 pr-0">
+														<div class="egl-card-text">${properties.thirdCaptionImgCard2 @ context='html'}</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="egl-card-secondary card">
+										<div class="body egl-card-body">
+											<div class="egl-card-subtitle">${properties.thirdTitleSubcaptionCard2 @ context='html'}</div>
+											<div class="egl-card-content container-fluid">
+												<div class="row">
+													<div class="col-12 pl-0">
+														<div class="egl-card-text">${properties.thirdSubcaptionCard2 @ context='html'}</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row justify-content-center riga-frecce">
+							<div class="col-6">
+								<div
+									class="
+										impaginazione	
+										flex-direction-row
+										justify-content-center
+									">
+									<div class="news__arrow news__arrow_dir_left"
+										onclick="slideCards('-', event)">
+										<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-left-solid.svg" class="news__arrow"/>
+									</div>
+
+									<p class="pagingInfo-cards p18-egl"></p>
+									<div class="news__arrow news__arrow_dir_right"
+										onclick="slideCards('+', event)">
+										<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-right-solid.svg" class="news__arrow"/>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div data-sly-test="${properties.contentSelect == 'egl-card-n3'}"
+				data-sly-unwrap>
+				<div class="col-xl-9 col-lg-10 col-md-12 pt-4 pt-lg-0">
+					<div class="container-fluid px-0">
+						<div class="row spazio-carosello-carte">
+							<div class="col-4">
+								<div class="egl-card card egl-card-n3" >
+									<div class="egl-card-main card">
+										<div class="body egl-card-body">
+											<img loading="lazy"  src="${properties.firstProdImageCard3}" alt="${properties.firstProdAltCard3}" class="egl-card-icon egl-card-img" />
+
+											<div class="egl-card-title mb-0 pr-5">
+												<img loading="lazy"  src="${properties.firstLogoCard3}" alt="${properties.firstLogoAltCard3}"
+													class="egl-card-icon" />
+											</div>
+
+											<div class="egl-card-content container-fluid">
+												<div class="row">
+													<div class="col-12 pl-0">
+														<div class="egl-card-subtitle">${properties.firstTitleCard3 @ context='html'}</div>
+														<div class="egl-card-subtext">${properties.firstCaptionCard3 @ context='html'}</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-4" data-sly-test="${properties.secondTitleCard3}">
+								<div class="egl-card card egl-card-n3" >
+									<div class="egl-card-main card">
+										<div class="body egl-card-body">
+											<img loading="lazy"  src="${properties.secondProdImageCard3}" alt="${properties.secondProdAltCard3}" class="egl-card-icon egl-card-img" />
+
+											<div class="egl-card-title mb-0 pr-5">
+												<img loading="lazy"  src="${properties.secondLogoCard3}" alt="${properties.secondLogoAltCard3}"
+													class="egl-card-icon" />
+											</div>
+
+											<div class="egl-card-content container-fluid">
+												<div class="row">
+													<div class="col-12 pl-0">
+														<div class="egl-card-subtitle">${properties.secondTitleCard3 @ context='html'}</div>
+														<div class="egl-card-subtext">${properties.secondCaptionCard3 @ context='html'}</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-4" data-sly-test="${properties.thirdTitleCard3}">
+								<div class="egl-card card egl-card-n3" >
+									<div class="egl-card-main card">
+										<div class="body egl-card-body">
+											<img loading="lazy"  src="${properties.thirdProdImageCard3}" alt="${properties.thirdProdAltCard3}" class="egl-card-icon egl-card-img" />
+
+											<div class="egl-card-title mb-0 pr-5">
+												<img loading="lazy"  src="${properties.thirdLogoCard3}" alt="${properties.thirdLogoAltCard3}"
+													class="egl-card-icon" />
+											</div>
+
+											<div class="egl-card-content container-fluid">
+												<div class="row">
+													<div class="col-12 pl-0">
+														<div class="egl-card-subtitle">${properties.thirdTitleCard3 @ context='html'}</div>
+														<div class="egl-card-subtext">${properties.thirdCaptionCard3 @ context='html'}</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row justify-content-center riga-frecce">
+							<div class="col-6">
+								<div
+									class="
+										impaginazione	
+										flex-direction-row
+										justify-content-center
+									">
+									<div class="news__arrow news__arrow_dir_left"
+										onclick="slideCards('-', event)">
+										<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-left-solid.svg" class="news__arrow"/>
+									</div>
+
+									<p class="pagingInfo-cards p18-egl"></p>
+									<div class="news__arrow news__arrow_dir_right"
+										onclick="slideCards('+', event)">
+										<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/svg-icons/chevron-right-solid.svg" class="news__arrow"/>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

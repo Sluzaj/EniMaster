@@ -1,0 +1,21 @@
+<sly
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.text}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<sly data-sly-test.isImage="${properties.asset}"></sly>
+<sly data-sly-test.isBgColor="${properties.bgType == 'coloreBack'}"></sly>
+<sly data-sly-set.bgImg="url(${properties.immagineBackReference})"></sly>
+
+<a
+	class="d-flex justify-content-center align-items-center text-lg-center fascia-small-bg-link"
+	href="${properties.linkCTA}" target="${properties.targetCTA}"
+	data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.asset}"
+	style="background: ${isBgColor ? properties.coloreBackground : bgImg @ context='styleString'};">
+	<img loading="lazy" data-sly-test="${isImage}" src="${isImage}" alt="${image.description}">
+	<div class="d-flex flex-lg-row flex-column ${isImage ? '' : 'align-items-center'}">
+		<h3>${properties.text @ context='html'}</h3>
+		<div data-sly-test="${properties.labelCTA}" class="fascia-small-cta" title="${properties.altCTA}">${properties.labelCTA}</div>
+	</div>
+</a>

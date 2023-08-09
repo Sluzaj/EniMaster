@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+	xmlns:cq="http://www.day.com/jcr/cq/1.0"
+	xmlns:jcr="http://www.jcp.org/jcr/1.0"
+	xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
+	xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+	jcr:primaryType="nt:unstructured" jcr:title="Card Offerte Commodity Properties"
+	sling:resourceType="cq/gui/components/authoring/dialog">
+	<content jcr:primaryType="nt:unstructured"
+		sling:resourceType="granite/ui/components/coral/foundation/container">
+		<items jcr:primaryType="nt:unstructured">
+			<tabs jcr:primaryType="nt:unstructured"
+				sling:resourceType="granite/ui/components/coral/foundation/tabs"
+				maximized="{Boolean}true">
+				<items jcr:primaryType="nt:unstructured">
+
+
+					<configItem jcr:primaryType="nt:unstructured"
+						jcr:title="Configurazione Item"
+						sling:resourceType="granite/ui/components/coral/foundation/container"
+						margin="{Boolean}true">
+						<items jcr:primaryType="nt:unstructured">
+							<columns jcr:primaryType="nt:unstructured"
+								sling:resourceType="granite/ui/components/coral/foundation/container"
+								margin="{Boolean}true">
+								<items jcr:primaryType="nt:unstructured">
+									<column jcr:primaryType="nt:unstructured"
+										sling:resourceType="granite/ui/components/coral/foundation/container">
+										<items jcr:primaryType="nt:unstructured">
+											
+											<pathFragment
+												jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+												fieldLabel="Path Content Fragment Commodity"
+												name="./pathOfferta" rootPath="/content/dam/enigaseluce" />
+											
+										<!-- CARD  -->
+											<tipoCard
+												jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/select"
+												granite:class="cq-dialog-dropdown-showhide"
+												fieldLabel="Tipologia Card" name="./tipoCard">
+												<items jcr:primaryType="nt:unstructured">
+													<option1 jcr:primaryType="nt:unstructured"
+														selected="true" text="Card Basic" value="cardBasic" />
+													<option2 jcr:primaryType="nt:unstructured"
+														text="Card + Label" value="cardLabel" />
+												</items>
+												<granite:data
+													jcr:primaryType="nt:unstructured"
+													cq-dialog-dropdown-showhide-target=".tipoCard-showhide-target" />
+											</tipoCard>
+											
+											<!-- CON PROMOZIONE -->
+											<promo jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/foundation/form/checkbox"
+												name="./promo" text="Con Promozione" value="true"
+												class="cq-dialog-checkbox-showhide"
+												cq-dialog-checkbox-showhide-target=".promo-showhide-target" />
+											<promotionsFields
+												jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/foundation/container"
+												jcr:title="Gestione Promo"
+												class="hidden promo-showhide-target"
+												showhidetargetvalue="true">
+												<items jcr:primaryType="nt:unstructured">
+													<pathPromo1
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+														fieldLabel="Path Content Fragment Promozione 1"
+														name="./pathPromo1" rootPath="/content/dam/enigaseluce" />
+													<pathPromo2 jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+														fieldLabel="Path Content Fragment Promozione 2"
+														name="./pathPromo2" rootPath="/content/dam/enigaseluce" />
+												</items>
+											</promotionsFields>
+											
+								
+											<!-- CARD 1 BASIC-->
+											<descrizioneCard jcr:primaryType="nt:unstructured"
+												jcr:title="Descrizione Card" fieldLabel="Descrizione Card"
+												sling:resourceType="cq/gui/components/authoring/dialog/richtext"
+												name="./descrizioneCard"
+												useFixedInlineToolbar="{Boolean}true"
+												removeSingleParagraphContainer="{Boolean}true">
+												<rtePlugins jcr:primaryType="nt:unstructured"
+													removeSingleParagraphContainer="true">
+													<format jcr:primaryType="nt:unstructured"
+														features="bold,italic" />
+													<justify jcr:primaryType="nt:unstructured"
+														features="*" />
+													<links jcr:primaryType="nt:unstructured"
+														features="modifylink,unlink" />
+													<lists jcr:primaryType="nt:unstructured"
+														features="*" />
+													<paraformat jcr:primaryType="nt:unstructured"
+														features="*">
+														<formats jcr:primaryType="nt:unstructured">
+															<default_p jcr:primaryType="nt:unstructured"
+																description="Paragraph" tag="p" />
+															<default_h1
+																jcr:primaryType="nt:unstructured"
+																description="Heading 1" tag="h1" />
+															<default_h2
+																jcr:primaryType="nt:unstructured"
+																description="Heading 2" tag="h2" />
+															<default_h3
+																jcr:primaryType="nt:unstructured"
+																description="Heading 3" tag="h3" />
+														</formats>
+													</paraformat>
+													<tracklinks jcr:primaryType="nt:unstructured"
+														features="*" />
+													<table jcr:primaryType="nt:unstructured"
+														features="*" />
+													<subsuperscript
+														jcr:primaryType="nt:unstructured" features="*" />
+													<misctools jcr:primaryType="nt:unstructured"
+														features="*" />
+													<experience-aem
+														jcr:primaryType="nt:unstructured" features="*" />
+												</rtePlugins>
+												<uiSettings jcr:primaryType="nt:unstructured">
+													<cui jcr:primaryType="nt:unstructured">
+														<inline jcr:primaryType="nt:unstructured"
+															toolbar="[format#bold,format#italic,format#underline,subsuperscript#subscript,subsuperscript#superscript,justify#justifyleft,justify#justifycenter,justify#justifyright,#lists,experience-aem#colorPicker,links#modifylink,links#unlink,#paraformat,table#createoredit,table#removetable,misctools#sourceedit]">
+															<popovers jcr:primaryType="nt:unstructured">
+																<justify jcr:primaryType="nt:unstructured"
+																	items="[justify#justifyleft,justify#justifycenter,justify#justifyright]"
+																	ref="justify" />
+																<lists jcr:primaryType="nt:unstructured"
+																	items="[lists#unordered,lists#ordered,lists#outdent,lists#indent]"
+																	ref="lists" />
+																<misctools jcr:primaryType="nt:unstructured"
+																	items="[misctools#specialchars]" ref="misctools" />
+																<paraformat
+																	jcr:primaryType="nt:unstructured"
+																	items="paraformat:getFormats:paraformat-pulldown"
+																	ref="paraformat" />
+															</popovers>
+														</inline>
+														<dialogFullScreen
+															jcr:primaryType="nt:unstructured"
+															toolbar="[format#bold,format#italic,format#underline,subsuperscript#subscript,subsuperscript#superscript,justify#justifyleft,justify#justifycenter,justify#justifyright,#lists,experience-aem#colorPicker,links#modifylink,links#unlink,#paraformat,table#createoredit,table#removetable,misctools#sourceedit]">
+															<popovers jcr:primaryType="nt:unstructured">
+																<justify jcr:primaryType="nt:unstructured"
+																	items="[justify#justifyleft,justify#justifycenter,justify#justifyright]"
+																	ref="justify" />
+																<lists jcr:primaryType="nt:unstructured"
+																	items="[lists#unordered,lists#ordered,lists#outdent,lists#indent]"
+																	ref="lists" />
+																<misctools jcr:primaryType="nt:unstructured"
+																	items="[misctools#specialchars]" ref="misctools" />
+																<paraformat
+																	jcr:primaryType="nt:unstructured"
+																	items="paraformat:getFormats:paraformat-pulldown"
+																	ref="paraformat" />
+															</popovers>
+														</dialogFullScreen>
+													</cui>
+												</uiSettings>
+											</descrizioneCard>
+											
+											<tipoFornitura
+												jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/select"
+												fieldLabel="Tipologia Fornitura" name="./tipoFornitura">
+												<items jcr:primaryType="nt:unstructured">
+													<option1 jcr:primaryType="nt:unstructured"
+														selected="true" text="Luce e gas" value="LUCE E GAS" />
+													<option2 jcr:primaryType="nt:unstructured"
+														text="Luce" value="LUCE" />
+													<option3 jcr:primaryType="nt:unstructured"
+														text="Gas" value="GAS" />
+												</items>
+											</tipoFornitura>
+											
+											<labelCTASCard
+												jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+												fieldLabel="Label CTA Card" name="./labelCtaCard" />
+											<urlCTACard jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+												fieldLabel="Path Link CTA Card" name="./urlCtaCard" />
+											<targetCTACard
+												jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/select"
+												fieldLabel="Target Card" name="./targetCtaCard">
+												<items jcr:primaryType="nt:unstructured">
+													<option1 jcr:primaryType="nt:unstructured"
+														text="Self" value="_self" selected="true" />
+													<option2 jcr:primaryType="nt:unstructured"
+														text="Blank" value="_blank" />
+												</items>
+											</targetCTACard>
+											<altCTACard jcr:primaryType="nt:unstructured"
+												sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+												fieldLabel="Alt Text CTA Card" name="./altCtaCard" />
+													
+											<!-- CARD 1 + LABEL-->
+											<cardLabel
+												jcr:primaryType="nt:unstructured"
+												jcr:title="Card Label"
+												granite:class="tipoCard-showhide-target"
+												sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">
+												<items jcr:primaryType="nt:unstructured">										
+													<label
+														jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+														fieldLabel="Label" name="./label" />	
+													<coloreBgLabel jcr:primaryType="nt:unstructured"
+														sling:resourceType="granite/ui/components/coral/foundation/form/colorfield"
+														fieldLabel="Colore Background Label (esadecimale)"
+														name="./coloreBgLabel" />			
+												</items>
+												<granite:data jcr:primaryType="nt:unstructured"
+												showhidetargetvalue="cardLabel" />
+											</cardLabel>
+											
+											
+											<!-- CARD 1 + PROMO-->
+											
+													
+
+										</items>
+									</column>
+								</items>
+							</columns>
+						</items>
+					</configItem>
+
+				</items>
+			</tabs>
+		</items>
+	</content>
+</jcr:root>

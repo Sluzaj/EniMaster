@@ -1,0 +1,216 @@
+<sly
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.pathCF}"> </sly>
+
+<sly data-sly-use.model="com.egl.core.models.boxthankyou.BoxTYModel"></sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+<sly data-sly-test.luce="${properties.contentType == 'luce'}"></sly>
+<sly data-sly-test.gas="${properties.contentType == 'gas'}"></sly>
+<sly data-sly-test.promo="${properties.contentType == 'promo'}"></sly>
+<sly data-sly-test.newSub="${properties.contentType == 'newSub'}"></sly>
+
+<div id="${properties.id}">
+	<!-- typ-gas/luce -->
+	<div data-sly-test="${luce || gas}"
+		class="container-lg box-thankyou-container">
+		<div class="row justify-content-center">
+			<img loading="lazy"
+				src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/logo-plenitude-orizzontale.svg"
+				alt="">
+		</div>
+		<div class="row mx-0">
+			<div class="box-thankyou-page">
+				<div class="d-flex text-center justify-content-center">
+					<p class="typ-congrats">${gas ? properties.titleGas : properties.titleLuce}</p>
+				</div>
+				<div class="d-flex text-center justify-content-center">
+					<p class="typ-nuova-attivazione">${gas ? properties.subtitleGas : properties.subtitleLuce}</p>
+				</div>
+				<div class="d-flex text-center justify-content-center">
+					<div class="typ-nome-offerta">${model.nomeOfferta @
+						context='html'}</div>
+				</div>
+				<div
+					class="row typ-info-row d-none d-lg-flex justify-content-center">
+					<div class="typ-info-box-icon">
+						<img loading="lazy"
+							src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/SVG (1)/SVG/email.svg"
+							alt="">
+						<p>${gas ? properties.textItem1Gas : properties.textItem1Luce}</p>
+					</div>
+					<div class="typ-info-box-icon">
+						<img loading="lazy"
+							src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/SVG (1)/SVG/eni-action.svg"
+							alt="">
+						<p>${gas ? properties.textItem2Gas : properties.textItem2Luce}</p>
+					</div>
+					<div data-sly-test="${gas}" class="typ-info-box-icon">
+						<img loading="lazy"
+							src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/SVG (1)/SVG/calendar.svg"
+							alt="">
+						<p>${properties.textItem3Gas}</p>
+					</div>
+					<div class="typ-info-box-icon">
+						<img loading="lazy"
+							src="${gas ? '/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/SVG (1)/SVG/contatore-gas.svg' : '/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/SVG (1)/SVG/contatore-luce.svg'}"
+							alt="">
+						<p>${gas ? properties.textItem4Gas : properties.textItem3Luce}</p>
+					</div>
+				</div>
+				<div
+					class="row typ-info-row typ-carousel d-lg-none d-flex justify-content-center">
+					<div class="typ-info-box-icon">
+						<img loading="lazy"
+							src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/SVG (1)/SVG/email.svg"
+							alt="">
+						<p>${gas ? properties.textItem1Gas : properties.textItem1Luce}</p>
+					</div>
+					<div class="typ-info-box-icon">
+						<img loading="lazy"
+							src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/SVG (1)/SVG/eni-action.svg"
+							alt="">
+						<p>${gas ? properties.textItem2Gas : properties.textItem2Luce}</p>
+					</div>
+					<div data-sly-test="${gas}" class="typ-info-box-icon">
+						<img loading="lazy"
+							src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/SVG (1)/SVG/calendar.svg"
+							alt="">
+						<p>${properties.textItem3Gas}</p>
+					</div>
+					<div class="typ-info-box-icon">
+						<img loading="lazy"
+							src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/SVG (1)/SVG/contatore-gas.svg"
+							alt="">
+						<p>${gas ? properties.textItem4Gas : properties.textItem3Luce}</p>
+					</div>
+				</div>
+				<div class="box-typ-navigatore-carosello d-lg-none">
+					<i
+						class="fas fa-chevron-left box-typ-previous-arrow box-typ-arrows"
+						onclick="slideBoxtypCard('-')"></i>
+					<p class="box-typ-status-text" style="margin-bottom: 0px;"></p>
+					<i class="fas fa-chevron-right box-typ-next-arrow box-typ-arrows"
+						onclick="slideBoxtypCard('+')"></i>
+				</div>
+				<div class="box-typ-footer">
+					<div class="d-flex justify-content-center">
+						<p>${gas ? properties.notaCTAGas : properties.notaCTALuce}</p>
+					</div>
+					<div class="d-flex justify-content-center">
+						<a href="${luce ? properties.linkCTALuce : properties.linkCTAGas}"
+							title="${luce ? properties.altTextCTALuce : properties.altTextCTAGas}"
+							target="${luce ? properties.targetCTALuce : properties.targetCTAGas}">${luce
+							? properties.labelCTALuce : properties.labelCTAGas}</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Variante nuova sottoscrizione -->
+	<div data-sly-test="${promo}"
+		class="container-lg box-thankyou-container">
+		<div class="row justify-content-center">
+			<img loading="lazy"
+				src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/logo-plenitude-orizzontale.svg"
+				alt="">
+		</div>
+		<div class="row mx-0">
+			<div class="box-thankyou-page box-typ-sub">
+				<div class="d-flex text-center justify-content-center">
+					<p class="typ-congrats">${properties.titlePromo}</p>
+				</div>
+				<div class="d-flex text-center justify-content-center">
+					<p class="typ-nuova-attivazione">${properties.subtitlePromo}</p>
+				</div>
+				<div class="d-flex text-center justify-content-center">
+					<div class="typ-nome-offerta">${model.nomeOfferta @
+						context='html'}</div>
+				</div>
+				<div class="d-flex text-center justify-content-center">
+					<p class="typ-controlla-email">${properties.descriptionPromo}</p>
+				</div>
+				<div data-sly-test="${promo}" data-sly-unwrap>
+					<div data-sly-test.promo1="${model.promo1}"
+						class="boxTY-promo1-${resource.name}"
+						data-start-promo="${promo1.dataInizioPromozione}"
+						data-end-promo="${promo1.dataFinePromozione}">
+						<div class="d-flex text-center justify-content-center">
+							<img loading="lazy"
+								src="${promo1.immaginePerBandSticky}"
+								alt="">
+						</div>
+						<div class="d-flex text-center justify-content-center">
+							<div class="typ-congrats-footer">
+								${promo1.textPromo @ context='html'}
+							</div>
+						</div>
+						<div class="d-flex text-center justify-content-center">
+		                    <p class="cap14-egl">${properties.notaPromo @ context='html'}</p>
+		                </div>
+					</div>
+					<div data-sly-test.promo2="${model.promo2}"
+						class="boxTY-promo2-${resource.name}"
+						data-start-promo="${promo2.dataInizioPromozione}"
+						data-end-promo="${promo2.dataFinePromozione}">
+						<div class="d-flex text-center justify-content-center">
+							<img loading="lazy"
+								src="${promo2.immaginePerBandSticky}"
+								alt="">
+						</div>
+						<div class="d-flex text-center justify-content-center">
+							<div class="typ-congrats-footer">
+								${promo2.textPromo @ context='html'}
+							</div>
+						</div>
+						<div class="d-flex text-center justify-content-center">
+		                    <p class="cap14-egl">${properties.notaPromo @ context='html'}</p>
+		                </div>
+					</div>
+				</div>
+				<div class="d-flex flex-wrap text-center justify-content-center">
+					<a
+						href="${properties.linkCTAPromo3 ? properties.linkCTAPromo3 : 'https://eniplenitude.com'}"
+						target="${properties.targetCTAPromo3}"
+						title="${properties.altTextCTAPromo3}"
+						class="cta-typ-white buttonlink-pleni-cta">${properties.labelCTAPromo3}</a> 
+					<a data-sly-test="${properties.linkCTAPromo2 && properties.labelCTAPromo2}"
+						href="${properties.linkCTAPromo2}"
+						target="${properties.targetCTAPromo2}"
+						title="${properties.altTextCTAPromo2}"
+						class="cta-typ-yellow buttonlink-pleni-cta">${properties.labelCTAPromo2}</a> 
+					<a
+						href="${properties.linkCTAPromo1 ? properties.linkCTAPromo1 : 'https://it.surveymonkey.com/r/XYQFLJS'}"
+						target="${properties.targetCTAPromo1}"
+						title="${properties.altTextCTAPromo1}"
+						class="cta-typ-yellow buttonlink-pleni-cta">${properties.labelCTAPromo1}</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<script
+	data-sly-test="${wcmmode.disabled && (model.promo1 || model.promo2)}">
+	(function($) {
+		$(document)
+				.ready(
+						function() {
+							promotionHideShow(
+									".boxTY-edit-${resource.name @ context='scriptToken'}",
+									".boxTY-promo1-${resource.name @ context='scriptToken'}",
+									".boxTY-promo2-${resource.name @ context='scriptToken'}");
+							countdownElements(
+									".boxTY-promo1-${resource.name @ context='scriptToken'}",
+									".egl-promo-cd-giorno",
+									".egl-promo-cd-ore", ".egl-promo-cd-minuti");
+							countdownElements(
+									".boxTY-promo2-${resource.name @ context='scriptToken'}",
+									".egl-promo-cd-giorno",
+									".egl-promo-cd-ore", ".egl-promo-cd-minuti");
+						});
+	})($);
+</script>

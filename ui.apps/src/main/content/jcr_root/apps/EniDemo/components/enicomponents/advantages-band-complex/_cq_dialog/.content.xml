@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Fascia Benefici Complex"
+    extraClientlibs="[cq.author.accordion]"
+    sling:resourceType="cq/gui/components/authoring/dialog">
+    <content
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/container">
+        <items jcr:primaryType="nt:unstructured">
+        	<idRef jcr:primaryType="nt:unstructured"
+				sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+				fieldLabel="ID Per Ancore" name="./idRef" />
+			<variante jcr:primaryType="nt:unstructured"
+				sling:resourceType="granite/ui/components/coral/foundation/form/select"
+				defaultValue="option1"
+				fieldLabel="Scelta variante" name="./sceltaVariante">
+				<items jcr:primaryType="nt:unstructured">
+					<option1 jcr:primaryType="nt:unstructured"
+						selected="true" text="Normal" value="paragrafoComplex" />
+					<option2 jcr:primaryType="nt:unstructured"
+						text="Icon Bullet" value="paragrafoComplex-bullet" />
+				</items>
+			</variante>
+            <itemNumber 
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/form/numberfield"
+                min="2"
+                max="4" 
+                value="2" 
+                step="1" 
+                fieldLabel="Numero di items" 
+                name="./itemNumber" />
+            <asset
+                granite:class="cmp-image__editor-file-upload"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="cq/gui/components/authoring/dialog/fileupload"
+                autoStart="{Boolean}false"
+                class="cq-droptarget"
+                fileNameParameter="./assetName"
+                fileReferenceParameter="./assetReference"
+                mimeTypes="[image/gif,image/jpeg,image/png,image/tiff,image/svg+xml]"
+                multiple="{Boolean}false"
+                name="./asset"
+                title="Asset"
+                fieldLabel="Asset"
+                uploadUrl="${suffix.path}"
+                useHTML5="{Boolean}true" />
+        </items>
+    </content>
+</jcr:root>

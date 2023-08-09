@@ -1,0 +1,35 @@
+
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.titolo}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+	<div id="${properties.id}" style="background-color:${properties.backgroundColore@ context='styleToken'};">
+    <div class="container-lg container-documenti" style="background-color:${properties.backgroundColore@ context='styleToken'};">
+      <div class="row">
+        <div class="col-12 text-center">
+          <div class="h2-egl container-documenti-titolo">${properties.titolo}</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 text-center">
+          <div class="p18-egl">
+            ${properties.descrizione @context='html'}
+          </div>
+        </div>
+      </div>
+      
+      <div class="row egl-riga-documenti">
+        <div data-sly-use.doc="com.egl.core.models.documenti.FragmentDocumentiModel"
+          data-sly-list.lista="${doc.lista}" data-sly-unwrap>
+          <div class="col-lg-4 col-12">
+            <div class="d-flex doc-space">
+              <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/icona-documenti.svg" alt="documento" /> <a
+                class="egl-documento-link p16-egl" href="${lista.allegato}" target="_blank" title="${lista.altTextDoc}"> ${lista.titoloNomeDelDocumento} </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+</div>

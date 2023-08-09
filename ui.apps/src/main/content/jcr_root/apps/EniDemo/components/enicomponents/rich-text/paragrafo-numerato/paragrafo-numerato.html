@@ -1,0 +1,17 @@
+<sly
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.elencoNumerato}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<sly
+	data-sly-use.model="com.egl.core.models.richtext.ParagrafoNumeratoModel"></sly>
+
+<ol class="rich-text-list">
+	<sly data-sly-list.lista="${model.listaParagrafo}">
+		<li>
+			<p data-sly-use.text="${'com.egl.core.models.utils.TableModel' @ richText=lista}">${text.tableFormatted @context='html'}</p>
+		</li>
+	</sly>
+</ol>
+

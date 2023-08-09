@@ -1,0 +1,29 @@
+<sly
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.contenuto}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+
+	 <!-- box fuori griglia (Margini Superiori e Inferiori)-->
+	<div data-sly-test="${properties.radioGroup == 'fuoriSupInf'}" data-sly-unwrap> 
+	    <div id="${properties.id}" class="container-html-box container-html-box-my">
+			${properties.contenuto @context='unsafe'}
+	    </div>
+	</div>
+	 
+	  <!-- box fuori griglia (Margini Dx e Sx)-->
+	<div data-sly-test="${properties.radioGroup == 'fuoriDxSx'}" data-sly-unwrap> 
+	    <div id="${properties.id}" class="container-lg container-html-box">
+			${properties.contenuto @context='unsafe'}
+	    </div>
+	</div>
+	
+	    <!-- box dentro griglia (tutti i margini) -->        
+	 <div data-sly-test="${properties.radioGroup == 'dentro'}" data-sly-unwrap>
+	    <div id="${properties.id}" class="container-lg container-html-box container-md">
+	    	${properties.contenuto @context='unsafe'}
+	    </div>
+	</div>
+
+

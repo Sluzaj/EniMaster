@@ -1,0 +1,225 @@
+<sly
+	data-sly-test.id="${properties.id ? properties.id : 'efficientamento'}"></sly>
+
+<sly data-sly-use.eniEnvs="com.egl.core.models.utils.ENIEnvironmentConfig"></sly>
+<sly data-sly-test.vanity="${eniEnvs.getCanonicalUrl}"/>
+	
+<sly data-sly-use.model="com.egl.core.models.formefficientamento.FormEfficientamentoModel"></sly>
+
+<script>
+setTimeout(function () {
+	var result = '${model.result @ context="scriptString"}';
+	$('#ModaleSuccesso').modal('hide');
+	$('#ModaleFallimento').modal('hide');
+	if(result != null && result.length>0){
+		if(result.includes('0')) {
+			$('#ModaleSuccesso').modal('show');
+			sfCallMeBackDataLayerEfficientamentoOK();
+			$('body').data('sf-dataLayerPush').pushEfficientamentoLayer('inviato');
+		}
+		else if(result.includes('1')) {
+			$('#ModaleFallimento').modal('show');
+			sfCallMeBackDataLayerEfficientamentoKO();
+			$('body').data('sf-dataLayerPush').pushEfficientamentoLayer('ko');
+		}
+	}
+}, 1000);
+</script>
+
+<div class="container-lg form-pagina-container form-cappotto-container form-energia-2" id="${id}">
+        <div id="efficientamento" class="d-flex justify-content-center align-items-center flex-column">
+            <h2>Ti richiamiamo noi.</h2>
+            <p class="p18-egl">Inserisci i tuoi dati per essere ricontattato senza impegno.
+            </p>
+        </div>
+        <form class="needs-validation" method="POST" action="${vanity ? vanity : currentPage.path}.formdata.txt" novalidate>
+         	<input type="hidden" name="currentPage" id="currentPage" value="${vanity ? vanity : currentPage.path}${vanity ? '' : '.html'}">
+            <div class="form-row">
+                <div class="col-lg-6">
+                    <div class="label-box  input-no-numeri">
+                        <label for="validationCustom01">Nome</label>
+                        <input type="text" class="form-control" id="validationCustom01" name="Nome" required>
+                        <div class="invalid-feedback">
+                            Nome &#232; un campo obbligatorio.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="label-box  input-no-numeri">
+                        <label for="validationCustom02">Cognome</label>
+                        <input type="text" class="form-control" id="validationCustom02" name="Cognome" required>
+                        <div class="invalid-feedback">
+                            Cognome &#232; un campo obbligatorio.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-lg-6">
+                    <div class="label-box ">
+                        <label for="exampleInputEmail1">Indirizzo email</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" name="Email" aria-describedby="emailHelp"
+                            required>
+                        <div class="invalid-feedback">
+                            Inserisci un indirizzo email valido.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="label-box">
+                        <label for="exampleInputEmail1">Telefono</label>
+                        <input type="number" maxlength="16" pattern="[0-9]*" title="sono ammessi 16 caratteri numerici"
+                            class="form-control" id="inputPhoneNumber" aria-describedby="Telefono" name="Telefono"
+                            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                            required />
+                        <div class="invalid-feedback">
+                            Il numero di telefono &#232; obbligatorio.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="label-box input-no-numeri">
+                        <label for="validationCustom03">Citt&#224;</label>
+                        <input type="text" class="form-control" id="validationCustom03" name="Citta" required>
+                        <div class="invalid-feedback">
+                            Citt&#224; &#232; un campo obbligatorio.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="label-box ">
+                        <label for="validationCustom05">Ragione sociale</label>
+                        <input type="text" class="form-control" id="validationCustom05" name="Regione Sociale" required>
+                        <div class="invalid-feedback">
+                            Ragione sociale &#232; un campo obbligatorio.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-cappotto-radio">
+                <p class="p16-egl"><b>QUAL &#200; IL LIVELLO DI EFFICIENZA ENERGETICA DELLA TUA IMPRESA?</b></p>
+                <div class="d-flex flex-column flex-md-row">
+                    <div class="form-check form-check-inline">
+                        <input required class="form-check-input" type="radio" name="Livello efficienza"
+                            id="inlineRadioOptions1" value="Nessun intervento">
+                        <label class="form-check-label" for="inlineRadioOptions1">Nessun intervento realizzato</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input required class="form-check-input" type="radio" name="Livello efficienza"
+                            id="inlineRadioOptions2" value="Alcuni interventi">
+                        <label class="form-check-label" for="inlineRadioOptions2">Alcuni interventi effettuati</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-cappotto-radio">
+                <p class="p16-egl"><b>QUANTO CONSUMA LA TUA IMPRESA?</b></p>
+                <div class="d-flex flex-column flex-md-row">
+                    <div class="form-check form-check-inline">
+                        <input required class="form-check-input" type="radio" name="Consumo Impresa"
+                            id="radioConsumoImpresa1" value="Meno di 100.000 kWh/anno">
+                        <label class="form-check-label" for="radioConsumoImpresa1">Meno di 100.000 kWh/anno</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input required class="form-check-input" type="radio" name="Consumo Impresa"
+                            id="radioConsumoImpresa2" value="Piu di 100.000 kWh/anno">
+                        <label class="form-check-label" for="radioConsumoImpresa2">Pi&#249; di 100.000 kWh/anno</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input required class="form-check-input" type="radio" name="Consumo Impresa"
+                            id="radioConsumoImpresa3" value="Non so">
+                        <label class="form-check-label" for="radioConsumoImpresa2">Non so</label>
+                    </div>
+                </div>
+            </div>
+            <p class="p16-egl"><b>A COSA SEI INTERESSATO?</b></p>
+            <div class="d-flex flex-column flex-md-row  flex-wrap">
+                <div class="form-check form-check-inline pleni-checkbox">
+                    <input class="form-check-input" type="checkbox" name="Interesse" id="pleniCheck1"
+                        value="Servizi di efficientamento in generale">
+                    <label class="form-check-label" for="pleniCheck1">Servizi di efficientamento in generale</label>
+                </div>
+                <div class="form-check form-check-inline pleni-checkbox">
+                    <input class="form-check-input" type="checkbox" name="Interesse" id="pleniCheck2"
+                        value="BEMS">
+                    <label class="form-check-label" for="pleniCheck2">BEMS (Building Energy Management Service)</label>
+                </div>
+                <div class="form-check form-check-inline pleni-checkbox">
+                    <input class="form-check-input" type="checkbox" name="Interesse" id="pleniCheck3"
+                        value="Fotovoltaico">
+                    <label class="form-check-label" for="pleniCheck3">Fotovoltaico</label>
+                </div>
+                <div class="form-check form-check-inline pleni-checkbox">
+                    <input class="form-check-input" type="checkbox" name="Interesse" id="pleniCheck4"
+                        value="Pompe di calore">
+                    <label class="form-check-label" for="pleniCheck4">Pompe di calore</label>
+                </div>
+                <div class="form-check form-check-inline pleni-checkbox">
+                    <input class="form-check-input" type="checkbox" name="Interesse" id="pleniCheck5"
+                        value="Relamping">
+                    <label class="form-check-label" for="pleniCheck5">Relamping</label>
+                </div>
+                <div class="form-check form-check-inline pleni-checkbox">
+                    <input class="form-check-input" type="checkbox" name="Interesse" id="pleniCheck6"
+                        value="Offerte">
+                    <label class="form-check-label" for="pleniCheck6">Offerte luce e gas di Plenitude</label>
+                </div>
+            </div>
+            <div data-sly-test="${properties.nota}" class="cap14-egl">${properties.nota @ context='html'}</div>
+            <div class="d-lg-flex justify-content-between align-items-center">
+                <div class="cap14-egl">Tutti i campi sono obbligatori: controlla l'esattezza dei dati prima di cliccare
+                    su "Invia Richiesta"
+                </div>
+                <button onclick="sfCallMeBackDataLayerEfficientamentoClick()" class="buttonlink-pleni-cta" type="submit">Invia Richiesta</button>
+            </div>
+        </form>
+    </div>
+
+<!-- Modale OK -->
+<div class="modal callmeback-2" id="ModaleSuccesso" tabindex="-1"
+	aria-labelledby="ModaleSuccesso" aria-hidden="true">
+	<div class="callmeback2-dialog">
+		<div class="callmeback2-modal modale-successo">
+			<span aria-hidden="true"
+				class="position-absolute egl-mod-comm-closeIcon">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-close-bold.svg" alt="chiudi-modale" />
+				</button>
+			</span>
+			<div class="d-flex justify-content-center">
+				<img loading="lazy" class="modale-successo-arr"
+					src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/arrivederci-colorato.svg" alt="">
+			</div>
+			<p>Grazie, ti contatteremo a breve</p>
+			<div class="d-flex justify-content-center">
+				<button class="btn btn-primary cta-primary" data-dismiss="modal"
+					aria-label="Close" type="submit">Chiudi</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modale KO -->
+<div class="modal callmeback-2" id="ModaleFallimento" tabindex="-1"
+	aria-labelledby="ModaleFallimento" aria-hidden="true">
+	<div class="callmeback2-dialog">
+		<div class="callmeback2-modal modale-fallimento">
+			<span aria-hidden="true"
+				class="position-absolute egl-mod-comm-closeIcon">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/03-icons-close-bold.svg" alt="chiudi-modale" />
+				</button>
+			</span>
+			<div class="d-flex justify-content-center">
+				<img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/lead-ko.svg" alt="">
+			</div>
+			<p class="text-center"><b>Si &egrave; verificato un errore imprevisto.</b></p>
+            <p class="text-center">Riprovare pi&ugrave; tardi </p>
+			<div class="d-flex justify-content-center">
+				<button class="btn btn-primary cta-primary" data-dismiss="modal"
+					aria-label="Close" type="submit">Ritorna alla pagina</button>
+			</div>
+		</div>
+	</div>
+</div>

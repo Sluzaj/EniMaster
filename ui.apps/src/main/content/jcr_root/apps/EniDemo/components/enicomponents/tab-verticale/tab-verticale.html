@@ -1,0 +1,88 @@
+<sly
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.titleCard1}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<sly data-sly-use.model="com.egl.core.models.tabverticale.TabVerticaleModel"></sly>
+
+<div id="${properties.idRef}" class="tab-vertical-wrapper">
+	<div class="d-flex egl-tab-vertical-title container-lg">
+	<sly data-sly-test="${properties.title}">
+		<div class="card-offerte-rectangle"></div>
+		<div class="d-flex flex-column">
+			<span class="card-offerte-title">${properties.title}</span>
+		</div>
+	</sly>
+	</div>
+	<div class="tab-verticale-background-div-color d-none d-lg-block">
+		<div
+			class="container-lg egl-herohomepage-basic egl-tab-vertical-container">
+			<div class="tab-verticale-contenitore-asset">
+				<div class="tab-verticale-contenitore-asset-per-promo">
+					<sly data-sly-list.el="${model.list}">
+					<div id="${el.divId}" class="tabcontent tabcontent ${elList.first ? 'd-block' : 'd-none'}" style="display:${wcmmode.edit && !elList.first ? 'none' : '' @ context='styleToken'}">
+						<div class="tabcontent-contenuto-testuale">
+							<div class="d-flex tabcontent-contenuto-titolo">
+								<p>${el.titleTab @ context='html'}</p>
+							</div>
+							<div class="tabcontent-contenuto-paragrafo">${el.paragraphTab @
+								context='html'}</div>
+							<a data-sly-test="${el.linkCTA && el.labelCTA}"
+								href="${el.linkCTA}" title="${el.altCTA}"
+								target="${el.targetCTA}" class="cta-tab-vertical">${el.labelCTA}</a>
+						</div>
+						<picture data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=el.asset}" >
+	                    	<sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+	                       		<source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+	                            <source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+	                        </sly> <img loading="lazy"
+							data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=el.asset}"
+							class="tab-verticale-right-img"
+							src="${renditionsManager.renditions['1920px']}"
+							alt="${image.description}" />
+						</picture>
+					</div>
+					</sly>
+				</div>
+			</div>
+			<div class="row tab-verticale-main-row">
+				<div class="col-12 tab-verticale-main-col">
+					<div class="d-flex flex-column tab-verticale-contenitore-contenuto">
+						<sly data-sly-list.tab="${model.list}">
+						<div data-sly-set.func="openImage(event, '${tab.divId}')" class="tablinks" onclick="${func @ context='attribute'}"
+							id="${tabList.first ? 'defaultOpen' : ''}">
+							<span class="tab-verticale-tab-style">
+								<p>${tab.tabLabel}</p>
+							</span>
+						</div>
+						</sly>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tab-verticale-mobile-wrapper d-lg-none">
+		<div class="tab-verticale-mobile-tabs-container">
+			<sly data-sly-list.tabMobile="${model.list}">
+			<span class="tab-verticale-mobile-tabs">${tabMobile.tabLabel}</span></sly>
+		</div>
+		<div class="tab-verticale-mobile-content-container">
+			<sly data-sly-list.elMobile="${model.list}">
+			<div class="tab-verticale-mobile-content">
+				<img loading="lazy"
+					src="${elMobile.asset}"
+					alt="">
+				<div class="tab-verticale-mobile-testo">
+					<div class="tab-verticale-mobile-titolo"><p>${elMobile.titleTab @ context='html'}</p></div>
+					<div class="tab-verticale-mobile-paragrafo">${elMobile.paragraphTab
+						@ context='html'}</div>
+					<a data-sly-test="${elMobile.linkCTA && elMobile.labelCTA}"
+						href="${elMobile.linkCTA}" title="${elMobile.altCTA}" target="${elMobile.targetCTA}"
+						class="cta-tab-vertical">${elMobile.labelCTA}</a>
+				</div>
+			</div>
+			</sly>
+		</div>
+	</div>
+</div>

@@ -4,3 +4,12 @@
 [submodule "EniSpagna"]
 	path = EniSpagna
 	url = https://github.com/Sluzaj/EniSpagna.git
+[submodule "EniFrancia"]
+	path = EniFrancia
+	url = https://github.com/Sluzaj/EniFrancia.git
+[submodule "EniGrecia"]
+	path = EniGrecia
+	url = https://github.com/Sluzaj/EniGrecia.git
+[submodule "EniSlovenia"]
+	path = EniSlovenia
+	url = https://github.com/Sluzaj/EniSlovenia.git

@@ -1,0 +1,548 @@
+<sly
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.compilazioneComponente}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<sly data-sly-use.fragModel="com.egl.core.models.promoband.FragmentPromoBandModel"></sly>
+
+<sly data-sly-test.isEdit= "${properties.compilazioneComponente == 'editoriale'}"></sly>
+
+<sly data-sly-test.isDefault= "${properties.tipoPromoBand == 'promoBand'}"></sly>
+<sly data-sly-test.isCountdown= "${properties.tipoPromoBand == 'promoBandCount'}"></sly>
+<sly data-sly-test.isSticky= "${properties.switchSticky}"></sly>
+
+
+<sly data-sly-test.linkCTA="${properties.linkCTA ? properties.linkCTA : '#modale-promozione'}"></sly>
+<sly data-sly-test.default="${!properties.modalCTA && linkCTA == '#modale-promozione'}"></sly>
+<sly data-sly-test.jsCTA="${properties.itemsjs}"></sly>
+
+
+    <!--PROMO BAND DEFAULT EDITORIALE -->
+ <div data-sly-test="${isEdit}" data-sly-unwrap>
+    <div id="${properties.id}" class="container-fluid egl-promo-band-default-container promoB-edit-${resource.name}" >
+      <div class="row h-100 egl-promo-band-row" style="--bg-PromoBand-color:${properties.coloreBackground @context='styleToken'}">
+        <div class="egl-circle-background" style="background:${properties.coloreBackground@ context='styleToken'};">
+          <div class="egl-promo-band-img-div" data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.assetImgReference}">
+            <picture data-sly-use.rend="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=properties.assetImgReference}">
+              <source media="(min-resolution: 150dpi)" srcset="${rend.doubledRenditions['1920px'] @ context='uri'}">
+              <img loading="lazy" src="${rend.renditions['1920px']}" alt="${image.description}"/>
+            </picture>
+          </div>
+        </div>
+        <div class="egl-promo-band-content text-center text-lg-left">
+          <div class="row">
+            <div class="col-12">
+              <div class="h2-egl egl-promo-band-titolo">
+                ${properties.titoloH3 @context='html'}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="p18-egl" style="line-height: 1.44; margin-bottom: 30px">
+                 ${properties.descrizioneP2 @context='html'}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div data-sly-test="${(properties.modalCTA || default) && !jsCTA}" class="egl-promo-band-cta-container">
+	              <button data-sly-test="${properties.labelCTA}"
+                  title="${properties.titleTextLink}"
+                  type="button"
+                  class="btn btn-link cta-secondary egl-cta-promo-band"
+                  data-toggle="modal"
+                  data-target="${'#' in linkCTA ? '' : '#'}${linkCTA}">
+                    ${properties.labelCTA}
+                </button>
+              </div>
+              <!-- Bottone URL -->
+             <div data-sly-test="${(!properties.modalCTA && !default) || jsCTA}" class="egl-promo-band-cta-container">
+             	<a data-sly-test="${properties.labelCTA && (linkCTA || jsCTA)}" href="${jsCTA ? jsCTA : linkCTA @ context='html'}" target="${properties.targetCTA}">
+		            <button 
+	                  title="${properties.titleTextLink}"
+	                  class="btn btn-link cta-secondary egl-cta-promo-band">
+	                    ${properties.labelCTA}
+	                </button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+ </div>
+    
+    
+  <!--PROMO BAND DEFAULT PROMOZIONE 1 -->
+ <div data-sly-test="${!isEdit && isDefault}" data-sly-test.promozione1="${fragModel.fragPromo1}" data-sly-unwrap>
+    <div id="${properties.id}" class="container-fluid egl-promo-band-default-container promoB-promo1-${resource.name}"
+    	data-start-promo="${promozione1.dataInizioPromozione}" data-end-promo="${promozione1.dataFinePromozione}">
+      <div class="row h-100 egl-promo-band-row" 
+      	style="--bg-PromoBand-color:${promozione1.coloreBackgroundFasciaPromozionale @context='styleToken'}">
+        <div class="egl-circle-background" style="background:${promozione1.coloreBackgroundFasciaPromozionale @ context='styleToken'};">
+          <div class="egl-promo-band-img-div" data-sly-use.image1="${'com.egl.core.models.utils.ImageModel' @ imagePath=promozione1.immagineComponentePromoBand}">
+            <picture data-sly-use.rend="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=promozione1.immagineComponentePromoBand}">
+              <source media="(min-resolution: 150dpi)" srcset="${rend.doubledRenditions['1920px'] @ context='uri'}">
+              <img loading="lazy" src="${rend.renditions['1920px']}" alt="${image1.description}"/>
+            </picture>
+          </div>
+        </div>
+        <div class="egl-promo-band-content text-center text-lg-left">
+          <div class="row">
+            <div class="col-12">
+              <div class="h2-egl egl-promo-band-titolo">
+                ${promozione1.titoloComponentePromoBand @context='html'}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="p18-egl" style="line-height: 1.44; margin-bottom: 30px">
+                 ${promozione1.descrizioneComponentePromoBand @context='html'}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div data-sly-test="${(properties.modalCTA || default) && !jsCTA}" class="egl-promo-band-cta-container">
+	              <button data-sly-test="${properties.labelCTA}"
+                  title="${properties.titleTextLink}"
+                  type="button"
+                  class="btn btn-link cta-secondary egl-cta-promo-band"
+                  data-toggle="modal"
+                  data-target="${'#' in linkCTA ? '' : '#'}${linkCTA}">
+                    ${properties.labelCTA}
+                </button>
+              </div>
+              <!-- Bottone URL -->
+             <div data-sly-test="${(!properties.modalCTA && !default) || jsCTA}" class="egl-promo-band-cta-container">
+             	<a data-sly-test="${properties.labelCTA && (linkCTA || jsCTA)}"  href="${jsCTA ? jsCTA : linkCTA @ context='html'}" target="${properties.targetCTA}">
+		            <button 
+	                  title="${properties.titleTextLink}"
+	                  class="btn btn-link cta-secondary egl-cta-promo-band">
+	                    ${properties.labelCTA}
+	                </button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>   
+   </div>
+   
+    <!--PROMO BAND DEFAULT PROMOZIONE 2 -->
+ <div data-sly-test="${!isEdit && isDefault}" data-sly-test.promozione2="${fragModel.fragPromo2}" data-sly-unwrap>
+    <div id="${properties.id}" class="container-fluid egl-promo-band-default-container promoB-promo2-${resource.name}"
+    	data-start-promo="${promozione2.dataInizioPromozione}" data-end-promo="${promozione2.dataFinePromozione}">
+      <div class="row h-100 egl-promo-band-row"
+      style="--bg-PromoBand-color:${promozione2.coloreBackgroundFasciaPromozionale @context='styleToken'}">
+        <div class="egl-circle-background" style="background:${promozione2.coloreBackgroundFasciaPromozionale @ context='styleToken'};">
+          <div class="egl-promo-band-img-div" data-sly-use.image2="${'com.egl.core.models.utils.ImageModel' @ imagePath=promozione2.immagineComponentePromoBand}">
+            <picture data-sly-use.rend="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=promozione2.immagineComponentePromoBand}">
+              <source media="(min-resolution: 150dpi)" srcset="${rend.doubledRenditions['1920px'] @ context='uri'}">
+              <img loading="lazy" src="${rend.renditions['1920px']}" alt="${image2.description}"/>
+            </picture>
+          </div>
+        </div>
+        <div class="egl-promo-band-content text-center text-lg-left">
+          <div class="row">
+            <div class="col-12">
+              <div class="h2-egl egl-promo-band-titolo">
+                ${promozione2.titoloComponentePromoBand @context='html'}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="p18-egl" style="line-height: 1.44; margin-bottom: 30px">
+                 ${promozione2.descrizioneComponentePromoBand @context='html'}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div data-sly-test="${(properties.modalCTA || default) && !jsCTA}" class="egl-promo-band-cta-container">
+	              <button data-sly-test="${properties.labelCTA}"
+                  title="${properties.titleTextLink}"
+                  type="button"
+                  class="btn btn-link cta-secondary egl-cta-promo-band"
+                  data-toggle="modal"
+                  data-target="${'#' in linkCTA ? '' : '#'}${linkCTA}">
+                    ${properties.labelCTA}
+                </button>
+              </div>
+              <!-- Bottone URL -->
+             <div data-sly-test="${(!properties.modalCTA && !default) || jsCTA}" class="egl-promo-band-cta-container">
+             	<a data-sly-test="${properties.labelCTA && (linkCTA || jsCTA)}" href="${jsCTA ? jsCTA : linkCTA @ context='html'}" target="${properties.targetCTA}">
+		            <button 
+	                  title="${properties.titleTextLink}"
+	                  class="btn btn-link cta-secondary egl-cta-promo-band">
+	                    ${properties.labelCTA}
+	                </button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>   
+  </div>
+   
+   
+<!--PROMO BAND COUNTDOWN-->
+<div data-sly-test="${!isEdit && isCountdown}" data-sly-unwrap>
+    
+    <!--PROMOZIONE 1-->
+    <div id="${properties.id}" data-sly-test.promozione1="${fragModel.fragPromo1}"
+      class="container-fluid egl-promo-band-offerta-container position-relative promoB-promo1-${resource.name}"
+      data-start-promo="${promozione1.dataInizioPromozione}" data-end-promo="${promozione1.dataFinePromozione}"
+    >
+      <div class="row egl-row-promo-band-fascia-countdown">
+        <div class="position-relative d-flex egl-promo-div-fascia-countdown" 
+        style="--bg-PromoBand-color:${promozione1.coloreBackgroundFasciaPromozionale @context='styleToken'}">
+          <div class="egl-promo-band-paragrafi">
+            <div class="countdown-paragraph-1">PROMO ATTIVA!</div>
+            <div class="countdown-paragraph-2">Scade tra:</div>
+          </div>
+          <div class="egl-promo-band-countdown">
+            <div class="d-flex position-relative">
+              <div class="egl-promo-cd-giorno">
+                <div>01</div>
+              </div>
+              <div
+                class="egl-promo-cd-ore"
+                style="margin-right: 30px; margin-left: 30px"
+              >
+                <div>12</div>
+              </div>
+              <div class="egl-promo-cd-minuti">
+                <div>38</div>
+              </div>
+            </div>
+            <div class="d-flex">
+              <div
+                class="cap12-egl"
+                style="color: #fff; margin-left: 2px; margin-right: 41px"
+              >
+                GIORNO
+              </div>
+              <div class="cap12-egl" style="color: #fff; margin-right: 43px">
+                ORE
+              </div>
+              <div class="cap12-egl" style="color: #fff">MINUTI</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row h-100 egl-promo-band-row" style="--bg-PromoBand-color:${promozione1.coloreBackgroundFasciaPromozionale @context='styleToken'}">
+        <div class="egl-circle-background" style="background:${promozione1.coloreBackgroundFasciaPromozionale @ context='styleToken'};">
+          <div class="egl-promo-band-img-div" data-sly-use.image3="${'com.egl.core.models.utils.ImageModel' @ imagePath=promozione1.immagineComponentePromoBand}">
+            <picture data-sly-use.rend="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=promozione1.immagineComponentePromoBand}">
+              <source media="(min-resolution: 150dpi)" srcset="${rend.doubledRenditions['1920px'] @ context='uri'}">
+              <img loading="lazy" src="${rend.renditions['1920px']}" alt="${image3.description}"/>
+            </picture>
+          </div>
+        </div>
+        <div class="egl-promo-band-content text-center text-lg-left">
+          <div class="row">
+            <div class="col-12">
+            	<div class="h2-egl egl-promo-band-titolo">
+                	${promozione1.titoloComponentePromoBand @context='html'}
+              	</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="p18-egl" style="line-height: 1.44; margin-bottom: 30px">
+                ${promozione1.descrizioneComponentePromoBand @context='html'}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div data-sly-test="${(properties.modalCTA || default) && !jsCTA}" class="egl-promo-band-cta-container">
+	              <button data-sly-test="${properties.labelCTA}"
+                  title="${properties.titleTextLink}"
+                  type="button"
+                  class="btn btn-link cta-secondary egl-cta-promo-band"
+                  data-toggle="modal"
+                  data-target="${'#' in linkCTA ? '' : '#'}${linkCTA}">
+                    ${properties.labelCTA}
+                </button>
+              </div>
+              <!-- Bottone URL -->
+             <div data-sly-test="${(!properties.modalCTA && !default) || jsCTA}" class="egl-promo-band-cta-container">
+             	<a data-sly-test="${properties.labelCTA && (linkCTA || jsCTA)}"  href="${jsCTA ? jsCTA : linkCTA @ context='html'}" target="${properties.targetCTA}">
+		            <button 
+	                  title="${properties.titleTextLink}"
+	                  class="btn btn-link cta-secondary egl-cta-promo-band">
+	                    ${properties.labelCTA}
+	                </button>
+                </a>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    
+    <!--PROMOZIONE 2-->
+    <div id="${properties.id}" data-sly-test.promozione2="${fragModel.fragPromo2}"
+      class="container-fluid egl-promo-band-offerta-container position-relative promoB-promo2-${resource.name}"
+      data-start-promo="${promozione2.dataInizioPromozione}" data-end-promo="${promozione2.dataFinePromozione}"
+    >
+      <div class="row egl-row-promo-band-fascia-countdown">
+        <div class="position-relative d-flex egl-promo-div-fascia-countdown"
+        style="--bg-PromoBand-color:${promozione2.coloreBackgroundFasciaPromozionale @context='styleToken'}">
+          <div class="egl-promo-band-paragrafi">
+            <div class="countdown-paragraph-1">PROMO ATTIVA!</div>
+            <div class="countdown-paragraph-2">Scade tra:</div>
+          </div>
+          <div class="egl-promo-band-countdown">
+            <div class="d-flex position-relative">
+              <div class="egl-promo-cd-giorno">
+                <div>01</div>
+              </div>
+              <div
+                class="egl-promo-cd-ore"
+                style="margin-right: 30px; margin-left: 30px"
+              >
+                <div>12</div>
+              </div>
+              <div class="egl-promo-cd-minuti">
+                <div>38</div>
+              </div>
+            </div>
+            <div class="d-flex">
+              <div
+                class="cap12-egl"
+                style="color: #fff; margin-left: 2px; margin-right: 41px"
+              >
+                GIORNO
+              </div>
+              <div class="cap12-egl" style="color: #fff; margin-right: 43px">
+                ORE
+              </div>
+              <div class="cap12-egl" style="color: #fff">MINUTI</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row h-100 egl-promo-band-row" style="--bg-PromoBand-color:${promozione2.coloreBackgroundFasciaPromozionale @context='styleToken'}">
+        <div class="egl-circle-background" style="background:${promozione2.coloreBackgroundFasciaPromozionale @ context='styleToken'};">
+          <div class="egl-promo-band-img-div" data-sly-use.image4="${'com.egl.core.models.utils.ImageModel' @ imagePath=promozione2.immagineComponentePromoBand}">
+            <picture data-sly-use.rend="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=promozione2.immagineComponentePromoBand}">
+              <source media="(min-resolution: 150dpi)" srcset="${rend.doubledRenditions['1920px'] @ context='uri'}">
+              <img loading="lazy" src="${rend.renditions['1920px']}" alt="${image4.description}"/>
+            </picture>
+          </div>
+        </div>
+        <div class="egl-promo-band-content text-center text-lg-left">
+          <div class="row">
+            <div class="col-12">
+            	<div class="h2-egl egl-promo-band-titolo">
+                	${promozione2.titoloComponentePromoBand @context='html'}
+              	</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="p18-egl" style="line-height: 1.44; margin-bottom: 30px">
+                ${promozione2.descrizioneComponentePromoBand @context='html'}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div data-sly-test="${(properties.modalCTA || default) && !jsCTA}" class="egl-promo-band-cta-container">
+	              <button data-sly-test="${properties.labelCTA}"
+                  title="${properties.titleTextLink}"
+                  type="button"
+                  class="btn btn-link cta-secondary egl-cta-promo-band"
+                  data-toggle="modal"
+                  data-target="${'#' in linkCTA ? '' : '#'}${linkCTA}">
+                    ${properties.labelCTA}
+                </button>
+              </div>
+              <!-- Bottone URL -->
+             <div data-sly-test="${(!properties.modalCTA && !default) || jsCTA}" class="egl-promo-band-cta-container">
+             	<a data-sly-test="${properties.labelCTA && (linkCTA || jsCTA)}" href="${jsCTA ? jsCTA : linkCTA @ context='html'}" target="${properties.targetCTA}">
+		            <button 
+	                  title="${properties.titleTextLink}"
+	                  class="btn btn-link cta-secondary egl-cta-promo-band">
+	                    ${properties.labelCTA}
+	                </button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+   
+   
+<div data-sly-test="${!isEdit && isCountdown && isSticky}" data-sly-unwrap>   
+
+
+    <!--  STICKY PROMO BAND PROMOZIONE 1 -->
+ <div data-sly-test.promozione1="${fragModel.fragPromo1}" data-sly-unwrap>
+    <div
+      id="egl-sticky-promo"
+      class="position-fixed egl-sticky-promo-box ${wcmmode.edit ? '' : 'd-none'} promoB-promo1-sticky-${resource.name}"
+      data-start-promo="${promozione1.dataInizioPromozione}" data-end-promo="${promozione1.dataFinePromozione}"
+      data-toggle="modal"
+      data-target="#modale-promozione"
+    >
+      <div class="egl-promo-sticky-img" style="background-color:${promozione1.coloreBackgroundFasciaPromozionale @context='styleToken'}"
+      data-sly-use.image5="${'com.egl.core.models.utils.ImageModel' @ imagePath=promozione1.immagineComponentePromoBand}">
+        <picture data-sly-use.rend="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=promozione1.immagineComponentePromoBand}">
+          <source media="(min-resolution: 150dpi)" srcset="${rend.doubledRenditions['1920px'] @ context='uri'}">
+          <img loading="lazy" src="${rend.renditions['1920px']}" alt="${image5.description}"/>
+        </picture>
+      </div>
+      <div class="egl-promo-sticky-cd">
+        <div class="p16-egl"><b>PROMO ATTIVA!</b> Scade tra:</div>
+        <div class="egl-sticky-promo-cd d-flex text-center">
+          <div class="egl-sticky-cd-giorno">
+            <div class="egl-promo-cd-giorno">
+            	<div class= "h3-egl" style="color:#212529; font-weight: bold;">
+            		01
+            	</div>
+            </div>
+            <div class="cap12-egl">GIORNO</div>
+          </div>
+          <div class="egl-sticky-cd-ore position-relative">
+          	<div class="egl-promo-cd-ore">
+	            <div class="h3-egl" style="color:#212529; font-weight: bold;">
+	            	12
+	            </div>
+            </div>
+            <div class="cap12-egl">ORE</div>
+          </div>
+          <div class="egl-sticky-cd-minuti">
+          	<div class="egl-promo-cd-minuti">
+	            <div class="h3-egl" style="color:#212529; font-weight: bold;">
+	            	33
+	            </div>
+            </div>
+            <div class="cap12-egl">MINUTI</div>
+          </div>
+        </div>
+            <div data-sly-test="${(properties.modalCTA || default) && !jsCTA}" class="egl-promo-sticky-cta-container">
+            <button data-sly-test="${properties.labelCTA}"
+               title="${properties.titleTextLink}"
+               type="button"
+               class="btn btn-link egl-sticky-promo-cta-secondary cta-secondary p16-egl"
+               data-toggle="modal"
+               data-target="${'#' in linkCTA ? '' : '#'}${linkCTA}">
+                 ${properties.labelCTA}
+             </button>
+           </div>
+           <!-- Bottone URL -->
+          <div data-sly-test="${(!properties.modalCTA && !default) || jsCTA}" class="egl-promo-sticky-cta-container">
+          	<a data-sly-test="${properties.labelCTA && (linkCTA || jsCTA)}" href="${jsCTA ? jsCTA : linkCTA @ context='html'}" target="${properties.targetCTA}">
+           <button 
+                title="${properties.titleTextLink}"
+                class="btn btn-link egl-sticky-promo-cta-secondary cta-secondary p16-egl">
+                  ${properties.labelCTA}
+              </button>
+             </a>
+           </div>
+      </div>
+    </div>
+</div>
+
+
+
+
+
+
+     <!-- STICKY PROMO BAND PROMOZIONE 2  -->
+ <div data-sly-test.promozione2="${fragModel.fragPromo2}" data-sly-unwrap>
+    <div
+      id="egl-sticky-promo"
+      class="position-fixed egl-sticky-promo-box ${wcmmode.edit ? '' : 'd-none'} promoB-promo2-sticky-${resource.name}"
+      data-start-promo="${promozione2.dataInizioPromozione}" data-end-promo="${promozione2.dataFinePromozione}"
+      data-toggle="modal"
+      data-target="#modale-promozione"
+    >
+      <div class="egl-promo-sticky-img" style="background-color:${promozione2.coloreBackgroundFasciaPromozionale @context='styleToken'}"
+      data-sly-use.image6="${'com.egl.core.models.utils.ImageModel' @ imagePath=promozione2.immagineComponentePromoBand}">
+        <picture data-sly-use.rend="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=promozione2.immagineComponentePromoBand}">
+          <source media="(min-resolution: 150dpi)" srcset="${rend.doubledRenditions['1920px'] @ context='uri'}">
+          <img loading="lazy" src="${rend.renditions['1920px']}" alt="${image6.description}"/>
+        </picture>
+      </div>
+      <div class="egl-promo-sticky-cd">
+        <div class="p16-egl"><b>PROMO ATTIVA!</b> Scade tra:</div>
+        <div class="egl-sticky-promo-cd d-flex text-center">
+          <div class="egl-sticky-cd-giorno">
+            <div class= "h3-egl" style="font-weight: bold;">
+              01
+            </div>
+            <div class="cap12-egl">GIORNO</div>
+          </div>
+          <div class="egl-sticky-cd-ore position-relative">
+          	<div class="h3-egl" style="font-weight: bold;">
+	            12
+            </div>
+            <div class="cap12-egl">ORE</div>
+          </div>
+          <div class="egl-sticky-cd-minuti">
+            <div class="h3-egl" style="font-weight: bold;">
+              33
+            </div>
+            <div class="cap12-egl">MINUTI</div>
+          </div>
+        </div>
+          <div data-sly-test="${properties.modalCTA || default}" class="egl-promo-sticky-cta-container">
+           <button data-sly-test="${properties.labelCTA}"
+              title="${properties.titleTextLink}"
+              type="button"
+              class="btn btn-link egl-sticky-promo-cta-secondary cta-secondary p16-egl"
+              data-toggle="modal"
+              data-target="${'#' in linkCTA ? '' : '#'}${linkCTA}">
+                ${properties.labelCTA}
+            </button>
+          </div>
+          <!-- Bottone URL -->
+         <div data-sly-test="${(!properties.modalCTA && !default) || jsCTA}" class="egl-promo-sticky-cta-container">
+         	<a data-sly-test="${properties.labelCTA && (linkCTA || jsCTA)}" href="${jsCTA ? jsCTA : linkCTA @ context='html'}" target="${properties.targetCTA}">
+          <button 
+               title="${properties.titleTextLink}"
+               class="btn btn-link egl-sticky-promo-cta-secondary cta-secondary p16-egl">
+                 ${properties.labelCTA}
+             </button>
+            </a>
+          </div>
+      </div>
+    </div>
+	</div>
+	
+ </div>
+
+ 
+ 
+<div>
+	<sly
+		data-sly-resource="${'modale-promozione' @ resourceType='enigaseluce/components/promo-band/modale-promozione'}"></sly>
+</div>
+
+
+<script data-sly-test="${wcmmode.disabled && (fragModel.fragPromo1 || fragModel.fragPromo2)}">
+	(function($) {
+		$(document).ready( function() {
+		  promotionHideShow(".promoB-edit-${resource.name @ context='scriptToken'}",".promoB-promo1-${resource.name @ context='scriptToken'}",".promoB-promo2-${resource.name @ context='scriptToken'}", "egl-promo-band-offerta-container");
+		  promotionHideShow(null,".promoB-promo1-sticky-${resource.name @ context='scriptToken'}",".promoB-promo2-sticky-${resource.name @ context='scriptToken'}", "egl-sticky-promo-box");
+      countdownElements(".promoB-promo1-${resource.name @ context='scriptToken'}", ".egl-promo-cd-giorno", ".egl-promo-cd-ore", ".egl-promo-cd-minuti");
+      countdownElements(".promoB-promo2-${resource.name @ context='scriptToken'}", ".egl-promo-cd-giorno", ".egl-promo-cd-ore", ".egl-promo-cd-minuti");
+      countdownElements(".promoB-promo1-sticky-${resource.name @ context='scriptToken'}", ".egl-promo-cd-giorno", ".egl-promo-cd-ore", ".egl-promo-cd-minuti");
+      countdownElements(".promoB-promo2-sticky-${resource.name @ context='scriptToken'}", ".egl-sticky-cd-giorno", ".egl-sticky-cd-ore", ".egl-sticky-cd-minuti");
+    });
+	})($);
+</script>

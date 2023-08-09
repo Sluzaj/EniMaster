@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+	xmlns:cq="http://www.day.com/jcr/cq/1.0"
+	xmlns:jcr="http://www.jcp.org/jcr/1.0"
+	xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+	xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
+	jcr:primaryType="nt:unstructured" jcr:title="Properties Hero Homepage"
+	extraClientlibs="[cq.author.accordion]"
+	sling:resourceType="cq/gui/components/authoring/dialog">
+	<content jcr:primaryType="nt:unstructured"
+		sling:resourceType="granite/ui/components/coral/foundation/container">
+		<items jcr:primaryType="nt:unstructured">
+			<generic jcr:primaryType="nt:unstructured"
+				jcr:title="Proprietà"
+				sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">
+				<items jcr:primaryType="nt:unstructured">
+					<idRef jcr:primaryType="nt:unstructured"
+						sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+						fieldLabel="ID Per Ancore" name="./idRef" />
+					<itemNumber jcr:primaryType="nt:unstructured"
+						sling:resourceType="granite/ui/components/coral/foundation/form/numberfield"
+						min="1" max="3" value="1" step="1" fieldLabel="Numero di tabs"
+						name="./tabsNumber" />
+				</items>
+			</generic>
+			<tabOrder jcr:primaryType="nt:unstructured"
+				sling:resourceType="granite/ui/components/coral/foundation/form/fieldset"
+				jcr:title="Ordine Tab">
+				<items jcr:primaryType="nt:unstructured">
+					<tab1 jcr:primaryType="nt:unstructured"
+						sling:resourceType="granite/ui/components/coral/foundation/form/select"
+						emptyOption="true"
+						fieldLabel="Posizione 1" name="./tab1">
+						<datasource jcr:primaryType="nt:unstructured"
+							sling:resourceType="enigaseluce/components/hero-homepage/inner-element/datasource-tabs" />
+					</tab1>
+					<tab2 jcr:primaryType="nt:unstructured"
+						sling:resourceType="granite/ui/components/coral/foundation/form/select"
+						emptyOption="true"
+						fieldLabel="Posizione 2" name="./tab2">
+						<datasource jcr:primaryType="nt:unstructured"
+							sling:resourceType="enigaseluce/components/hero-homepage/inner-element/datasource-tabs" />
+					</tab2>
+					<tab3 jcr:primaryType="nt:unstructured"
+						sling:resourceType="granite/ui/components/coral/foundation/form/select"
+						emptyOption="true"
+						fieldLabel="Posizione 3" name="./tab3">
+						<datasource jcr:primaryType="nt:unstructured"
+							sling:resourceType="enigaseluce/components/hero-homepage/inner-element/datasource-tabs" />
+					</tab3>
+				</items>
+			</tabOrder>
+		</items>
+	</content>
+</jcr:root>

@@ -1,0 +1,46 @@
+<sly data-sly-use.eniEnvs="com.egl.core.models.utils.ENIEnvironmentConfig"></sly>
+<sly data-sly-use.model="${'com.egl.core.models.nuoveattivazioni.LuceNATextsModel' @ stepName='lucePosa', pathJson=properties.pathJson}" />
+<sly data-sly-test.text="${model.lucePosaAttivazione}"/>
+
+
+<div class="container-lg px-lg-0 NA-last-step" data-faq-tab="${properties.allaccioPosaAttivazioneLuce}">
+    <div class="row">
+        <div class="col-lg-4 na-riepilogo">
+            <div class="na-card-riepilogo">
+                <div class="na-card-riepilogo-content">
+                    <div class="na-riepilogo-ripeti" onclick="caricaStepNuovaAttivazione('luce_step0')">${text.repeatQ}
+                    </div>
+                    <p>${text.lightMeterRec}</p>
+                    <div class="na-riepilogo-button">${text.lightGasMeterR2}</div>
+                    <p>${text.lightGasMeterConnection}</p>
+                    <div class="na-riepilogo-button">${text.lightMeterConnectionR2}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 na-spazio-card na-step0 na-lavori-impianto-gas">
+            <div class="na-last-step-content">
+                <p>${text.finalStepTitle}</p>
+                <h2>${text.meterNewTitle}</h2>
+                <p>${text.lightMeterNewText @ context='html'}</p>
+                <div class="d-flex">
+                    <button id="btn-vers" class="buttonlink-pleni-cta" data-toggle="modal" data-target="#modale-NA" data-backdrop="static"
+                    data-keyboard="false" onclick="getDataFromRecap()">${text.lightMeterNewButton @ context='html'}</button>
+                    <button class="${properties.callme ? 'callmeback' : 'd-none'}" data-toggle="modal" data-target="#ti-chiamiamo-noi" onclick="sfCallMeBackDataLayer('1_i tuoi dati', null)">${properties.callme}</button>
+                	<sly  data-sly-test="${properties.whatsappluce}">
+	                	<button class="na-whatsapp" whatsapp="ModaleWA">WHATSAPP
+	                        <img loading="lazy" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/chevron-right-solid.svg"  class="chevron"/>
+	                    </button>
+                    </sly>
+                </div>
+            </div>
+            <p class="cap12-egl" style="margin: 15px 0px 0px;">${text.finalStepFAQNote @ context='html'}</p>
+        </div>
+    </div>
+</div>
+
+<div id="riepilogo-nuova-attivazione"
+    data-weborder-service="${eniEnvs.serviceUrl}"
+	data-light-meter="${text.lightGasMeterR2}"
+	data-light-gas-meter-connection="${text.lightMeterConnectionR2}"></div> 
+
+

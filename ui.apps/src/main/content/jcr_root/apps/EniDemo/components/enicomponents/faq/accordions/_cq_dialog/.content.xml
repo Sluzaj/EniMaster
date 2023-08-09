@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+	xmlns:cq="http://www.day.com/jcr/cq/1.0"
+	xmlns:jcr="http://www.jcp.org/jcr/1.0"
+	xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+	xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
+	jcr:primaryType="nt:unstructured" jcr:title="Accordions Properties"
+	sling:resourceType="cq/gui/components/authoring/dialog">
+	<content jcr:primaryType="nt:unstructured"
+		sling:resourceType="granite/ui/components/coral/foundation/container">
+		<items jcr:primaryType="nt:unstructured">
+			<altTextPromo1 jcr:primaryType="nt:unstructured"
+				sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+				fieldLabel="Alt Text Promo 1" name="./altTextPromo1" />
+			<pathFragmentPromo1
+				jcr:primaryType="nt:unstructured"
+				sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+				fieldLabel="Path Content Fragment Promozione 1"
+				name="./pathFragmentPromo1" rootPath="/content/dam/enigaseluce" />
+			<altTextPromo2 jcr:primaryType="nt:unstructured"
+				sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+				fieldLabel="Alt Text Promo 2" name="./altTextPromo2" />
+			<pathFragmentPromo2
+				jcr:primaryType="nt:unstructured"
+				sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+				fieldLabel="Path Content Fragment Promozione 2"
+				name="./pathFragmentPromo2" rootPath="/content/dam/enigaseluce" />
+			<pathFragmentFaq jcr:primaryType="nt:unstructured"
+				sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+				fieldLabel="Path Content Fragment FAQ" name="./pathFragmentFAQNew"
+				multiple="{Boolean}true" rootPath="/content/dam/enigaseluce" />
+			<accList jcr:primaryType="nt:unstructured"
+				sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+				class="full-width" fieldLabel="Lista Accordion"
+				composite="{Boolean}true">
+				<field jcr:primaryType="nt:unstructured"
+					sling:resourceType="granite/ui/components/foundation/form/fieldset"
+					acs-commons-nested="" name="./accList">
+					<layout jcr:primaryType="nt:unstructured"
+						sling:resourceType="granite/ui/components/foundation/layouts/container"
+						method="absolute" />
+					<items jcr:primaryType="nt:unstructured">
+						<column jcr:primaryType="nt:unstructured"
+							sling:resourceType="granite/ui/components/foundation/container">
+							<items jcr:primaryType="nt:unstructured">
+								<altTextFrag jcr:primaryType="nt:unstructured"
+									sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+									fieldLabel="Alt Text FAQ" name="./altTextFrag" />
+								<pathFragmentFaq
+									jcr:primaryType="nt:unstructured"
+									sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+									fieldLabel="Path Content Fragment FAQ" name="./pathFragmentFAQ"
+									rootPath="/content/dam/enigaseluce" />
+							</items>
+						</column>
+					</items>
+				</field>
+			</accList>
+		</items>
+	</content>
+</jcr:root>

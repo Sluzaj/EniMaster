@@ -1,0 +1,90 @@
+<!--/*
+    Copyright 2017 Adobe Systems Incorporated
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+*/-->
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html">
+    <sly data-sly-test="${wcmmode.edit}" data-sly-call="${clientlib.css @ categories='enigaseluce.base'}"/>
+</sly>
+
+<link rel="icon" type="image/x-icon" href="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/favicon.ico" />
+<link rel="apple-touch-icon" sizes="57x57" href="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/apple-touch-icon-57x57.png"/>
+    <link rel="apple-touch-icon" sizes="60x60" href="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/apple-touch-icon-60x60.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="76x76" href="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/apple-touch-icon-76x76.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/apple-touch-icon-114x114.png"/>
+    <link rel="apple-touch-icon" sizes="120x120" href="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/apple-touch-icon-120x120.png"/>
+    <link rel="apple-touch-icon" sizes="144x144" href="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/apple-touch-icon-144x144.png"/>
+    <link rel="apple-touch-icon" sizes="152x152" href="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/apple-touch-icon-152x152.png"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/apple-touch-icon-180x180.png"/>
+    <link rel="icon" type="image/png" href="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/favicon-32x32.png" sizes="32x32"/>
+    <link rel="icon" type="image/png" href="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/favicon-194x194.png" sizes="194x194"/>
+    <link rel="icon" type="image/png" href="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/favicon-96x96.png"   sizes="96x96"/>
+    <link rel="icon" type="image/png" href="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/android-chrome-192x192.png" sizes="192x192"/>
+    <link rel="icon" type="image/png" href="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/favicon-16x16.png"  sizes="16x16"/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin/>
+
+<!-- Commento -->
+
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap"/>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap" onload="this.media='all'"/>
+
+
+<sly data-sly-call="${clientlib.css @ categories='enigaseluce.site'}"/>
+
+<script 
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    crossorigin="anonymous"
+></script>
+
+<sly data-sly-use.eniEnvs="com.egl.core.models.utils.ENIEnvironmentConfig" />
+
+<sly data-sly-test="${eniEnvs.isProd}">
+    <script async type="text/javascript" id="commandersact-script" src="https://cdn.tagcommander.com/5023/tc_enigaseluce_20.js?"></script>
+</sly>
+
+<sly data-sly-test="${!eniEnvs.isProd}">
+    <script async type="text/javascript" id="commandersact-script" src="https://cdn.tagcommander.com/5023/uat/tc_enigaseluce_20.js?"></script>
+</sly>
+
+<!--script defer type="text/javascript" id="maxymiser-script" src="//service.maxymiser.net/api/eu/enigaseluce.com/a36709/mmapi.js?a"></script-->
+
+<script
+    data-sly-use.eniEnvs="com.egl.core.models.utils.ENIEnvironmentConfig">
+    window.AKLAMIO_DATE = "${eniEnvs.aklamioDate @ context='uri'}";
+    window.IS_PROD = ${eniEnvs.isProd @ context='scriptToken'};
+    window.IS_BUSINESS = ${eniEnvs.isBusiness @ context='scriptToken'};
+</script>
+
+<sly data-sly-use.clientlibs1="${'com.adobe.cq.wcm.core.components.models.ClientLibraries' @
+    categories='enigaseluce.dependencies', defer=true}">
+    ${clientlibs1.jsIncludes @ context="unsafe"}
+</sly>
+
+<sly data-sly-use.clientlibs1="${'com.adobe.cq.wcm.core.components.models.ClientLibraries' @
+    categories='enigaseluce.tracking', defer=true}">
+    ${clientlibs1.jsIncludes @ context="unsafe"}
+</sly>
+
+<sly data-sly-use.clientlibs1="${'com.adobe.cq.wcm.core.components.models.ClientLibraries' @
+    categories='enigaseluce.universal', defer=true}">
+    ${clientlibs1.jsIncludes @ context="unsafe"}
+</sly>
+
+<script
+    data-sly-use.eniEnvs="com.egl.core.models.utils.ENIEnvironmentConfig">
+    window.SERVICE_BASE_URL = "${eniEnvs.serviceUrl @ context='uri'}";
+    window.DDL_ROOT_PATH = "${eniEnvs.serviceRoot @ context='uri'}";
+</script>

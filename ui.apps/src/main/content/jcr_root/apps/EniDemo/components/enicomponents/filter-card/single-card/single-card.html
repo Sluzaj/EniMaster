@@ -1,0 +1,48 @@
+<sly
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.nomeCard}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+<sly data-sly-use.modelManipulated="com.egl.core.models.filtercardgrid.ManipulatedCategory"></sly>
+
+<div class="FilterCard-article-card-mobile ${modelManipulated.nameList @ context='text'}" data-sly-test="${'mobile' in request.requestPathInfo.selectors}">
+  <div class="FilterCard-article-card-img-mobile" data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagineSingleReference}">
+    <picture data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=properties.immagineSingleReference}" >
+         <sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+             <source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+             <source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+         </sly>
+		<img loading="lazy" src="${renditionsManager.renditions['1920px']}" alt="${image.description}" />
+	</picture>
+    <div class="FilterCard-article-card-img-text-mobile d-flex-column">
+      <p>${properties.nomeCard @context='html'}</p>
+	  <a href="${properties.urlCTA}">${properties.cta @context='html'}</a>
+    </div>
+  </div>
+  <div class="FilterCard-article-card-text-mobile">
+    <h4>${properties.titoloCard @context='html'}</h4>
+	<p>${properties.sottotitolo @context='html'}</p>
+  </div>
+</div>
+
+
+<div class="FilterCard-article-card ${modelManipulated.nameList @ context='text'}" data-sly-test="${'desktop' in request.requestPathInfo.selectors}">
+	<div class="FilterCard-article-card-img" data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.immagineSingleReference}">
+		<picture data-sly-use.renditionsManager="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=properties.immagineSingleReference}" >
+	         <sly data-sly-list="${renditionsManager.renditions.keySet.iterator}">
+	             <source media="(min-width: ${item}) and (min-resolution: 150dpi)" srcset="${renditionsManager.doubledRenditions[item] @ context='uri'}">
+	             <source media="(min-width: ${item})" srcset="${renditionsManager.renditions[item] @ context='uri'}">
+	         </sly>
+			<img loading="lazy" src="${renditionsManager.renditions['1920px']}" alt="${image.description}" />
+		</picture>
+		<div
+			class="FilterCard-article-card-img-text d-flex justify-content-between">
+			<p>${properties.nomeCard @context='html'}</p>
+			<a href="${properties.urlCTA}">${properties.cta @context='html'}</a>
+		</div>
+	</div>
+	<div class="FilterCard-article-card-text">
+		<h4>${properties.titoloCard @context='html'}</h4>
+		<p>${properties.sottotitolo @context='html'}</p>
+	</div>
+</div>

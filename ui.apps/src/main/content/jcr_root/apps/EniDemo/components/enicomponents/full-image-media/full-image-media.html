@@ -1,0 +1,44 @@
+<sly
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.title}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+<sly data-sly-test.mediaType="${properties.mediaType ? properties.mediaType : 'image'}"></sly>
+
+<div id="${properties.idRef}">
+	<div data-pln-component="image-copyright" data-pln-version="1.0" data-pln-template=””>
+		<!--Image-->
+		<div data-sly-test="${mediaType == 'image'}" 
+		class="image-container container-lg" 
+		data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.image}">
+			<picture data-sly-use.rend="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=properties.image}">
+				<source media="(min-resolution: 150dpi)" srcset="${rend.doubledRenditions['1920px'] @ context='uri'}">
+				<img loading="lazy" src="${rend.renditions['1920px']}" alt="${image.description}"/>
+            </picture>
+			<div>${properties.copyright}</div>
+		</div>
+		<!--Video-->
+		<div data-pln-component="video-copyright" data-pln-version="1.0" data-pln-template=””>
+			<div data-sly-test="${mediaType == 'video'}" class="video-container container-lg">
+				<iframe class="youtubeVideo image-04-youtube" 
+					src="${properties.video}"
+					title="${properties.altVideo}" 
+					frameborder="0"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+					allowfullscreen></iframe>
+			</div>
+		</div>
+		<!--Podcast-->
+		<div data-pln-component="podcast-copyright" data-pln-version="1.0" data-pln-template=””>
+			<div data-sly-test="${mediaType == 'podcast'}" class="podcast-container container-lg">
+				<iframe style="border-radius:12px" class="podcastAudio podcastIframe" 
+					src="${properties.podcast}"
+					title="${properties.altPodcast}" 
+					frameborder="0"
+					allowfullscreen="" 
+					allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+					loading="lazy"></iframe>
+        	</div>
+		</div>
+	</div>
+</div>

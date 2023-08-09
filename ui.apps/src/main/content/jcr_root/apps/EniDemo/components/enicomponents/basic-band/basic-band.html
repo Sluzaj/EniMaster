@@ -1,0 +1,3060 @@
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	    data-sly-test.testing="${!properties.title}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+
+<sly data-sly-set.isUniformColor="${properties.bgSelect == 'color' && properties.bgSelectMobile == 'color' && 
+	(!properties.colorBGMobile || properties.colorBG == properties.colorBGMobile)}" />
+<sly data-sly-set.isNotUniformColor="${properties.bgSelect == 'color' && properties.bgSelectMobile == 'color' && 
+	properties.colorBGMobile && properties.colorBG != properties.colorBGMobile}" />
+<sly data-sly-set.isUniformPhoto="${properties.bgSelect == 'photo' && properties.bgSelectMobile == 'photo' && 
+	(!properties.pathBGMobile || properties.pathBG == properties.pathBGMobile)}" />
+<sly data-sly-set.isNotUniformPhoto="${properties.bgSelect == 'photo' && properties.bgSelectMobile == 'photo' && 
+	properties.pathBGMobile && properties.pathBG != properties.pathBGMobile}" />
+<sly data-sly-set.isMix="${properties.bgSelect == 'color' && properties.bgSelectMobile == 'photo'}" />
+<sly data-sly-set.isMixReverse="${properties.bgSelect == 'photo' && properties.bgSelectMobile == 'color'}" />
+<sly data-sly-use.rendManDesk="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=properties.pathBG}" />
+<sly data-sly-use.rendManMob="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=properties.pathBGMobile}" />
+<sly data-sly-set.rendDesk="${rendManDesk.renditions}" />
+<sly data-sly-set.doubledRendDesk="${rendManDesk.doubledRenditions}" />
+<sly data-sly-set.rendMob="${rendManMob.renditions}" />
+<sly data-sly-set.doubledRendMob="${rendManMob.doubledRenditions}" />
+<sly data-sly-set.hasVelina="${properties.colore1 || properties.colore2}" />
+<sly data-sly-test.bottomType="${properties.bottomType ? properties.bottomType : 'ctaVer'}"></sly>
+
+<style>
+.filtro-background-basic-band-colorato-mobile::before {
+  background: linear-gradient(180deg, ${properties.colore2 @ context='styleToken'}, #ff000000);
+}
+@media (min-width : 1024px) {
+ .filtro-background-basic-band-colorato-mobile::before {
+    content: '';
+    background: unset;
+  }
+ .filtro-background-basic-band-colorato-desktop::before {
+	background: linear-gradient(90deg, ${properties.colore1 @ context='styleToken'}, #ff000000);
+ }
+ .filtro-background-basic-band-nero-desktop::before {
+    background: linear-gradient(90deg, #333333cc, #3330);
+  }
+  .filtro-background-basic-band-bianco-desktop::before {
+    background: linear-gradient(90deg, #ffffffcc, #ffffff00);
+  }
+}
+</style>
+
+<sly data-sly-test="${properties.typeBasic == 'default'}">
+
+<style data-sly-test="${isUniformColor}">
+	.${resource.name @ context='styleToken'}.egl-basic-band-color-container {
+		background: ${properties.colorBG @ context='styleToken'};
+	}
+	.${resource.name @ context='styleToken'}.egl-basic-band-color-center-container {
+		background: ${properties.colorBG @ context='styleToken'};
+	}
+</style>
+
+<style data-sly-test="${isNotUniformColor}">
+	.${resource.name @ context='styleToken'}.egl-basic-band-color-container {
+		background: ${properties.colorBGMobile @ context='styleToken'};
+	}
+	.${resource.name @ context='styleToken'}.egl-basic-band-color-center-container {
+		background: ${properties.colorBGMobile @ context='styleToken'};
+	}
+	@media (min-width: 768px) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-color-container {
+			background: ${properties.colorBG @ context='styleToken'};
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-color-center-container {
+			background: ${properties.colorBG @ context='styleToken'};
+		}
+	}
+</style>
+
+<style data-sly-test="${isUniformPhoto}">
+	.${resource.name @ context='styleToken'}.egl-basic-band-photo-container {
+		background: url(${rendDesk['360px'] @ context='uri'}) no-repeat center center ;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+	}
+	.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+		background: url(${rendDesk['360px'] @ context='uri'}) no-repeat center center ;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+	}
+	@media (min-resolution: 150dpi) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container {
+			background: url(${doubledRendDesk['360px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+			background: url(${doubledRendDesk['360px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	}
+	@media (min-width: 768px) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container {
+			background: url(${rendDesk['768px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+			background: url(${rendDesk['768px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	}
+	@media (min-width: 768px) and (min-resolution: 150dpi) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container {
+			background: url(${doubledRendDesk['768px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+			background: url(${doubledRendDesk['768px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	}
+	@media (min-width: 1024px) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container {
+			background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+			background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	}
+	@media (min-width: 1024px) and (min-resolution: 150dpi) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container {
+			background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+			background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	}
+	@media (min-width: 1200px) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container {
+			background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+			background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	}
+	@media (min-width: 1200px) and (min-resolution: 150dpi) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container {
+			background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+			background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	}
+	@media (min-width: 1440px) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container {
+			background: url(${rendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+			background: url(${rendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	}
+	@media (min-width: 1440px) and (min-resolution: 150dpi) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container {
+			background: url(${doubledRendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+			background: url(${doubledRendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	}
+	@media (min-width: 1920px) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container {
+			background: url(${rendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+			background: url(${rendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	}
+	@media (min-width: 1920px) and (min-resolution: 150dpi) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container {
+			background: url(${doubledRendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+			background: url(${doubledRendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	}
+</style>
+
+<style data-sly-test="${isNotUniformPhoto}">
+	.${resource.name @ context='styleToken'}.egl-basic-band-photo-container {
+		background: url(${rendMob['360px'] @ context='uri'}) no-repeat center center ;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+	}
+	.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+		background: url(${rendMob['360px'] @ context='uri'}) no-repeat center center ;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+	}
+	@media (min-resolution: 150dpi) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container {
+			background: url(${doubledRendMob['360px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+			background: url(${doubledRendMob['360px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	}
+	@media (min-width: 768px) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container {
+			background: url(${rendDesk['768px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+			background: url(${rendDesk['768px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	}
+	@media (min-width: 768px) and (min-resolution : 150dpi) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container {
+			background: url(${doubledRendDesk['768px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+			background: url(${doubledRendDesk['768px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	}
+	@media (min-width: 1024px) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container {
+			background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+			background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	}
+	@media (min-width: 1024px) and (min-resolution : 150dpi) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container {
+			background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+			background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	}
+	@media (min-width: 1200px) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container {
+			background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+			background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	}
+	@media (min-width: 1200px) and (min-resolution : 150dpi) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container {
+			background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+			background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	}
+	@media (min-width: 1440px) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container {
+			background: url(${rendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+			background: url(${rendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	}
+	@media (min-width: 1440px) and (min-resolution : 150dpi) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container {
+			background: url(${doubledRendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+			background: url(${doubledRendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	}
+	@media (min-width: 1920px) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container {
+			background: url(${rendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+			background: url(${rendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	}
+	@media (min-width: 1920px) and (min-resolution : 150dpi) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container {
+			background: url(${doubledRendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+			background: url(${doubledRendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	}
+</style>
+
+<style data-sly-test="${isMix || isMixReverse}">
+	.${resource.name @ context='styleToken'}.egl-basic-band-photo-container.mix-bg {
+        background: url(${rendMob['360px'] @ context='uri'}) no-repeat center center ;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+    }
+	.${resource.name @ context='styleToken'}.egl-basic-band-photo-container.mix-bg-reverse {
+        background: ${properties.colorBGMobile @ context='styleToken'};
+	}
+	.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg {
+        background: url(${rendMob['360px'] @ context='uri'}) no-repeat center center ;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+    }
+	.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg-reverse {
+        background: ${properties.colorBGMobile @ context='styleToken'};
+	}
+	@media (min-resolution: 150dpi) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container.mix-bg {
+			background: url(${doubledRendMob['360px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg {
+			background: url(${doubledRendMob['360px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	}
+	@media (min-width: 768px) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container.mix-bg {
+			background: ${properties.colorBG @ context='styleToken'};
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container.mix-bg-reverse {
+			background: url(${rendDesk['768px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg {
+			background: ${properties.colorBG @ context='styleToken'};
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg-reverse {
+			background: url(${rendDesk['768px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	}
+	@media (min-width: 768px) and (min-resolution: 150dpi) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container.mix-bg-reverse {
+			background: url(${doubledRendDesk['768px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg-reverse {
+			background: url(${doubledRendDesk['768px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	}
+	@media (min-width: 1024px) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container.mix-bg {
+			background: ${properties.colorBG @ context='styleToken'};
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container.mix-bg-reverse {
+			background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg {
+			background: ${properties.colorBG @ context='styleToken'};
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg-reverse {
+			background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	}
+	@media (min-width: 1024px) and (min-resolution: 150dpi) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container.mix-bg-reverse {
+			background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg-reverse {
+			background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	}
+	@media (min-width: 1200px) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container.mix-bg {
+			background: ${properties.colorBG @ context='styleToken'};
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container.mix-bg-reverse {
+			background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg {
+			background: ${properties.colorBG @ context='styleToken'};
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg-reverse {
+			background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	}
+	@media (min-width: 1200px) and (min-resolution: 150dpi) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container.mix-bg-reverse {
+			background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg-reverse {
+			background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	}
+	@media (min-width: 1440px) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container.mix-bg {
+			background: ${properties.colorBG @ context='styleToken'};
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container.mix-bg-reverse {
+			background: url(${rendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg {
+			background: ${properties.colorBG @ context='styleToken'};
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg-reverse {
+			background: url(${rendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	}
+	@media (min-width: 1440px) and (min-resolution: 150dpi) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container.mix-bg-reverse {
+			background: url(${doubledRendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg-reverse {
+			background: url(${doubledRendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	}
+	@media (min-width: 1920px) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container.mix-bg {
+			background: ${properties.colorBG @ context='styleToken'};
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container.mix-bg-reverse {
+			background: url(${rendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg {
+			background: ${properties.colorBG @ context='styleToken'};
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg-reverse {
+			background: url(${rendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	}
+	@media (min-width: 1920px) and (min-resolution: 150dpi) {
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-container.mix-bg-reverse {
+			background: url(${doubledRendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg-reverse {
+			background: url(${doubledRendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+	}
+</style>
+
+						<style data-sly-test="${properties.colorecta}">
+							.egl-btn-primary-band-color {
+    							background-color: ${properties.colorecta @ context='styleToken' }!important;border: none;}
+						</style>
+						<style data-sly-test="${properties.colorecta2}">
+							.egl-btn-primary-band-color.cta2 {
+    							background-color: ${properties.colorecta2 @ context='styleToken' }!important;border: none;}
+						</style>
+						
+<div data-sly-test="${isUniformPhoto || isNotUniformPhoto || isMix || isMixReverse}" data-sly-unwrap>
+
+	<div data-sly-test="${properties.alignSelect == 'sx'}" data-sly-unwrap>
+		<!-- basic band photo non-center -->
+		<div id="${properties.id}" class="${properties.class} container-fluid egl-basic-band-photo-container ${properties.coloreVelinaDesk} ${properties.coloreVelinaMob} ${resource.name} ${isMix ? 'mix-bg' : (isMixReverse ? 'mix-bg-reverse' : '')} position-relative">
+			<div class="container-lg px-0">
+				<!-- titolo -->
+				<div class="row">
+					<div class="col-lg-5">
+						<h2 class="h2-egl">
+							${properties.title @ context='html'}
+						</h2>
+					</div>
+				</div>
+				<!-- contenuto desktop-->
+				<div class="row d-lg-flex d-none">
+					<div class="col-lg-6">
+						<h4 class="h4-egl">
+							${properties.subtitle @ context='html'}
+						</h4>
+					</div>
+				</div>
+				<!-- contenuto mobile -->
+				<div class="row d-lg-none d-flex">
+					<div class="col-lg-6">
+						<p class="p16-egl">
+							${properties.subtitle @ context='html'}
+						</p>
+					</div>
+				</div>
+				<!-- bottone/img -->
+				
+				<div class="row text-md-left text-center">
+					<sly data-sly-test="${bottomType == 'ctaVer'}">
+						<div class="col-lg-6"  data-sly-test="${properties.labelCTA}">
+						
+							<a data-sly-test="${properties.linkCTA}" href="${properties.linkCTA}" target="${properties.targetCTA}" title="${properties.titleTextLink}" style="width: inherit;" onclick="dataLayerCtaPlenitude(this)">
+								<button 
+									type="button"
+									class="btn btn-warning p20-egl egl-btn-primary-band-color">
+									${properties.labelCTA}
+								</button>
+							</a>
+							<a data-sly-test="${properties.jscustom}" href="${properties.jscustom @ context='html'}" target="_self" title="${properties.titleTextLink}" style="width: inherit;" >
+								<button 
+									type="button"
+									class="btn btn-warning p20-egl egl-btn-primary-band-color">
+									${properties.labelCTA}</button>
+							</a>
+						</div>
+						<div class="col-lg-6"  data-sly-test="${properties.labelCTA2}">
+							<a data-sly-test="${properties.linkCTA2}" href="${properties.linkCTA2}" target="${properties.targetCTA2}" title="${properties.titleTextLink2}" style="width: inherit;" onclick="dataLayerCtaPlenitude(this)">
+								<button 
+									type="button"
+									class="btn btn-warning p20-egl egl-btn-primary-band-photo cta2">
+									${properties.labelCTA2}
+								</button>
+							</a>
+							<a data-sly-test="${properties.jscustom2}" href="${properties.jscustom2 @ context='html'}" target="_self" title="${properties.titleTextLink2}" style="width: inherit;">
+								<button 
+									type="button"
+									class="btn btn-warning p20-egl egl-btn-primary-band-photo cta2">
+									${properties.labelCTA2}</button>
+							</a>
+						</div>
+					</sly>	
+				</div>
+			</div>
+		</div>
+	</div>
+	<div data-sly-test="${properties.alignSelect == 'cx'}" data-sly-unwrap>
+		<!-- basic band photo center -->
+		<div id="${properties.id}" class="${properties.class} container-fluid egl-basic-band-photo-center-container ${properties.coloreVelinaDesk} ${properties.coloreVelinaMob} ${resource.name} ${isMix ? 'mix-bg' : (isMixReverse ? 'mix-bg-reverse' : '')} position-relative">
+			<!-- titolo -->
+			<div class="container-lg px-0">
+				<div class="row justify-content-center">
+					<div class="col-lg-7">
+						<h2 class="h2-egl">
+							${properties.title @ context='html'}
+						</h2>
+					</div>
+				</div>
+				<!-- contenuto desktop-->
+				<div class="row d-lg-flex d-none justify-content-center">
+					<div class="col-lg-7">
+						<h4 class="h4-egl">
+							${properties.subtitle @ context='html'}
+						</h4>
+					</div>
+				</div>
+				<!-- contenuto mobile -->
+				<div class="row d-lg-none d-flex">
+					<div class="col-12">
+						<p class="p16-egl">
+							${properties.subtitle @ context='html'}
+						</p>
+					</div>
+				</div>
+				<!-- bottone/img -->
+				<div class="row text-center justify-content-center">
+					<img loading="lazy" data-sly-test="${bottomType == 'imageVer'}" data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.imgLogo}" 
+						src="${properties.imgLogo}" alt="${image.description}">
+					<sly data-sly-test="${bottomType == 'ctaVer'}">
+						<div class="col-sm-12 col-lg-3" data-sly-test="${properties.linkCTA && properties.labelCTA}">
+							<a href="${properties.linkCTA}" target="${properties.targetCTA}" title="${properties.titleTextLink}" style="width: inherit;" onclick="dataLayerCtaPlenitude(this)">
+								<button type="button"
+									class="btn btn-warning p20-egl egl-btn-primary-band-color">
+									${properties.labelCTA}</button>
+							</a>
+						</div>
+						<div class="col-sm-12 col-lg-3" data-sly-test="${properties.linkCTA2 && properties.labelCTA2}">
+							<a href="${properties.linkCTA2}" target="${properties.targetCTA2}" title="${properties.titleTextLink2}" style="width: inherit;" onclick="dataLayerCtaPlenitude(this)">
+								<button type="button"
+									class="btn btn-warning p20-egl egl-btn-primary-band-color cta2">
+									${properties.labelCTA2}</button>
+							</a>
+						</div>
+					</sly>	
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div data-sly-test="${isUniformColor || isNotUniformColor}" data-sly-unwrap>
+	<!-- basic band color non-center -->
+	<div data-sly-test="${properties.alignSelect == 'sx'}" data-sly-unwrap>
+		<div id="${properties.id}" class="${properties.class} container-fluid egl-basic-band-color-container ${resource.name} ${properties.coloreVelinaDesk} ${properties.coloreVelinaMob} position-relative">
+			<div class="container-lg px-0">
+				<!-- titolo -->
+				<div class="row">
+					<div class="col-lg-6">
+						<h2 class="h2-egl">
+							${properties.title @ context='html'}
+						</h2>
+					</div>
+				</div>
+				<!-- contenuto desktop-->
+				<div class="row d-lg-flex d-none">
+					<div class="col-lg-6">
+						<h4 class="h4-egl">
+							${properties.subtitle @ context='html'}
+						</h4>
+					</div>
+				</div>
+				<!-- contenuto mobile -->
+				<div class="row d-lg-none d-flex">
+					<div class="col-lg-6">
+						<p class="p16-egl">
+							${properties.subtitle @ context='html'}
+						</p>
+					</div>
+				</div>
+				<!-- bottone/img -->
+				<div class="row text-md-left text-center">
+					<sly data-sly-test="${bottomType == 'ctaVer'}">
+						<div class="col-lg-6" data-sly-test="${properties.linkCTA && properties.labelCTA}">
+							<a href="${properties.linkCTA}" target="${properties.targetCTA}" title="${properties.titleTextLink}" style="width: inherit;" onclick="dataLayerCtaPlenitude(this)">
+								<button type="button"
+									class="btn btn-warning p20-egl egl-btn-primary-band-color">
+									${properties.labelCTA}</button>
+							</a>
+						</div>
+						<div class="col-lg-6" data-sly-test="${properties.jscustom && properties.labelCTA}">
+							<a href="${properties.jscustom @ context='html'}" target="_self" title="${properties.titleTextLink}" style="width: inherit;">
+								<button type="button"
+									class="btn btn-warning p20-egl egl-btn-primary-band-color">
+									${properties.labelCTA}</button>
+							</a>
+						</div>
+						<div class="col-lg-6" data-sly-test="${properties.linkCTA2 && properties.labelCTA2}">
+							<a href="${properties.linkCTA2}" target="${properties.targetCTA2}" title="${properties.titleTextLink2}" style="width: inherit;" onclick="dataLayerCtaPlenitude(this)">
+								<button type="button"
+									class="btn btn-warning p20-egl egl-btn-primary-band-color cta2">
+									${properties.labelCTA2}</button>
+							</a>
+						</div>
+						<div class="col-lg-6" data-sly-test="${properties.jscustom2 && properties.labelCTA2}">
+							<a href="${properties.jscustom2 @ context='html'}" target="_self" title="${properties.titleTextLink2}" style="width: inherit;">
+								<button type="button"
+									class="btn btn-warning p20-egl egl-btn-primary-band-color cta2">
+									${properties.labelCTA2}</button>
+							</a>
+						</div>
+					</sly>	
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- basic band color center -->
+	<div data-sly-test="${properties.alignSelect == 'cx'}" data-sly-unwrap>
+		<div id="${properties.id}" class="${properties.class} container-fluid egl-basic-band-color-center-container ${resource.name} ${properties.coloreVelinaDesk} ${properties.coloreVelinaMob} position-relative">
+			<div class="container-lg px-0">
+				<!-- titolo -->
+				<div class="row justify-content-center">
+					<div class="col-lg-7">
+						<h2 class="h2-egl">
+							${properties.title @ context='html'}
+						</h2>
+					</div>
+				</div>
+				<!-- contenuto desktop-->
+				<div class="row d-lg-flex d-none justify-content-center">
+					<div class="col-lg-7">
+						<h4 class="h4-egl">	
+							${properties.subtitle @ context='html'}
+						</h4>
+					</div>
+				</div>
+				<!-- contenuto mobile -->
+				<div class="row d-lg-none d-flex">
+					<div class="col-12">
+						<p class="p16-egl">
+							${properties.subtitle @ context='html'}
+						</p>
+					</div>
+				</div>
+				<!-- bottone/img -->
+				<div class="row text-center justify-content-center">
+					<img loading="lazy" data-sly-test="${bottomType == 'imageVer'}" data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.imgLogo}" 
+						src="${properties.imgLogo}" alt="${image.description}">
+					<sly data-sly-test="${bottomType == 'ctaVer'}">
+						<div class="col-sm-12 col-lg-3" data-sly-test="${properties.linkCTA && properties.labelCTA}">
+							<a href="${properties.linkCTA}" target="${properties.targetCTA}" title="${properties.titleTextLink}" style="width: inherit;" onclick="dataLayerCtaPlenitude(this)">
+								<button type="button"
+									class="btn btn-warning p20-egl egl-btn-primary-band-color">
+									${properties.labelCTA}</button>
+							</a>
+						</div>
+						<div class="col-sm-12 col-lg-3" data-sly-test="${properties.jscustom && properties.labelCTA}">
+							<a href="${properties.jscustom @ context='html'}" target="_self" title="${properties.titleTextLink}" style="width: inherit;">
+								<button type="button"
+									class="btn btn-warning p20-egl egl-btn-primary-band-color">
+									${properties.labelCTA}</button>
+							</a>
+						</div>
+						<div class="col-sm-12 col-lg-3" data-sly-test="${properties.linkCTA2 && properties.labelCTA2}">
+							<a href="${properties.linkCTA2}" target="${properties.targetCTA2}" title="${properties.titleTextLink2}" style="width: inherit;" onclick="dataLayerCtaPlenitude(this)">
+								<button type="button"
+									class="btn btn-warning p20-egl egl-btn-primary-band-color cta2">
+									${properties.labelCTA2}</button>
+							</a>
+						</div>
+						<div class="col-sm-12 col-lg-3" data-sly-test="${properties.jscustom2 && properties.labelCTA2}">
+							<a href="${properties.jscustom2 @ context='html'}" target="_self" title="${properties.titleTextLink2}" style="width: inherit;">
+								<button type="button"
+									class="btn btn-warning p20-egl egl-btn-primary-band-color cta2">
+									${properties.labelCTA2}</button>
+							</a>
+						</div>
+						
+					</sly>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</sly>
+
+<sly data-sly-test="${properties.typeBasic == 'large'}">
+
+	<sly data-sly-test="${properties.bgSelect == 'color' && properties.bgSelectMobile == 'color'}">
+		<style>
+		@media (min-width: 768px) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: ${properties.colorBG @ context='styleToken'};
+			}
+		}
+		@media (min-resolution: 150dpi) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: ${properties.colorBGMobile @ context='styleToken'};
+			}
+		}
+		@media (max-width: 767px) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: ${properties.colorBGMobile @ context='styleToken'} !important;
+			}
+		}
+		</style>
+	</sly>
+	
+	<sly data-sly-test="${properties.bgSelect == 'color'}">
+	<style>
+		@media (min-width: 768px) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: ${properties.colorBG @ context='styleToken'};
+			}
+		}
+		@media (min-resolution: 150dpi) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: url(${doubledRendMob['360px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+	</style>
+	</sly>
+	
+	<sly data-sly-test="${properties.bgSelect == 'photo' && properties.bgSelectMobile == 'color'}">
+
+		<style>
+			
+				@media (max-width: 767px) {
+					[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.test {
+						background: none !important;
+					}
+				}
+
+				@media (min-width: 320px) and (max-width: 768px){
+					[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+						background: none !important;
+					}
+				}
+		</style>
+		
+		<style>
+		@media (min-width: 768px) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: url(${rendDesk['768px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${rendDesk['768px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 768px) and (min-resolution: 150dpi) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: url(${doubledRendDesk['768px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendDesk['768px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1024px) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1024px) and (min-resolution: 150dpi) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1200px) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1200px) and (min-resolution: 150dpi) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1440px) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: url(${rendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${rendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1440px) and (min-resolution: 150dpi) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: url(${doubledRendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1920px) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: url(${rendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${rendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1920px) and (min-resolution: 150dpi) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: url(${doubledRendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+	</style>
+	</sly>
+	
+	<sly data-sly-test="${properties.bgSelect == 'photo' && properties.bgSelectMobile == 'photo'}">
+	
+	<style data-sly-test="${isUniformColor}">
+		[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+			background: ${properties.colorBG @ context='styleToken'};
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-color-center-container {
+			background: ${properties.colorBG @ context='styleToken'};
+		}
+	</style>
+	
+	<style data-sly-test="${isNotUniformColor}">
+		[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+			background: ${properties.colorBGMobile @ context='styleToken'};
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-color-center-container {
+			background: ${properties.colorBGMobile @ context='styleToken'};
+		}
+		@media (min-width: 768px) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: ${properties.colorBG @ context='styleToken'};
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-color-center-container {
+				background: ${properties.colorBG @ context='styleToken'};
+			}
+		}
+	</style>
+	
+	<style data-sly-test="${isUniformPhoto}">
+		[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+			background: url(${rendDesk['360px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+			background: url(${rendDesk['360px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		@media (min-resolution: 150dpi) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: url(${doubledRendDesk['360px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendDesk['360px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 768px) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: url(${rendDesk['768px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${rendDesk['768px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 768px) and (min-resolution: 150dpi) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: url(${doubledRendDesk['768px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendDesk['768px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1024px) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1024px) and (min-resolution: 150dpi) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1200px) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1200px) and (min-resolution: 150dpi) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1440px) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: url(${rendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${rendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1440px) and (min-resolution: 150dpi) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: url(${doubledRendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1920px) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: url(${rendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${rendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1920px) and (min-resolution: 150dpi) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: url(${doubledRendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+	</style>
+	
+	<style data-sly-test="${isNotUniformPhoto}">
+		[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+			background: url(${rendMob['360px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+			background: url(${rendMob['360px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		@media (min-resolution: 150dpi) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: url(${doubledRendMob['360px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendMob['360px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 768px) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: url(${rendDesk['768px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${rendDesk['768px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 768px) and (min-resolution : 150dpi) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: url(${doubledRendDesk['768px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendDesk['768px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1024px) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1024px) and (min-resolution : 150dpi) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1200px) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1200px) and (min-resolution : 150dpi) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1440px) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: url(${rendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${rendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1440px) and (min-resolution : 150dpi) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: url(${doubledRendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1920px) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: url(${rendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${rendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1920px) and (min-resolution : 150dpi) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container {
+				background: url(${doubledRendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+	</style>
+	
+	<style data-sly-test="${isMix || isMixReverse}">
+		[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container.mix-bg {
+			background: url(${rendMob['360px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container.mix-bg-reverse {
+			background: ${properties.colorBGMobile @ context='styleToken'};
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg {
+			background: url(${rendMob['360px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg-reverse {
+			background: ${properties.colorBGMobile @ context='styleToken'};
+		}
+		@media (min-resolution: 150dpi) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container.mix-bg {
+				background: url(${doubledRendMob['360px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg {
+				background: url(${doubledRendMob['360px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 768px) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container.mix-bg {
+				background: ${properties.colorBG @ context='styleToken'};
+			}
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container.mix-bg-reverse {
+				background: url(${rendDesk['768px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg {
+				background: ${properties.colorBG @ context='styleToken'};
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg-reverse {
+				background: url(${rendDesk['768px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 768px) and (min-resolution: 150dpi) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container.mix-bg-reverse {
+				background: url(${doubledRendDesk['768px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg-reverse {
+				background: url(${doubledRendDesk['768px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1024px) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container.mix-bg {
+				background: ${properties.colorBG @ context='styleToken'};
+			}
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container.mix-bg-reverse {
+				background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg {
+				background: ${properties.colorBG @ context='styleToken'};
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg-reverse {
+				background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1024px) and (min-resolution: 150dpi) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container.mix-bg-reverse {
+				background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg-reverse {
+				background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1200px) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container.mix-bg {
+				background: ${properties.colorBG @ context='styleToken'};
+			}
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container.mix-bg-reverse {
+				background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg {
+				background: ${properties.colorBG @ context='styleToken'};
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg-reverse {
+				background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1200px) and (min-resolution: 150dpi) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container.mix-bg-reverse {
+				background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg-reverse {
+				background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1440px) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container.mix-bg {
+				background: ${properties.colorBG @ context='styleToken'};
+			}
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container.mix-bg-reverse {
+				background: url(${rendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg {
+				background: ${properties.colorBG @ context='styleToken'};
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg-reverse {
+				background: url(${rendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1440px) and (min-resolution: 150dpi) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container.mix-bg-reverse {
+				background: url(${doubledRendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg-reverse {
+				background: url(${doubledRendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1920px) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container.mix-bg {
+				background: ${properties.colorBG @ context='styleToken'};
+			}
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container.mix-bg-reverse {
+				background: url(${rendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg {
+				background: ${properties.colorBG @ context='styleToken'};
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg-reverse {
+				background: url(${rendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1920px) and (min-resolution: 150dpi) {
+			[data-pln-component="basicPh-band-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-l-photo-container.mix-bg-reverse {
+				background: url(${doubledRendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg-reverse {
+				background: url(${doubledRendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+	</style>
+	
+	</sly>
+
+	<sly data-sly-test="${'rgba' in properties.colore1 && 'rgba' in properties.colore1dxsx}">
+		<style data-sly-test="${properties.orientamentoVelina == 'sinistra' && properties.coloreVelinaDesk == 'filtro-background-basic-band-colorato-desktop'}">
+			@media (min-width: 768px) {
+				[data-pln-component=basicPh-band-tx][pln-version="1.0"].egl-hero-centered-l-photo-container .filtro-background-img-hero-nero::before {
+					content: '';
+					background: linear-gradient(90deg, ${properties.colore1 @ context='styleToken'} 34%, ${properties.colore1dxsx @ context='styleToken'} 66%)!important;
+					height: 700px;
+				}
+			}
+		</style>
+	</sly>
+
+	<sly data-sly-test="${!('rgba' in properties.colore1)  && !('rgba' in properties.colore1dxsx)}">
+		<style data-sly-test="${properties.orientamentoVelina == 'sinistra' && properties.coloreVelinaDesk == 'filtro-background-basic-band-colorato-desktop'}">
+			@media (min-width: 768px) {
+				[data-pln-component=basicPh-band-tx][pln-version="1.0"].egl-hero-centered-l-photo-container .filtro-background-img-hero-nero::before {
+					content: '';
+					background: linear-gradient(90deg, ${properties.colore1 @ context='styleToken'}cc 34%, ${properties.colore1dxsx @ context='styleToken'}00 66%)!important;
+					height: 700px;
+				}
+			}
+		</style>
+	</sly>
+
+	<sly data-sly-test="${!('rgba' in properties.colore1)  && ('rgba' in properties.colore1dxsx)}">
+		<style data-sly-test="${properties.orientamentoVelina == 'sinistra' && properties.coloreVelinaDesk == 'filtro-background-basic-band-colorato-desktop'}">
+			@media (min-width: 768px) {
+				[data-pln-component=basicPh-band-tx][pln-version="1.0"].egl-hero-centered-l-photo-container .filtro-background-img-hero-nero::before {
+					content: '';
+					background: linear-gradient(90deg, ${properties.colore1 @ context='styleToken'}cc 34%, ${properties.colore1dxsx @ context='styleToken'} 66%)!important;
+					height: 700px;
+				}
+			}
+		</style>
+	</sly>
+
+	<sly data-sly-test="${('rgba' in properties.colore1)  && !('rgba' in properties.colore1dxsx)}">
+		<style data-sly-test="${properties.orientamentoVelina == 'sinistra' && properties.coloreVelinaDesk == 'filtro-background-basic-band-colorato-desktop'}">
+			@media (min-width: 768px) {
+				[data-pln-component=basicPh-band-tx][pln-version="1.0"].egl-hero-centered-l-photo-container .filtro-background-img-hero-nero::before {
+					content: '';
+					background: linear-gradient(90deg, ${properties.colore1 @ context='styleToken'} 34%, ${properties.colore1dxsx @ context='styleToken'}00 66%)!important;
+					height: 700px;
+				}
+			}
+		</style>
+	</sly>
+
+	<style data-sly-test="${properties.orientamentoVelina == 'sinistra' && properties.coloreVelinaDesk != 'filtro-background-basic-band-colorato-desktop'}">
+		@media (min-width: 768px) {
+			[data-pln-component=basicPh-band-tx][pln-version="1.0"].egl-hero-centered-l-photo-container .filtro-background-img-hero-nero::before {
+				content: '';
+				background: linear-gradient(90deg, #333333cc 34%, #3330 66%)!important;
+				height: 700px;
+			}
+		}
+	</style>
+
+	<sly data-sly-test="${'rgba' in properties.colore1 && 'rgba' in properties.colore1dxsx}">
+		<style data-sly-test="${properties.orientamentoVelina == 'centrato' && properties.coloreVelinaDesk == 'filtro-background-basic-band-colorato-desktop'}">
+			@media (min-width: 768px) {
+				.filtro-background-img-hero-nero::before {
+					content: "";
+					background: linear-gradient(to bottom,${properties.colore1 @ context='styleToken'},${properties.colore1dxsx @ context='styleToken'})!important;
+					height: 700px;
+					width: 100%;
+				}
+			}
+		</style>
+	</sly>
+
+	<sly data-sly-test="${!('rgba' in properties.colore1)  && !('rgba' in properties.colore1dxsx)}">
+		<style data-sly-test="${properties.orientamentoVelina == 'centrato' && properties.coloreVelinaDesk == 'filtro-background-basic-band-colorato-desktop'}">
+			@media (min-width: 768px) {
+				.filtro-background-img-hero-nero::before {
+					content: "";
+					background: linear-gradient(to bottom,${properties.colore1 @ context='styleToken'}80,${properties.colore1dxsx @ context='styleToken'}80)!important;
+					height: 700px;
+					width: 100%;
+				}
+			}
+		</style>
+	</sly>
+
+	<sly data-sly-test="${!('rgba' in properties.colore1)  && ('rgba' in properties.colore1dxsx)}">
+		<style data-sly-test="${properties.orientamentoVelina == 'centrato' && properties.coloreVelinaDesk == 'filtro-background-basic-band-colorato-desktop'}">
+			@media (min-width: 768px) {
+				.filtro-background-img-hero-nero::before {
+					content: "";
+					background: linear-gradient(to bottom,${properties.colore1 @ context='styleToken'}80,${properties.colore1dxsx @ context='styleToken'})!important;
+					height: 700px;
+					width: 100%;
+				}
+			}
+		</style>
+	</sly>
+
+	<sly data-sly-test="${('rgba' in properties.colore1)  && !('rgba' in properties.colore1dxsx)}">
+		<style data-sly-test="${properties.orientamentoVelina == 'centrato' && properties.coloreVelinaDesk == 'filtro-background-basic-band-colorato-desktop'}">
+			@media (min-width: 768px) {
+				.filtro-background-img-hero-nero::before {
+					content: "";
+					background: linear-gradient(to bottom,${properties.colore1 @ context='styleToken'},${properties.colore1dxsx @ context='styleToken'}80)!important;
+					height: 700px;
+					width: 100%;
+				}
+			}
+		</style>
+	</sly>
+	
+	<style data-sly-test="${properties.orientamentoVelinaMobile == 'top'}">
+		@media (max-width: 767px) {
+			[data-pln-component=basicPh-band-tx][pln-version="1.0"].egl-hero-centered-l-photo-container .filtro-background-img-hero-nero:before {
+				content: '';
+				background: linear-gradient(180deg, #333333cc 34%, #3330 66%);
+				height: 700px;
+				width: 100%;
+			}
+		}
+	</style>
+	
+	<style data-sly-test="${properties.orientamentoVelinaMobile == 'bottom'}">
+		@media (max-width: 767px) {
+			[data-pln-component=basicPh-band-tx][pln-version="1.0"].egl-hero-centered-l-photo-container .filtro-background-img-hero-nero:before {
+				content: '';
+				background: linear-gradient(0deg, #333333cc 34%, #3330 66%);
+				height: 700px;
+				width: 100%;
+			}
+		}
+	</style>
+
+	<!-- COLORE VELINA MOBILE -->
+	<sly data-sly-test="${properties.orientamentoVelinaMobile == 'top'}">
+		<sly data-sly-test="${'rgba' in properties.colore1 && 'rgba' in properties.colore1dxsx}">
+			<style>
+				@media (max-width: 767px) {
+					.filtro-background-img-hero-nero::before {
+						content: "";
+						background: linear-gradient(180deg,${properties.colore1 @ context='styleToken'},${properties.colore1dxsx @ context='styleToken'})!important;
+						height: 700px;
+						width: 100%;
+					}
+				}
+			</style>
+		</sly>
+
+		<sly data-sly-test="${!('rgba' in properties.colore1)  && !('rgba' in properties.colore1dxsx)}">
+			<style>
+				@media (max-width: 767px) {
+					.filtro-background-img-hero-nero::before {
+						content: "";
+						background: linear-gradient(180deg,${properties.colore1 @ context='styleToken'}80,${properties.colore1dxsx @ context='styleToken'}80)!important;
+						height: 700px;
+						width: 100%;
+					}
+				}
+			</style>
+		</sly>
+
+		<sly data-sly-test="${!('rgba' in properties.colore1)  && ('rgba' in properties.colore1dxsx)}">
+			<style>
+				@media (max-width: 767px) {
+					.filtro-background-img-hero-nero::before {
+						content: "";
+						background: linear-gradient(180deg,${properties.colore1 @ context='styleToken'}80,${properties.colore1dxsx @ context='styleToken'})!important;
+						height: 700px;
+						width: 100%;
+					}
+				}
+			</style>
+		</sly>
+
+		<sly data-sly-test="${('rgba' in properties.colore1)  && !('rgba' in properties.colore1dxsx)}">
+			<style>
+				@media (max-width: 767px) {
+					.filtro-background-img-hero-nero::before {
+						content: "";
+						background: linear-gradient(180deg,${properties.colore1 @ context='styleToken'},${properties.colore1dxsx @ context='styleToken'}80)!important;
+						height: 700px;
+						width: 100%;
+					}
+				}
+			</style>
+		</sly>
+	</sly>
+
+	<sly data-sly-test="${properties.orientamentoVelinaMobile == 'bottom'}">
+		<sly data-sly-test="${'rgba' in properties.colore1 && 'rgba' in properties.colore1dxsx}">
+			<style>
+				@media (max-width: 767px) {
+					.filtro-background-img-hero-nero::before {
+						content: "";
+						background: linear-gradient(0deg,${properties.colore1 @ context='styleToken'},${properties.colore1dxsx @ context='styleToken'})!important;
+						height: 700px;
+						width: 100%;
+					}
+				}
+			</style>
+		</sly>
+
+		<sly data-sly-test="${!('rgba' in properties.colore1)  && !('rgba' in properties.colore1dxsx)}">
+			<style>
+				@media (max-width: 767px) {
+					.filtro-background-img-hero-nero::before {
+						content: "";
+						background: linear-gradient(0deg,${properties.colore1 @ context='styleToken'}80,${properties.colore1dxsx @ context='styleToken'}80)!important;
+						height: 700px;
+						width: 100%;
+					}
+				}
+			</style>
+		</sly>
+
+		<sly data-sly-test="${!('rgba' in properties.colore1)  && ('rgba' in properties.colore1dxsx)}">
+			<style>
+				@media (max-width: 767px) {
+					.filtro-background-img-hero-nero::before {
+						content: "";
+						background: linear-gradient(0deg,${properties.colore1 @ context='styleToken'}80,${properties.colore1dxsx @ context='styleToken'})!important;
+						height: 700px;
+						width: 100%;
+					}
+				}
+			</style>
+		</sly>
+
+		<sly data-sly-test="${('rgba' in properties.colore1)  && !('rgba' in properties.colore1dxsx)}">
+			<style>
+				@media (max-width: 767px) {
+					.filtro-background-img-hero-nero::before {
+						content: "";
+						background: linear-gradient(0deg,${properties.colore1 @ context='styleToken'},${properties.colore1dxsx @ context='styleToken'}80)!important;
+						height: 700px;
+						width: 100%;
+					}
+				}
+			</style>
+		</sly>
+	</sly>
+	<!-- FINE COLORE VELINA MOBILE -->
+
+	<style data-sly-test="${properties.coloreVelinaDesk == 'filtro-background-basic-band-bianco-desktop' && properties.orientamentoVelina == 'sinistra'}">
+		@media (min-width: 768px) {
+			[data-pln-component=basicPh-band-tx][pln-version="1.0"].egl-hero-centered-l-photo-container .filtro-background-img-hero-nero:before {
+				content: '';
+				background: linear-gradient(90deg, #FFFFFFcc 34%, #00000000 66%)!important;
+				height: 700px;
+				width: 100%;
+			}
+		}
+	</style>
+
+	<style data-sly-test="${properties.coloreVelinaDesk == 'filtro-background-basic-band-bianco-desktop' && properties.orientamentoVelina == 'centrato'}">
+		@media (min-width: 768px) {
+			[data-pln-component=basicPh-band-tx][pln-version="1.0"].egl-hero-centered-l-photo-container .filtro-background-img-hero-nero:before {
+				content: '';
+				background: linear-gradient(to bottom, #FFFFFFcc 34%, #00000000 66%)!important;
+				height: 700px;
+				width: 100%;
+			}
+		}
+	</style>
+
+	<sly data-sly-test="${properties.colorBGMobile}">
+		<style>
+			@media (max-width: 767px) {
+				[data-pln-component=basicPh-band-tx][pln-version="1.0"].egl-hero-centered-l-photo-container{
+					height: 700px;
+					max-width: 20in;
+					padding: 0;
+					display: flex;
+					justify-content: center;
+					background: ${properties.colorBGMobile @ context='styleToken'};
+				}
+			}
+		</style>
+	</sly>
+	
+	<!-- hero centred full-->
+	<div data-sly-test="${properties.typeBasic == 'large'}" role="doc-cover" aria-label="hero" data-pln-component="basicPh-band-tx" pln-version="1.0"
+	class="container-fluid egl-hero-centered-l-photo-container ${properties.marginilarge ? 'spacing' :''} ${resource.name}">
+	<div class="row ${properties.coloreVelinaDesk == 'none' ? '' : 'filtro-background-img-hero-nero'}">
+		<div class="container">
+		<div class="hr-logo">
+			<img data-sly-test="${properties.imgLogoLarge}" src="${properties.imgLogoLarge}" alt="${properties.altLogoLarge}">
+			<span data-sly-test="${properties.imgLogoLarge2}" class="line"></span>
+			<img data-sly-test="${properties.imgLogoLarge2}" src="${properties.imgLogoLarge2}" alt="${properties.altLogoLarge2}">
+		</div>
+		<div class="container-lg egl-hero-basic-item-container ${properties.alignSelect == 'sx' ? 'alternativeAlign' : ''}">
+			<div class="col col-xl-8">
+			<div class="row">
+				${properties.title @ context='html'}
+			</div>
+			<div class="row">
+				<p>${properties.subtitle @ context='html'}</p>
+			</div>
+			<sly data-sly-test="${(properties.labelCTALarge) || (properties.labelCTALarge2)}">
+			<div  class="content-button">
+				<h5 class="sr-only" id="describ-button">Primary Button</h5>
+				<a data-sly-test="${properties.linkCTALarge}" href="${properties.linkCTALarge}" target="${properties.targetCTALarge}" title="${properties.titleTextLinkLarge}">
+				<button data-sly-test="${properties.linkCTALarge}" aria-describedby="describ-button" class="Primary">${properties.labelCTALarge}</button></a>
+				<a data-sly-test="${properties.linkCTALarge2}" href="${properties.linkCTALarge2}" target="${properties.targetCTALarge2}" title="${properties.titleTextLinkLarge2}">
+				<button data-sly-test="${properties.linkCTALarge2}" aria-describedby="describ-button" class="Primary">${properties.labelCTALarge2}</button></a>
+			</div>
+			</sly>
+			</div>
+		</div>
+		</div>
+	</div>
+	</div>
+
+</sly>
+
+<sly data-sly-test="${properties.typeBasic == 'cropped'}">
+
+	<sly data-sly-test="${properties.bgSelect == 'color' && properties.bgSelectMobile == 'color'}">
+		<style>
+		@media (min-width: 768px) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: ${properties.colorBG @ context='styleToken'};
+			}
+		}
+		@media (min-resolution: 150dpi) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: ${properties.colorBGMobile @ context='styleToken'};
+			}
+		}
+		@media (max-width: 767px) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: ${properties.colorBGMobile @ context='styleToken'} !important;
+			}
+		}
+		</style>
+	</sly>
+	
+	
+	<sly data-sly-test="${properties.bgSelect == 'color'}">
+	<style>
+		@media (min-width: 768px) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: ${properties.colorBG @ context='styleToken'};
+			}
+		}
+		@media (min-resolution: 150dpi) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: url(${doubledRendMob['360px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+	</style>
+	</sly>
+	
+	<sly data-sly-test="${properties.bgSelect == 'photo' && properties.bgSelectMobile == 'color'}">
+		<style>
+		@media (max-width: 768px) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: ${properties.colorBGMobile @ context='styleToken'};
+			}
+		}
+		@media (min-width: 768px) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: url(${rendDesk['768px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${rendDesk['768px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 768px) and (min-resolution: 150dpi) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: url(${doubledRendDesk['768px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendDesk['768px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1024px) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1024px) and (min-resolution: 150dpi) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1200px) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1200px) and (min-resolution: 150dpi) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1440px) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: url(${rendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${rendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1440px) and (min-resolution: 150dpi) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: url(${doubledRendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1920px) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: url(${rendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${rendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1920px) and (min-resolution: 150dpi) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: url(${doubledRendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+	</style>
+	</sly>
+	
+	<sly data-sly-test="${properties.bgSelect == 'photo' && properties.bgSelectMobile == 'photo'}">
+	
+	<style data-sly-test="${isUniformColor}">
+		[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+			background: ${properties.colorBG @ context='styleToken'};
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-color-center-container {
+			background: ${properties.colorBG @ context='styleToken'};
+		}
+	</style>
+	
+	<style data-sly-test="${isNotUniformColor}">
+		[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+			background: ${properties.colorBGMobile @ context='styleToken'};
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-color-center-container {
+			background: ${properties.colorBGMobile @ context='styleToken'};
+		}
+		@media (min-width: 768px) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: ${properties.colorBG @ context='styleToken'};
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-color-center-container {
+				background: ${properties.colorBG @ context='styleToken'};
+			}
+		}
+	</style>
+	
+	<style data-sly-test="${isUniformPhoto}">
+		[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+			background: url(${rendDesk['360px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+			background: url(${rendDesk['360px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		@media (min-resolution: 150dpi) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: url(${doubledRendDesk['360px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendDesk['360px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 768px) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: url(${rendDesk['768px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${rendDesk['768px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 768px) and (min-resolution: 150dpi) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: url(${doubledRendDesk['768px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendDesk['768px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1024px) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1024px) and (min-resolution: 150dpi) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1200px) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1200px) and (min-resolution: 150dpi) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1440px) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: url(${rendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${rendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1440px) and (min-resolution: 150dpi) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: url(${doubledRendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1920px) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: url(${rendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${rendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1920px) and (min-resolution: 150dpi) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: url(${doubledRendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+	</style>
+	
+	<style data-sly-test="${isNotUniformPhoto}">
+		[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+			background: url(${rendMob['360px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+			background: url(${rendMob['360px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		@media (min-resolution: 150dpi) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: url(${doubledRendMob['360px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendMob['360px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 768px) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: url(${rendDesk['768px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${rendDesk['768px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 768px) and (min-resolution : 150dpi) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: url(${doubledRendDesk['768px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendDesk['768px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1024px) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1024px) and (min-resolution : 150dpi) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1200px) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1200px) and (min-resolution : 150dpi) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1440px) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: url(${rendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${rendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1440px) and (min-resolution : 150dpi) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: url(${doubledRendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1920px) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: url(${rendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${rendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1920px) and (min-resolution : 150dpi) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container {
+				background: url(${doubledRendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container {
+				background: url(${doubledRendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+	</style>
+	
+	<style data-sly-test="${isMix || isMixReverse}">
+		[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container.mix-bg {
+			background: url(${rendMob['360px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container.mix-bg-reverse {
+			background: ${properties.colorBGMobile @ context='styleToken'};
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg {
+			background: url(${rendMob['360px'] @ context='uri'}) no-repeat center center ;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg-reverse {
+			background: ${properties.colorBGMobile @ context='styleToken'};
+		}
+		@media (min-resolution: 150dpi) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container.mix-bg {
+				background: url(${doubledRendMob['360px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg {
+				background: url(${doubledRendMob['360px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 768px) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container.mix-bg {
+				background: ${properties.colorBG @ context='styleToken'};
+			}
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container.mix-bg-reverse {
+				background: url(${rendDesk['768px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg {
+				background: ${properties.colorBG @ context='styleToken'};
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg-reverse {
+				background: url(${rendDesk['768px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 768px) and (min-resolution: 150dpi) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container.mix-bg-reverse {
+				background: url(${doubledRendDesk['768px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg-reverse {
+				background: url(${doubledRendDesk['768px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1024px) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container.mix-bg {
+				background: ${properties.colorBG @ context='styleToken'};
+			}
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container.mix-bg-reverse {
+				background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg {
+				background: ${properties.colorBG @ context='styleToken'};
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg-reverse {
+				background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1024px) and (min-resolution: 150dpi) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container.mix-bg-reverse {
+				background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg-reverse {
+				background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1200px) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container.mix-bg {
+				background: ${properties.colorBG @ context='styleToken'};
+			}
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container.mix-bg-reverse {
+				background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg {
+				background: ${properties.colorBG @ context='styleToken'};
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg-reverse {
+				background: url(${rendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1200px) and (min-resolution: 150dpi) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container.mix-bg-reverse {
+				background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg-reverse {
+				background: url(${doubledRendDesk['1024px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1440px) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container.mix-bg {
+				background: ${properties.colorBG @ context='styleToken'};
+			}
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container.mix-bg-reverse {
+				background: url(${rendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg {
+				background: ${properties.colorBG @ context='styleToken'};
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg-reverse {
+				background: url(${rendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1440px) and (min-resolution: 150dpi) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container.mix-bg-reverse {
+				background: url(${doubledRendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg-reverse {
+				background: url(${doubledRendDesk['1440px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1920px) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container.mix-bg {
+				background: ${properties.colorBG @ context='styleToken'};
+			}
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container.mix-bg-reverse {
+				background: url(${rendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg {
+				background: ${properties.colorBG @ context='styleToken'};
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg-reverse {
+				background: url(${rendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+		@media (min-width: 1920px) and (min-resolution: 150dpi) {
+			[data-pln-component="basicCl-band-card-tx"][pln-version='1.0'].${resource.name @ context='styleToken'}.egl-hero-centered-basic-color-container.mix-bg-reverse {
+				background: url(${doubledRendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.${resource.name @ context='styleToken'}.egl-basic-band-photo-center-container.mix-bg-reverse {
+				background: url(${doubledRendDesk['1920px'] @ context='uri'}) no-repeat center center ;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+		}
+	</style>
+	
+	</sly>
+
+	<sly data-sly-test="${properties.colorBGMobile}">
+		<style>
+			@media (max-width: 767px) {
+				[data-pln-component="basicCl-band-card-tx"][pln-version="1.0"].egl-hero-centered-basic-color-container{
+					height: 440px;
+					max-width: calc(100% - 30px);
+					margin: 30px auto;
+					display: flex;
+					justify-content: center;
+    				padding: 0;
+					background: ${properties.colorBGMobile @ context='styleToken'};
+				}
+			}
+		</style>
+	</sly>
+
+	<style>
+		
+			.bg-basic-band-cropped{
+				padding-top: 0.1px;
+				padding-bottom: 0.1px;
+				background: ${properties.colorBG @ context='styleToken'};
+			}
+		
+	</style>
+	<sly data-sly-include="stile-cropped.html"></sly>
+	<!-- hero basic Cropped color-Centred-tx -->
+	<div class="bg-basic-band-cropped">
+		<div role="textbox" aria-label="basic-color" data-pln-component="basicCl-band-card-tx" pln-version="1.0"
+		class="container-fluid ${properties.shadow == 'default' ? 'shw-standard' : 'shw-light'} egl-hero-centered-basic-color-container ${resource.name}">
+		<div class="row ${properties.coloreVelinaDesk == 'none' ? '' : 'filtro-background-img-hero-nero'}">
+			<div class="container">
+			<div class="col-12">
+				<div class="egl-hero-basic-item-container ${properties.alignSelect == 'sx' ? 'alternativeAlign' : ''}">
+				<div class="col-xl-8">
+					${properties.title @ context='html'}
+					<p class="content-hero-cmdt">
+					</p>
+					${properties.subtitle @ context='html'}
+					<sly data-sly-test="${(properties.labelCTACrp) || (properties.labelCTACrp2)}">
+					<div  class="content-button">
+					<h5 class="sr-only" id="describ-button">Primary Button</h5>
+					<a data-sly-test="${properties.linkCTACrp}" href="${properties.linkCTACrp}" target="${properties.targetCTACrp}" title="${properties.titleTextLinkCrp}">
+						<button type="button"
+							class="Primary">
+							${properties.labelCTACrp}</button>
+					</a>
+					<a data-sly-test="${properties.linkCTACrp2}" href="${properties.linkCTACrp2}" target="${properties.targetCTACrp}" title="${properties.titleTextLinkCrp2}">
+						<button type="button"
+							class="Primary">
+							${properties.labelCTACrp2}</button>
+					</a>
+					</div>
+					</sly>
+					</p>
+				</div>
+				</div>
+				</div>
+			</div>
+		  </div>
+		</div>
+	</div>
+
+</sly>

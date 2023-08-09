@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+	xmlns:cq="http://www.day.com/jcr/cq/1.0"
+	xmlns:jcr="http://www.jcp.org/jcr/1.0"
+	xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+	xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
+	extraClientlibs="[cq.author.accordion]"
+	jcr:primaryType="nt:unstructured" jcr:title="FAQ Properties"
+	sling:resourceType="cq/gui/components/authoring/dialog">
+	<content jcr:primaryType="nt:unstructured"
+		sling:resourceType="granite/ui/components/coral/foundation/container">
+		<items jcr:primaryType="nt:unstructured">
+			<idRef jcr:primaryType="nt:unstructured"
+				sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+				fieldLabel="ID Per Ancore" name="./idRef" />
+			<title jcr:primaryType="nt:unstructured"
+				sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+				fieldLabel="Titolo" name="./title" />
+			<bgSelect jcr:primaryType="nt:unstructured"
+				sling:resourceType="granite/ui/components/coral/foundation/form/select"
+				fieldLabel="Colore Sfondo" name="./bgColor">
+				<items jcr:primaryType="nt:unstructured">
+					<option1 jcr:primaryType="nt:unstructured" text="Bianco"
+						value="#ffffff" selected="true" />
+					<option2 jcr:primaryType="nt:unstructured" text="Grigio"
+						value="#f4f4f4" />
+				</items>
+			</bgSelect>
+			<contentType jcr:primaryType="nt:unstructured"
+				sling:resourceType="granite/ui/components/coral/foundation/form/fieldset"
+				jcr:title="Tipologia Contenuto">
+				<items jcr:primaryType="nt:unstructured">
+					<tab jcr:primaryType="nt:unstructured"
+						sling:resourceType="granite/ui/components/foundation/form/checkbox"
+						name="./tab" text="Con Tab" value="tag" />
+					<documents jcr:primaryType="nt:unstructured"
+						sling:resourceType="granite/ui/components/foundation/form/checkbox"
+						name="./doc" text="Con Documenti" value="doc" />
+				</items>
+			</contentType>
+			<tabConf jcr:primaryType="nt:unstructured"
+				sling:resourceType="granite/ui/components/coral/foundation/form/fieldset"
+				jcr:title="Configurazione Tab">
+				<items jcr:primaryType="nt:unstructured">
+					<tabList jcr:primaryType="nt:unstructured"
+						sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+						class="full-width" fieldLabel="Lista Tab"
+						composite="{Boolean}true">
+						<granite:data jcr:primaryType="nt:unstructured"
+							max-item="6" />
+						<field jcr:primaryType="nt:unstructured"
+							sling:resourceType="granite/ui/components/foundation/form/fieldset"
+							acs-commons-nested="" name="./tabList">
+							<layout jcr:primaryType="nt:unstructured"
+								sling:resourceType="granite/ui/components/foundation/layouts/container"
+								method="absolute" />
+							<items jcr:primaryType="nt:unstructured">
+								<column jcr:primaryType="nt:unstructured"
+									sling:resourceType="granite/ui/components/foundation/container">
+									<items jcr:primaryType="nt:unstructured">
+										<label fieldLabel="Label Tab"
+											jcr:primaryType="nt:unstructured"
+											sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+											name="./labelTab" />
+									</items>
+								</column>
+							</items>
+						</field>
+					</tabList>
+				</items>
+			</tabConf>
+			<docConf jcr:primaryType="nt:unstructured"
+				sling:resourceType="granite/ui/components/coral/foundation/form/fieldset"
+				jcr:title="Configurazione documenti">
+				<items jcr:primaryType="nt:unstructured">
+					<titleDoc jcr:primaryType="nt:unstructured"
+						sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+						fieldLabel="Titolo Documenti" name="./titleDoc" />
+					<pathFragmentDoc jcr:primaryType="nt:unstructured"
+						sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+						fieldLabel="Path Content Fragment Documenti"
+						name="./pathFragmentDocNew" rootPath="/content/dam/enigaseluce" />
+					<docList jcr:primaryType="nt:unstructured"
+						sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+						class="full-width" fieldLabel="Lista Documenti"
+						composite="{Boolean}true">
+						<field jcr:primaryType="nt:unstructured"
+							sling:resourceType="granite/ui/components/foundation/form/fieldset"
+							acs-commons-nested="" name="./documenti">
+							<layout jcr:primaryType="nt:unstructured"
+								sling:resourceType="granite/ui/components/foundation/layouts/container"
+								method="absolute" />
+							<items jcr:primaryType="nt:unstructured">
+								<column jcr:primaryType="nt:unstructured"
+									sling:resourceType="granite/ui/components/foundation/container">
+									<items jcr:primaryType="nt:unstructured">
+										<altText fieldLabel="Alt Text Documento"
+											jcr:primaryType="nt:unstructured"
+											sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+											name="./altTextDoc" />
+										<pathFragmentDoc
+											jcr:primaryType="nt:unstructured"
+											sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+											fieldLabel="Path Content Fragment Documenti"
+											name="./pathFragmentDoc" rootPath="/content/dam/enigaseluce" />
+									</items>
+								</column>
+							</items>
+						</field>
+					</docList>
+				</items>
+			</docConf>
+		</items>
+	</content>
+</jcr:root>

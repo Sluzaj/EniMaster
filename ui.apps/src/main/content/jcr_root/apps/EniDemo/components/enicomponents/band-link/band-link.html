@@ -1,0 +1,62 @@
+<sly
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.titolo}"> </sly>
+
+<div class="container-bg">
+  <div class="container-fluid egl-promo-link-default-container">
+    <div class="row h-100 egl-promo-link-row">
+      <div class="egl-circle-background-1">
+        <div class="egl-promo-link-img-div" data-sly-use.image="${'com.egl.core.models.utils.ImageModel' @ imagePath=properties.assetImgReference}">
+          <picture data-sly-use.rend="${'com.egl.core.models.utils.RenditionsManager' @ imagePath=properties.assetImgReference}">
+            <source media="(min-resolution: 150dpi)" srcset="${rend.doubledRenditions['1920px'] @ context='uri'}">
+            <img loading="lazy" src="${rend.renditions['1920px']}" alt="${image.description}"/>
+          </picture>
+        <!-- <img src="${properties.assetImgReference}" alt=""/>-->
+        </div>
+      </div>
+      <div class="egl-promo-link-content text-lg-left">
+        <div class="row">
+          <div class="col-12">
+            <div class="egl-promo-link-titolo">
+              ${properties.titolo @context='html'}
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="p18-egl egl-p-corporate">
+              ${properties.paragrafo @context='html'}
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="egl-promo-link-cta-container">
+              <sly data-sly-test="${properties.linkCta}">
+                <sly data-sly-test="${properties.targetCta != 'modale'}">
+                <a href="${properties.linkCta}" target="${properties.targetCta}" > 
+                  <button class="btn btn-link cta-secondary egl-cta-promo-link">${properties.labelCta @context='html'}</button> 
+                </a>
+                </sly>
+                <!--Modale-->
+                <sly data-sly-test="${properties.targetCta == 'modale'}">
+                <a data-toggle="modal" href="#${properties.linkCta}" target="${properties.targetCta}" > 
+                  <button class="btn btn-link cta-secondary egl-cta-promo-link">${properties.labelCta @context='html'}</button> 
+                </a>
+                </sly>
+                </sly>
+              <!--
+              <a data-sly-test="${properties.labelCta && linkCta}" href="${linkCta}" target="${properties.targetCta}">
+              <button data-sly-test="${properties.labelCta}"
+                      type="button" 
+                      class="btn btn-link cta-secondary egl-cta-promo-link">
+                ${properties.labelCta}
+              </button>
+            </a>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

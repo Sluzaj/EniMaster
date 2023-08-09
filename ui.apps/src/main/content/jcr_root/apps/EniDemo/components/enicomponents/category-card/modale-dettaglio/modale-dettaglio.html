@@ -1,0 +1,30 @@
+<sly
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.title}"> </sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing, emptyTextAppend=request.requestPathInfo.selectors}"></sly>
+
+
+    <!-- modale dettaglio card category -->
+    <div class="modal fade" id="${request.requestPathInfo.selectors}" tabindex="-1" aria-labelledby="${request.requestPathInfo.selectors}" aria-hidden="true">
+        <div class="modal-dialog egl-modale-category">
+            <div class="modal-content position-relative">
+                <span aria-hidden="true" class="position-absolute egl-mod-comm-closeIcon" style="z-index: 1">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <img loading="lazy" class="modale-close-category" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/7-icons-close-x.png" alt="chiudi-modale" />
+                    </button>
+                </span>
+                <h2 class="modale-category-title">${properties.titoloModale @ context='html'}</h2>
+                <p class="modale-category-testo">${properties.paragrafoModale @ context='html'}</p>
+                <div class="modale-category-bottom-buttons">
+                    <a data-sly-test="${properties.ctaSecondaria == 'modale'}" href="" class="modale-category-button-left" data-toggle="modal" 
+                   		data-target="#${request.requestPathInfo.selectors}" title="${properties.altCTASecondaria}">${properties.labelCTASecondaria}</a>
+                    <a data-sly-test="${properties.ctaSecondaria == 'url'}" href="${properties.urlCTASecondaria}" class="modale-category-button-left" 
+                    	target="${properties.targetCTASecondaria}" title="${properties.altCTASecondaria}">${properties.labelCTASecondaria}</a>
+                    <a href="${properties.urlCTAPrimaria}" class="modale-category-button-right" data-toggle="modal" 
+                        data-target="#${request.requestPathInfo.selectors}" title="${properties.altCTAPrimaria}">${properties.labelCTAPrimaria}</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>

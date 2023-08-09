@@ -1,0 +1,278 @@
+ 	
+ <sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-test.testing="${!properties.tipoFooter}"> </sly>
+	
+<sly data-sly-call="${templates.placeholder @ isEmpty=testing}"></sly>
+	
+<sly data-sly-test="${properties.tipoFooter=='footer'}">
+	<sly data-sly-use.footerModel="com.egl.core.models.footer.FooterModel"/> 
+      
+    <!-- INIZIO FOOTER DSKTP -->
+    <div class="container-fluid d-none d-lg-block sc-new-footer-container" data-track-insights="egl-footer-container">
+      <div class="row sc-new-footer-bg">
+        <div class="col-12">
+          <div class="container">
+            <div class="row">
+              <div class="col-2">
+                <img loading="lazy"
+                  src="${properties.footerLogoReference}"
+                  class="egl-logo"
+                  alt="${properties.altLogo}"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTENUTO FOOTER -->
+      <div class="row sc-new-footer-bg sc-new-footer-main">
+        <div class="col-12">
+          <div class="container">
+            <div class="row">
+              <div class="col-3 prima-colonna">
+                <div class="sc-new-footer-container sc-new-footer-container-contenuto">
+                  <div class="sc-new-footer-title sc-new-footer-component">
+	                		${properties.sectionTitle}
+                  </div>
+                  <!-- FOOTER LINK -->
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="sc-new-footer-link sc-new-footer-component">
+                        <a href="${properties.urlLink}" target="${properties.targetLink}" title="${properties.titleTextLink}">${properties.labelLink}</a>
+                      </div>
+                    </div>
+                  </div>    
+                  
+                  <!-- FOOTER TEXT -->
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="sc-new-footer-text sc-new-footer-component">
+                     		${properties.infoLegali @context='html'}
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <sly data-sly-list="${footerModel.firstLinks}">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="sc-new-footer-link sc-new-footer-component">
+                        <a href="${item.url}" target="${item.target}" title="${item.titleText}">${item.label}</a>
+                      </div>
+                    </div>
+                  </div>
+                  </sly>
+          
+                </div>
+              </div>
+              <div class="col-3" data-sly-list.section="${footerModel.secondList}">
+                <div class="sc-new-footer-container sc-new-footer-container-contenuto">
+                  <div class="sc-new-footer-title sc-new-footer-component">
+                    ${section.sectionTitle}
+                  </div>
+                  <sly data-sly-list="${section.linksList}">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="sc-new-footer-link sc-new-footer-component">
+                        <a href="${item.url}" target="${item.target}" title="${item.titleText}">${item.label}</a>
+                      </div>
+                    </div>
+                  </div>
+                  </sly>
+                </div>
+              </div>
+
+              <div class="col-3" data-sly-list.section="${footerModel.thirdList}">
+                <div class="sc-new-footer-container sc-new-footer-container-contenuto">
+                  <div class="sc-new-footer-title sc-new-footer-component">
+                    ${section.sectionTitle}
+                  </div>
+                  <sly data-sly-list="${section.linksList}">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="sc-new-footer-link sc-new-footer-component">
+                        <a href="${item.url}" target="${item.target}" title="${item.titleText}">${item.label}</a>
+                      </div>
+                    </div>
+                  </div>
+                  </sly>
+                </div>
+              </div>
+              
+              <div class="col-3" data-sly-list.section="${footerModel.fourthList}">
+                <div class="sc-new-footer-container sc-new-footer-container-contenuto">
+                  <div class="sc-new-footer-title sc-new-footer-component">
+                    ${section.sectionTitle}
+                  </div>
+                  <sly data-sly-list="${section.linksList}">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="sc-new-footer-link sc-new-footer-component">
+                        <a href="${item.url}" target="${item.target}" title="${item.titleText}">${item.label}</a>
+                      </div>
+                    </div>
+                  </div>
+                  </sly>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+     
+     
+      <!-- SECONDO FOOTER -->
+      <div class="row sc-new-footer-bg">
+        <div class="container">
+          <div class="sc-new-footer2 sc-new-footer-component">
+            <sly data-sly-use.subfooter="com.egl.core.models.footer.SubfooterModel" 
+              data-sly-list="${subfooter.subLinks}">
+              <a class="sc-new-footer2-link" href="${item.url}" target="${item.target}" title="${item.titleText}">${item.label}</a>
+            </sly>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- FINE FOOTER DSKTP -->  
+    
+    
+    <!-- INIZIO FOOTER TABLET/MOBILE -->
+    <div class="container-fluid d-block d-lg-none sc-new-footer-container" data-track-insights="egl-footer-container-mobile">
+      <div class="row sc-new-footer-bg sc-new-footer-border">
+        <div class="col-12 d-flex align-items-center">
+          <!-- LOGO FOOTER TABLET/MOBILE -->
+          <img loading="lazy"
+            src="${properties.footerLogoReference}"
+            class="egl-logo"
+            alt="${properties.altLogo}"
+          />
+        </div>
+      </div>
+      <!-- CONTENUTO FOOTER TABLET/MOBILE -->
+      <div class="row sc-new-footer-bg">
+        <div class="col-12 p-0">
+          <div
+            class="accordion sc-new-footer-component sc-new-footer-accordion"
+            id="accordionExample"
+          >
+            <div class="card">
+              <div class="card-header" id="heading0">
+                <h2 class="mb-0">
+                  <button
+                    class="btn btn-link btn-block text-left sc-new-footer-accordion-button collapsed"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#collapse0"
+                    aria-expanded="false"
+                    aria-controls="collapse0"                   
+                    aria-label="espandi-contenuto"
+                    onclick="checkAriaLabelAccordion('.sc-new-footer-accordion-button')"
+                  >
+                  <!-- Dovrebbe essere il titolo sezione -->
+                    ${properties.sectionTitle}
+                  </button>
+                </h2>
+             
+
+              <div
+                id="collapse0"
+                class="collapse"
+                data-parent="#accordionExample"
+              >
+                <div class="card-body sc-new-footer-accordion-card-body">
+                  <div class="sc-new-footer-link">
+                    <a href="${properties.urlLink}" target="${properties.targetLink}" title="${properties.titleTextLink}">${properties.labelLink}</a>
+                  </div>
+                  <div class="sc-new-footer-text">
+                    ${properties.infoLegali @context='html'}
+                  </div>
+                  <sly data-sly-list="${footerModel.firstLinks}">
+                  <div class="sc-new-footer-link">
+                    <a href="${item.url}" target="${item.target}" title="${item.titleText}">${item.label}</a>
+                  </div>
+                  </sly>
+                </div>
+              </div>
+               </div>
+            </div>
+            <sly data-sly-list.section="${footerModel.fullList}">
+            <div class="card">
+              <div class="card-header" id="heading${sectionList.count}">
+                <h2 class="mb-0">
+                  <button
+                    class="btn btn-link btn-block text-left sc-new-footer-accordion-button collapsed"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#collapse${sectionList.count}"
+                    aria-expanded="false"
+                    aria-controls="collapse${sectionList.count}"
+                    aria-label="espandi-contenuto"
+                    onclick="checkAriaLabelAccordion('.sc-new-footer-accordion-button')"
+                  >
+                    ${section.sectionTitle}
+                  </button>
+                </h2>
+              
+              <div
+                id="collapse${sectionList.count}"
+                class="collapse"
+                data-parent="#accordionExample"
+              >
+                <div class="card-body sc-new-footer-accordion-card-body" data-sly-list="${section.linksList}">
+                  <div class="sc-new-footer-link">
+                    <a href="${item.url}" target="${item.target}" title="${item.titleText}">${item.label}</a>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+            </sly>
+   
+          </div>
+        </div>
+      </div>
+
+      <!-- SECONDO FOOTER -->
+      <div class="row sc-new-footer-bg sc-new-footer2-mb sc-new-footer-component sc-new-footer-border">
+        <sly data-sly-use.subfooter="com.egl.core.models.footer.SubfooterModel" 
+        	data-sly-list="${subfooter.subLinks}">
+        <div class="col-md-2 col-6 mb-2 pl-md-3 pl-5">
+          <a class="sc-new-footer2-link sc-new-footer2-link-sm" href="${item.url}" target="${item.target}" title="${item.titleText}">${item.label}</a>
+        </div>
+        </sly>
+      </div>
+    </div>
+	    <!-- FINE FOOTER TABLET/MOBILE -->
+</sly>	
+
+<sly data-sly-test="${properties.tipoFooter =='footerRidotto'}">
+    	<!-- Footer ridotto -->
+	<div class="container-fluid sc-new-footer-ridotto sc-new-footer-border" data-track-insights="egl-footer-container-ridotto">
+    <div class="container-lg px-0">
+      <div class="row">
+        <div class="sc-new-footer-ridotto-logodiv">
+            <img loading="lazy" aria-hidden="true"  class="d-block d-lg-none" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/logo-plenitude-verticale.svg" alt="logo-eni-footer" />
+            <img loading="lazy" aria-hidden="true" class="d-none d-lg-block" src="/etc.clientlibs/enigaseluce/clientlibs/clientlib-site/resources/assets/logo-plenitude-orizzontale.svg" alt="logo-eni-footer" />
+        </div>
+        <div class="sc-new-footer-ridotto-text">
+          <p class="p16-egl">
+            <b>Eni Plenitude S.p.A. Società Benefit</b>
+          </p>
+          <p class="cap14-egl">C.F. e Registro Imprese di Milano, Monza-Brianza, Lodi n° 12300020158, Partita Iva n° 12300020158</p>
+        </div>
+      </div>
+    </div>
+	</div>
+	<!-- footer ridotto fine -->
+</sly>	
+
+<input type="hidden" id="monitoraggio">
+
+
+
+
+
+	
+	
+
